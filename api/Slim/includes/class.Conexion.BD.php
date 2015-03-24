@@ -136,6 +136,7 @@ class ConexionBD
 	function restantesRegistros(){
 		try{
 			$retorno = $this->sentencia->fetchAll();
+                        var_dump($retorno);
 		}
 		catch (PDOException $e){
 			$this->ultimoError = "{" . date("d/m/Y H:i:s") . "} " . $e->getMessage();

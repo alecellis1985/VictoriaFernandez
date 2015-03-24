@@ -16,36 +16,36 @@ $app->delete('/users/:id', 'deleteUser');
 $app->run();
 
 function getUsers() {
-    $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
-    if ($conn->conectar()) {
-        $sql = "SELECT * FROM users";
-        if ($conn->consulta($sql)) {
-            $users = $conn->restantesRegistros();
-            var_dump($users);
-                $response = MessageHandler::getSuccessResponse("", "",$users);
-        } else {
-            $response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
-        }
-    }
-    if ($response == null) {
-        header('HTTP/1.1 400 Bad Request');
-        echo MessageHandler::getDBErrorResponse();
-    } else {
-        $conn->desconectar();
-        echo $response;
-    }
+//    $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
+//    if ($conn->conectar()) {
+//        $sql = "SELECT * FROM users";
+//        if ($conn->consulta($sql)) {
+//            $users = $conn->restantesRegistros();
+//            var_dump($users);
+//                $response = MessageHandler::getSuccessResponse("", "",$users);
+//        } else {
+//            $response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
+//        }
+//    }
+//    if ($response == null) {
+//        header('HTTP/1.1 400 Bad Request');
+//        echo MessageHandler::getDBErrorResponse();
+//    } else {
+//        $conn->desconectar();
+//        echo $response;
+//    }
     
     
-//	$sql = "select * FROM users ORDER BY id";
-//	try {
-//		$db = getConnection();
-//		$stmt = $db->query($sql);  
-//		$wines = $stmt->fetchAll(PDO::FETCH_OBJ);
-//		$db = null;
-//		echo json_encode($wines);
-//	} catch(PDOException $e) {
-//		echo '{"error":{"text":'. $e->getMessage() .'}}'; 
-//	}
+	$sql = "select * FROM users ORDER BY id";
+	try {
+		$db = getConnection();
+		$stmt = $db->query($sql);  
+		$wines = $stmt->fetchAll(PDO::FETCH_OBJ);
+		$db = null;
+		echo json_encode($wines);
+	} catch(PDOException $e) {
+		echo '{"error":{"text":'. $e->getMessage() .'}}'; 
+	}
 }
 
 function getUser($id) {
