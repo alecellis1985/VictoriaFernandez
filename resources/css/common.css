@@ -1,0 +1,64 @@
+.navbar-fixed-top
+{
+    background: #c00;
+    border-bottom: 2px solid #990000;
+}
+
+.navbar-fixed-top .navbar-header > a,.navbar-inverse .navbar-nav>li>a
+{
+    color:#FFFFFF!important;
+}
+
+
+.navbar-fixed-top .navbar-header > a:hover,.navbar-inverse .navbar-nav>li>a:hover
+{
+    color: #efefef!important;
+    transition: color 700ms;
+}
+
+.footer h4,h3
+{
+    color: #ffcccc;
+}
+
+.footer h4:hover,h3:hover
+{
+    color: #FFFFFF;
+}
+
+.headerSearch
+{
+    background-image: url("../img/logobackground.png");
+    background-repeat: repeat;
+    height: 45px;
+    padding-top: 5px;
+}
+
+.dropdown-menu
+{
+    max-height: 500px;
+    overflow-y:scroll; 
+}
+.overflowDots
+{
+    display:inline-block;
+    width: 180px;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
+    line-height: 15px;
+    text-align: left;
+}
+.btn
+{
+    padding: 7px 12px 4px;
+}
+
+.caret
+{
+    padding-top: 10px;
+}
+.form-control
+{
+    height: 33px;
+}
