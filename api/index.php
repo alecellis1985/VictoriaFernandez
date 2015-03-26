@@ -6,6 +6,9 @@ require_once("Slim/config/parametros.php");
 require_once("Slim/includes/MessageHandler.php");
 require_once 'usersList.php';
 require_once 'crudUser.php';
+require_once 'crudDepartamentos.php';
+require_once 'crudBarrios.php';
+require_once 'crudCategorias.php';
 
 $app = new Slim();
 $app->get('/users', 'getUsers');
@@ -14,6 +17,8 @@ $app->post('/add_user', 'addUser');
 $app->put('/users/:id', 'updateUser');
 $app->delete('/users/:id', 'deleteUser');
 
+$app->get('/departamentos', 'getDepartamentos');
+$app->get('/categorias', 'getCategorias');
 
 $app->run();
 

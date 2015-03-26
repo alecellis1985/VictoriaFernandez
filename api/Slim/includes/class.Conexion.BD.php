@@ -120,7 +120,7 @@ class ConexionBD
 	 */
 	function siguienteRegistro(){
 		try{
-			$retorno = $this->sentencia->fetch(PDO::FETCH_ASSOC);
+			$retorno = $this->sentencia->fetch(PDO::FETCH_OBJ);
 		}
 		catch (PDOException $e){
 			//guardo el error generado
@@ -135,8 +135,7 @@ class ConexionBD
 	 */
 	function restantesRegistros(){
 		try{
-			$retorno = $this->sentencia->fetchAll();
-                        var_dump($retorno);
+			$retorno = $this->sentencia->fetchAll(PDO::FETCH_OBJ); //
 		}
 		catch (PDOException $e){
 			$this->ultimoError = "{" . date("d/m/Y H:i:s") . "} " . $e->getMessage();

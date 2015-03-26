@@ -53,7 +53,17 @@
 {
     padding: 7px 12px 4px;
 }
+.btn-primary
+{
+    background: #c00;
+    border: 2px solid #BE0303;
+}
 
+.btn-primary.active, .btn-primary.focus, .btn-primary:active, .btn-primary:focus, .btn-primary:hover, .open>.dropdown-toggle.btn-primary
+{
+    background:#B60000;
+    border: 2px solid #A30303;
+}
 .caret
 {
     padding-top: 10px;

@@ -22,11 +22,11 @@ class MessageHandler
     
     public static function getDBErrorResponse()
     {
-        return json_encode(Array('success'=>false,'msg'=>self::DbErrorMsg,'data'=>Array()));
+        return json_encode(Array('success'=>false,'msg'=>self::DbErrorMsg,'data'=>json_encode(Array())));
     }
     
     public static function getDBUnauthorizedResponse()
     {
-        return json_encode(Array('success'=>false,'msg'=>self::DbUnauthorizedMsg,'data'=>Array()));
+        return json_encode(Array('success'=>false,'msg'=>self::DbUnauthorizedMsg,'data'=>json_encode(Array())));
     }
 }
