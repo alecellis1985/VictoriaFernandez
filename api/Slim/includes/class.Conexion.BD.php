@@ -17,7 +17,7 @@ class ConexionBD
 		//lista de servidores de datos soportados, agrear aquí para nuevos motores los DSN correspondientes.
 		switch (strtolower($motor)){
 			case "mysql":
-				$this->dsn = "mysql:dbname=" . $db . ";host=" . $servidor;
+				$this->dsn = "mysql:dbname=" . $db . ";host=" . $servidor . ";charset=utf8";
 				break;
 		}
 		$this->usuario = $usuario;
@@ -30,7 +30,7 @@ class ConexionBD
 	 */
 	function conectar(){
  		try{ 
-			$this->conexion = new PDO($this->dsn, $this->usuario, $this->clave);
+			$this->conexion = new PDO($this->dsn, $this->usuario, $this->clave,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
 			//determino si los errores son por warnings a pantalla o por excepciones
 			if ($this->debugMode){
 				$this->conexion->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );

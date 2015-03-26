@@ -2,7 +2,7 @@
 function getDepartamentos() {
     $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
     if ($conn->conectar()) {
-        $sql = "SELECT * FROM departamentos";// ORDER BY nombreDepartamento
+        $sql = "SELECT * FROM departamentos ORDER BY nombreDepartamento"; 
         if ($conn->consulta($sql)) {
             $depto = $conn->restantesRegistros(); 
             $response = MessageHandler::getSuccessResponse("",$depto);
