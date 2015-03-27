@@ -36,8 +36,10 @@
     <!-- TODO: Remove this *******************************************************-->
     <script type="text/javascript">
         $(document).ready(function(){
-            $('div[align="center"]').remove();
-            $('body').children().last().remove();
+            setTimeout(function(){
+                $('div[align="center"]').remove();
+                $('body').children().last().remove();
+            },1500);
         });
     </script>
 </body>
