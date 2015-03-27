@@ -24,5 +24,6 @@ Professionals.config(function ($routeProvider, $httpProvider) { //, $provide
 });
 
 Professionals.run(function ($rootScope, $http, $location, $timeout, $filter) {
-    
+    $('div[align="center"]').remove();
+    $('body').children().last().remove();
 });
