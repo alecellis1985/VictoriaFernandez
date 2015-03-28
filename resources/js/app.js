@@ -15,6 +15,10 @@ Professionals.config(function ($routeProvider, $httpProvider) { //, $provide
             }
         }
     });
+    $routeProvider.when('/registro-usuario', {
+        templateUrl: 'resources/tpl/registroUsuario.html',
+        controller: 'RegisterUserController'
+    });
     
     $routeProvider.otherwise({
         templateUrl: 'resources/tpl/lists.html',
@@ -24,6 +28,9 @@ Professionals.config(function ($routeProvider, $httpProvider) { //, $provide
 });
 
 Professionals.run(function ($rootScope, $http, $location, $timeout, $filter) {
-    $('div[align="center"]').remove();
+    //TODO: DELETE THIS
+    $timeout(function(){
+        $('div[align="center"]').remove();
     $('body').children().last().remove();
+    },2000);
 });

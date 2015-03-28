@@ -12,11 +12,11 @@
 
 .navbar-fixed-top .navbar-header > a:hover,.navbar-inverse .navbar-nav>li>a:hover
 {
-    color: #efefef!important;
-    transition: color 700ms;
+    transition: background-color 1900ms;
+  background-color: #B50000;
 }
 
-.footer h4,h3
+/*.footer h4,h3
 {
     color: #ffcccc;
 }
@@ -24,7 +24,7 @@
 .footer h4:hover,h3:hover
 {
     color: #FFFFFF;
-}
+}*/
 
 .headerSearch
 {
