@@ -17,7 +17,15 @@ Professionals.config(function ($routeProvider, $httpProvider) { //, $provide
     });
     $routeProvider.when('/registro-usuario', {
         templateUrl: 'resources/tpl/registroUsuario.html',
-        controller: 'RegisterUserController'
+        controller: 'RegisterUserController',
+        resolve: {
+            departamentosList: function (CommonService) {
+                return CommonService.getRequest('api/departamentos');
+            },
+            categoriasList: function (CommonService) {
+                return CommonService.getRequest('api/categorias');
+            }
+        }
     });
     
     $routeProvider.otherwise({

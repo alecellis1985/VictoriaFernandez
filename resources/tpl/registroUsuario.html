@@ -1,66 +1,115 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Brand</a>
-    </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <form class="navbar-form navbar-left" role="search">
-        <div class="row">
-            <div class="form-group">
-                <input type="text" class="form-control col-xs-4" placeholder="Nombre">
+<div>
+    <form style="padding-top: 10px">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Datos personales de contacto</h3>
             </div>
-            <div class="form-group ">
-                <input type="text" class="form-control col-xs-4" placeholder="Email">
+            <div class="panel-body">
+                <div class="row ">
+                    <div class="form-group col-xs-4">
+                        <input type="text" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="form-group col-xs-4">
+                        <input type="text" class="form-control" placeholder="Apellido">
+                    </div>
+                    <div class="form-group col-xs-4">
+                        <input type="text" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="form-group col-xs-4">
+                        <input type="text" class="form-control" placeholder="Telefono">
+                    </div>
+                    <div class="form-group col-xs-4">
+                        <input type="text" class="form-control" placeholder="Celular">
+                    </div>
+                </div>
             </div>
-            <div class="form-group ">
-                <input type="text" class="form-control col-xs-4" placeholder="Telefono">
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Datos de tu negocio</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="form-group col-xs-4">
+                        <input type="text" class="form-control" placeholder="Nombre Empresa">
+                    </div>
+                    <div class="form-group col-xs-4">
+                        <!--<input type="text" class="form-control" placeholder="Rubro">-->
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                                <span class="overflowDots" ng-bind="selectedCategoria.categoriaNombre"></span>
+                              <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                <li  ng-repeat="categoria in categorias" role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#" ng-click="selectCategoria($event,categoria)">{{categoria.categoriaNombre}}</a>
+                                </li>
+                            </ul>
+                        </div> 
+                    </div>
+                    <div class="form-group col-xs-4">
+                        <!--<input type="text" class="form-control" placeholder="Departamento">-->
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true">
+                              <span class="overflowDots" ng-bind="depSelected.nombreDepartamento"></span>
+                              <span class="caret"></span> 
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                                <li  ng-repeat="dep in departamentosList" role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#" ng-click="selectDepartamento($event,dep)">{{dep.nombreDepartamento}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-4">
+                        <input type="text" class="form-control" placeholder="Direccion">
+                    </div>
+                    <div class="form-group col-xs-4">
+                        <input type="text" class="form-control" placeholder="Telefono">
+                    </div>
+                    <div class="form-group col-xs-4">
+                        <input type="text" class="form-control" placeholder="Sitio Web">
+                    </div>
+                    <div class="form-group col-xs-4">
+                        <input type="text" class="form-control" placeholder="Imagen/Logo">
+                    </div>
+                    <div class="form-group col-xs-4">
+                        <input type="text" class="form-control" placeholder="Enlaces de redes Sociales">
+                    </div>
+                    <div class="form-group col-xs-4">
+                        <input type="text" class="form-control" placeholder="Enlaces de redes Sociales">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Describa su negocio o servicio</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="form-group col-xs-12">
+                        <textarea class="form-control " rows="6" placeholder="Breve descripcion del servicio."></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-xs-4">
+                        <input type="text" class="form-control" placeholder="Servicio ofrecido">
+                    </div>
+                    <div class="form-group col-xs-4">
+                        <input type="text" class="form-control" placeholder="Servicio ofrecido">
+                    </div>
+                    <div class="form-group col-xs-4">
+                        <input type="text" class="form-control" placeholder="Servicio ofrecido">
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
-          <div class="form-group">
-              <input type="text" class="form-control" placeholder="Nombre Empresa">
-          </div>
-          <div class="form-group">
-              <input type="text" class="form-control" placeholder="Rubro">
-          </div>
-          <div class="form-group">
-              <input type="text" class="form-control" placeholder="Departamento">
-          </div>
-          <div class="form-group">
-              <input type="text" class="form-control" placeholder="Direccion">
-          </div>
-          <div class="form-group">
-              <input type="text" class="form-control" placeholder="Telefono">
-          </div>
-          <div class="form-group">
-              <input type="text" class="form-control" placeholder="Sitio Web">
-          </div>
-          <div class="form-group">
-              <input type="text" class="form-control" placeholder="Imagen/Logo">
-          </div>
-          <div class="form-group">
-              <input type="text" class="form-control" placeholder="Enlaces de redes Sociales">
-          </div>
-          <div class="form-group">
-              <input type="text" class="form-control" placeholder="Enlaces de redes Sociales">
-          </div>
-        </div> 
-        <div class="row">
-            <textarea class="form-control" placeholder="Breve descripcion del servicio."></textarea>
+            <div class="form-group col-xs-12">
+                <button type="submit" class="btn btn-primary pull-right">Registrarme</button>
+            </div>
         </div>
-        <div class="row">
-            <button type="submit" class="btn btn-default">Submit</button>
-        </div>
-      </form>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+  </form>
+</div>

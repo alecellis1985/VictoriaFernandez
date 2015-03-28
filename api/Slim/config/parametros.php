@@ -14,6 +14,6 @@ if ($_SERVER['SERVER_NAME'] != "localhost") {
     define("SERVIDOR", "localhost");
     define("BASE", "angular_tutorial");
     define("USUARIO", "root");
-    define("CLAVE", "oso2203");
+    define("CLAVE", "turtleman1");
     //define("CLAVE", "oso2203");
 }
