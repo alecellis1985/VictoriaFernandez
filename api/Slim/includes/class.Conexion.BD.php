@@ -85,7 +85,6 @@ class ConexionBD
 					case "string":
 						$tipo = PDO::PARAM_STR;
 						break;
-					
 				}
 				//paso los parámetros para que sean filtrados antes de incluirlos en la SQL
 				$this->sentencia->bindParam($parametro[0], $parametro[1], $tipo, $parametro[3]);

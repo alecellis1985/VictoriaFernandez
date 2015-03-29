@@ -1,40 +1,79 @@
 <div class="row headerSearch">
     <div class="container">
-    <ul class="nav navbar-nav">
-        <li class="col-xs-4">
-            <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                    <span class="overflowDots" ng-bind="selectedCategoria.categoriaNombre"></span>
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                    <li  ng-repeat="categoria in categorias" role="presentation">
-                        <a role="menuitem" tabindex="-1" href="#" ng-click="selectCategoria($event,categoria)">{{categoria.categoriaNombre}}</a>
-                    </li>
-                </ul>
-              </div>                
-        </li>
-        <li class="col-xs-4">
-            <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true">
-                  <span class="overflowDots" ng-bind="depSelected.nombreDepartamento"></span>
-                  <span class="caret"></span> 
-                </button>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
-                    <li  ng-repeat="dep in departamentosList" role="presentation">
-                        <a role="menuitem" tabindex="-1" href="#" ng-click="selectDepartamento($event,dep)">{{dep.nombreDepartamento}}</a>
-                    </li>
-                </ul>
-            </div>                
-        </li>
-        <li class="col-xs-3">
-            <div class="input-group"> 
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
-                </span>
-                <input type="text" class="form-control" placeholder="Buscar...">
+        <div class="row" style="margin-bottom: 10px;">
+            <ul class="nav navbar-nav col-xs-12">
+                <li class="col-xs-4">
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                            <span class="overflowDots" ng-bind="selectedCategoria.categoriaNombre"></span>
+                          <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            <li  ng-repeat="categoria in categorias" role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#" ng-click="selectCategoria($event,categoria)">{{categoria.categoriaNombre}}</a>
+                            </li>
+                        </ul>
+                      </div>                
+                </li>
+                <li class="col-xs-4">
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true">
+                          <span class="overflowDots" ng-bind="depSelected.nombreDepartamento"></span>
+                          <span class="caret"></span> 
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                            <li  ng-repeat="dep in departamentosList" role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#" ng-click="selectDepartamento($event,dep)">{{dep.nombreDepartamento}}</a>
+                            </li>
+                        </ul>
+                    </div>                
+                </li>
+                <li class="col-xs-3">
+                    <div class="input-group"> 
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                        </span>
+                        <input type="text" class="form-control" ng-model="buscoProf" placeholder="Buscar...">
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Usuarios</h3>
             </div>
-        </li>
-    </ul>
+            <div class="panel-body">
+                <div class="row">
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Usuario</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Email</th>
+                            <th>Telefono</th>
+                            <th>Celular</th>
+                            <th>Direccion</th>
+                            <th>departamento</th>
+                            <th>categoria</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="user in users | filter:buscoProf">
+                            <td>{{user.username}}</td>
+                            <td>{{user.nombre}}</td>
+                            <td>{{user.apellido}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.telefono}}</td>
+                            <td>{{user.celular}}</td>
+                            <td>{{user.direccion}}</td>
+                            <td>{{user.departamento}}</td>
+                            <td>{{user.categoria}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

@@ -10,6 +10,17 @@ Professionals.factory('CommonService', function ($http, $q) {
         });
         return deferred.promise();
     };
+    
+    commonService.getRequestCustom = function (requestUrl, params, canceller) {
+        var deferred = $.Deferred(),
+            cancelTimeout = canceller || $q.defer();
+        var paramsget = params !== undefined ? '/' + $.param(params).replace('&','/'):'';
+        $http.get(requestUrl + paramsget, { timeout: cancelTimeout.promise }).success(function (data) {
+            deferred.resolve(data);
+        });
+        return deferred.promise();
+    };
+    
 
     commonService.postRequest = function (requestUrl, params) {
         var deferred = $.Deferred();

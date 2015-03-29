@@ -42,7 +42,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                 'servicioOfrecido3':$scope.servicioOfrecido3
         };
         CommonService.postJsonRequest('api/agregar_usuario',data).then(function(data){
-            console.log(data);
+            alert(data.datos);
         });
         
     };
