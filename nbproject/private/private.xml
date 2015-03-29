@@ -3,22 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/AppServ/www/VictoriaFernandez/README.md</file>
-            <file>file:/C:/AppServ/www/VictoriaFernandez/index.html</file>
-            <file>file:/C:/AppServ/www/VictoriaFernandez/assets/js/app.js</file>
-            <file>file:/C:/AppServ/www/VictoriaFernandez/assets/tpl/lists.html</file>
-            <file>file:/C:/AppServ/www/VictoriaFernandez/api/index.php</file>
-            <file>file:/C:/AppServ/www/VictoriaFernandez/users.sql</file>
-            <file>file:/C:/AppServ/www/VictoriaFernandez/api/.htaccess</file>
-            <file>file:/C:/AppServ/www/VictoriaFernandez/assets/tpl/add-new.html</file>
-            <file>file:/C:/AppServ/www/VictoriaFernandez/assets/tpl/edit.html</file>
-            <file>file:/C:/AppServ/www/VictoriaFernandez/api/Slim/Router.php</file>
-            <file>file:/C:/AppServ/www/VictoriaFernandez/api/Slim/View.php</file>
-            <file>file:/C:/AppServ/www/VictoriaFernandez/api/Slim/Http/Cookie.php</file>
-            <file>file:/C:/AppServ/www/VictoriaFernandez/api/Slim/includes/class.Conexion.BD.php</file>
-            <file>file:/C:/AppServ/www/VictoriaFernandez/api/Slim/config/parametros.php</file>
-            <file>file:/C:/AppServ/www/VictoriaFernandez/api/usersList.php</file>
-            <file>file:/C:/AppServ/www/VictoriaFernandez/api/crudUser.php</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/api/registerUser.php</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/registroUsuario.html</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/app.js</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/api/Slim/config/parametros.php</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/api/crudDepartamentos.php</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/RegisterUserController.js</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/api/index.php</file>
         </group>
     </open-files>
 </project-private>

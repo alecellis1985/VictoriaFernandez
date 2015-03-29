@@ -1,6 +1,6 @@
 
 <div>
-    <form style="padding-top: 10px">
+    <form ng-submit="registrarUsuario()"style="padding-top: 10px">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Datos personales de contacto</h3>
@@ -8,19 +8,25 @@
             <div class="panel-body">
                 <div class="row ">
                     <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" placeholder="Nombre">
+                        <input type="text" class="form-control" ng-model="nombre" placeholder="Nombre" required>
                     </div>
                     <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" placeholder="Apellido">
+                        <input type="text" class="form-control" ng-model="apellido" placeholder="Apellido">
                     </div>
                     <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" placeholder="Email">
+                        <input type="text" class="form-control" ng-model="username" placeholder="Nombre de usuario">
                     </div>
                     <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" placeholder="Telefono">
+                        <input type="password" class="form-control" ng-model="password" placeholder="Contraseña">
                     </div>
                     <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" placeholder="Celular">
+                        <input type="text" class="form-control" ng-model="email" placeholder="Email">
+                    </div>
+                    <div class="form-group col-xs-4">
+                        <input type="text" class="form-control" ng-model="telefono" placeholder="Telefono">
+                    </div>
+                    <div class="form-group col-xs-4">
+                        <input type="text" class="form-control" ng-model="celular" placeholder="Celular">
                     </div>
                 </div>
             </div>
@@ -63,22 +69,22 @@
                         </div>
                     </div>
                     <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" placeholder="Direccion">
+                        <input type="text" class="form-control" ng-model="direccion" placeholder="Direccion">
                     </div>
                     <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" placeholder="Telefono">
+                        <input type="text" class="form-control" ng-model="telefonoEmp" placeholder="Telefono Empresa">
                     </div>
                     <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" placeholder="Sitio Web">
+                        <input type="text" class="form-control" ng-model="sitioWeb" placeholder="Sitio Web">
                     </div>
                     <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" placeholder="Imagen/Logo">
+                        <input type="text" class="form-control" ng-model="imagen" placeholder="Imagen/Logo">
                     </div>
                     <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" placeholder="Enlaces de redes Sociales">
+                        <input type="text" class="form-control" ng-model="enlace1" placeholder="Enlaces de redes Sociales">
                     </div>
                     <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" placeholder="Enlaces de redes Sociales">
+                        <input type="text" class="form-control" ng-model="enlace2" placeholder="Enlaces de redes Sociales">
                     </div>
                 </div>
             </div>
@@ -90,18 +96,18 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="form-group col-xs-12">
-                        <textarea class="form-control " rows="6" placeholder="Breve descripcion del servicio."></textarea>
+                        <textarea class="form-control " rows="6" ng-model="descService" placeholder="Breve descripcion del servicio."></textarea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" placeholder="Servicio ofrecido">
+                        <input type="text" class="form-control" ng-model="servicioOfrecido1" placeholder="Servicio ofrecido">
                     </div>
                     <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" placeholder="Servicio ofrecido">
+                        <input type="text" class="form-control" ng-model="servicioOfrecido2" placeholder="Servicio ofrecido">
                     </div>
                     <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" placeholder="Servicio ofrecido">
+                        <input type="text" class="form-control" ng-model="servicioOfrecido3" placeholder="Servicio ofrecido">
                     </div>
                 </div>
             </div>

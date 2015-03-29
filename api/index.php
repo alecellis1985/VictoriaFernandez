@@ -9,6 +9,7 @@ require_once 'crudUser.php';
 require_once 'crudDepartamentos.php';
 require_once 'crudBarrios.php';
 require_once 'crudCategorias.php';
+require_once 'registerUser.php';
 
 $app = new Slim();
 $app->get('/users', 'getUsers');
@@ -20,14 +21,16 @@ $app->delete('/users/:id', 'deleteUser');
 $app->get('/departamentos', 'getDepartamentos');
 $app->get('/categorias', 'getCategorias');
 
+$app->post('/agregar_usuario', 'registerUser');
+
 $app->run();
 
-function getConnection() {
-    $dbhost = "localhost";
-    $dbuser = "root";
-    $dbpass = "oso2203";
-    $dbname = "angular_tutorial";
-    $dbConnection = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
-    $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    return $dbConnection;
-}
+//function getConnection() {
+//    $dbhost = "localhost";
+//    $dbuser = "root";
+//    $dbpass = "oso2203";
+//    $dbname = "angular_tutorial";
+//    $dbConnection = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
+//    $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//    return $dbConnection;
+//}
