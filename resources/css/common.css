@@ -78,3 +78,7 @@
 {
     height: 33px;
 }
+
+.contentContainer {
+  min-height: 500px;
+}
