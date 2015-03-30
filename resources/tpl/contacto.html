@@ -1,0 +1,33 @@
+<form ng-submit="registrarUsuario()"style="padding-top: 10px">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Datos personales de contacto</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row ">
+                <div class="form-group col-xs-4">
+                    <input type="text" class="form-control" ng-model="nombre" placeholder="Nombre" required>
+                </div>
+                <div class="form-group col-xs-4">
+                    <input type="text" class="form-control" ng-model="apellido" placeholder="Apellido">
+                </div>
+                <div class="form-group col-xs-4">
+                    <input type="text" class="form-control" ng-model="email" placeholder="Email">
+                </div>
+                <div class="form-group col-xs-4">
+                    <input type="text" class="form-control" ng-model="telefono" placeholder="Telefono">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12">
+                    <textarea class="form-control " rows="6" ng-model="descService" placeholder="Mensaje"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12">
+                    <button type="submit" class="btn btn-primary pull-right">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

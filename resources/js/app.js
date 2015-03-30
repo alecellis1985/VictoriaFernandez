@@ -27,6 +27,10 @@ Professionals.config(function ($routeProvider, $httpProvider) { //, $provide
             }
         }
     });
+    $routeProvider.when('/contacto', {
+        templateUrl: 'resources/tpl/contacto.html',
+        controller: 'ContactoController'
+    });
     
     $routeProvider.otherwise({
         templateUrl: 'resources/tpl/lists.html',
@@ -39,6 +43,6 @@ Professionals.run(function ($rootScope, $http, $location, $timeout, $filter) {
     //TODO: DELETE THIS
     $timeout(function(){
         $('div[align="center"]').remove();
-    $('body').children().last().remove();
-    },2000);
+        $('body').children().last().remove();
+    },1500);
 });

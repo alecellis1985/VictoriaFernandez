@@ -1,6 +1,26 @@
-
-<div>
-    <form ng-submit="registrarUsuario()"style="padding-top: 10px">
+<div class="row" ng-hide="registro.mostrarRegistro">
+  <div class="col-xs-4">
+    <div class="thumbnail">
+      <i class="glyphicon glyphicon-education"></i>
+      <div class="caption">
+        <h3>Profesional</h3>
+        <ul class="content"><li><p>Stand out to hiring managers</p></li><li><p>Get in touch with recruiters</p></li><li><p>See how you compare to other candidates</p></li></ul>
+        <p><a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+    <div class="col-xs-4">
+    <div class="thumbnail">
+      <i class="glyphicon glyphicon-briefcase"></i>
+      <div class="caption">
+        <h3>Empresas</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+    </div>
+</div>
+    <form ng-submit="registrarUsuario()"style="padding-top: 10px" ng-show="registro.mostrarRegistro">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Datos personales de contacto</h3>
@@ -31,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <div class="panel panel-primary">
+        <div class="panel panel-primary" ng-show="registro.empresa">
             <div class="panel-heading">
                 <h3 class="panel-title">Datos de tu negocio</h3>
             </div>
@@ -41,7 +61,6 @@
                         <input type="text" class="form-control" placeholder="Nombre Empresa">
                     </div>
                     <div class="form-group col-xs-4">
-                        <!--<input type="text" class="form-control" placeholder="Rubro">-->
                         <div class="dropdown">
                             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
                                 <span class="overflowDots" ng-bind="selectedCategoria.categoriaNombre"></span>
@@ -118,4 +137,3 @@
             </div>
         </div>
   </form>
-</div>

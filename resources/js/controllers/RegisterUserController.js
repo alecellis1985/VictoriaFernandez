@@ -1,6 +1,12 @@
 'use strict';
 
 Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$http', '$rootScope', '$location', 'CommonService', 'departamentosList', 'categoriasList', function ($scope, $routeParams, $http, $rootScope, $location, CommonService, departamentosList, categoriasList) {
+    
+    $scope.registro = {
+        mostrarRegistro:false,
+        empresa:false
+    };
+    
     $scope.categorias = categoriasList.data;
     $scope.categorias.unshift({categoriaNombre:"Seleccione Categoria",id:-1});
     $scope.selectedCategoria = $scope.categorias[0];
