@@ -46,3 +46,11 @@ Professionals.run(function ($rootScope, $http, $location, $timeout, $filter) {
         $('body').children().last().remove();
     },1500);
 });
+
+Professionals.directive('hello', function(){
+    return {
+        restrict: 'E',
+        templateUrl: 'resources/tpl/header.html',
+        
+    };
+});

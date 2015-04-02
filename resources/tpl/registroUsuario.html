@@ -1,139 +1,139 @@
 <div class="row" ng-hide="registro.mostrarRegistro">
-  <div class="col-xs-4">
-    <div class="thumbnail">
-      <i class="glyphicon glyphicon-education"></i>
-      <div class="caption">
-        <h3>Profesional</h3>
-        <ul class="content"><li><p>Stand out to hiring managers</p></li><li><p>Get in touch with recruiters</p></li><li><p>See how you compare to other candidates</p></li></ul>
-        <p><a href="#" class="btn btn-default" role="button">Button</a></p>
-      </div>
-    </div>
-  </div>
     <div class="col-xs-4">
-    <div class="thumbnail">
-      <i class="glyphicon glyphicon-briefcase"></i>
-      <div class="caption">
-        <h3>Empresas</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-default" role="button">Button</a></p>
-      </div>
+        <div class="thumbnail">
+            <i class="glyphicon glyphicon-education"></i>
+            <div class="caption">
+                <h3>Profesional</h3>
+                <ul class="content"><li><p>Stand out to hiring managers</p></li><li><p>Get in touch with recruiters</p></li><li><p>See how you compare to other candidates</p></li></ul>
+                <p><a href="#" class="btn btn-default" role="button" ng-click="showProfessionalRegistration($event)">Button</a></p>
+            </div>
+        </div>
     </div>
+    <div class="col-xs-4">
+        <div class="thumbnail">
+            <i class="glyphicon glyphicon-briefcase"></i>
+            <div class="caption">
+                <h3>Empresas</h3>
+                <p>...</p>
+                <p><a href="#" class="btn btn-default" role="button" ng-click="showEnterpriseRegistration($event)">Button</a></p>
+            </div>
+        </div>
     </div>
 </div>
-    <form ng-submit="registrarUsuario()"style="padding-top: 10px" ng-show="registro.mostrarRegistro">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">Datos personales de contacto</h3>
-            </div>
-            <div class="panel-body">
-                <div class="row ">
-                    <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" ng-model="nombre" placeholder="Nombre" required>
-                    </div>
-                    <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" ng-model="apellido" placeholder="Apellido">
-                    </div>
-                    <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" ng-model="username" placeholder="Nombre de usuario">
-                    </div>
-                    <div class="form-group col-xs-4">
-                        <input type="password" class="form-control" ng-model="password" placeholder="Contraseña">
-                    </div>
-                    <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" ng-model="email" placeholder="Email">
-                    </div>
-                    <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" ng-model="telefono" placeholder="Telefono">
-                    </div>
-                    <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" ng-model="celular" placeholder="Celular">
-                    </div>
+<form ng-submit="registrarUsuario()"style="padding-top: 10px" ng-show="registro.mostrarRegistro">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Datos personales de contacto</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row ">
+                <div class="form-group col-xs-4">
+                    <input type="text" class="form-control" ng-model="nombre" placeholder="Nombre" required>
+                </div>
+                <div class="form-group col-xs-4">
+                    <input type="text" class="form-control" ng-model="apellido" placeholder="Apellido">
+                </div>
+                <div class="form-group col-xs-4">
+                    <input type="text" class="form-control" ng-model="username" placeholder="Nombre de usuario">
+                </div>
+                <div class="form-group col-xs-4">
+                    <input type="password" class="form-control" ng-model="password" placeholder="Contraseña">
+                </div>
+                <div class="form-group col-xs-4">
+                    <input type="text" class="form-control" ng-model="email" placeholder="Email">
+                </div>
+                <div class="form-group col-xs-4">
+                    <input type="text" class="form-control" ng-model="telefono" placeholder="Telefono">
+                </div>
+                <div class="form-group col-xs-4">
+                    <input type="text" class="form-control" ng-model="celular" placeholder="Celular">
                 </div>
             </div>
         </div>
-        <div class="panel panel-primary" ng-show="registro.empresa">
-            <div class="panel-heading">
-                <h3 class="panel-title">Datos de tu negocio</h3>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" placeholder="Nombre Empresa">
+    </div>
+    <div class="panel panel-primary" ng-show="registro.empresa">
+        <div class="panel-heading">
+            <h3 class="panel-title">Datos de tu negocio</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="form-group col-xs-4">
+                    <input type="text" class="form-control" placeholder="Nombre Empresa">
+                </div>
+                <div class="form-group col-xs-4">
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                            <span class="overflowDots" ng-bind="selectedCategoria.categoriaNombre"></span>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            <li  ng-repeat="categoria in categorias" role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#" ng-click="selectCategoria($event, categoria)">{{categoria.categoriaNombre}}</a>
+                            </li>
+                        </ul>
+                    </div> 
+                </div>
+                <div class="form-group col-xs-4">
+                    <!--<input type="text" class="form-control" placeholder="Departamento">-->
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true">
+                            <span class="overflowDots" ng-bind="depSelected.nombreDepartamento"></span>
+                            <span class="caret"></span> 
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                            <li  ng-repeat="dep in departamentosList" role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#" ng-click="selectDepartamento($event, dep)">{{dep.nombreDepartamento}}</a>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="form-group col-xs-4">
-                        <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                                <span class="overflowDots" ng-bind="selectedCategoria.categoriaNombre"></span>
-                              <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                <li  ng-repeat="categoria in categorias" role="presentation">
-                                    <a role="menuitem" tabindex="-1" href="#" ng-click="selectCategoria($event,categoria)">{{categoria.categoriaNombre}}</a>
-                                </li>
-                            </ul>
-                        </div> 
-                    </div>
-                    <div class="form-group col-xs-4">
-                        <!--<input type="text" class="form-control" placeholder="Departamento">-->
-                        <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true">
-                              <span class="overflowDots" ng-bind="depSelected.nombreDepartamento"></span>
-                              <span class="caret"></span> 
-                            </button>
-                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
-                                <li  ng-repeat="dep in departamentosList" role="presentation">
-                                    <a role="menuitem" tabindex="-1" href="#" ng-click="selectDepartamento($event,dep)">{{dep.nombreDepartamento}}</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" ng-model="direccion" placeholder="Direccion">
-                    </div>
-                    <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" ng-model="telefonoEmp" placeholder="Telefono Empresa">
-                    </div>
-                    <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" ng-model="sitioWeb" placeholder="Sitio Web">
-                    </div>
-                    <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" ng-model="imagen" placeholder="Imagen/Logo">
-                    </div>
-                    <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" ng-model="enlace1" placeholder="Enlaces de redes Sociales">
-                    </div>
-                    <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" ng-model="enlace2" placeholder="Enlaces de redes Sociales">
-                    </div>
+                </div>
+                <div class="form-group col-xs-4">
+                    <input type="text" class="form-control" ng-model="direccion" placeholder="Direccion">
+                </div>
+                <div class="form-group col-xs-4">
+                    <input type="text" class="form-control" ng-model="telefonoEmp" placeholder="Telefono Empresa">
+                </div>
+                <div class="form-group col-xs-4">
+                    <input type="text" class="form-control" ng-model="sitioWeb" placeholder="Sitio Web">
+                </div>
+                <div class="form-group col-xs-4">
+                    <input type="text" class="form-control" ng-model="imagen" placeholder="Imagen/Logo">
+                </div>
+                <div class="form-group col-xs-4">
+                    <input type="text" class="form-control" ng-model="enlace1" placeholder="Enlaces de redes Sociales">
+                </div>
+                <div class="form-group col-xs-4">
+                    <input type="text" class="form-control" ng-model="enlace2" placeholder="Enlaces de redes Sociales">
                 </div>
             </div>
         </div>
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">Describa su negocio o servicio</h3>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="form-group col-xs-12">
-                        <textarea class="form-control " rows="6" ng-model="descService" placeholder="Breve descripcion del servicio."></textarea>
-                    </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Describa su negocio o servicio</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="form-group col-xs-12">
+                    <textarea class="form-control " rows="6" ng-model="descService" placeholder="Breve descripcion del servicio."></textarea>
                 </div>
-                <div class="row">
-                    <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" ng-model="servicioOfrecido1" placeholder="Servicio ofrecido">
-                    </div>
-                    <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" ng-model="servicioOfrecido2" placeholder="Servicio ofrecido">
-                    </div>
-                    <div class="form-group col-xs-4">
-                        <input type="text" class="form-control" ng-model="servicioOfrecido3" placeholder="Servicio ofrecido">
-                    </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-4">
+                    <input type="text" class="form-control" ng-model="servicioOfrecido1" placeholder="Servicio ofrecido">
+                </div>
+                <div class="form-group col-xs-4">
+                    <input type="text" class="form-control" ng-model="servicioOfrecido2" placeholder="Servicio ofrecido">
+                </div>
+                <div class="form-group col-xs-4">
+                    <input type="text" class="form-control" ng-model="servicioOfrecido3" placeholder="Servicio ofrecido">
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="form-group col-xs-12">
-                <button type="submit" class="btn btn-primary pull-right">Registrarme</button>
-            </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-xs-12">
+            <button type="submit" class="btn btn-primary pull-right">Registrarme</button>
         </div>
-  </form>
+    </div>
+</form>
