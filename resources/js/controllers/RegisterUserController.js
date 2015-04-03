@@ -1,24 +1,51 @@
 'use strict';
 
-Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$http', '$rootScope', '$location',
+Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$http', '$rootScope', '$location', '$upload',
     'CommonService', 'departamentosList', 'categoriasList',
-    function ($scope, $routeParams, $http, $rootScope, $location, CommonService, departamentosList, categoriasList) {
+    function ($scope, $routeParams, $http, $rootScope, $location, $upload, CommonService, departamentosList, categoriasList) {
+        //FOR UPLOAD FILE (IMG)
+        $scope.error = '';
+        $scope.$watch('files', function () {
+            //perform img validation 
+            $scope.validateImg($scope.files);
+        });
 
+        $scope.validateImg = function (files) {
+            if (files && files.length) {
+                var file = files[0];
+                
+                if (file.type.indexOf('image') === -1) {
+                    $scope.error = 'Image extension not allowed, please choose a JPEG or PNG file.'
+                }
+
+                if (file.size > 2097152) {
+                    $scope.error += 'File size cannot exceed 2 MB';
+                }
+                if($scope.error === '')
+                    alert("FILE OK!");
+                else
+                    alert($scope.error);
+                
+                $scope.error = '';
+            }
+        };
+
+        //
         $scope.registro = {
             mostrarRegistro: false,
             empresa: false
         };
-        
-        $scope.showProfessionalRegistration = function(e){
+
+        $scope.showProfessionalRegistration = function (e) {
             e.preventDefault();
             $scope.registro.mostrarRegistro = true;
             $scope.registro.empresa = false;
         };
-        
-        $scope.showEnterpriseRegistration = function(e){
+
+        $scope.showEnterpriseRegistration = function (e) {
             e.preventDefault();
             $scope.registro.mostrarRegistro = false;
-            $scope.registro.empresa = true;            
+            $scope.registro.empresa = true;
         };
 
         $scope.categorias = categoriasList.data;
@@ -61,8 +88,9 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                 'servicioOfrecido2': $scope.servicioOfrecido2,
                 'servicioOfrecido3': $scope.servicioOfrecido3
             };
-            CommonService.postJsonRequest('api/agregar_usuario', data).then(function (data) {
-                alert(data.datos);
+            
+            CommonService.postRequestWithFile('api/agregar_usuario', data, $scope.files[0]).then(function (result) {
+                alert(result.msg);
             });
 
         };

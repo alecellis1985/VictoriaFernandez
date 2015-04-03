@@ -205,19 +205,34 @@ INSERT INTO `departamentos` VALUES (19, 'Treinta y Tres');
 -- 
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL auto_increment,
-  `username` varchar(255) NOT NULL,
-  `first_name` varchar(100) NOT NULL,
-  `last_name` varchar(100) NOT NULL,
-  `address` varchar(255) default NULL,
+    `id` int(11) NOT NULL auto_increment,
+    `nombre` varchar(100) NOT NULL,
+    `apellido` varchar(100) NOT NULL,
+    `email` varchar(100) NOT NULL,
+    `telefono` varchar(100) NOT NULL,
+    `celular` varchar(100) NOT NULL,
+    `direccion` varchar(100) default NULL,
+    `telefonoEmp` varchar(100) NOT NULL,
+    `departamento` int(3) NOT NULL,
+    `categoria` int(3) NOT NULL,
+    `sitioWeb` varchar(100) NOT NULL,
+    `imagenUrl` varchar(100) NOT NULL,
+    `enlace1` varchar(250) NOT NULL,
+    `enlace2` varchar(250) NOT NULL,
+    `descService` varchar(1000) NOT NULL,
+    `servicioOfrecido1` varchar(250) NOT NULL,
+    `servicioOfrecido2` varchar(250) NOT NULL,
+    `servicioOfrecido3` varchar(250) NOT NULL,
+    `username` varchar(100) NOT NULL,
+    `password` varchar(100) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- 
 -- Dumping data for table `users`
 -- 
 
-INSERT INTO `users` VALUES (1, 'lucentx', 'Aron', 'Barbosa', 'Manila, Philippines');
-INSERT INTO `users` VALUES (2, 'ozzy', 'Ozzy', 'Osbourne', 'England');
-INSERT INTO `users` VALUES (3, 'tony', 'Tony', 'Iommi', 'England');
-INSERT INTO `users` VALUES (4, 'khoh', 'okjoj', 'uguyg', 'ytfyfyt');
+-- INSERT INTO `users` VALUES (1, 'lucentx', 'Aron', 'Barbosa', 'Manila, Philippines');
+-- INSERT INTO `users` VALUES (2, 'ozzy', 'Ozzy', 'Osbourne', 'England');
+-- INSERT INTO `users` VALUES (3, 'tony', 'Tony', 'Iommi', 'England');
+-- INSERT INTO `users` VALUES (4, 'khoh', 'okjoj', 'uguyg', 'ytfyfyt');
