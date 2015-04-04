@@ -3,7 +3,7 @@
 var Professionals = angular.module('Professionals', ['ngRoute', 'angularFileUpload']);//, 'ngSanitize'
 Professionals.config(function ($routeProvider, $httpProvider) { //, $provide
 
-    $routeProvider.when('/busqueda-profesionales', {
+    $routeProvider.otherwise({
         templateUrl: 'resources/tpl/busquedaProfesionales.html',
         controller: 'ProfessionalsSearchController',
         resolve: {
@@ -15,6 +15,7 @@ Professionals.config(function ($routeProvider, $httpProvider) { //, $provide
             }
         }
     });
+    
     $routeProvider.when('/registro-usuario', {
         templateUrl: 'resources/tpl/registroUsuario.html',
         controller: 'RegisterUserController',
@@ -32,10 +33,10 @@ Professionals.config(function ($routeProvider, $httpProvider) { //, $provide
         controller: 'ContactoController'
     });
     
-    $routeProvider.otherwise({
-        templateUrl: 'resources/tpl/lists.html',
-        controller: 'HomeController'
-    });
+//    $routeProvider.otherwise({
+//        templateUrl: 'resources/tpl/lists.html',
+//        controller: 'HomeController'
+//    });
 
 });
 
