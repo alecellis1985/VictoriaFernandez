@@ -110,3 +110,61 @@
    -webkit-box-shadow: none;
     box-shadow: none;
 }
+
+.searchIcons
+{
+    background-color: #C54D4D;
+    border: 1px solid #C54D4D;
+    color: #FFFFFF;
+    padding: 2px;    
+    border-radius: 3px;
+    font-size: 25px;
+    margin-right: 5px;
+    cursor:pointer;
+}
+.glyphicon-th-large
+{
+    padding-left: 4px;
+}
+
+.searchIcons:hover,.searchIconActive
+{
+    background: #c00;
+    border: 1px solid #990000;
+}
+
+.card
+{
+/*    border: 1px solid rgba(187, 200, 0, 0.09);
+    background: rgba(187, 200, 0, 0.09);*/
+    background: rgba(187, 200, 0, 0.09);
+    box-shadow: 0 0 1em rgba(187, 200, 0, 0.28);
+}
+
+.card img
+{
+    height: 100px;
+    width: 90px;
+    margin-top: 4px;
+}
+
+.card h2
+{
+      margin-top: 4px;
+}
+
+.card:hover
+{
+    box-shadow: 0 0 1em rgba(187, 200, 0, 0.55);
+    cursor:pointer;
+}
+
+.card .glyphicon-envelope
+{
+    font-size: 16px;
+}
+
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus
+{
+    outline:none;
+}

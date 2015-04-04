@@ -11,8 +11,7 @@ function registerUser() {
     $filenameAndExt = explode(".", $_FILES['file']['name']);
     $destination = '../resources/img/uploaded/' . $filenameAndExt[0] . "_" . $user['username'] . "." . $filenameAndExt[1]; 
     move_uploaded_file($_FILES['file']['tmp_name'], $destination);
-    $user['imagenUrl'] = $destination;
-    //
+    $user['imagenUrl'] = $filenameAndExt[1];
 
     if ($conn->conectar()) {
         $sql = "INSERT INTO users (nombre, apellido, email, telefono, celular, direccion, telefonoEmp, "
