@@ -1,14 +1,7 @@
--- phpMyAdmin SQL Dump
--- version 2.10.3
--- http://www.phpmyadmin.net
--- 
--- Host: localhost
--- Generation Time: Apr 04, 2015 at 01:47 PM
--- Server version: 5.0.51
--- PHP Version: 5.2.6
-
+DROP DATABASE IF EXISTS `angular_tutorial`;
+CREATE DATABASE `angular_tutorial`;
+USE `angular_tutorial`;
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
 -- 
 -- Database: `angular_tutorial`
 -- 
