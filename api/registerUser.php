@@ -4,7 +4,6 @@ function registerUser() {
     $request = Slim::getInstance()->request();
 
     $user = getArrayFromRequest($request);
-    var_dump($user);
     $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
     $response = null;
     //Save File

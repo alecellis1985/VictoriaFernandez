@@ -47,10 +47,10 @@ Professionals.run(function ($rootScope, $http, $location, $timeout, $filter) {
     },1500);
 });
 
-Professionals.directive('hello', function(){
-    return {
-        restrict: 'E',
-        templateUrl: 'resources/tpl/header.html',
-        
-    };
-});
+//Professionals.directive('hello', function(){
+//    return {
+//        restrict: 'E',
+//        templateUrl: 'resources/tpl/header.html',
+//        
+//    };
+//});

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Generation Time: Mar 26, 2015 at 07:21 PM
+-- Generation Time: Apr 04, 2015 at 01:47 PM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6
 
@@ -205,8 +205,8 @@ INSERT INTO `departamentos` VALUES (19, 'Treinta y Tres');
 -- 
 
 CREATE TABLE `users` (
-    `id` int(11) NOT NULL auto_increment,
-    `nombre` varchar(100) NOT NULL,
+	`idUser` int(11) NOT NULL auto_increment,
+	`nombre` varchar(100) NOT NULL,
     `apellido` varchar(100) NOT NULL,
     `email` varchar(100) NOT NULL,
     `telefono` varchar(100) NOT NULL,
@@ -225,14 +225,17 @@ CREATE TABLE `users` (
     `servicioOfrecido3` varchar(250) NOT NULL,
     `username` varchar(100) NOT NULL,
     `password` varchar(100) NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  PRIMARY KEY  (`idUser`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 -- 
 -- Dumping data for table `users`
 -- 
 
--- INSERT INTO `users` VALUES (1, 'lucentx', 'Aron', 'Barbosa', 'Manila, Philippines');
--- INSERT INTO `users` VALUES (2, 'ozzy', 'Ozzy', 'Osbourne', 'England');
--- INSERT INTO `users` VALUES (3, 'tony', 'Tony', 'Iommi', 'England');
--- INSERT INTO `users` VALUES (4, 'khoh', 'okjoj', 'uguyg', 'ytfyfyt');
+
+INSERT INTO `users` VALUES (1, 'nombre', 'apellido', 'email', '26013794', '09865321', 'tucuman 2121', 'dasd', 1, 2, 'asfas', 'asff', 'fasf', '', 'asf', 'asfasf', 'asfasf', 'asfasf', 'user1', 'pw');
+INSERT INTO `users` VALUES (2, 'nombre', 'apellido', 'email', '26013794', '09865321', 'tucuman 2121', 'dasd', 1, 2, 'asfas', 'asff', 'fasf', 'asf', 'asf', 'asfasf', 'asfasf', 'asfasf', 'user12', 'pw');
+INSERT INTO `users` VALUES (3, 'fasfa', 'asfas', 'fasf', 'fasfas', '26013794', '09865321', 'tucuman 2121', 7, 5, 'fasf', 'asfasfasf', 'sfasfas', 'asfasf', 'asfafasf', 'asf', 'asfasfasf', 'asfsa', 'fasfasf', 'asf');
+INSERT INTO `users` VALUES (4, 'Alec', 'Ellis', 'alecellis1985@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1, 'www.alec.com', 'imgtodo', 'redesocial1', 'redesocial2', 'asfasf', 'afsaf', 'asfas', 'fasf', 'Alexander', 'pwpwpw');
+INSERT INTO `users` VALUES (5, 'Juan', 'Gonzales', 'elgonchi@gmail.com', '262321651', '09861651', 'tucuman 2121', '6251651651', 2, 1, 'wawa.com.uy', 'fafa', 'fsaf', 'asfasf', 'asfasfaf', 'asfa', 'fasfas', 'asfaf', 'El_Gonchi', 'ahfahf');
