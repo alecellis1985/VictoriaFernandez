@@ -1,6 +1,6 @@
 'use strict'; 
 
-var Professionals = angular.module('Professionals', ['ngRoute']);//, 'ngSanitize'
+var Professionals = angular.module('Professionals', ['ngRoute', 'angularFileUpload']);//, 'ngSanitize'
 Professionals.config(function ($routeProvider, $httpProvider) { //, $provide
 
     $routeProvider.when('/busqueda-profesionales', {
@@ -45,4 +45,12 @@ Professionals.run(function ($rootScope, $http, $location, $timeout, $filter) {
         $('div[align="center"]').remove();
         $('body').children().last().remove();
     },1500);
+});
+
+Professionals.directive('hello', function(){
+    return {
+        restrict: 'E',
+        templateUrl: 'resources/tpl/header.html',
+        
+    };
 });

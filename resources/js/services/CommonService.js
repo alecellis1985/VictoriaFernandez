@@ -1,4 +1,4 @@
-Professionals.factory('CommonService', function ($http, $q) {
+Professionals.factory('CommonService', function ($http, $q, $upload) {
     var commonService = {};
 
     commonService.getRequest = function (requestUrl, params, canceller) {
@@ -36,6 +36,15 @@ Professionals.factory('CommonService', function ($http, $q) {
             deferred.resolve(data);
         });
         return deferred.promise();
+    };
+    
+    commonService.postRequestWithFile = function (requestUrl, params, file) {
+         return $upload.upload({
+                    url: requestUrl,
+                    file: file,
+                    fields: params
+                   // headers: {'Content-Type': 'application/json;charset=utf-8'}
+                });
     };
 
     return commonService;
