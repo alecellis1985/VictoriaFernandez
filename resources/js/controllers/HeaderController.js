@@ -11,23 +11,24 @@ Professionals.controller('HeaderController', ['$scope', '$routeParams', '$http',
     $scope.items = ['item1', 'item2', 'item3'];
 
     $scope.ingresarAction = function (evt,size) {
-        
-      var modalInstance = $modal.open({
-        templateUrl: 'resources/tpl/login.html',
-        controller: 'LoginController',
-        size: size,
-//        resolve: {
-//          items: function () {
-//            return $scope.items;
-//          }
-//        }
-      });
-      evt.stopPropagation();
-      modalInstance.result.then(function () {
-//      $scope.selected = selectedItem;
-    }, function () {
-        console.log('Modal dismissed at: ' + new Date());
-    });
+        evt.preventDefault();
+        evt.stopPropagation();
+        var modalInstance = $modal.open({
+            templateUrl: 'resources/tpl/login.html',
+            controller: 'LoginController',
+            size: size
+      //        resolve: {
+      //          items: function () {
+      //            return $scope.items;
+      //          }
+      //        }
+        });
+      
+        modalInstance.result.then(function () {
+        //$scope.selected = selectedItem;
+        }, function () {
+          console.log('Modal dismissed at: ' + new Date());
+        });
   };
     
     //$scope.profesionalesList = ["Abogados","Alambradores","Albañiles","Animadores","Arquitectos","Carpinteros","Constructores","Contadores","Corredores de seguro","Decoradores y Diseñadores de Interiores","Desarrolladores Web","Despachantes de aduana","Diseñadores gráficos","Economistas","Economistas","Electricistas","Escribanos","Estilistas/Esteticistas","Fisioterapeutas","Fonoaudiólogos","Herreros","Ingenieros","Médicos","Nutricionistas","Odontólogos","Pintores","Podólogos","Psicólogos","Sanitarios","Tapiceros","Veterinarios","Vidrieros"];

@@ -212,7 +212,7 @@
 
 .alertsTop
 {
-    position: absolute;
+    position: fixed;
     width: 60%;
     top: 0;
     left: 0;
