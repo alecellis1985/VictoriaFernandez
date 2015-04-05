@@ -32,14 +32,17 @@ function registerUser() {
         $params[8] = array("categoria", (int) $user['categoria'], "int", 5);
         $params[9] = array("sitioWeb", $user['sitioWeb'], "string", 50);
         $params[10] = array("imagenUrl", $user['imagenUrl'], "string", 100);
-        $params[11] = array("enlace1", $user['enlace1'], "string", 250);
-        $params[12] = array("enlace2", $user['enlace2'], "string", 250);
-        $params[13] = array("descService", $user['descService'], "string", 1000);
-        $params[14] = array("servicioOfrecido1", $user['servicioOfrecido1'], "string", 250);
-        $params[15] = array("servicioOfrecido2", $user['servicioOfrecido2'], "string", 250);
-        $params[16] = array("servicioOfrecido3", $user['servicioOfrecido3'], "string", 250);
-        $params[17] = array("username", $user['username'], "string", 50);
-        $params[18] = array("password", md5($user['password']), "string", 10);
+        
+        $params[11] = array("facebookUrl", $user['facebookUrl'], "string", 250);
+        $params[12] = array("twitterUrl", $user['twitterUrl'], "string", 250);
+        $params[13] = array("linkedinUrl", $user['linkedinUrl'], "string", 250);
+        
+        $params[14] = array("descService", $user['descService'], "string", 1000);
+        $params[15] = array("servicioOfrecido1", $user['servicioOfrecido1'], "string", 250);
+        $params[16] = array("servicioOfrecido2", $user['servicioOfrecido2'], "string", 250);
+        $params[17] = array("servicioOfrecido3", $user['servicioOfrecido3'], "string", 250);
+        $params[18] = array("username", $user['username'], "string", 50);
+        $params[19] = array("password", md5($user['password']), "string", 10);
 
         if ($conn->consulta($sql, $params)) {
             $user['id'] = $conn->ultimoIdInsert();
@@ -70,8 +73,11 @@ function getArrayFromRequest($request) {
         "categoria" => 0, //$_POST['categoria'],
         "sitioWeb" => $request->post('sitioWeb'),
         //"imagen" => $request->post('imagen'),
-        "enlace1" => $request->post('enlace1'),
-        "enlace2" => $request->post('enlace2'),
+        
+        "facebookUrl" => $request->post('facebookUrl'),
+        "twitterUrl" => $request->post('twitterUrl'),
+        "linkedinUrl" => $request->post('linkedinUrl'),
+        
         "descService" => $request->post('descService'),
         "servicioOfrecido1" => $request->post('servicioOfrecido1'),
         "servicioOfrecido2" => $request->post('servicioOfrecido2'),

@@ -197,9 +197,10 @@ INSERT INTO `departamentos` VALUES (19, 'Treinta y Tres');
 -- Table structure for table `users`
 -- 
 
+
 CREATE TABLE `users` (
-	`idUser` int(11) NOT NULL auto_increment,
-	`nombre` varchar(100) NOT NULL,
+    `idUser` int(11) NOT NULL auto_increment,
+    `nombre` varchar(100) NOT NULL,
     `apellido` varchar(100) NOT NULL,
     `email` varchar(100) NOT NULL,
     `telefono` varchar(100) NOT NULL,
@@ -210,8 +211,9 @@ CREATE TABLE `users` (
     `categoria` int(3) NOT NULL,
     `sitioWeb` varchar(100) NOT NULL,
     `imagenUrl` varchar(100) NOT NULL,
-    `enlace1` varchar(250) NOT NULL,
-    `enlace2` varchar(250) NOT NULL,
+    `facebookUrl` varchar(250) NOT NULL,
+    `twitterUrl` varchar(250) NOT NULL,
+    `linkedinUrl` varchar(250) NOT NULL,
     `descService` varchar(1000) NOT NULL,
     `servicioOfrecido1` varchar(250) NOT NULL,
     `servicioOfrecido2` varchar(250) NOT NULL,
@@ -225,10 +227,9 @@ CREATE TABLE `users` (
 -- 
 -- Dumping data for table `users`
 -- 
-
-
-INSERT INTO `users` VALUES (1, 'nombre', 'apellido', 'email', '26013794', '09865321', 'tucuman 2121', 'dasd', 1, 2, 'asfas', 'asff', 'fasf', '', 'asf', 'asfasf', 'asfasf', 'asfasf', 'user1', 'pw');
-INSERT INTO `users` VALUES (2, 'nombre', 'apellido', 'email', '26013794', '09865321', 'tucuman 2121', 'dasd', 1, 2, 'asfas', 'asff', 'fasf', 'asf', 'asf', 'asfasf', 'asfasf', 'asfasf', 'user12', 'pw');
-INSERT INTO `users` VALUES (3, 'fasfa', 'asfas', 'fasf', 'fasfas', '26013794', '09865321', 'tucuman 2121', 7, 5, 'fasf', 'asfasfasf', 'sfasfas', 'asfasf', 'asfafasf', 'asf', 'asfasfasf', 'asfsa', 'fasfasf', 'asf');
-INSERT INTO `users` VALUES (4, 'Alec', 'Ellis', 'alecellis1985@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1, 'www.alec.com', 'imgtodo', 'redesocial1', 'redesocial2', 'asfasf', 'afsaf', 'asfas', 'fasf', 'Alexander', 'pwpwpw');
-INSERT INTO `users` VALUES (5, 'Juan', 'Gonzales', 'elgonchi@gmail.com', '262321651', '09861651', 'tucuman 2121', '6251651651', 2, 1, 'wawa.com.uy', 'fafa', 'fsaf', 'asfasf', 'asfasfaf', 'asfa', 'fasfas', 'asfaf', 'El_Gonchi', 'ahfahf');
+--                          id  nombre  apellido email                      telefono     celular    direccion     telefonoEmp dep cat web            imgNombre               facebook                                   twitter                  linkedin
+INSERT INTO `users` VALUES (1, 'Alec', 'Ellis', 'alecellis1985@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'afsaf', 'asfas', 'fasf', 'Palomo', 'pwpwpw');
+INSERT INTO `users` VALUES (2, 'Sam', 'Gusto', 'elgroso@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'afsaf', 'asfas', 'fasf', 'El_Triste', 'pwpwpw');
+INSERT INTO `users` VALUES (3, 'Tomy', 'Potatoue', 'los_pi@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'afsaf', 'asfas', 'fasf', 'Gomon', 'pwpwpw');
+INSERT INTO `users` VALUES (4, 'Charli', 'Gut', 'matoluzen@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'afsaf', 'asfas', 'fasf', 'Alexander', 'pwpwpw');
+INSERT INTO `users` VALUES (5, 'Juan', 'Gonzales', 'elgonchi@gmail.com', '262321651', '09861651', 'tucuman 2121', '6251651651', 2, 1, 'wawa.com.uy', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'asfa', 'fasfas', 'asfaf', 'El_Gonchi', 'ahfahf');

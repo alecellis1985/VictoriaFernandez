@@ -24,9 +24,12 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
     {
         $scope.selectedList = num;
     }
+    
+    $scope.selectedUser = null;
+    
     $scope.showUserInfo = function(user)
     {
-        alert('showUserInfo');
+        $scope.selectedUser = user;
     }
     $scope.sendMailToUser = function(event,user)
     {

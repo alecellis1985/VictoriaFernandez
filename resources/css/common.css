@@ -137,6 +137,7 @@
 {
     background: rgba(187, 200, 0, 0.09);
     box-shadow: 0 0 1em rgba(187, 200, 0, 0.28);
+    margin-bottom: 17px;
 }
 
 .card img
@@ -153,7 +154,7 @@
 
 .card:hover
 {
-    box-shadow: 0 0 1em rgba(187, 200, 0, 0.55);
+    box-shadow: 0 0 1em rgba(187, 200, 0, 0.77);
     cursor:pointer;
 }
 
@@ -194,4 +195,17 @@
 .card button
 {
     margin-top: 5px;
+}
+
+.fa-phone-square
+{
+    font-size: 22px;
+    color: #c00;
+    background: white;
+}
+.fa-mobile{
+    font-size: 30px;
+    padding: 0 2px;
+    color: #c00;
+    background: white;
 }
