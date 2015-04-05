@@ -135,8 +135,6 @@
 
 .card
 {
-/*    border: 1px solid rgba(187, 200, 0, 0.09);
-    background: rgba(187, 200, 0, 0.09);*/
     background: rgba(187, 200, 0, 0.09);
     box-shadow: 0 0 1em rgba(187, 200, 0, 0.28);
 }
@@ -167,4 +165,33 @@
 .btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus
 {
     outline:none;
+}
+
+.fa-facebook-official
+{
+    color: #3a5795;
+}
+.fa-twitter-square
+{
+      color: #00aced;
+}
+.fa-linkedin-square
+{
+      color: #007bb6;
+}
+
+.card .fa-facebook-official,.card .fa-twitter-square,.card .fa-linkedin-square
+{
+    font-size: 31px;
+    
+}
+
+.card .fa-facebook-official:hover,.card .fa-twitter-square:hover,.card .fa-linkedin-square:hover
+{
+    opacity: 0.9;
+}
+
+.card button
+{
+    margin-top: 5px;
 }
