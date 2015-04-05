@@ -8,11 +8,10 @@
     <title>One Single Page AP</title>
     <link type="text/css" rel="stylesheet" href="resources/css/normalize.css">
     <link type="text/css" rel="stylesheet" href="resources/css/bootstrap.min.css">
+    <link type="text/css" rel='stylesheet' href="resources/css/font-awesome.min.css">
     <link type="text/css"  rel="stylesheet" href="resources/css/2-col-portfolio.css">
     <link type="text/css" rel="stylesheet" href="resources/css/main.css">
-    <link type="text/css" rel="stylesheet" href="resources/css/common.css">
-    <link type="text/css" rel='stylesheet' href="resources/css/font-awesome.min.css">
-    
+    <link type="text/css" rel="stylesheet" href="resources/css/common.css">  
 <body>
 <div class='alertsTop' ng-controller="AlertController">
   <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>

@@ -17,6 +17,7 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
         e.preventDefault();
         e.stopPropagation();
     };
+    $scope.isCollapsed = true;
     
     $scope.selectedList = 2;
     
@@ -29,6 +30,15 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
     
     $scope.showUserInfo = function(user)
     {
+        if(user !== $scope.selectedUser)
+        {
+            $scope.isCollapsed = false;
+        }
+        else
+        {
+            $scope.isCollapsed = !$scope.isCollapsed;
+        }
+//        $scope.isCollapsed = !$scope.isCollapsed;
         $scope.selectedUser = user;
     }
     $scope.sendMailToUser = function(event,user)

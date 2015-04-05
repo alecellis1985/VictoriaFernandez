@@ -58,9 +58,12 @@
                 </li>
             </ul>
         </div>
-        <div class="panel panel-primary" ng-if="selectedUser !== null">
+        <div class="panel panel-primary"  collapse="isCollapsed">
             <div class="panel-heading">
                 <h3 class="panel-title">{{selectedUser.nombre}} {{selectedUser.apellido}}</h3>
+                <button  type="button" class="close" ng-click="isCollapsed = true" style="position: relative;top: -18px;">
+                    <span aria-hidden="true">×</span>
+                </button>
             </div>
             <div class="panel-body">
                 <div class="row">
