@@ -1,6 +1,6 @@
 'use strict'; 
 
-var Professionals = angular.module('Professionals', ['ngRoute', 'angularFileUpload']);//, 'ngSanitize'
+var Professionals = angular.module('Professionals', ['ngRoute', 'angularFileUpload', 'ui.bootstrap']);//, 'ngSanitize'
 Professionals.config(function ($routeProvider, $httpProvider) { //, $provide
 
     $routeProvider.otherwise({

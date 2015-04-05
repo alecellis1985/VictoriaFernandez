@@ -3,12 +3,12 @@
         <div class="row" style="margin-bottom: 10px;">
             <ul class="nav navbar-nav col-xs-12">
                 <li class="col-xs-3">
-                    <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                    <div class=" dropdown" dropdown>
+                        <button type="button" class="btn btn-default dropdown-toggle"  dropdown-toggle ng-disabled="disabled">
                             <span class="overflowDots" ng-bind="selectedCategoria.categoriaNombre"></span>
                           <span class="caret"></span>
                         </button>
-                        <ul class="dropdown-menu filterUl" role="menu" aria-labelledby="dropdownMenu1">
+                        <ul class="dropdown-menu filterUl" role="menu">
                             <li>
                                 <div class="input-group"> 
                                   <span class="input-group-btn">
@@ -17,19 +17,19 @@
                                   <input type="text" class="form-control" ng-click="categoriasFilterClk($event)" ng-model="categoriaFilter" placeholder="Filtro de categorias">
                                 </div>
                             </li>
-                            <li  ng-repeat="categoria in categorias | filter:categoriaFilter" role="presentation">
-                                <a role="menuitem" tabindex="-1" href="#" ng-click="selectCategoria($event,categoria)">{{categoria.categoriaNombre}}</a>
+                            <li  ng-repeat="categoria in categorias | filter:categoriaFilter">
+                                <a href="#" ng-click="selectCategoria($event,categoria)">{{categoria.categoriaNombre}}</a>
                             </li>
                         </ul>
-                      </div>                
+                    </div>          
                 </li>
                 <li class="col-xs-3">
-                    <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true">
-                          <span class="overflowDots" ng-bind="depSelected.nombreDepartamento"></span>
-                          <span class="caret"></span> 
+                    <div class=" dropdown" dropdown>
+                        <button type="button" class="btn btn-default dropdown-toggle"  dropdown-toggle ng-disabled="disabled">
+                            <span class="overflowDots" ng-bind="depSelected.nombreDepartamento"></span>
+                          <span class="caret"></span>
                         </button>
-                        <ul class="dropdown-menu filterUl" role="menu" aria-labelledby="dropdownMenu2">
+                        <ul class="dropdown-menu filterUl" role="menu">
                             <li>
                                 <div class="input-group"> 
                                   <span class="input-group-btn">
@@ -38,11 +38,11 @@
                                   <input type="text" class="form-control" ng-click="categoriasFilterClk($event)" ng-model="dptoFilter" placeholder="Filtro de departamentos">
                                 </div>
                             </li>
-                            <li  ng-repeat="dep in departamentosList | filter:dptoFilter" role="presentation">
-                                <a role="menuitem" tabindex="-1" href="#" ng-click="selectDepartamento($event,dep)">{{dep.nombreDepartamento}}</a>
+                            <li  ng-repeat="dep in departamentosList | filter:dptoFilter">
+                                <a href="#" ng-click="selectDepartamento($event,dep)">{{dep.nombreDepartamento}}</a>
                             </li>
                         </ul>
-                    </div>                
+                    </div>               
                 </li>
                 <li class="col-xs-3">
                     <div class="input-group"> 
