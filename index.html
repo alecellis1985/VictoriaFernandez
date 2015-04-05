@@ -14,6 +14,9 @@
     <link type="text/css" rel='stylesheet' href="resources/css/font-awesome.min.css">
     
 <body>
+<div class='alertsTop' ng-controller="AlertController">
+  <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+</div>
 <div id="header" ng-controller="HeaderController" ng-include="template.header"></div>
 <!--<div id="header" ng-controller="HeaderController">
     <hello></hello>
@@ -41,6 +44,7 @@
     <script type="text/javascript" src="resources/js/services/CommonService.js"></script>
     <script type="text/javascript" src="resources/js/directives/CommonDirectives.js"></script>
     <script type="text/javascript" src="resources/js/controllers/HeaderController.js"></script>
+    <script type="text/javascript" src="resources/js/controllers/AlertController.js"></script>
     <script type="text/javascript" src="resources/js/controllers/HomeController.js"></script>
     <script type="text/javascript" src="resources/js/controllers/FooterController.js"></script>
     <script type="text/javascript" src="resources/js/controllers/ProfessionalsSearchController.js"></script>

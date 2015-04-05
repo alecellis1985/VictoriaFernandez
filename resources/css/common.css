@@ -209,3 +209,18 @@
     color: #c00;
     background: white;
 }
+
+.alertsTop
+{
+    position: absolute;
+    width: 60%;
+    top: 0;
+    left: 0;
+    z-index: 10001;
+    margin-left: 20%;
+}
+
+.alertsTop button
+{
+    display: block!important;
+}

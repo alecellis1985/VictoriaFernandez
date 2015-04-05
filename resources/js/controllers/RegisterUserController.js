@@ -1,10 +1,9 @@
 'use strict';
 
-Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$http', '$rootScope', '$location', '$upload',
+Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$rootScope', '$location', '$upload',
     'CommonService', 'departamentosList', 'categoriasList',
-    function ($scope, $routeParams, $http, $rootScope, $location, $upload, CommonService, departamentosList, categoriasList) {
+    function ($scope, $routeParams, $rootScope, $location, $upload, CommonService, departamentosList, categoriasList) {
         //FOR UPLOAD FILE (IMG)
-        $scope.error = '';
         $scope.$watch('files', function () {
             //perform img validation 
             $scope.validateImg($scope.files);
@@ -13,24 +12,26 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         $scope.validateImg = function (files) {
             if (files && files.length) {
                 var file = files[0];
-                
+                var error;
                 if (file.type.indexOf('image') === -1) {
-                    $scope.error = 'Image extension not allowed, please choose a JPEG or PNG file.'
+                    error = 'Image extension not allowed, please choose a JPEG or PNG file.'
                 }
 
                 if (file.size > 2097152) {
-                    $scope.error += 'File size cannot exceed 2 MB';
+                    error = 'File size cannot exceed 2 MB';
                 }
-                if($scope.error === '')
-                    alert("FILE OK!");
-                else
-                    alert($scope.error);
                 
-                $scope.error = '';
+                if(error === undefined)
+                { 
+                    $rootScope.$broadcast('alert-event', { type: 'success', msg: 'FILE OK!' });
+                }
+                else
+                {
+                    $rootScope.$broadcast('alert-event', { type: 'danger', msg: error });
+                }
             }
         };
 
-        //
         $scope.registro = {
             mostrarRegistro: false,
             empresa: false
@@ -91,7 +92,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             };
             
             CommonService.postRequestWithFile('api/agregar_usuario', data, $scope.files[0]).then(function (result) {
-                alert(result.msg);
+                $rootScope.$broadcast('alert-event', { type: 'success', msg: 'Has sido registrado con exito' });
             });
 
         };
