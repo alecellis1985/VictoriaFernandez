@@ -5,28 +5,28 @@ Professionals.controller('HeaderController', ['$scope', '$routeParams', '$http',
         
     $scope.template = {
         "header": "resources/tpl/header.html"
-        //        "about": "aboutus.html",
-        //        "contact": "contactus.html"
     };
     
     
     $scope.items = ['item1', 'item2', 'item3'];
 
-    $scope.ingresarAction = function (size) {
+    $scope.ingresarAction = function (evt,size) {
+        
       var modalInstance = $modal.open({
-        templateUrl: 'login.html',
-        controller: 'loginController',
+        templateUrl: 'resources/tpl/login.html',
+        controller: 'LoginController',
         size: size,
-        resolve: {
-          items: function () {
-            return $scope.items;
-          }
-        }
+//        resolve: {
+//          items: function () {
+//            return $scope.items;
+//          }
+//        }
       });
-      modalInstance.result.then(function (selectedItem) {
-      $scope.selected = selectedItem;
+      evt.stopPropagation();
+      modalInstance.result.then(function () {
+//      $scope.selected = selectedItem;
     }, function () {
-      $log.info('Modal dismissed at: ' + new Date());
+        console.log('Modal dismissed at: ' + new Date());
     });
   };
     
