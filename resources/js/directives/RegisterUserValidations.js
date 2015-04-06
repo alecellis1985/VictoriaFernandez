@@ -3,6 +3,9 @@ Professionals.directive('imageUpload', function () {
         require: 'ngModel',
         link: function (scope, elm, attrs, ctrl) {
             ctrl.$validators.imageUpload = function (modelValue, viewValue) {
+               if (typeof modelValue === 'undefined')
+                    return false;
+                
                 if (typeof modelValue[0] === 'undefined')
                     return false;
 
@@ -15,7 +18,6 @@ Professionals.directive('imageUpload', function () {
                 if (imgExtension === "JPEG" || imgExtension === "JPG" || imgExtension === "PNG") {
                     return true;
                 }
-
                 // it is invalid
                 return false;
             };

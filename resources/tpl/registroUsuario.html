@@ -27,33 +27,41 @@
         <div class="panel-body">
             <div class="row ">
                 <div class="form-group col-xs-4">
-                    <input type="text" class="form-control" ng-model="user.nombre" placeholder="Nombre" required>
+                    <input type="text" class="form-control" name="nombre" ng-model="user.nombre" placeholder="Nombre" required>
+                    <span ng-show="registerUser.nombre.$touched && registerUser.nombre.$error.required" class="error">Nombre es requerido</span>
                 </div>
                 <div class="form-group col-xs-4">
-                    <input type="text" class="form-control" ng-model="user.apellido" placeholder="Apellido" required>
+                    <input type="text" class="form-control" name="apellido" ng-model="user.apellido" placeholder="Apellido" required>
+                    <span ng-show="registerUser.apellido.$touched && registerUser.apellido.$error.required" class="error">Apellido es requerido</span>
                 </div>
                 <div class="form-group col-xs-4">
                     <input type="text" class="form-control" name="username" ng-model="user.username" placeholder="Nombre de usuario" 
-                           required ensure-unique="username" ng-minlength=6 
-                           ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }">
+                           required ng-model-options="{ debounce: 500 }">
+                    <span ng-show="registerUser.username.$touched && registerUser.username.$error.required" class="error">Nombre de usuario es requerido</span>
                 </div>
+            </div>
+            <div class="row ">
                 <div class="form-group col-xs-4">
-                    <input type="password" class="form-control" ng-model="user.password" placeholder="Contraseña" 
+                    <input type="password" class="form-control" name="password" ng-model="user.password" placeholder="Contraseña" 
                            required ng-minlength=6>
+                    <span ng-show="registerUser.password.$touched && registerUser.password.$error.required" class="error">Contraseña es requerida</span>
                 </div>
                 <div class="form-group col-xs-4">
-                    <input type="text" class="form-control" ng-model="user.email" placeholder="Email" required>
-                </div>
+                    <input type="text" class="form-control" name="email" ng-model="user.email" placeholder="Email" required>
+                     <span ng-show="registerUser.email.$touched && registerUser.email.$error.required" class="error">Email es requerido</span>
+               </div>
                 <div class="form-group col-xs-4">
-                    <input type="text" class="form-control" ng-model="user.telefono" placeholder="Telefono">
+                    <input type="text" class="form-control" name="telefono" ng-model="user.telefono" placeholder="Telefono">
                 </div>
+            </div>
+            <div class="row ">
                 <div class="form-group col-xs-4">
-                    <input type="text" class="form-control" ng-model="user.celular" placeholder="Celular">
+                    <input type="text" class="form-control" name="celular" ng-model="user.celular" placeholder="Celular">
                 </div>
                 <div class="form-group col-xs-4">
                     <!--<input type="file"  ng-file-select ng-model="files" placeholder="Upload">-->
 
-                    <input id="uploadFile" class="form-control" style="display: inline-block; width: 85%" 
+                    <input id="uploadFile" name="imageUpload" class="form-control" style="display: inline-block; width: 85%" 
                            placeholder="Seleccionar archivo" disabled="disabled" ng-model="files[0].name" required/>
                     <div class="fileUpload btn btn-primary">
                         <span class="glyphicon glyphicon-folder-open"></span>
@@ -70,11 +78,12 @@
         <div class="panel-body">
             <div class="row" ng-show="registro.empresa">
                 <div class="form-group col-xs-4">
-                    <input type="text" class="form-control" placeholder="Nombre Empresa">
+                    <input type="text" name="nombreEmpresa" class="form-control" placeholder="Nombre Empresa">
                 </div>
                 <div class="form-group col-xs-4">
                     <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" 
+                                data-toggle="dropdown" aria-expanded="true">
                             <span class="overflowDots" ng-bind="selectedCategoria.categoriaNombre"></span>
                             <span class="caret"></span>
                         </button>
@@ -102,25 +111,29 @@
                     </div>
                 </div>
                 <div class="form-group col-xs-4">
-                    <input type="text" class="form-control" ng-model="user.direccion" placeholder="Direccion">
+                    <input type="text" name="direccion" class="form-control" ng-model="user.direccion" placeholder="Direccion">
                 </div>
                 <div class="form-group col-xs-4">
-                    <input type="text" class="form-control" ng-model="user.telefonoEmp" placeholder="Telefono Empresa">
+                    <input type="text" name="telefonoEmp" class="form-control" ng-model="user.telefonoEmp" placeholder="Telefono Empresa">
+                </div>
+            </div>
+            <div class="row ">
+                <div class="form-group col-xs-4">
+                    <input type="text" name="sitioWeb" class="form-control" ng-model="user.sitioWeb" placeholder="Sitio Web">
                 </div>
                 <div class="form-group col-xs-4">
-                    <input type="text" class="form-control" ng-model="user.sitioWeb" placeholder="Sitio Web">
+                    <input type="text" name="imagenLogo" class="form-control" ng-model="user.imagen" placeholder="Imagen/Logo">
                 </div>
                 <div class="form-group col-xs-4">
-                    <input type="text" class="form-control" ng-model="user.imagen" placeholder="Imagen/Logo">
+                    <input type="text" name="facebookUrl" class="form-control" ng-model="user.facebookUrl" placeholder="Enlaces de facebook">
+                </div>
+            </div>
+            <div class="row ">
+                <div class="form-group col-xs-4">
+                    <input type="text" name="twitterUrl" class="form-control" ng-model="user.twitterUrl" placeholder="Enlaces de twitter">
                 </div>
                 <div class="form-group col-xs-4">
-                    <input type="text" class="form-control" ng-model="user.facebookUrl" placeholder="Enlaces de facebook">
-                </div>
-                <div class="form-group col-xs-4">
-                    <input type="text" class="form-control" ng-model="user.twitterUrl" placeholder="Enlaces de twitter">
-                </div>
-                <div class="form-group col-xs-4">
-                    <input type="text" class="form-control" ng-model="user.linkedinUrl" placeholder="Enlaces de linkedin">
+                    <input type="text" name="linkedinUrl" class="form-control" ng-model="user.linkedinUrl" placeholder="Enlaces de linkedin">
                 </div>
             </div>
         </div>
@@ -132,18 +145,18 @@
         <div class="panel-body">
             <div class="row">
                 <div class="form-group col-xs-12">
-                    <textarea class="form-control " rows="6" ng-model="user.descService" placeholder="Breve descripcion del servicio."></textarea>
+                    <textarea class="form-control " name="descService" rows="6" ng-model="user.descService" placeholder="Breve descripcion del servicio."></textarea>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-xs-4">
-                    <input type="text" class="form-control" ng-model="user.servicioOfrecido1" placeholder="Servicio ofrecido">
+                    <input type="text" class="form-control" name="servicioOfrecido1" ng-model="user.servicioOfrecido1" placeholder="Servicio ofrecido">
                 </div>
                 <div class="form-group col-xs-4">
-                    <input type="text" class="form-control" ng-model="user.servicioOfrecido2" placeholder="Servicio ofrecido">
+                    <input type="text" class="form-control" name="servicioOfrecido2" ng-model="user.servicioOfrecido2" placeholder="Servicio ofrecido">
                 </div>
                 <div class="form-group col-xs-4">
-                    <input type="text" class="form-control" ng-model="user.servicioOfrecido3" placeholder="Servicio ofrecido">
+                    <input type="text" class="form-control" name="servicioOfrecido3" ng-model="user.servicioOfrecido3" placeholder="Servicio ofrecido">
                 </div>
             </div>
         </div>
