@@ -47,9 +47,13 @@
                     <input type="text" class="form-control" ng-model="celular" placeholder="Celular">
                 </div>
                 <div class="form-group col-xs-4">
-                    <!--                    <input type="file" name="imgFile" class="form-control" ng-model="imgFile" placeholder="Imagen">
-                                        <input type="hidden" name="MAX_SIZE_FILE" value="100000">-->
-                    <input type="file" class="form-control" ng-file-select ng-model="files" placeholder="Upload">
+                    <!--<input type="file"  ng-file-select ng-model="files" placeholder="Upload">-->
+
+                    <input id="uploadFile" class="form-control" style="display: inline-block; width: 85%" placeholder="Seleccionar archivo" disabled="disabled" ng-model="files[0].name"/>
+                    <div class="fileUpload btn btn-primary">
+                        <span class="glyphicon glyphicon-folder-open"></span>
+                        <input id="uploadBtn" type="file" class="upload" ng-file-select ng-model="files" />
+                    </div>
                 </div>
             </div>
         </div>
