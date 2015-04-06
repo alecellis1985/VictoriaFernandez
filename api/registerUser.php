@@ -87,7 +87,7 @@ function getArrayFromRequest($request) {
 function checkUsername() {
     $request = Slim::getInstance()->request();
 
-    $userName = $request->post('userName');
+    $userName = json_decode($request->getBody())->userName;
     $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
     $response = null;
     if ($conn->conectar()) {

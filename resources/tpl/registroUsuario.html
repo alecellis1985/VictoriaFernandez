@@ -36,11 +36,13 @@
                 </div>
                 <div class="form-group col-xs-4">
                     <input type="text" class="form-control" name="username" ng-model="user.username" placeholder="Nombre de usuario" 
-                           required ng-model-options="{ debounce: 500 }">
+                           required username ng-model-options="{ debounce: 500 }">
                     <span ng-show="registerUser.username.$touched && registerUser.username.$error.required" class="error">Nombre de usuario es requerido</span>
+                    <span ng-show="registerUser.username.$pending.username" class="alert-info">Checking if this name is available...</span>
+                    <span ng-show="registerUser.username.$error.username" class="error">This username is already taken!</span>
                 </div>
             </div>
-            <div class="row ">
+            <div class="row">
                 <div class="form-group col-xs-4">
                     <input type="password" class="form-control" name="password" ng-model="user.password" placeholder="Contraseña" 
                            required ng-minlength=6>
@@ -48,8 +50,8 @@
                 </div>
                 <div class="form-group col-xs-4">
                     <input type="text" class="form-control" name="email" ng-model="user.email" placeholder="Email" required>
-                     <span ng-show="registerUser.email.$touched && registerUser.email.$error.required" class="error">Email es requerido</span>
-               </div>
+                    <span ng-show="registerUser.email.$touched && registerUser.email.$error.required" class="error">Email es requerido</span>
+                </div>
                 <div class="form-group col-xs-4">
                     <input type="text" class="form-control" name="telefono" ng-model="user.telefono" placeholder="Telefono">
                 </div>
