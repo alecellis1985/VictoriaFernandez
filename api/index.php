@@ -24,6 +24,7 @@ $app->get('/categorias', 'getCategorias');
 
 $app->get('/users/:categoria/:departamento', 'getUsers');
 $app->post('/agregar_usuario', 'registerUser');
+$app->post('/check-username', 'checkUsername');
 
 $app->run();
 

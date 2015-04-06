@@ -343,19 +343,19 @@ html {
 }
 
 body{
-/*    background-image: url("../img/bgcontent.png");
-    background-repeat: repeat;*/
-/*    opacity: 1;
-    background-image: -webkit-linear-gradient(left, rgb(104, 110, 129), rgb(133, 147, 152));
-    background-color: rgb(255, 255, 255);*/
+    /*    background-image: url("../img/bgcontent.png");
+        background-repeat: repeat;*/
+    /*    opacity: 1;
+        background-image: -webkit-linear-gradient(left, rgb(104, 110, 129), rgb(133, 147, 152));
+        background-color: rgb(255, 255, 255);*/
     background-color: #e9eaed; 
 }
 
 .contentContainer{
-/*    background-color: white;
-    background-size: 100% 100%;
-    background-position: center;
-    background-repeat: no-repeat;*/
+    /*    background-color: white;
+        background-size: 100% 100%;
+        background-position: center;
+        background-repeat: no-repeat;*/
     background-image: url("../img/logobackground.png");
     background-repeat: repeat;
     min-height: 400px;
@@ -398,13 +398,18 @@ textarea{
 }
 
 .fileUpload input.upload {
-	position: absolute;
-	top: 0;
-	right: 0;
-	margin: 0;
-	padding: 0;
-	font-size: 20px;
-	cursor: pointer;
-	opacity: 0;
-	filter: alpha(opacity=0);
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
 }

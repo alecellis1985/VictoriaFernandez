@@ -23,7 +23,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                 
                 if(error === undefined)
                 { 
-                    $rootScope.$broadcast('alert-event', { type: 'success', msg: 'FILE OK!' });
+                    //$rootScope.$broadcast('alert-event', { type: 'success', msg: 'FILE OK!' });
                 }
                 else
                 {
@@ -66,29 +66,33 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             e.preventDefault();
             $scope.depSelected = departamento;
         };
+        
+        $scope.user = {};
+        
         $scope.registrarUsuario = function ()
         {
+            debugger;
             var data = {
-                'nombre': $scope.nombre,
-                'apellido': $scope.apellido,
-                'username': $scope.username,
-                'password': $scope.password,
-                'email': $scope.email,
-                'telefono': $scope.telefono,
-                'celular': $scope.celular,
-                'direccion': $scope.direccion,
-                'telefonoEmp': $scope.telefonoEmp,
+                'nombre': $scope.user.nombre,
+                'apellido': $scope.user.apellido,
+                'username': $scope.user.username,
+                'password': $scope.user.password,
+                'email': $scope.user.email,
+                'telefono': $scope.user.telefono,
+                'celular': $scope.user.celular,
+                'direccion': $scope.user.direccion,
+                'telefonoEmp': $scope.user.telefonoEmp,
                 'departamento': parseInt($scope.depSelected.idDepartamento),
                 'categoria': parseInt($scope.selectedCategoria.categoriaId),
-                'sitioWeb': $scope.sitioWeb,
-                'imagen': $scope.imagen,
-                'facebookUrl': $scope.facebookUrl,
-                'twitterUrl': $scope.twitterUrl,
-                'linkedinUrl': $scope.linkedinUrl,
-                'descService': $scope.descService,
-                'servicioOfrecido1': $scope.servicioOfrecido1,
-                'servicioOfrecido2': $scope.servicioOfrecido2,
-                'servicioOfrecido3': $scope.servicioOfrecido3
+                'sitioWeb': $scope.user.sitioWeb,
+                'imagen': $scope.user.imagen,
+                'facebookUrl': $scope.user.facebookUrl,
+                'twitterUrl': $scope.user.twitterUrl,
+                'linkedinUrl': $scope.user.linkedinUrl,
+                'descService': $scope.user.descService,
+                'servicioOfrecido1': $scope.user.servicioOfrecido1,
+                'servicioOfrecido2': $scope.user.servicioOfrecido2,
+                'servicioOfrecido3': $scope.user.servicioOfrecido3
             };
             
             CommonService.postRequestWithFile('api/agregar_usuario', data, $scope.files[0]).then(function (result) {

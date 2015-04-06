@@ -43,7 +43,6 @@ Professionals.factory('CommonService', function ($http, $q, $upload) {
                     url: requestUrl,
                     file: file,
                     fields: params
-                   // headers: {'Content-Type': 'application/json;charset=utf-8'}
                 });
     };
 

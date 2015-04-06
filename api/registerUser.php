@@ -9,7 +9,7 @@ function registerUser() {
     //Save File
     //TODO: Validate format and size
     $filenameAndExt = explode(".", $_FILES['file']['name']);
-    $destination = '../resources/img/uploaded/' . $filenameAndExt[0] . "_" . $user['username'] . "." . $filenameAndExt[1]; 
+    $destination = '../resources/img/uploaded/' . $filenameAndExt[0] . "_" . $user['username'] . "." . $filenameAndExt[1];
     move_uploaded_file($_FILES['file']['tmp_name'], $destination);
     $user['imagenUrl'] = $filenameAndExt[1];
 
@@ -32,11 +32,11 @@ function registerUser() {
         $params[8] = array("categoria", (int) $user['categoria'], "int", 5);
         $params[9] = array("sitioWeb", $user['sitioWeb'], "string", 50);
         $params[10] = array("imagenUrl", $user['imagenUrl'], "string", 100);
-        
+
         $params[11] = array("facebookUrl", $user['facebookUrl'], "string", 250);
         $params[12] = array("twitterUrl", $user['twitterUrl'], "string", 250);
         $params[13] = array("linkedinUrl", $user['linkedinUrl'], "string", 250);
-        
+
         $params[14] = array("descService", $user['descService'], "string", 1000);
         $params[15] = array("servicioOfrecido1", $user['servicioOfrecido1'], "string", 250);
         $params[16] = array("servicioOfrecido2", $user['servicioOfrecido2'], "string", 250);
@@ -73,15 +73,42 @@ function getArrayFromRequest($request) {
         "categoria" => 0, //$_POST['categoria'],
         "sitioWeb" => $request->post('sitioWeb'),
         //"imagen" => $request->post('imagen'),
-        
         "facebookUrl" => $request->post('facebookUrl'),
         "twitterUrl" => $request->post('twitterUrl'),
         "linkedinUrl" => $request->post('linkedinUrl'),
-        
         "descService" => $request->post('descService'),
         "servicioOfrecido1" => $request->post('servicioOfrecido1'),
         "servicioOfrecido2" => $request->post('servicioOfrecido2'),
         "servicioOfrecido3" => $request->post('servicioOfrecido3'),
         "username" => $request->post('username'),
         "password" => $request->post('password'));
+}
+
+function checkUsername() {
+    $request = Slim::getInstance()->request();
+
+    $userName = $request->post('userName');
+    $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
+    $response = null;
+    if ($conn->conectar()) {
+        $sql = "SELECT 1 FROM users WHERE username = :userName";
+        $params = array();
+        $params[0] = array("userName", $userName, "string", 50);
+
+        if ($conn->consulta($sql, $params)) {
+            if ($conn->cantidadRegistros() == 0)
+                $response = MessageHandler::getSuccessResponse("Consulta exitosa", array("isUnique" => true));
+            else 
+                $response = MessageHandler::getSuccessResponse("Consulta exitosa", array("isUnique" => false));
+        } else {
+            $response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
+        }
+    }
+    if ($response == null) {
+        header('HTTP/1.1 400 Bad Request');
+        echo MessageHandler::getDBErrorResponse();
+    } else {
+        $conn->desconectar();
+        echo $response;
+    }
 }

@@ -70,6 +70,13 @@
     background:#B60000;
     border: 2px solid #A30303;
 }
+
+.btn-primary[disabled]
+{
+    background: #c00;
+    border: 2px solid #BE0303;
+}
+
 .caret
 {
     padding-top: 10px;

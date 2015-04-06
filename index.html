@@ -1,58 +1,62 @@
 <!DOCTYPE html>
 <html ng-app="Professionals">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="">
-    <title>One Single Page AP</title>
-    <link type="text/css" rel="stylesheet" href="resources/css/normalize.css">
-    <link type="text/css" rel="stylesheet" href="resources/css/bootstrap.min.css">
-    <link type="text/css" rel='stylesheet' href="resources/css/font-awesome.min.css">
-    <link type="text/css"  rel="stylesheet" href="resources/css/2-col-portfolio.css">
-    <link type="text/css" rel="stylesheet" href="resources/css/main.css">
-    <link type="text/css" rel="stylesheet" href="resources/css/common.css">  
-<body>
-<div class='alertsTop' ng-controller="AlertController">
-  <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
-</div>
-<div id="header" ng-controller="HeaderController" ng-include="template.header"></div>
-<!--<div id="header" ng-controller="HeaderController">
-    <hello></hello>
-</div>-->
-<div class="container contentContainer" style="margin-top: 5px;">
-    <div class="row propagandaMargins" ng-controller="TopPropagandaController" ng-include="template.topPropaganda"></div>
-  <div ng-view></div>
-</div>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="">
+        <title>One Single Page AP</title>
+        <link type="text/css" rel="stylesheet" href="resources/css/normalize.css">
+        <link type="text/css" rel="stylesheet" href="resources/css/bootstrap.min.css">
+        <link type="text/css" rel='stylesheet' href="resources/css/font-awesome.min.css">
+        <link type="text/css"  rel="stylesheet" href="resources/css/2-col-portfolio.css">
+        <link type="text/css" rel="stylesheet" href="resources/css/main.css">
+        <link type="text/css" rel="stylesheet" href="resources/css/common.css">
+    </head>
+    <body>
+        <div class='alertsTop' ng-controller="AlertController">
+            <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+        </div>
+        <div id="header" ng-controller="HeaderController" ng-include="template.header"></div>
+        <!--<div id="header" ng-controller="HeaderController">
+            <hello></hello>
+        </div>-->
+        <div class="container contentContainer" style="margin-top: 5px;">
+            <div class="row propagandaMargins" ng-controller="TopPropagandaController" ng-include="template.topPropaganda"></div>
+            <div ng-view></div>
+        </div>
 
-<div class="footer" ng-controller="FooterController" ng-include="template.footer"></div>
-    <!--CDN DLS TODO: Alexander Ellis check how to include them and dont kill the flow
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-resource.min.js"></script>-->
-    <script type="text/javascript" src="resources/js/libs/jquery.js"></script>
-    <!--<script type="text/javascript" src="resources/js/libs/bootstrap.min.js"></script>-->
-    
-    <script type="text/javascript" src="resources/js/libs/angular.min.js"></script>
-    
-    <!-- https://angular-ui.github.io/bootstrap/  EJEMPLOS -->
-    <script type="text/javascript" src="resources/js/libs/ui-bootstrap-tpls-0.12.1.min"></script>
-    
-    <script type="text/javascript" src="resources/js/libs/route.min.js"></script>
-    <script type="text/javascript" src="resources/js/libs/plugins.js"></script>
-    <script type="text/javascript" src ="resources/js/app.js"></script>
-    <script type="text/javascript" src="resources/js/services/CommonService.js"></script>
-    <script type="text/javascript" src="resources/js/directives/CommonDirectives.js"></script>
-    <script type="text/javascript" src="resources/js/controllers/HeaderController.js"></script>
-    <script type="text/javascript" src="resources/js/controllers/AlertController.js"></script>
-    <script type="text/javascript" src="resources/js/controllers/HomeController.js"></script>
-    <script type="text/javascript" src="resources/js/controllers/FooterController.js"></script>
-    <script type="text/javascript" src="resources/js/controllers/LoginController.js"></script>
-    <script type="text/javascript" src="resources/js/controllers/ContactoController.js"></script>
-    <script type="text/javascript" src="resources/js/controllers/TopPropagandaController.js"></script>
-    <script type="text/javascript" src="resources/js/controllers/ProfessionalsSearchController.js"></script>
-    <script type="text/javascript" src="resources/js/controllers/RegisterUserController.js"></script>
-    <!-- FOR FILE UPLOAD -->
-    <script type="text/javascript" src="resources/js/libs/angular-file-upload.min.js"></script>
-</body>
+        <div class="footer" ng-controller="FooterController" ng-include="template.footer"></div>
+        <!--CDN DLS TODO: Alexander Ellis check how to include them and dont kill the flow
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-resource.min.js"></script>-->
+        <script type="text/javascript" src="resources/js/libs/jquery.js"></script>
+        <!--<script type="text/javascript" src="resources/js/libs/bootstrap.min.js"></script>-->
+
+        <script type="text/javascript" src="resources/js/libs/angular.min.js"></script>
+
+        <!-- https://angular-ui.github.io/bootstrap/  EJEMPLOS -->
+        <script type="text/javascript" src="resources/js/libs/ui-bootstrap-tpls-0.12.1.min"></script>
+
+        <script type="text/javascript" src="resources/js/libs/route.min.js"></script>
+        <script type="text/javascript" src="resources/js/libs/plugins.js"></script>
+        <script type="text/javascript" src ="resources/js/app.js"></script>
+        <script type="text/javascript" src="resources/js/services/CommonService.js"></script>
+        <script type="text/javascript" src="resources/js/directives/CommonDirectives.js"></script>
+        <script type="text/javascript" src="resources/js/directives/RegisterUserValidations.js"></script>
+        <script type="text/javascript" src="resources/js/controllers/HeaderController.js"></script>
+        <script type="text/javascript" src="resources/js/controllers/AlertController.js"></script>
+        <script type="text/javascript" src="resources/js/controllers/HomeController.js"></script>
+        <script type="text/javascript" src="resources/js/controllers/FooterController.js"></script>
+        <script type="text/javascript" src="resources/js/controllers/LoginController.js"></script>
+        <script type="text/javascript" src="resources/js/controllers/ContactoController.js"></script>
+        <script type="text/javascript" src="resources/js/controllers/TopPropagandaController.js"></script>
+        <script type="text/javascript" src="resources/js/controllers/ProfessionalsSearchController.js"></script>
+        <script type="text/javascript" src="resources/js/controllers/RegisterUserController.js"></script>
+        
+        
+        <!-- FOR FILE UPLOAD -->
+        <script type="text/javascript" src="resources/js/libs/angular-file-upload.min.js"></script>
+    </body>
 </html>
