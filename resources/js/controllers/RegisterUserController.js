@@ -71,7 +71,6 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         
         $scope.registrarUsuario = function ()
         {
-            debugger;
             var data = {
                 'nombre': $scope.user.nombre,
                 'apellido': $scope.user.apellido,
@@ -96,7 +95,11 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             };
             
             CommonService.postRequestWithFile('api/agregar_usuario', data, $scope.files[0]).then(function (result) {
-                $rootScope.$broadcast('alert-event', { type: 'success', msg: 'Has sido registrado con exito' });
+                if(result.success)
+                    $rootScope.$broadcast('alert-event', { type: 'success', msg: 'Has sido registrado con exito' });
+                else
+                    $rootScope.$broadcast('alert-event', { type: 'error', msg: result.msg });
+                    
             });
 
         };

@@ -34,12 +34,18 @@
                     <input type="text" class="form-control" name="apellido" ng-model="user.apellido" placeholder="Apellido" required>
                     <span ng-show="registerUser.apellido.$touched && registerUser.apellido.$error.required" class="error">Apellido es requerido</span>
                 </div>
-                <div class="form-group col-xs-4">
+                <div class="form-group col-xs-3">
                     <input type="text" class="form-control" name="username" ng-model="user.username" placeholder="Nombre de usuario" 
                            required username ng-model-options="{ debounce: 500 }">
-                    <span ng-show="registerUser.username.$touched && registerUser.username.$error.required" class="error">Nombre de usuario es requerido</span>
-                    <span ng-show="registerUser.username.$pending.username" class="alert-info">Checking if this name is available...</span>
-                    <span ng-show="registerUser.username.$error.username" class="error">This username is already taken!</span>
+                    <span ng-show="registerUser.username.$touched && registerUser.username.$error.required" class="error">Nombre de usuario es requerido </span>
+                    <span ng-show="registerUser.username.$pending.username" class="alert-info">Comprobando disponibilidad...</span>
+                    <span ng-show="registerUser.username.$error.username && registerUser.username.$touched" class="error">
+                        Nombre de usuario en uso
+                        <i class="fa fa-times fa-lg" ng-show="registerUser.username.$error.username && registerUser.username.$touched" style="color: red;"></i>
+                    </span>
+                </div>
+                <div class="form-group">
+                    <i class="fa fa-check-circle fa-lg" ng-show="!registerUser.username.$error.username && registerUser.username.$touched" style="color: green;"></i>                                        
                 </div>
             </div>
             <div class="row">
