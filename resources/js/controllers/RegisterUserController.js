@@ -95,10 +95,11 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             };
             
             CommonService.postRequestWithFile('api/agregar_usuario', data, $scope.files[0]).then(function (result) {
-                if(result.success)
+                debugger;
+                if(result.data.success)
                     $rootScope.$broadcast('alert-event', { type: 'success', msg: 'Has sido registrado con exito' });
                 else
-                    $rootScope.$broadcast('alert-event', { type: 'error', msg: result.msg });
+                    $rootScope.$broadcast('alert-event', { type: 'error', msg: result.data.msg });
                     
             });
 
