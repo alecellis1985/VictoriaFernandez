@@ -76,6 +76,8 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             $scope.depSelected = departamento;
         };
         
+        
+        
         $scope.user = {};
         
         $scope.registrarUsuario = function ()

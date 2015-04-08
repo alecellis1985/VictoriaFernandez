@@ -82,27 +82,26 @@
         </div>
         <div class="panel-body">
             <div class="row">
+
                 <div class="form-group col-xs-12 col-md-3">
-                    <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" 
-                                data-toggle="dropdown" aria-expanded="true">
-                            <span class="overflowDots" ng-bind="selectedCategoria.categoriaNombre"></span>
-                            <span class="caret"></span>
+                    <div class="btn-group" dropdown >
+                        <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
+                            <span class="overflowDots" ng-bind="selectedCategoria.categoriaNombre"></span> <span class="caret"></span>
                         </button>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                        <ul class="dropdown-menu" role="menu">
                             <li  ng-repeat="categoria in categorias" role="presentation">
                                 <a role="menuitem" tabindex="-1" href="#" ng-click="selectCategoria($event, categoria)">{{categoria.categoriaNombre}}</a>
                             </li>
                         </ul>
-                    </div> 
+                    </div>
                 </div>
+
                 <div class="form-group col-xs-12 col-md-3">
-                    <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true">
-                            <span class="overflowDots" ng-bind="depSelected.nombreDepartamento"></span>
-                            <span class="caret"></span> 
+                    <div class="btn-group" dropdown >
+                        <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
+                            <span class="overflowDots" ng-bind="depSelected.nombreDepartamento"></span> <span class="caret"></span>
                         </button>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                        <ul class="dropdown-menu" role="menu">
                             <li  ng-repeat="dep in departamentosList" role="presentation">
                                 <a role="menuitem" tabindex="-1" href="#" ng-click="selectDepartamento($event, dep)">{{dep.nombreDepartamento}}</a>
                             </li>
@@ -110,12 +109,11 @@
                     </div>
                 </div>
                 <div class="form-group col-xs-12 col-md-3">
-                    <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true">
-                            <span class="overflowDots" ng-bind="selectedBarrio.barrioNombre"></span>
-                            <span class="caret"></span> 
+                    <div class="btn-group" dropdown>
+                        <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
+                            <span class="overflowDots" ng-bind="selectedBarrio.barrioNombre"></span> <span class="caret"></span>
                         </button>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                        <ul class="dropdown-menu" role="menu">
                             <li  ng-repeat="barrio in barrios" role="presentation">
                                 <a role="menuitem" tabindex="-1" href="#" ng-click="selectBarrio($event, barrio)">{{barrio.barrioNombre}}</a>
                             </li>
