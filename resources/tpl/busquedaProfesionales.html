@@ -3,7 +3,7 @@
         <div class="row" style="margin-bottom: 10px;">
             <ul class="nav navbar-nav col-xs-12">
                 <li class="col-xs-3">
-                    <div class=" dropdown" dropdown>
+                    <div class="dropdown" dropdown>
                         <button type="button" class="btn btn-default dropdown-toggle"  dropdown-toggle ng-disabled="disabled">
                             <span class="overflowDots" ng-bind="selectedCategoria.categoriaNombre"></span>
                           <span class="caret"></span>
@@ -58,6 +58,7 @@
                 </li>
             </ul>
         </div>
+        <div class="row propagandaMargins" ng-controller="TopPropagandaController" ng-include="template.topPropaganda"></div>
         <div class="panel panel-primary"  collapse="isCollapsed">
             <div class="panel-heading">
                 <h3 class="panel-title">{{selectedUser.nombre}} {{selectedUser.apellido}}</h3>
