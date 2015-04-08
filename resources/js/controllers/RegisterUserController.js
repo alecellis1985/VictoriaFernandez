@@ -68,7 +68,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         };
 
         $scope.departamentosList = departamentosList.data;
-        $scope.departamentosList.unshift({nombreDepartamento: "Seleccione Departamento", id: -1});
+        $scope.departamentosList.unshift({nombreDepartamento: "Seleccione Departamento", id: -1, idDepartamento: -1});
         $scope.depSelected = $scope.departamentosList[0];
         $scope.selectDepartamento = function (e, departamento)
         {
