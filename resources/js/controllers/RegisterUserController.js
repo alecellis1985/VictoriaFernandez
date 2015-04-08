@@ -66,6 +66,13 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             e.preventDefault();
             $scope.selectedCategoria = categoria;
         };
+        
+        $scope.clearModel = function(evt,model)
+        {
+            $scope[model] = '';
+            evt.preventDefault();
+            evt.stopPropagation();
+        };
 
         $scope.departamentosList = departamentosList.data;
         $scope.departamentosList.unshift({nombreDepartamento: "Seleccione Departamento", id: -1, idDepartamento: -1});

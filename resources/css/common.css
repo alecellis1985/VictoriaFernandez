@@ -236,3 +236,13 @@
 {
     margin: 8px 0;
 }
+
+.filterUl .fa-times
+{
+    position: absolute;
+    right: 3px;
+    top: 8px;
+    color: #BDBBBB;
+    cursor:pointer;
+    z-index: 10;
+}
