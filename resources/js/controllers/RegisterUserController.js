@@ -1,8 +1,8 @@
 'use strict';
 
 Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$rootScope', '$location', '$upload',
-    'CommonService', 'departamentosList', 'categoriasList',
-    function ($scope, $routeParams, $rootScope, $location, $upload, CommonService, departamentosList, categoriasList) {
+    'CommonService', 'departamentosList', 'categoriasList', 'barriosList',
+    function ($scope, $routeParams, $rootScope, $location, $upload, CommonService, departamentosList, categoriasList, barriosList) {
         //FOR UPLOAD FILE (IMG)
         $scope.$watch('files', function () {
             //perform img validation 
@@ -47,6 +47,15 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             e.preventDefault();
             $scope.registro.mostrarRegistro = false;
             $scope.registro.empresa = true;
+        };
+        
+        $scope.barrios = barriosList.data;
+        $scope.barrios.unshift({barrioNombre: "Seleccione Barrio", id: -1});
+        $scope.selectedBarrio = $scope.barrios[0];
+        $scope.selectBarrio = function (e, barrio)
+        {
+            e.preventDefault();
+            $scope.selectedBarrio = barrio;
         };
 
         $scope.categorias = categoriasList.data;

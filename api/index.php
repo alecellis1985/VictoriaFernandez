@@ -21,6 +21,7 @@ $app->delete('/users/:id', 'deleteUser');
 
 $app->get('/departamentos', 'getDepartamentos');
 $app->get('/categorias', 'getCategorias');
+$app->get('/barrios', 'getBarrios');
 
 $app->get('/users/:categoria/:departamento', 'getUsers');
 $app->post('/agregar_usuario', 'registerUser');

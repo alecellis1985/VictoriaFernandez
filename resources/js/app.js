@@ -25,6 +25,9 @@ Professionals.config(function ($routeProvider, $httpProvider) { //, $provide
             },
             categoriasList: function (CommonService) {
                 return CommonService.getRequest('api/categorias');
+            },
+            barriosList: function (CommonService) {
+                return CommonService.getRequest('api/barrios');
             }
         }
     });
