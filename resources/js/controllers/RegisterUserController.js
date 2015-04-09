@@ -20,14 +20,14 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                 if (file.size > 2097152) {
                     error = 'File size cannot exceed 2 MB';
                 }
-                
-                if(error === undefined)
-                { 
+
+                if (error === undefined)
+                {
                     //$rootScope.$broadcast('alert-event', { type: 'success', msg: 'FILE OK!' });
                 }
                 else
                 {
-                    $rootScope.$broadcast('alert-event', { type: 'danger', msg: error });
+                    $rootScope.$broadcast('alert-event', {type: 'danger', msg: error});
                 }
             }
         };
@@ -36,7 +36,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             mostrarRegistro: false,
             empresa: false
         };
-        
+
         $scope.goBackRegistration = function (e) {
             e.preventDefault();
             $scope.registro.mostrarRegistro = false;
@@ -54,7 +54,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             $scope.registro.mostrarRegistro = true;
             $scope.registro.empresa = true;
         };
-        
+
         $scope.barrios = barriosList.data;
         $scope.barrios.unshift({barrioNombre: "Seleccione Barrio", id: -1});
         $scope.selectedBarrio = $scope.barrios[0];
@@ -65,8 +65,15 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         $scope.departamentosList.unshift({nombreDepartamento: "Seleccione Departamento", idDepartamento: -1});
         $scope.depSelected = $scope.departamentosList[0];
         
-        $scope.user = {};
+        var initHour = new Date();
+        initHour.setHours(8);
+        initHour.setMinutes(0);
         
+        $scope.user = {
+            horaComienzo : initHour,
+            horaFin: initHour
+        };
+
         $scope.registrarUsuario = function ()
         {
             var data = {
@@ -97,13 +104,13 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             var imgFile = null;
             if (!(typeof $scope.files === 'undefined') && !$scope.files === null)
                 imgFile = $scope.files[0];
-            
+
             CommonService.postRequestWithFile('api/agregar_usuario', data, imgFile).then(function (result) {
-                if(result.data.success)
-                    $rootScope.$broadcast('alert-event', { type: 'success', msg: 'Has sido registrado con exito' });
+                if (result.data.success)
+                    $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Has sido registrado con exito'});
                 else
-                    $rootScope.$broadcast('alert-event', { type: 'error', msg: result.data.msg });
-                    
+                    $rootScope.$broadcast('alert-event', {type: 'error', msg: result.data.msg});
+
             });
 
         };
