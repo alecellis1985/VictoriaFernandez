@@ -17,6 +17,14 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
         e.preventDefault();
         e.stopPropagation();
     };
+    
+    $scope.clearModel = function(evt,model)
+    {
+        $scope[model] = '';
+        evt.preventDefault();
+        evt.stopPropagation();
+    };
+        
     $scope.isCollapsed = true;
     
     $scope.selectedList = 2;

@@ -1,62 +1,85 @@
 <div class="row headerSearch">
     <div class="container">
-        <div class="row" style="margin-bottom: 10px;">
-            <ul class="nav navbar-nav col-xs-12">
-                <li class="col-xs-3">
-                    <div class="dropdown" dropdown>
-                        <button type="button" class="btn btn-default dropdown-toggle"  dropdown-toggle ng-disabled="disabled">
-                            <span class="overflowDots" ng-bind="selectedCategoria.categoriaNombre"></span>
-                          <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu filterUl" role="menu">
-                            <li>
-                                <div class="input-group"> 
-                                  <span class="input-group-btn">
-                                      <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
-                                  </span>
-                                  <input type="text" class="form-control" ng-click="categoriasFilterClk($event)" ng-model="categoriaFilter" placeholder="Filtro de categorias">
-                                </div>
-                            </li>
-                            <li  ng-repeat="categoria in categorias | filter:categoriaFilter">
-                                <a href="#" ng-click="selectCategoria($event,categoria)">{{categoria.categoriaNombre}}</a>
-                            </li>
-                        </ul>
-                    </div>          
-                </li>
-                <li class="col-xs-3">
-                    <div class=" dropdown" dropdown>
-                        <button type="button" class="btn btn-default dropdown-toggle"  dropdown-toggle ng-disabled="disabled">
-                            <span class="overflowDots" ng-bind="depSelected.nombreDepartamento"></span>
-                          <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu filterUl" role="menu">
-                            <li>
-                                <div class="input-group"> 
-                                  <span class="input-group-btn">
-                                      <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
-                                  </span>
-                                  <input type="text" class="form-control" ng-click="categoriasFilterClk($event)" ng-model="dptoFilter" placeholder="Filtro de departamentos">
-                                </div>
-                            </li>
-                            <li  ng-repeat="dep in departamentosList | filter:dptoFilter">
-                                <a href="#" ng-click="selectDepartamento($event,dep)">{{dep.nombreDepartamento}}</a>
-                            </li>
-                        </ul>
-                    </div>               
-                </li>
-                <li class="col-xs-3">
-                    <div class="input-group"> 
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
-                        </span>
-                        <input type="text" class="form-control" ng-model="buscoProf" placeholder="Buscar...">
-                    </div>
-                </li>
-                <li class="col-xs-3">
-                    <i ng-class="{'searchIconActive':selectedList === 1}" ng-click="setListType(1)" class="glyphicon glyphicon-list searchIcons"></i>
-                    <i ng-class="{'searchIconActive':selectedList === 2}" ng-click="setListType(2)" class="glyphicon glyphicon-th-large searchIcons"></i>
-                </li>
-            </ul>
+        <div class="row no-padding-right" style="margin-bottom: 10px;">
+            <div class="form-group col-xs-12 col-md-3">
+                <div class="dropdown" dropdown>
+                    <button type="button" class="btn btn-default dropdown-toggle"  dropdown-toggle ng-disabled="disabled">
+                        <span class="overflowDots" ng-bind="selectedCategoria.categoriaNombre"></span>
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu filterUl" role="menu">
+                        <li>
+                            <div class="input-group"> 
+                            <i class="fa fa-times" ng-show="categoriaFilter.length > 0" ng-click="clearModel($event,'categoriaFilter')"></i>
+                              <span class="input-group-btn">
+                                  <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                              </span>
+                              <input type="text" class="form-control" stop-All-Events ng-model="categoriaFilter" placeholder="Filtro de categorias">
+                            </div>
+                        </li>
+                        <li  ng-repeat="categoria in categorias | filter:categoriaFilter">
+                            <a href="#" ng-click="selectCategoria($event,categoria)">{{categoria.categoriaNombre}}</a>
+                        </li>
+                    </ul>
+                </div>  
+            </div>      
+            <div class="form-group col-xs-12 col-md-3">
+                <div class="dropdown" dropdown>
+                    <button type="button" class="btn btn-default dropdown-toggle"  dropdown-toggle ng-disabled="disabled">
+                        <span class="overflowDots" ng-bind="depSelected.nombreDepartamento"></span>
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu filterUl" role="menu">
+                        <li>
+                            <div class="input-group"> 
+                            <i class="fa fa-times" ng-show="deptoFilter.length > 0" ng-click="clearModel($event,'deptoFilter')"></i>
+                              <span class="input-group-btn">
+                                  <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                              </span>
+                              <input type="text" class="form-control" stop-All-Events ng-model="deptoFilter" placeholder="Filtro de departamentos">
+                            </div>
+                        </li>
+                        <li  ng-repeat="dep in departamentosList | filter:deptoFilter">
+                            <a href="#" ng-click="selectDepartamento($event, dep)">{{dep.nombreDepartamento}}</a>
+                        </li>
+                    </ul>
+                </div>  
+            </div>
+            <div class="form-group col-xs-12 col-md-3" ng-show="depSelected.nombreDepartamento === 'Montevideo'">
+                <div class="dropdown" dropdown>
+                    <button type="button" class="btn btn-default dropdown-toggle"  dropdown-toggle ng-disabled="disabled">
+                        <span class="overflowDots" ng-bind="selectedBarrio.barrioNombre"></span>
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu filterUl" role="menu">
+                        <li>
+                            <div class="input-group"> 
+                            <i class="fa fa-times" ng-show="barrioFilter.length > 0" ng-click="clearModel($event,'barrioFilter')"></i>
+                              <span class="input-group-btn">
+                                  <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                              </span>
+                              <input type="text" class="form-control" stop-All-Events ng-model="barrioFilter" placeholder="Filtro de barrios">
+                            </div>
+                        </li>
+                        <li  ng-repeat="barrio in barrios | filter:barrioFilter">
+                            <a href="#" ng-click="selectBarrio($event, barrio)">{{barrio.barrioNombre}}</a>
+                        </li>
+                    </ul>
+                </div>  
+            </div>
+            <div class="form-group col-xs-12 col-md-2">
+                <div class="input-group col-xs-12 col-md-12"> 
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                    </span>
+                    <input type="text" class="form-control" ng-model="buscoProf" placeholder="Buscar...">
+                </div>
+            </div>
+
+            <div class="form-group col-xs-12 col-md-1"> 
+                <i ng-class="{'searchIconActive':selectedList === 1}" ng-click="setListType(1)" class="glyphicon glyphicon-list searchIcons"></i>
+                <i ng-class="{'searchIconActive':selectedList === 2}" ng-click="setListType(2)" class="glyphicon glyphicon-th-large searchIcons"></i>
+            </div>  
         </div>
         <div class="row propagandaMargins" ng-controller="TopPropagandaController" ng-include="template.topPropaganda"></div>
         <div class="panel panel-primary"  collapse="isCollapsed">
@@ -68,50 +91,50 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                        <div class="col-xs-2">
-                            <div class='row'>
-                                <div class="col-xs-12">
-                                    <img style="max-width:120px;" ng-if="selectedUser.imagenUrl !== ''" ng-src="{{'resources/img/uploaded/' +  selectedUser.imagenUrl}}"> <!--$location.absUrl().split('#')[0] + -->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-10">
-                            <div class="row">
-                                <p ng-bind="selectedUser.descService" style='text-transform: capitalize;'></p>
-                            </div>
-                            
-                            
-                            <div class="row">
-                                <i class="fa fa-phone-square"></i>
-                                <span ng-bind="selectedUser.telefono"></span>
-                            </div>
-                            <div class="row">
-                                <i class="fa fa-mobile"></i>
-                                <span ng-bind="selectedUser.celular"></span>
-                            </div>
-                            <div class="row">
-                                <label>Dirección: </label>
-                                <span ng-bind="selectedUser.direccion"></span>
+                    <div class="col-xs-2">
+                        <div class='row'>
+                            <div class="col-xs-12">
+                                <img style="max-width:120px;" ng-if="selectedUser.imagenUrl !== ''" ng-src="{{'resources/img/uploaded/' +  selectedUser.imagenUrl}}"> <!--$location.absUrl().split('#')[0] + -->
                             </div>
                         </div>
                     </div>
-                    <div class='row'>
-                        <ul class="nav nav-tabs">
-                            <li role="presentation" class="active"><a href="#">Home</a></li>
-                            <li role="presentation"><a href="#">Profile</a></li>
-                            <li role="presentation"><a href="#">Messages</a></li>
-                        </ul>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-xs-12">
-                            <a href='{{selectedUser.facebookUrl}}' target="_blank" stop-Event><i class="fa fa-facebook-official"></i></a>
-                            <a href='{{selectedUser.twitterUrl}}' target="_blank" stop-Event><i class="fa fa-twitter-square"></i></a>
-                            <a href='{{selectedUser.linkedinUrl}}' target="_blank" stop-Event><i class="fa fa-linkedin-square"></i></a>
-                            <button type="submit" class="btn btn-primary pull-right" ng-click='sendMailToUser($event,selectedUser)'>
-                                <i class="glyphicon glyphicon-envelope"></i>
-                            </button>
+                    <div class="col-xs-10">
+                        <div class="row">
+                            <p ng-bind="selectedUser.descService" style='text-transform: capitalize;'></p>
+                        </div>
+
+
+                        <div class="row">
+                            <i class="fa fa-phone-square"></i>
+                            <span ng-bind="selectedUser.telefono"></span>
+                        </div>
+                        <div class="row">
+                            <i class="fa fa-mobile"></i>
+                            <span ng-bind="selectedUser.celular"></span>
+                        </div>
+                        <div class="row">
+                            <label>Dirección: </label>
+                            <span ng-bind="selectedUser.direccion"></span>
                         </div>
                     </div>
+                </div>
+                <div class='row'>
+                    <ul class="nav nav-tabs">
+                        <li role="presentation" class="active"><a href="#">Home</a></li>
+                        <li role="presentation"><a href="#">Profile</a></li>
+                        <li role="presentation"><a href="#">Messages</a></li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="form-group col-xs-12">
+                        <a href='{{selectedUser.facebookUrl}}' target="_blank" stop-Event><i class="fa fa-facebook-official"></i></a>
+                        <a href='{{selectedUser.twitterUrl}}' target="_blank" stop-Event><i class="fa fa-twitter-square"></i></a>
+                        <a href='{{selectedUser.linkedinUrl}}' target="_blank" stop-Event><i class="fa fa-linkedin-square"></i></a>
+                        <button type="submit" class="btn btn-primary pull-right" ng-click='sendMailToUser($event,selectedUser)'>
+                            <i class="glyphicon glyphicon-envelope"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="panel panel-primary pull-left" ng-if="selectedList === 1">
