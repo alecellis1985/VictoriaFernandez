@@ -19,7 +19,9 @@ function registerUser() {
             echo MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
         }
     } else {
-        echo MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
+        //echo MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
+        $user['imagenUrl'] = '';
+        echo insertNewUser($conn, $user);
     }
 }
 
@@ -43,6 +45,9 @@ function getArrayFromRequest($request) {
         "servicioOfrecido1" => is_null($request->post('servicioOfrecido1')) ? "" : $request->post('servicioOfrecido1'),
         "servicioOfrecido2" => is_null($request->post('servicioOfrecido2')) ? "" : $request->post('servicioOfrecido2'),
         "servicioOfrecido3" => is_null($request->post('servicioOfrecido3')) ? "" : $request->post('servicioOfrecido3'),
+        "servicioOfrecido4" => is_null($request->post('servicioOfrecido4')) ? "" : $request->post('servicioOfrecido4'),
+        "servicioOfrecido5" => is_null($request->post('servicioOfrecido5')) ? "" : $request->post('servicioOfrecido5'),
+        "servicioOfrecido6" => is_null($request->post('servicioOfrecido6')) ? "" : $request->post('servicioOfrecido6'),
         "username" => is_null($request->post('username')) ? "" : $request->post('username'),
         "password" => is_null($request->post('password')) ? "" : $request->post('password')
     );
@@ -78,6 +83,8 @@ function checkUsername() {
 }
 
 function validateFileToUpload() {
+    if(!isset($_FILES['file']))
+        return false;
     $fileSize = $_FILES['file']['size'];
 
     if ($fileSize > 2000000)
@@ -91,10 +98,10 @@ function insertNewUser($conn, $user) {
     if ($conn->conectar()) {
         $sql = "INSERT INTO users (nombre, apellido, email, telefono, celular, direccion, telefonoEmp, "
                 . "departamento, categoria, sitioWeb, imagenUrl, facebookUrl, twitterUrl, linkedinUrl, descService, servicioOfrecido1,"
-                . " servicioOfrecido2, servicioOfrecido3,username,password) "
+                . " servicioOfrecido2, servicioOfrecido3, servicioOfrecido4, servicioOfrecido5, servicioOfrecido6, username, password) "
                 . "VALUES (:nombre, :apellido, :email, :telefono, :celular, :direccion, :telefonoEmp, :departamento,"
                 . " :categoria, :sitioWeb, :imagenUrl, :facebookUrl, :twitterUrl, :linkedinUrl, :descService, :servicioOfrecido1,"
-                . " :servicioOfrecido2, :servicioOfrecido3, :username, :password)";
+                . " :servicioOfrecido2, :servicioOfrecido3, :servicioOfrecido4, :servicioOfrecido5, :servicioOfrecido6, :username, :password)";
         $params = array();
         $params[0] = array("nombre", $user['nombre'], "string", 50);
         $params[1] = array("apellido", $user['apellido'], "string", 50);
@@ -111,11 +118,14 @@ function insertNewUser($conn, $user) {
         $params[12] = array("twitterUrl", $user['twitterUrl'], "string", 250);
         $params[13] = array("linkedinUrl", $user['linkedinUrl'], "string", 250);
         $params[14] = array("descService", $user['descService'], "string", 1000);
-        $params[15] = array("servicioOfrecido1", $user['servicioOfrecido1'], "string", 250);
-        $params[16] = array("servicioOfrecido2", $user['servicioOfrecido2'], "string", 250);
-        $params[17] = array("servicioOfrecido3", $user['servicioOfrecido3'], "string", 250);
-        $params[18] = array("username", $user['username'], "string", 50);
-        $params[19] = array("password", md5($user['password']), "string", 10);
+        $params[15] = array("servicioOfrecido1", $user['servicioOfrecido1'], "string", 20);
+        $params[16] = array("servicioOfrecido2", $user['servicioOfrecido2'], "string", 20);
+        $params[17] = array("servicioOfrecido3", $user['servicioOfrecido3'], "string", 20);
+        $params[18] = array("servicioOfrecido4", $user['servicioOfrecido4'], "string", 20);
+        $params[19] = array("servicioOfrecido5", $user['servicioOfrecido5'], "string", 20);
+        $params[20] = array("servicioOfrecido6", $user['servicioOfrecido6'], "string", 20);
+        $params[21] = array("username", $user['username'], "string", 50);
+        $params[22] = array("password", md5($user['password']), "string", 10);
 
         if ($conn->consulta($sql, $params)) {
             $user['id'] = $conn->ultimoIdInsert();

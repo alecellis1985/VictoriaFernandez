@@ -89,11 +89,16 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                 'descService': $scope.user.descService,
                 'servicioOfrecido1': $scope.user.servicioOfrecido1,
                 'servicioOfrecido2': $scope.user.servicioOfrecido2,
-                'servicioOfrecido3': $scope.user.servicioOfrecido3
+                'servicioOfrecido3': $scope.user.servicioOfrecido3,
+                'servicioOfrecido4': $scope.user.servicioOfrecido4,
+                'servicioOfrecido5': $scope.user.servicioOfrecido5,
+                'servicioOfrecido6': $scope.user.servicioOfrecido6
             };
+            var imgFile = null;
+            if (!(typeof $scope.files === 'undefined') && !$scope.files === null)
+                imgFile = $scope.files[0];
             
-            CommonService.postRequestWithFile('api/agregar_usuario', data, $scope.files[0]).then(function (result) {
-                debugger;
+            CommonService.postRequestWithFile('api/agregar_usuario', data, imgFile).then(function (result) {
                 if(result.data.success)
                     $rootScope.$broadcast('alert-event', { type: 'success', msg: 'Has sido registrado con exito' });
                 else

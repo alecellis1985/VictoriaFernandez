@@ -4,13 +4,13 @@ Professionals.directive('imageUpload', function () {
         link: function (scope, elm, attrs, ctrl) {
             ctrl.$validators.imageUpload = function (modelValue, viewValue) {
                 if (typeof modelValue === 'undefined' || modelValue === null)
-                    return false;
+                    return true;
 
                 if (typeof modelValue[0] === 'undefined')
-                    return false;
+                    return true;
 
                 if (ctrl.$isEmpty(modelValue[0].name))
-                    return false;
+                    return true;
 
                 var splitImgName = viewValue[0].name.split(".");
                 var imgExtension = splitImgName[splitImgName.length - 1].toUpperCase();
