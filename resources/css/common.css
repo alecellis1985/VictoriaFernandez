@@ -313,3 +313,9 @@
     cursor:default;
     opacity:0.8;
 }
+
+.clearBoth {
+    float: left;
+    clear: both;
+    content: "";
+}
