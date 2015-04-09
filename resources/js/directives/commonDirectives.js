@@ -20,6 +20,24 @@ Professionals.directive('stopEvent', function () {
         }
     };
  });
+ 
+ Professionals.directive('disableBtn', function () {
+    return {
+        restrict: 'A',
+        link: function ($scope, element, attr) {
+            if(attr.disableBtn === 'true')
+            {
+                element.addClass('notAvailable');
+                element.attr('title','No Disponible');
+                element.bind('click', function (e) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                });
+            }
+            
+        }
+    };
+ });
 
 Professionals.directive('dropdownFilter', function(){
     return {

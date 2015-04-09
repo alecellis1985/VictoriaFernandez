@@ -211,9 +211,9 @@ CREATE TABLE `users` (
     `categoria` int(3) NOT NULL,
     `sitioWeb` varchar(100) NOT NULL,
     `imagenUrl` varchar(100) NOT NULL,
-    `facebookUrl` varchar(250) NOT NULL,
-    `twitterUrl` varchar(250) NOT NULL,
-    `linkedinUrl` varchar(250) NOT NULL,
+    `facebookUrl` varchar(250),
+    `twitterUrl` varchar(250),
+    `linkedinUrl` varchar(250),
     `descService` varchar(150) NOT NULL,
     `servicioOfrecido1` varchar(20),
     `servicioOfrecido2` varchar(20),
@@ -226,14 +226,16 @@ CREATE TABLE `users` (
     `password` varchar(100) NOT NULL,
   PRIMARY KEY  (`idUser`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 -- 
 -- Dumping data for table `users`
 -- 
 --                          id  nombre  apellido email                      telefono     celular    direccion     telefonoEmp dep cat web            imgNombre               facebook                                   twitter                  linkedin
-INSERT INTO `users` VALUES (1, 'Alec', 'Ellis', 'alecellis1985@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'afsaf', 'asfas', 'fasf', 'fasf', 'fasf', 'fasf','fasf', 'Palomo', 'pwpwpw');
-INSERT INTO `users` VALUES (2, 'Sam', 'Gusto', 'elgroso@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'afsaf', 'asfas', 'fasf', 'fasf', 'fasf', 'fasf','fasf', 'El_Triste', 'pwpwpw');
-INSERT INTO `users` VALUES (3, 'Tomy', 'Potatoue', 'los_pi@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'afsaf', 'asfas', 'fasf', 'fasf', 'fasf', 'fasf','fasf', 'Gomon', 'pwpwpw');
-INSERT INTO `users` VALUES (4, 'Charli', 'Gut', 'matoluzen@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'afsaf', 'asfas', 'fasf', 'fasf', 'fasf', 'fasf','fasf', 'Alexander', 'pwpwpw');
-INSERT INTO `users` VALUES (5, 'Juan', 'Gonzales', 'elgonchi@gmail.com', '262321651', '09861651', 'tucuman 2121', '6251651651', 2, 1, 'wawa.com.uy', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'asfa', 'fasfas', 'asfaf', 'fasf', 'fasf', 'fasf','fasf', 'El_Gonchi', 'ahfahf');
+INSERT INTO `users` VALUES (1, 'Alec', 'Ellis', 'alecellis1985@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'Brindo el mejor service que puedas ver en tu vida contratame ya!!!', 'afsaf', 'asfas', 'fasf', 'fasf', 'fasf', 'fasf', 'Palomo', 'pwpwpw');
+INSERT INTO `users` VALUES (2, 'Sam', 'Gusto', 'elgroso@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'Por 3 mangos te doy clase las 24 horas, te llevo el carrito de panchos y todo lo que quieras a la hora que quieras. Se bailar y cantar pero no canto a menudo.', 'afsaf', 'asfas', 'fasf', 'fasf', 'fasf', 'fasf', 'El_Triste', 'pwpwpw');
+INSERT INTO `users` VALUES (3, 'Tomy', 'Potatoue', 'los_pi@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'afsaf', 'asfas', 'fasf', 'fasf', 'fasf', 'fasf', 'Gomon', 'pwpwpw');
+INSERT INTO `users` VALUES (4, 'Charli', 'Gut', 'matoluzen@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'afsaf', 'asfas', 'fasf', 'fasf', 'fasf', 'fasf', 'Alexander', 'pwpwpw');
+INSERT INTO `users` VALUES (5, 'Juan', 'Gonzales', 'elgonchi@gmail.com', '262321651', '09861651', 'tucuman 2121', '6251651651', 2, 1, 'wawa.com.uy', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'asfa', 'fasfas', 'asfaf', 'fasf', 'fasf', 'fasf', 'El_Gonchi', 'ahfahf');
+INSERT INTO `users` VALUES (6, 'Terry', 'Fierry', 'el_garca@gmail.com', '262321651', '09861651', 'tucuman 2121', '6251651651', 2, 1, 'wawa.com.uy', 'logoJPG.jpg', '', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'asfa', 'fasfas', 'asfaf', 'fasf', 'fasf', 'fasf', 'El_Tierri', 'zukulu');
+
