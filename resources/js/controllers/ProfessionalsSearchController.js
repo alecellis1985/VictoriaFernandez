@@ -1,6 +1,6 @@
 'use strict';
 
-Professionals.controller('ProfessionalsSearchController', ['$scope', '$routeParams', '$http', '$rootScope', '$location','CommonService','departamentosList','categoriasList', function ($scope, $routeParams, $http, $rootScope, $location,CommonService,departamentosList,categoriasList) {
+Professionals.controller('ProfessionalsSearchController', ['$scope', '$routeParams', '$http', '$rootScope', '$location','CommonService','departamentosList','categoriasList','barriosList', function ($scope, $routeParams, $http, $rootScope, $location,CommonService,departamentosList,categoriasList,barriosList) {
     
     //$scope.profesionalesList = [{ name:"Seleccione Categoria",id:-1},{ name:"Abogados",id:0},{ name:"Alambradores",id:1},{ name:"Albañiles",id:2},{ name:"Animadores",id:3},{ name:"Arquitectos",id:4},{ name:"Carpinteros",id:5},{ name:"Constructores",id:6},{ name:"Contadores",id:7},{ name:"Corredores de seguro",id:8},{ name:"Decoradores y Diseñadores de Interiores",id:9},{ name:"Desarrolladores Web",id:10},{ name:"Despachantes de aduana",id:11},{ name:"Diseñadores gráficos",id:12},{ name:"Economistas",id:13},{ name:"Economistas",id:14},{ name:"Electricistas",id:15},{ name:"Escribanos",id:16},{ name:"Estilistas/Esteticistas",id:17},{ name:"Fisioterapeutas",id:18},{ name:"Fonoaudiólogos",id:19},{ name:"Herreros",id:20},{ name:"Ingenieros",id:21},{ name:"Médicos",id:22},{ name:"Nutricionistas",id:23},{ name:"Odontólogos",id:24},{ name:"Pintores",id:25},{ name:"Podólogos",id:26},{ name:"Psicólogos",id:27},{ name:"Sanitarios",id:28},{ name:"Tapiceros",id:29},{ name:"Veterinarios",id:30},{ name:"Vidrieros",id:31}];
     $scope.categorias = categoriasList.data;
@@ -23,6 +23,15 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
         $scope[model] = '';
         evt.preventDefault();
         evt.stopPropagation();
+    };
+    
+    $scope.barrios = barriosList.data;
+    $scope.barrios.unshift({barrioNombre: "Seleccione Barrio", id: -1});
+    $scope.selectedBarrio = $scope.barrios[0];
+    $scope.selectBarrio = function (e, barrio)
+    {
+        e.preventDefault();
+        $scope.selectedBarrio = barrio;
     };
         
     $scope.isCollapsed = true;
