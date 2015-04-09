@@ -10,11 +10,6 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
     $scope.barrios = barriosList.data;
     $scope.barrios.unshift({barrioNombre: "Seleccione Barrio", id: -1});
     $scope.selectedBarrio = $scope.barrios[0];
-    $scope.selectBarrio = function (e, barrio)
-    {
-        e.preventDefault();
-        $scope.selectedBarrio = barrio;
-    };
         
     $scope.isCollapsed = true;
     
