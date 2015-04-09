@@ -29,7 +29,8 @@ Professionals.directive('dropdownFilter', function(){
             selectedElem: '=',
             placeholderFilter:'@',
             nameProp:'@',
-            elementsArr:'='
+            elementsArr:'=',
+            selectedElementFn:'='
         },
         replace: true,
         link:function($scope,elem,attr){
@@ -41,7 +42,7 @@ Professionals.directive('dropdownFilter', function(){
                 evt.stopPropagation();
             };
             
-            $scope.selectedElement = function(e,elem)
+            $scope.selectedElement = $scope.selectedElementFn || function(e,elem)
             {
                 e.preventDefault();
                 $scope.selectedElem = elem;
@@ -50,25 +51,3 @@ Professionals.directive('dropdownFilter', function(){
         }
     };
 });
-
-
-//$scope.categorias.unshift({categoriaNombre:"Seleccione Categoria",categoriaId:-1});
-//    $scope.selectedCategoria = $scope.categorias[0];
-//    $scope.selectCategoria = function(e,categoria)
-//    {
-//        e.preventDefault();
-//        $scope.selectedCategoria = categoria;
-//    };
-//    
-//    $scope.categoriasFilterClk = function(e)
-//    {
-//        e.preventDefault();
-//        e.stopPropagation();
-//    };
-//    
-//    $scope.clearModel = function(evt,model)
-//    {
-//        $scope[model] = '';
-//        evt.preventDefault();
-//        evt.stopPropagation();
-//    };
