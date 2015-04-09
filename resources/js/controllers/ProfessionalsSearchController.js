@@ -56,6 +56,4 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
         });
     };
     
-    
-    
 }]);

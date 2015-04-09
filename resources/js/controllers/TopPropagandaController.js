@@ -6,18 +6,19 @@ Professionals.controller('TopPropagandaController', ['$scope', '$routeParams', '
                     //        "about": "aboutus.html",
                     //        "contact": "contactus.html"
         };
-        $scope.myInterval = 5000;
+        $scope.myInterval = 3000;
         var slides = $scope.slides = [];
-        $scope.addSlide = function () {
-            var newWidth = 600 + slides.length + 1;
+        $scope.addSlide = function (url) {
             slides.push({
-                image: 'http://placekitten.com/' + newWidth + '/300',
-                text: ['More', 'Extra', 'Lots of', 'Surplus'][slides.length % 4] + ' ' +
-                        ['Cats', 'Kittys', 'Felines', 'Cutes'][slides.length % 4]
+                image: url,
+                text: ['More', 'Extra', 'Lots of'][slides.length % 3] + ' ' +
+                        ['Cats', 'Kittys', 'Felines'][slides.length % 3]
             });
         };
-        for (var i = 0; i < 4; i++) {
-            $scope.addSlide();
-        }
+//        for (var i = 0; i < 4; i++) {
+            $scope.addSlide('http://www.tuprofe.com.uy/blog/wp-content/uploads/2014/10/Seifer-banner.png');
+            $scope.addSlide('http://www.tuprofe.com.uy/blog/wp-content/uploads/2014/10/ifc.jpg');
+            $scope.addSlide('http://www.tuprofe.com.uy/blog/wp-content/uploads/2014/12/banner_web_CCEE_4.jpg');
+//        }
     }]);
 
