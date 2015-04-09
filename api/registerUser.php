@@ -117,7 +117,7 @@ function insertNewUser($conn, $user) {
         $params[11] = array("facebookUrl", $user['facebookUrl'], "string", 250);
         $params[12] = array("twitterUrl", $user['twitterUrl'], "string", 250);
         $params[13] = array("linkedinUrl", $user['linkedinUrl'], "string", 250);
-        $params[14] = array("descService", $user['descService'], "string", 1000);
+        $params[14] = array("descService", $user['descService'], "string", 150);
         $params[15] = array("servicioOfrecido1", $user['servicioOfrecido1'], "string", 20);
         $params[16] = array("servicioOfrecido2", $user['servicioOfrecido2'], "string", 20);
         $params[17] = array("servicioOfrecido3", $user['servicioOfrecido3'], "string", 20);
