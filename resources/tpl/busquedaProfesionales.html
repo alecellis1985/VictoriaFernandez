@@ -2,26 +2,7 @@
     <div class="container">
         <div class="row no-padding-right" style="margin-bottom: 10px;">
             <div class="form-group col-xs-12 col-md-3">
-                <div class="dropdown" dropdown>
-                    <button type="button" class="btn btn-default dropdown-toggle"  dropdown-toggle ng-disabled="disabled">
-                        <span class="overflowDots" ng-bind="selectedCategoria.categoriaNombre"></span>
-                      <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu filterUl" role="menu">
-                        <li>
-                            <div class="input-group"> 
-                            <i class="fa fa-times" ng-show="categoriaFilter.length > 0" ng-click="clearModel($event,'categoriaFilter')"></i>
-                              <span class="input-group-btn">
-                                  <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
-                              </span>
-                              <input type="text" class="form-control" stop-All-Events ng-model="categoriaFilter" placeholder="Filtro de categorias">
-                            </div>
-                        </li>
-                        <li  ng-repeat="categoria in categorias | filter:categoriaFilter">
-                            <a href="#" ng-click="selectCategoria($event,categoria)">{{categoria.categoriaNombre}}</a>
-                        </li>
-                    </ul>
-                </div>  
+                <dropdown-Filter selected-Elem="selectedCategoria" name-Prop="categoriaNombre" elements-Arr="categorias" placeholder-Filter="Filtro de categorias"></dropdown-Filter>                
             </div>      
             <div class="form-group col-xs-12 col-md-3">
                 <div class="dropdown" dropdown>
@@ -82,61 +63,8 @@
             </div>  
         </div>
         <div class="row propagandaMargins" ng-controller="TopPropagandaController" ng-include="template.topPropaganda"></div>
-        <div class="panel panel-primary"  collapse="isCollapsed">
-            <div class="panel-heading">
-                <h3 class="panel-title">{{selectedUser.nombre}} {{selectedUser.apellido}}</h3>
-                <button  type="button" class="close" ng-click="isCollapsed = true" style="position: relative;top: -18px;">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-xs-2">
-                        <div class='row'>
-                            <div class="col-xs-12">
-                                <img style="max-width:120px;" ng-if="selectedUser.imagenUrl !== ''" ng-src="{{'resources/img/uploaded/' +  selectedUser.imagenUrl}}"> <!--$location.absUrl().split('#')[0] + -->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-10">
-                        <div class="row">
-                            <p ng-bind="selectedUser.descService" style='text-transform: capitalize;'></p>
-                        </div>
-
-
-                        <div class="row">
-                            <i class="fa fa-phone-square"></i>
-                            <span ng-bind="selectedUser.telefono"></span>
-                        </div>
-                        <div class="row">
-                            <i class="fa fa-mobile"></i>
-                            <span ng-bind="selectedUser.celular"></span>
-                        </div>
-                        <div class="row">
-                            <label>Dirección: </label>
-                            <span ng-bind="selectedUser.direccion"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class='row'>
-                    <ul class="nav nav-tabs">
-                        <li role="presentation" class="active"><a href="#">Home</a></li>
-                        <li role="presentation"><a href="#">Profile</a></li>
-                        <li role="presentation"><a href="#">Messages</a></li>
-                    </ul>
-                </div>
-                <div class="row">
-                    <div class="form-group col-xs-12">
-                        <a href='{{selectedUser.facebookUrl}}' target="_blank" stop-Event><i class="fa fa-facebook-official"></i></a>
-                        <a href='{{selectedUser.twitterUrl}}' target="_blank" stop-Event><i class="fa fa-twitter-square"></i></a>
-                        <a href='{{selectedUser.linkedinUrl}}' target="_blank" stop-Event><i class="fa fa-linkedin-square"></i></a>
-                        <button type="submit" class="btn btn-primary pull-right" ng-click='sendMailToUser($event,selectedUser)'>
-                            <i class="glyphicon glyphicon-envelope"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <user-Details selected-User="selectedUser" elem-Colapsed="isCollapsed"></user-Details>
+       
         <div class="panel panel-primary pull-left" ng-if="selectedList === 1">
             <div class="panel-heading">
                 <h3 class="panel-title">Usuarios</h3>

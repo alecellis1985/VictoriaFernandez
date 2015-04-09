@@ -87,74 +87,14 @@
         <div class="panel-body">
             <div class="row">
                 <div class="form-group col-xs-12 col-md-3">
-                    <div class="dropdown" dropdown>
-                        <button type="button" class="btn btn-default dropdown-toggle"  dropdown-toggle ng-disabled="disabled">
-                            <span class="overflowDots" ng-bind="selectedCategoria.categoriaNombre"></span>
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu filterUl" role="menu">
-                            <li>
-                                <div class="input-group"> 
-                                    <i class="fa fa-times" ng-show="categoriaFilter.length > 0" ng-click="clearModel($event, 'categoriaFilter')"></i>
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
-                                    </span>
-                                    <input type="text" class="form-control" stop-All-Events ng-model="categoriaFilter" placeholder="Filtro de categorias">
-                                </div>
-                            </li>
-                            <li  ng-repeat="categoria in categorias| filter:categoriaFilter">
-                                <a href="#" ng-click="selectCategoria($event, categoria)">{{categoria.categoriaNombre}}</a>
-                            </li>
-                        </ul>
-                    </div>  
+                    <dropdown-Filter selected-Elem="selectedCategoria" name-Prop="categoriaNombre" elements-Arr="categorias" placeholder-Filter="Filtro de categorias"></dropdown-Filter>                   
                 </div>
-
                 <div class="form-group col-xs-12 col-md-3">
-                    <div class="dropdown" dropdown>
-                        <button type="button" class="btn btn-default dropdown-toggle"  dropdown-toggle ng-disabled="disabled">
-                            <span class="overflowDots" ng-bind="depSelected.nombreDepartamento"></span>
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu filterUl" role="menu">
-                            <li>
-                                <div class="input-group"> 
-                                    <i class="fa fa-times" ng-show="deptoFilter.length > 0" ng-click="clearModel($event, 'deptoFilter')"></i>
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
-                                    </span>
-                                    <input type="text" class="form-control" stop-All-Events ng-model="deptoFilter" placeholder="Filtro de departamentos">
-                                </div>
-                            </li>
-                            <li  ng-repeat="dep in departamentosList| filter:deptoFilter">
-                                <a href="#" ng-click="selectDepartamento($event, dep)">{{dep.nombreDepartamento}}</a>
-                            </li>
-                        </ul>
-                    </div>  
+                    <dropdown-Filter selected-Elem="depSelected" name-Prop="nombreDepartamento" elements-Arr="departamentosList" placeholder-Filter="Filtro de departamentos"></dropdown-Filter> 
                 </div>
-
                 <div class="form-group col-xs-12 col-md-3" ng-show="depSelected.nombreDepartamento === 'Montevideo'">
-                    <div class="dropdown" dropdown>
-                        <button type="button" class="btn btn-default dropdown-toggle"  dropdown-toggle ng-disabled="disabled">
-                            <span class="overflowDots" ng-bind="selectedBarrio.barrioNombre"></span>
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu filterUl" role="menu">
-                            <li>
-                                <div class="input-group"> 
-                                    <i class="fa fa-times" ng-show="barrioFilter.length > 0" ng-click="clearModel($event, 'barrioFilter')"></i>
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
-                                    </span>
-                                    <input type="text" class="form-control" stop-All-Events ng-model="barrioFilter" placeholder="Filtro de barrios">
-                                </div>
-                            </li>
-                            <li  ng-repeat="barrio in barrios| filter:barrioFilter">
-                                <a href="#" ng-click="selectBarrio($event, barrio)">{{barrio.barrioNombre}}</a>
-                            </li>
-                        </ul>
-                    </div>  
+                    <dropdown-Filter selected-Elem="selectedBarrio" name-Prop="barrioNombre" elements-Arr="barrios" placeholder-Filter="Filtro de barrios"></dropdown-Filter>                     
                 </div>
-
                 <div class="form-group col-xs-12 col-md-3">
                     <input type="text" name="direccion" class="form-control" ng-model="user.direccion" placeholder="Direccion">
                 </div>
