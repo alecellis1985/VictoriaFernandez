@@ -6,24 +6,6 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
     $scope.categorias = categoriasList.data;
     $scope.categorias.unshift({categoriaNombre:"Seleccione Categoria",categoriaId:-1});
     $scope.selectedCategoria = $scope.categorias[0];
-    $scope.selectCategoria = function(e,categoria)
-    {
-        e.preventDefault();
-        $scope.selectedCategoria = categoria;
-    };
-    
-    $scope.categoriasFilterClk = function(e)
-    {
-        e.preventDefault();
-        e.stopPropagation();
-    };
-    
-    $scope.clearModel = function(evt,model)
-    {
-        $scope[model] = '';
-        evt.preventDefault();
-        evt.stopPropagation();
-    };
     
     $scope.barrios = barriosList.data;
     $scope.barrios.unshift({barrioNombre: "Seleccione Barrio", id: -1});
