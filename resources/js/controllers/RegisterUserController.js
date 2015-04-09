@@ -36,6 +36,12 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             mostrarRegistro: false,
             empresa: false
         };
+        
+        $scope.goBackRegistration = function (e) {
+            e.preventDefault();
+            $scope.registro.mostrarRegistro = false;
+            $scope.registro.empresa = false;
+        };
 
         $scope.showProfessionalRegistration = function (e) {
             e.preventDefault();

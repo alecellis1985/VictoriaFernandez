@@ -71,9 +71,6 @@ Professionals.directive("compareTo", function () {
                 return modelValue === scope.otherModelValue;
             };
 
-//            scope.$watch("otherModelValue", function () {
-//                ngModel.$validate();
-//            });
         }
     };
 });
