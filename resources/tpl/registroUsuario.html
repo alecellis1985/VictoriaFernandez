@@ -32,7 +32,7 @@
                     <span ng-show="registerUser.nombre.$touched && registerUser.nombre.$error.required" class="error">Nombre es requerido</span>
                 </div>
                 <div class="form-group col-xs-12 col-md-4" ng-hide="registro.empresa">
-                    <input type="text" class="form-control" name="apellido" ng-model="user.apellido" placeholder="Apellido" required>
+                    <input type="text" class="form-control" name="apellido" ng-model="user.apellido" placeholder="Apellido" ng-required="!registro.empresa">
                     <span ng-show="registerUser.apellido.$touched && registerUser.apellido.$error.required" class="error">Apellido es requerido</span>
                 </div>
                 <div class="form-group col-xs-10 col-md-3">

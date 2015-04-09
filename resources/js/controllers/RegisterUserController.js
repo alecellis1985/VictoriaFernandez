@@ -45,7 +45,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
 
         $scope.showEnterpriseRegistration = function (e) {
             e.preventDefault();
-            $scope.registro.mostrarRegistro = false;
+            $scope.registro.mostrarRegistro = true;
             $scope.registro.empresa = true;
         };
         
@@ -59,7 +59,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         };
 
         $scope.categorias = categoriasList.data;
-        $scope.categorias.unshift({categoriaNombre: "Seleccione Categoria", id: -1});
+        $scope.categorias.unshift({categoriaNombre: "Seleccione Categoria", categoriaId: -1});
         $scope.selectedCategoria = $scope.categorias[0];
         $scope.selectCategoria = function (e, categoria)
         {
@@ -75,7 +75,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         };
 
         $scope.departamentosList = departamentosList.data;
-        $scope.departamentosList.unshift({nombreDepartamento: "Seleccione Departamento", id: -1, idDepartamento: -1});
+        $scope.departamentosList.unshift({nombreDepartamento: "Seleccione Departamento", idDepartamento: -1});
         $scope.depSelected = $scope.departamentosList[0];
         $scope.selectDepartamento = function (e, departamento)
         {
