@@ -6,7 +6,15 @@ Professionals.directive('userDetails', function(){
             selectedUser: '=',
             elemColapsed:'='
         },
-        replace: true
+        replace: true,
+        link:function($scope,elem,attr)
+        {
+            $scope.closeDialog = function()
+            {
+                $scope.elemColapsed = true;
+            };
+            
+        }
     };
 });
 

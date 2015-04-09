@@ -149,19 +149,9 @@
 
 .card img
 {
-    height: 100px;
+/*    height: 100px;*/
     margin-top: 4px;
 }
-
-@media (max-width:382px)
-{
-    .card img
-    {
-        height: 85px;
-        margin-top: 4px;
-    }
-}
-
 
 .card h2
 {
@@ -306,4 +296,20 @@
 .no-padding-right .col-xs-9
 {
     padding-right: 0px;
+}
+
+.fa-reply
+{
+    color:#7E7B7B;
+}
+
+.fa-reply:hover
+{
+    color:#3A3A3A;
+}
+
+.notAvailable,.notAvailable:hover,.notAvailable>.fa,.notAvailable:hover>.fa
+{
+    cursor:default;
+    opacity:0.8;
 }
