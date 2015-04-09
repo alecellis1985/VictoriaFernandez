@@ -61,11 +61,6 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         $scope.categorias = categoriasList.data;
         $scope.categorias.unshift({categoriaNombre: "Seleccione Categoria", categoriaId: -1});
         $scope.selectedCategoria = $scope.categorias[0];
-        $scope.selectCategoria = function (e, categoria)
-        {
-            e.preventDefault();
-            $scope.selectedCategoria = categoria;
-        };
         
         $scope.clearModel = function(evt,model)
         {
@@ -77,13 +72,6 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         $scope.departamentosList = departamentosList.data;
         $scope.departamentosList.unshift({nombreDepartamento: "Seleccione Departamento", idDepartamento: -1});
         $scope.depSelected = $scope.departamentosList[0];
-        $scope.selectDepartamento = function (e, departamento)
-        {
-            e.preventDefault();
-            $scope.depSelected = departamento;
-        };
-        
-        
         
         $scope.user = {};
         
