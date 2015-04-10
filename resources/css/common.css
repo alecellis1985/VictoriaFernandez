@@ -319,3 +319,8 @@
     clear: both;
     content: "";
 }
+.glyphicon-education .glyphicon-briefcase
+{
+    font-size: 30px;
+    color:#c00;
+}
