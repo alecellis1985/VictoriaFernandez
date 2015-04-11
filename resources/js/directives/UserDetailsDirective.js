@@ -11,10 +11,10 @@ Professionals.directive('userDetails', function(){
             
             $scope.tabs = [
                 { title:'Servicios', content:'Dynamic content 1' },
-                { title:'Informacion', content:'Dynamic content 2', disabled: true },
-                { title:'Promociones', content:'Dynamic content 2', disabled: true },
-                { title:'Formas de pago', content:'Dynamic content 2', disabled: true },
-                { title:'Mapa', content:'Dynamic content 2', disabled: true }
+                { title:'Informacion', content:'Dynamic content 2'},
+                { title:'Promociones', content:'Dynamic content 2'},
+                { title:'Formas de pago', content:'Dynamic content 2'},
+                { title:'Mapa', content:'Dynamic content 2'}
               ];
         }
     };

@@ -187,7 +187,7 @@
       color: #007bb6;
 }
 
-.card .fa-facebook-official,.card .fa-twitter-square,.card .fa-linkedin-square
+.card .fa-facebook-official,.card .fa-twitter-square,.card .fa-linkedin-square, .big-fa>a>.fa
 {
     font-size: 31px;
     
@@ -324,3 +324,42 @@
     font-size: 30px;
     color:#c00;
 }
+
+.nav-tabs>li>a:hover {
+  border-color: #990000;
+}
+
+.nav>li>a:focus, .nav>li>a:hover {
+  text-decoration: none;
+  transition: background-color 900ms;
+  background-color: #A90000;
+}
+
+.tab-content
+{
+    border:1px solid #c00;
+    min-height: 250px;
+}
+
+.nav-tabs>li>a {
+  background: #CB3939;
+  color: #FFFFFF;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover
+{
+    color: #FFFFFF;
+    cursor: default;
+    background-color: #A90000;
+    border: 1px solid #A90000;
+    border-bottom-color: transparent;
+}
+
+.marginRow
+{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+
+

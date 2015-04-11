@@ -34,7 +34,26 @@ Professionals.directive('stopEvent', function () {
                     e.preventDefault();
                 });
             }
-            
+        }
+    };
+ });
+ Professionals.directive('enableHref', function () {
+    return {
+        restrict: 'A',
+        link: function ($scope, element, attr) {
+            if(attr.enableHref === '')
+            {
+                element.addClass('notAvailable');
+                element.attr('title','No Disponible');
+                element.bind('click', function (e) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                });
+            }
+            else
+            {
+                $(element).attr('href',attr.enableHref);
+            }
         }
     };
  });

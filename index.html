@@ -24,6 +24,12 @@
         <div class="container contentContainer" style="margin-top: 5px;">
             <!--<div class="row propagandaMargins" ng-controller="TopPropagandaController" ng-include="template.topPropaganda"></div>-->
             <div ng-view></div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 big-fa">
+                    <i class="fa arrow-circle-up pull-right" ng-click="moveUp()"></i>
+                </div>
+            </div>
+            
         </div>
 
         <div class="footer" ng-controller="FooterController" ng-include="template.footer"></div>
