@@ -8,7 +8,6 @@ Professionals.directive('userDetails', function(){
         },
         replace: true,
         link:function($scope,element,attr){
-            
             $scope.tabs = [
                 { title:'Servicios', content:'Dynamic content 1' },
                 { title:'Informacion', content:'Dynamic content 2'},

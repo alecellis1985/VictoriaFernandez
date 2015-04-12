@@ -43,9 +43,9 @@
                 </div>
                 <div class="row">
                     <div class="form-group big-fa col-xs-12">
-                        <a enable-Href='{{selectedUser.facebookUrl}}' target="_blank" stop-Event><i class="fa fa-facebook-official"></i></a>
-                        <a enable-Href='{{selectedUser.twitterUrl}}' target="_blank" stop-Event><i class="fa fa-twitter-square"></i></a>
-                        <a enable-Href='{{selectedUser.linkedinUrl}}' target="_blank" stop-Event><i class="fa fa-linkedin-square"></i></a>
+                        <prof-a-custom href-Link="selectedUser.facebookUrl" icon="fa fa-facebook-official" icon-Title="Facebook"></prof-a-custom>
+                        <prof-a-custom href-Link="selectedUser.twitterUrl" icon="fa fa-twitter-square" icon-Title="Facebook"></prof-a-custom>
+                        <prof-a-custom href-Link="selectedUser.linkedinUrl" icon="fa fa-linkedin-square" icon-Title="Facebook"></prof-a-custom>
                         <button type="submit" class="btn btn-primary pull-right" ng-click='sendMailToUser($event,selectedUser)'>
                             <i class="glyphicon glyphicon-envelope"></i>
                         </button>

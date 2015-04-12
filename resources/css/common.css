@@ -187,7 +187,7 @@
       color: #007bb6;
 }
 
-.card .fa-facebook-official,.card .fa-twitter-square,.card .fa-linkedin-square, .big-fa>a>.fa
+.fa-facebook-official,.fa-twitter-square,.fa-linkedin-square, .big-fa>a>.fa,.fa-arrow-circle-up
 {
     font-size: 31px;
     
@@ -361,5 +361,57 @@
     margin-bottom: 15px;
 }
 
+.carousel-control:hover,.fa-arrow-circle-up
+{
+    cursor:pointer;
+}
+
+.fa-arrow-circle-up
+{
+  position: relative;
+  top: -60px;
+  right: 0px;
+  color: #c00;
+}
+
+.fa-arrow-circle-up:hover
+{
+    color:#B60000
+}
+
+@media (min-width:768px)
+{
+    .fa-arrow-circle-up
+    {
+         right: 0px;
+    }
+}
+@media (min-width:992px)
+{
+    .fa-arrow-circle-up
+    {
+        right: -50px;
+    }
+}
+@media (min-width:1200px)
+{
+    .fa-arrow-circle-up
+    {
+        right: -50px;
+    }
+}
 
 
+.GoogleMap {
+    height:420px;
+    width:600px;
+}
+.infoWindowContent {
+    font-size:  14px !important;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
+.GoogleMap h2 {
+    margin-bottom:0;
+    margin-top: 0;
+}

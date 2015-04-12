@@ -6,4 +6,5 @@ Professionals.controller('FooterController', ['$scope', '$routeParams', '$http',
         "footer": "resources/tpl/footer.html"
     };
 
+    $scope.clicked = false;
 }]);

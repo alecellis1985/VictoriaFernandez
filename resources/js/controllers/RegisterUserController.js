@@ -9,6 +9,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             $scope.validateImg($scope.files);
         });
 
+        
         $scope.validateImg = function (files) {
             if (files && files.length) {
                 var file = files[0];
@@ -73,6 +74,8 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             horaComienzo : initHour,
             horaFin: initHour
         };
+        
+        $scope.markers = [];
 
         $scope.registrarUsuario = function ()
         {
