@@ -6,14 +6,13 @@
         long : -79.4000
     }]
  */
-Professionals.directive('mapLoadMarkers', function () {
+				  Professionals.directive('mapLoadMarkers', function () {
     return {
         restrict:'E',
         scope:{            
             mapOptions:'=',
             locations:'='
         },
-//        replace:true,
         template:'<div class="GoogleMap"></div>',
         link:function($scope,element,attr){
             //default is montevideo
@@ -23,13 +22,13 @@ Professionals.directive('mapLoadMarkers', function () {
                 mapTypeId: google.maps.MapTypeId.TERRAIN
             };
 
-            $scope.map = new google.maps.Map(element.find('div')[0], $scope.mapOptions);
+            $scope.map = new google.maps.Map(element.find('.GoogleMap')[0], $scope.mapOptions);
 
             $scope.markers = [];
 
             var infoWindow = new google.maps.InfoWindow();
                         
-            var createMarker = function (info){
+            $scope.createMarker = function (info){
                 var marker = new google.maps.Marker({
                     map: $scope.map,
                     position: new google.maps.LatLng(info.lat, info.long),
@@ -49,7 +48,7 @@ Professionals.directive('mapLoadMarkers', function () {
             {
                 var length = $scope.locations.length;
                 for (var i = 0; i < length; i++){
-                    createMarker($scope.locations[i]);
+                    $scope.createMarker($scope.locations[i]);
                 }
             }
 
