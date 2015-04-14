@@ -9,11 +9,11 @@ Professionals.directive('userDetails', function(){
         replace: true,
         link:function($scope,element,attr){
             $scope.tabs = [
-                { title:'Servicios', content:'Dynamic content 1' },
-                { title:'Informacion', content:'Dynamic content 2'},
-                { title:'Promociones', content:'Dynamic content 2'},
-                { title:'Formas de pago', content:'Dynamic content 2'},
-                { title:'Mapa', content:'Dynamic content 2'}
+                { title:'Servicios', content:'resources/tpl/tabServicios.html' },
+                { title:'Informacion', content:'resources/tpl/tabInformacion.html'},
+                { title:'Promociones', content:'resources/tpl/tabPromociones.html'},
+                { title:'Formas de pago', content:'resources/tpl/tabFormadePago.html'},
+                { title:'Mapa', content:'resources/tpl/tabMap.html'}
               ];
         }
     };

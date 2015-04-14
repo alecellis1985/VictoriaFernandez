@@ -430,11 +430,14 @@ p
 {
     word-wrap: break-word;
 }
-.card .fa-user{
+.card .fa-user, .user-details .fa-user{
     font-size: 109px;
     color: #429127;
     color: #277D91;    
 }
+/*.user-details .fa-user{
+    
+}*/
 
 @media (min-width:768px)
 {
