@@ -112,8 +112,9 @@ Professionals.directive('scrollToTop', function ($document) {
         return {
             restrict: 'A',
             link: function (scope, elm, attrs) {
+                elm.css('display','none');             
                 elm.bind("click", function () {
-
+                    //TODO FIX IN IE AND FF
                     function scrollToTop(element, to, duration) {
                         if (duration < 0) return;
                         var difference = to - element.scrollTop;
@@ -128,6 +129,19 @@ Professionals.directive('scrollToTop', function ($document) {
                     // then just add dependency and call it
                     scrollToTop($document[0].body, 0, 400);
                 });
+                $(window).scroll(function() {
+                    if($(this).scrollTop()<200 )
+                    {
+//                        if(!elm.hasClass('ng-hide'))
+//                        elm.addClass('ng-hide');
+                            elm.fadeOut('slow');
+                    }
+                    else
+                    {
+                        elm.fadeIn('slow');
+                        //elm.removeClass('ng-hide');
+                    }
+                }); 
             }
         };
 });

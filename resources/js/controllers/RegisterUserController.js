@@ -10,6 +10,38 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         });
 
         
+        $scope.randomString = function(letters)
+        {
+            var text = "";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+            for( var i=0; i < letters; i++ )
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+            return text;
+        }
+        
+        $scope.fillNewUserCamps = function()
+        {
+            $scope.user.nombre = "Bin"+$scope.randomString(2);
+            $scope.user.apellido = "Laden"+$scope.randomString(2);
+            $scope.user.username = $scope.randomString(7);
+            $scope.user.password = "asdasd";
+            $scope.user.email = "alecellis1985@gmail.com";
+            $scope.user.telefono = "26013794";
+            $scope.user.celular = "098635923";
+            $scope.user.direccion = "Maximo tajen 3565";
+            $scope.user.telefonoEmp = "26013794";
+            $scope.depSelected.idDepartamento = 2;
+            $scope.selectedCategoria.categoriaId = 2;
+            $scope.user.descService = $scope.randomString(50);
+            $scope.user.servicioOfrecido1 = $scope.randomString(25);
+            $scope.user.servicioOfrecido2 = $scope.randomString(25);
+            $scope.user.servicioOfrecido3 = $scope.randomString(25);
+            $scope.user.servicioOfrecido4 = $scope.randomString(25);
+            $scope.user.servicioOfrecido5 = $scope.randomString(25);
+            $scope.user.servicioOfrecido6 = $scope.randomString(25);
+        }
+        
         $scope.validateImg = function (files) {
             if (files && files.length) {
                 var file = files[0];
@@ -75,10 +107,19 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             horaFin: initHour
         };
         
+        $scope.fillNewUserCamps();
+        
         $scope.markers = [];
 
         $scope.registrarUsuario = function ()
         {
+            //Need to map the marker position to latitude longitude to save in the db
+            var markersArr = $scope.markers.map(function(obj){
+                        return {
+                            'latitude':obj.position.k.toString(),
+                            'longitude':obj.position.D.toString(),
+                        }
+                    });
             var data = {
                 'nombre': $scope.user.nombre,
                 'apellido': $scope.user.apellido,
@@ -102,7 +143,8 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                 'servicioOfrecido3': $scope.user.servicioOfrecido3,
                 'servicioOfrecido4': $scope.user.servicioOfrecido4,
                 'servicioOfrecido5': $scope.user.servicioOfrecido5,
-                'servicioOfrecido6': $scope.user.servicioOfrecido6
+                'servicioOfrecido6': $scope.user.servicioOfrecido6,
+                'markers':markersArr
             };
             var imgFile = null;
             if (!(typeof $scope.files === 'undefined') && !$scope.files === null)
@@ -115,6 +157,5 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                     $rootScope.$broadcast('alert-event', {type: 'error', msg: result.data.msg});
 
             });
-
         };
     }]);

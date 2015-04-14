@@ -11,6 +11,7 @@
                         <div class='row'>
                             <div class="col-xs-12 col-md-12 col-sm-12">
                                 <img class="img-responsive img-rounded" ng-if="selectedUser.imagenUrl !== ''" ng-src="{{'resources/img/uploaded/' +  selectedUser.imagenUrl}}"> <!--$location.absUrl().split('#')[0] + -->
+                                <i ng-if="user.imagenUrl === ''" class="img-responsive fa fa-user"></i>
                             </div>
                         </div>
                     </div>

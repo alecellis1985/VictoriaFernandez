@@ -1,3 +1,7 @@
+body {
+    padding-top: 70px;
+}
+
 .navbar-fixed-top
 {
     background: #c00;
@@ -366,12 +370,19 @@
     cursor:pointer;
 }
 
-.fa-arrow-circle-up
+/*.fa-arrow-circle-up
 {
   position: relative;
   top: -60px;
   right: 0px;
   color: #c00;
+}*/
+.fa-arrow-circle-up
+{
+    position: fixed;
+    top: 60%;
+    right: 0px;
+    color: #c00;
 }
 
 .fa-arrow-circle-up:hover
@@ -379,7 +390,7 @@
     color:#B60000
 }
 
-@media (min-width:768px)
+/*@media (min-width:768px)
 {
     .fa-arrow-circle-up
     {
@@ -390,21 +401,20 @@
 {
     .fa-arrow-circle-up
     {
-        right: -50px;
+        right: 0px;
     }
 }
 @media (min-width:1200px)
 {
     .fa-arrow-circle-up
     {
-        right: -50px;
+        right: 173px;
     }
-}
+}*/
 
 
 .GoogleMap {
     height:420px;
-    width:600px;
 }
 .infoWindowContent {
     font-size:  14px !important;
@@ -414,4 +424,36 @@
 .GoogleMap h2 {
     margin-bottom:0;
     margin-top: 0;
+}
+
+p
+{
+    word-wrap: break-word;
+}
+.card .fa-user{
+    font-size: 109px;
+    color: #429127;
+    color: #277D91;    
+}
+
+@media (min-width:768px)
+{
+    .card .fa-user
+    {
+           font-size: 119px;
+    }
+}
+@media (min-width:992px)
+{
+    .card .fa-user
+    {
+           font-size: 109px;
+    }
+}
+@media (min-width:1200px)
+{
+    .card .fa-user
+    {
+           font-size: 119px;
+    }
 }
