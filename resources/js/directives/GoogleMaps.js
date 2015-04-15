@@ -1,38 +1,4 @@
-//Data
-//var cities = [
-//    {
-//        city : 'Toronto',
-//        desc : 'This is the best city in the world!',
-//        lat : 43.7000,
-//        long : -79.4000
-//    },
-//    {
-//        city : 'New York',
-//        desc : 'This city is aiiiiite!',
-//        lat : 40.6700,
-//        long : -73.9400
-//    },
-//    {
-//        city : 'Chicago',
-//        desc : 'This is the second best city in the world!',
-//        lat : 41.8819,
-//        long : -87.6278
-//    },
-//    {
-//        city : 'Los Angeles',
-//        desc : 'This city is live!',
-//        lat : 34.0500,
-//        long : -118.2500
-//    },
-//    {
-//        city : 'Las Vegas',
-//        desc : 'Sin City...\'nuff said!',
-//        lat : 36.0800,
-//        long : -115.1522
-//    }
-//];
-/*
- * Element exmpl 
+ /* Element exmpl 
   [{
         city : 'Toronto',
         desc : 'This is the best city in the world!',
@@ -40,15 +6,13 @@
         long : -79.4000
     }]
  */
-Professionals.directive('mapCtrl', function () {
+				  Professionals.directive('mapLoadMarkers', function () {
     return {
         restrict:'E',
-        scope:{
-            //mapId:'@',
-//            mapOptions:'=',
-//            locations:'='
+        scope:{            
+            mapOptions:'=',
+            locations:'='
         },
-//        replace:true,
         template:'<div class="GoogleMap"></div>',
         link:function($scope,element,attr){
             //default is montevideo
@@ -58,28 +22,13 @@ Professionals.directive('mapCtrl', function () {
                 mapTypeId: google.maps.MapTypeId.TERRAIN
             };
 
-            $scope.map = new google.maps.Map(element.find('div')[0], $scope.mapOptions);
+            $scope.map = new google.maps.Map(element.find('.GoogleMap')[0], $scope.mapOptions);
 
             $scope.markers = [];
 
             var infoWindow = new google.maps.InfoWindow();
-
-            
-            google.maps.event.addListener($scope.map, 'click', function(event) {
-                $scope.placeMarker(event.latLng);
-            });
-            
-            $scope.placeMarker = function(location) {
-                var marker = new google.maps.Marker({
-                    position: location,
-                    map: $scope.map
-                });
-                //$scope.map.setCenter(location);
-                $scope.markers.push(marker);
-            };
-            
-            var createMarker = function (info){
-
+                        
+            $scope.createMarker = function (info){
                 var marker = new google.maps.Marker({
                     map: $scope.map,
                     position: new google.maps.LatLng(info.lat, info.long),
@@ -98,9 +47,8 @@ Professionals.directive('mapCtrl', function () {
             if($scope.locations !== undefined)
             {
                 var length = $scope.locations.length;
-
                 for (var i = 0; i < length; i++){
-                    createMarker($scope.locations[i]);
+                    $scope.createMarker($scope.locations[i]);
                 }
             }
 
@@ -110,9 +58,6 @@ Professionals.directive('mapCtrl', function () {
             };
         }
     };
-
-    
-
 });
 
 Professionals.directive('mapSetMarkers', function () {
@@ -121,7 +66,17 @@ Professionals.directive('mapSetMarkers', function () {
         scope:{
             markersArr:'='
         },
-        template:'<div class="GoogleMap"></div>',
+        template:'<div class="row">'+
+        '<div class="form-group col-xs-12">'+
+            '<button ng-click="clearMarkers()" class="btn btn-primary pull-left">Borrar Marcadores</button>'+
+            '</div>'+
+        '</div>'+
+        '<div class="row">'+
+            '<div class="col-xs-12 col-md-12 col-sm-12">'+
+            '<div class="GoogleMap  col-xs-12 col-md-12 col-sm-12"></div>'+
+            '</div>'+
+        '</div>',
+//        template:'<div class="GoogleMap col-xs-12 col-md-12 col-sm-12"></div>',
         link:function($scope,element,attr){
             //Default is montevideo
             $scope.mapOptions = $scope.mapOptions || {
@@ -130,7 +85,7 @@ Professionals.directive('mapSetMarkers', function () {
                 mapTypeId: google.maps.MapTypeId.TERRAIN
             };
 
-            $scope.map = new google.maps.Map(element.find('div')[0], $scope.mapOptions);
+            $scope.map = new google.maps.Map(element.find('.GoogleMap')[0], $scope.mapOptions);
 
             google.maps.event.addListener($scope.map, 'click', function(event) {
                 $scope.placeMarker(event.latLng);
@@ -141,7 +96,7 @@ Professionals.directive('mapSetMarkers', function () {
                     position: location,
                     map: $scope.map
                 });
-                //$scope.map.setCenter(location);
+                
                 $scope.markersArr.push(marker);
             };
 
@@ -149,6 +104,16 @@ Professionals.directive('mapSetMarkers', function () {
                 e.preventDefault();
                 google.maps.event.trigger(selectedMarker, 'click');
             };
+            
+            $scope.clearMarkers = function() {
+                var arrLength = $scope.markersArr.length;
+                for (var i = 0; i < arrLength; i++) {
+                  $scope.markersArr[i].setMap(null);
+                }
+                 $scope.markersArr = [];
+              }
+
+         
         }
     };
 });

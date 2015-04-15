@@ -179,8 +179,6 @@ html {
     margin-top: 50px;
     bottom: 0;
     width: 100%;
-    /* Set the fixed height of the footer here */
-    height: 200px;
 
 }
 .footer {
@@ -190,10 +188,6 @@ html {
 }
 .footer a {
     color: #CABEBE;
-}
-@media only screen and (max-width: 768px) {
-    body { margin-bottom: 400px; }
-    .footer { height: 200px; }
 }
 
 /*
@@ -364,14 +358,6 @@ body{
     box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.75);
 }
 
-#videoDetails{
-    position: absolute;
-    width: auto;
-    height: auto;
-    background-color: #efefef;
-    z-index: 3;
-    border-radius: 10px;
-}
 textarea{
     resize:none;
 }
@@ -379,22 +365,6 @@ textarea{
 .form-group-inline{
     display: inline-block;  
     width: 45%;
-}
-
-@media (min-width: 768px) {
-    #videoDetails {
-        width: 750px;
-    }
-}
-@media (min-width: 992px) {
-    #videoDetails {
-        width: 970px;
-    }
-}
-@media (min-width: 1200px) {
-    #videoDetails {
-        width: 1170px;
-    }
 }
 
 .fileUpload input.upload {
