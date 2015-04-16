@@ -5,7 +5,7 @@ function registerUser() {
 
     $user = getArrayFromRequest($request);
     $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
-    
+
     //Save File
     //TODO: Validate format and size
     if (validateFileToUpload()) {
@@ -15,11 +15,9 @@ function registerUser() {
             $user['imagenUrl'] = md5($filenameAndExt[0]) . "_" . md5($user['username']) . "." . $filenameAndExt[1];
             echo insertNewUser($conn, $user);
         } else {
-//            echo MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
             echo MessageHandler::getErrorResponse("Img error.");
         }
     } else {
-        //echo MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
         $user['imagenUrl'] = '';
         echo insertNewUser($conn, $user);
     }
@@ -30,10 +28,10 @@ function insertNewUser($conn, $user) {
     if ($conn->conectar()) {
         $sql = "INSERT INTO users (nombre, apellido, email, telefono, celular, direccion, telefonoEmp, "
                 . "departamento, categoria, sitioWeb, imagenUrl, facebookUrl, twitterUrl, linkedinUrl, descService, servicioOfrecido1,"
-                . " servicioOfrecido2, servicioOfrecido3, servicioOfrecido4, servicioOfrecido5, servicioOfrecido6, username, password) "
+                . " servicioOfrecido2, servicioOfrecido3, servicioOfrecido4, servicioOfrecido5, servicioOfrecido6, descServiceLong, username, password) "
                 . "VALUES (:nombre, :apellido, :email, :telefono, :celular, :direccion, :telefonoEmp, :departamento,"
                 . " :categoria, :sitioWeb, :imagenUrl, :facebookUrl, :twitterUrl, :linkedinUrl, :descService, :servicioOfrecido1,"
-                . " :servicioOfrecido2, :servicioOfrecido3, :servicioOfrecido4, :servicioOfrecido5, :servicioOfrecido6, :username, :password)";
+                . " :servicioOfrecido2, :servicioOfrecido3, :servicioOfrecido4, :servicioOfrecido5, :servicioOfrecido6,:descServiceLong, :username, :password)";
         $params = array();
         $params[0] = array("nombre", $user['nombre'], "string", 50);
         $params[1] = array("apellido", $user['apellido'], "string", 50);
@@ -56,40 +54,69 @@ function insertNewUser($conn, $user) {
         $params[18] = array("servicioOfrecido4", $user['servicioOfrecido4'], "string", 20);
         $params[19] = array("servicioOfrecido5", $user['servicioOfrecido5'], "string", 20);
         $params[20] = array("servicioOfrecido6", $user['servicioOfrecido6'], "string", 20);
-        $params[21] = array("username", $user['username'], "string", 50);
-        $params[22] = array("password", md5($user['password']), "string", 10);
+        $params[21] = array("descServiceLong", $user['descServiceLong'], "string", 1000);
+        $params[22] = array("username", $user['username'], "string", 50);
+        $params[23] = array("password", md5($user['password']), "string", 10);
 
         if ($conn->consulta($sql, $params)) {
             $user['id'] = $conn->ultimoIdInsert();
-            
+
             $error = false;
             $userMarkers = json_decode($user['markers']);
-            $sqlMap = "INSERT INTO mapa VALUES (NULL, ". $user['id'] . ", :latitude, :longitude) ";
-            for($i = 0; $i< count($userMarkers); $i++)
-            {
+            $sqlMap = "INSERT INTO mapa VALUES (NULL, " . $user['id'] . ", :latitude, :longitude) ";
+            for ($i = 0; $i < count($userMarkers); $i++) {
                 $paramsInsertMap = array();
                 $latitude = $userMarkers[$i]->latitude;
                 $longitude = $userMarkers[$i]->longitude;
                 $paramsInsertMap[0] = array("latitude", $latitude, "string", 30);
-                $paramsInsertMap[1] = array("longitude", $longitude, "string", 30);        
+                $paramsInsertMap[1] = array("longitude", $longitude, "string", 30);
                 if ($conn->consulta($sqlMap, $paramsInsertMap)) {
-
-                }else{
-                        //tirar error
-                        $error = true;
-                }   
-            }           
-
-            if(!$error){
-                $response = MessageHandler::getSuccessResponse("Se registro exitosamente!", $user);
+                    
+                } else {
+                    //tirar error
+                    $error = true;
+                }
             }
-            else
-            {
+            if (!$error) {
+                $sqlPagos = "INSERT INTO `formasdepago` (`idUser`,`contado`,`debito`,`credito`,`otras`) 
+                                VALUES(:idUser , :contado , :debito, :credito, :otras)";
+                $paramsPagos = array();
+                $paramsPagos[0] = array("idUser", $user['id'], "int",11);
+                $paramsPagos[1] = array("contado", $user['formaDePago']['contado'], "int",1);
+                $paramsPagos[2] = array("debito", $user['formaDePago']['contado'], "int",1);
+                $paramsPagos[3] = array("credito", $user['formaDePago']['contado'], "int",1);
+                $paramsPagos[4] = array("otras", $user['formaDePago']['contado'], "int",1);
+
+                if ($conn->consulta($sqlPagos, $paramsPagos)) {
+                    $sqlDias = "INSERT INTO `diasatencion`(`idUser`,`lunes`,`martes`,`miercoles`,`jueves`,`viernes`,`sabado`,`domingo`) 
+                                    VALUES (:idUser, :lunes, :martes, :miercoles, :jueves, :viernes, :sabado, :domingo)";
+                    $paramsDias = array();
+                    $paramsDias[0] = array("idUser", $user['id'], "int",11);
+                    $paramsDias[1] = array("lunes", $user['diasAtencion']['lunes'], "int",1);
+                    $paramsDias[2] = array("martes", $user['diasAtencion']['martes'], "int",1);
+                    $paramsDias[3] = array("miercoles", $user['diasAtencion']['miercoles'], "int",1);
+                    $paramsDias[4] = array("jueves", $user['diasAtencion']['jueves'], "int",1);
+                    $paramsDias[5] = array("viernes", $user['diasAtencion']['viernes'], "int",1);
+                    $paramsDias[6] = array("sabado", $user['diasAtencion']['sabado'], "int",1);
+                    $paramsDias[7] = array("domingo", $user['diasAtencion']['domingo'], "int",1);
+
+                    if ($conn->consulta($sqlDias, $paramsDias)) {
+                        
+                    } else {
+                        
+                    }
+                } else {
+                    //tirar error
+                    $error = true;
+                }
+            }
+
+            if (!$error) {
+                $response = MessageHandler::getSuccessResponse("Se registro exitosamente!", $user);
+            } else {
                 $response = MessageHandler::getErrorResponse("Mi puto error.");
             }
-        } 
-        else 
-        {
+        } else {
             //$response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
             echo MessageHandler::getErrorResponse("Primer consulta error.");
         }
@@ -104,6 +131,9 @@ function insertNewUser($conn, $user) {
 }
 
 function getArrayFromRequest($request) {
+    $diasAtencion = json_decode($request->post("diasAtencion"));
+    // var_dump($diasAtencion);
+    $formaDePago = json_decode($request->post("formaDePago"));
     return array(
         "nombre" => is_null($request->post('nombre')) ? "" : $request->post('nombre'),
         "apellido" => is_null($request->post('apellido')) ? "" : $request->post('apellido'),
@@ -125,9 +155,25 @@ function getArrayFromRequest($request) {
         "servicioOfrecido4" => is_null($request->post('servicioOfrecido4')) ? "" : $request->post('servicioOfrecido4'),
         "servicioOfrecido5" => is_null($request->post('servicioOfrecido5')) ? "" : $request->post('servicioOfrecido5'),
         "servicioOfrecido6" => is_null($request->post('servicioOfrecido6')) ? "" : $request->post('servicioOfrecido6'),
+        "diasAtencion" => array(
+            "lunes" => $diasAtencion->lunes ? 1 : 0,
+            "martes" => $diasAtencion->martes ? 1 : 0,
+            "miercoles" => $diasAtencion->miercoles ? 1 : 0,
+            "jueves" => $diasAtencion->jueves ? 1 : 0,
+            "viernes" => $diasAtencion->viernes ? 1 : 0,
+            "sabado" => $diasAtencion->sabado ? 1 : 0,
+            "domingo" => $diasAtencion->domingo ? 1 : 0,
+        ),
+        "formaDePago" => array(
+            "contado" => $formaDePago->contado ? 1 : 0,
+            "credito" => $formaDePago->credito ? 1 : 0,
+            "debito" => $formaDePago->debito ? 1 : 0,
+            "otras" => $formaDePago->otras ? 1 : 0,
+        ),
+        "descServiceLong" => is_null($request->post('descServiceLong')) ? "" : $request->post('descServiceLong'),
         "username" => is_null($request->post('username')) ? "" : $request->post('username'),
         "password" => is_null($request->post('password')) ? "" : $request->post('password'),
-        "markers"=>$request->post('markers')
+        "markers" => $request->post('markers')
     );
 }
 
@@ -161,7 +207,7 @@ function checkUsername() {
 }
 
 function validateFileToUpload() {
-    if(!isset($_FILES['file']))
+    if (!isset($_FILES['file']))
         return false;
     $fileSize = $_FILES['file']['size'];
 
