@@ -106,8 +106,8 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         $scope.user = {
             horaComienzo: initHour,
             horaFin: initHour,
-            diasAtencion : {
-                lunes : false,
+            diasAtencion: {
+                lunes: false,
                 martes: false,
                 miercoles: false,
                 jueves: false,
@@ -115,13 +115,13 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                 sabado: false,
                 domingo: false
             },
-            formaDePago : {
+            formaDePago: {
                 contado: false,
                 debito: false,
                 credito: false,
-                otras : false
+                otras: false
             }
-            
+
         };
 
         $scope.fillNewUserCamps();
@@ -137,6 +137,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                     'longitude': obj.position.D.toString(),
                 }
             });
+
             var data = {
                 'nombre': $scope.user.nombre,
                 'apellido': $scope.user.apellido,
@@ -164,8 +165,8 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                 'descServiceLong': $scope.user.descServiceLong,
                 'formaDePago': $scope.user.formaDePago,
                 'diasAtencion': $scope.user.diasAtencion,
-                'horaComienzo': $scope.user.horaComienzo,
-                'horaFin': $scope.user.horaFin,
+                'horaComienzo': $scope.user.horaComienzo.getTime().toString().toHHMMSS(),
+                'horaFin': $scope.user.horaFin.getTime().toString().toHHMMSS(),
                 'markers': markersArr
             };
             var imgFile = null;
@@ -181,3 +182,23 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             });
         };
     }]);
+
+//TODO: Move to another js file
+String.prototype.toHHMMSS = function () {
+    var sec_num = parseInt(this, 10); // don't forget the second param
+    var hours = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+    if (hours < 10) {
+        hours = "0" + hours;
+    }
+    if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
+    if (seconds < 10) {
+        seconds = "0" + seconds;
+    }
+    var time = hours + ':' + minutes + ':' + seconds;
+    return time;
+}

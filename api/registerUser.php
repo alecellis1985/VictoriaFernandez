@@ -88,8 +88,8 @@ function insertNewUser($conn, $user) {
                 $paramsPagos[4] = array("otras", $user['formaDePago']['contado'], "int",1);
 
                 if ($conn->consulta($sqlPagos, $paramsPagos)) {
-                    $sqlDias = "INSERT INTO `diasatencion`(`idUser`,`lunes`,`martes`,`miercoles`,`jueves`,`viernes`,`sabado`,`domingo`) 
-                                    VALUES (:idUser, :lunes, :martes, :miercoles, :jueves, :viernes, :sabado, :domingo)";
+                    $sqlDias = "INSERT INTO `diasatencion`(`idUser`,`lunes`,`martes`,`miercoles`,`jueves`,`viernes`,`sabado`,`domingo`, `horaComienzo`, `horaFin`) 
+                                    VALUES (:idUser, :lunes, :martes, :miercoles, :jueves, :viernes, :sabado, :domingo, :horaComienzo, :horaFin)";
                     $paramsDias = array();
                     $paramsDias[0] = array("idUser", $user['id'], "int",11);
                     $paramsDias[1] = array("lunes", $user['diasAtencion']['lunes'], "int",1);
@@ -99,6 +99,8 @@ function insertNewUser($conn, $user) {
                     $paramsDias[5] = array("viernes", $user['diasAtencion']['viernes'], "int",1);
                     $paramsDias[6] = array("sabado", $user['diasAtencion']['sabado'], "int",1);
                     $paramsDias[7] = array("domingo", $user['diasAtencion']['domingo'], "int",1);
+                    $paramsDias[8] = array("horaComienzo", $user['horaComienzo'], "string", 20);
+                    $paramsDias[9] = array("horaFin", $user['horaFin'], "string", 20);
 
                     if ($conn->consulta($sqlDias, $paramsDias)) {
                         
@@ -173,7 +175,9 @@ function getArrayFromRequest($request) {
         "descServiceLong" => is_null($request->post('descServiceLong')) ? "" : $request->post('descServiceLong'),
         "username" => is_null($request->post('username')) ? "" : $request->post('username'),
         "password" => is_null($request->post('password')) ? "" : $request->post('password'),
-        "markers" => $request->post('markers')
+        "markers" => $request->post('markers'),
+        "horaComienzo" => is_null($request->post('horaComienzo')) ? "" : $request->post('horaComienzo'),
+        "horaFin" => is_null($request->post('horaFin')) ? "" : $request->post('horaFin')
     );
 }
 
