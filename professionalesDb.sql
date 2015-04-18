@@ -1,7 +1,16 @@
+-- phpMyAdmin SQL Dump
+-- version 2.10.3
+-- http://www.phpmyadmin.net
+-- 
+-- Host: localhost
+-- Generation Time: Apr 18, 2015 at 02:02 PM
+-- Server version: 5.0.51
+-- PHP Version: 5.2.6
 DROP DATABASE IF EXISTS `angular_tutorial`;
 CREATE DATABASE `angular_tutorial`;
 USE `angular_tutorial`;
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
 -- 
 -- Database: `angular_tutorial`
 -- 
@@ -194,48 +203,69 @@ INSERT INTO `departamentos` VALUES (19, 'Treinta y Tres');
 -- --------------------------------------------------------
 
 -- 
+-- Table structure for table `mapa`
+-- 
+
+CREATE TABLE `mapa` (
+  `IdMapa` int(11) NOT NULL auto_increment,
+  `IdUser` int(11) NOT NULL,
+  `latitude` varchar(30) NOT NULL,
+  `longitude` varchar(30) NOT NULL,
+  PRIMARY KEY  (`IdMapa`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+
+-- 
+-- Dumping data for table `mapa`
+-- 
+
+INSERT INTO `mapa` VALUES (12, 10, '-34.89564642972746', '-56.16442680358887');
+INSERT INTO `mapa` VALUES (11, 10, '-34.88226973385945', '-56.165971755981445');
+INSERT INTO `mapa` VALUES (10, 10, '-34.88719824359768', '-56.13764762878418');
+
+-- --------------------------------------------------------
+
+-- 
 -- Table structure for table `users`
 -- 
 
-
 CREATE TABLE `users` (
-    `idUser` int(11) NOT NULL auto_increment,
-    `nombre` varchar(100) NOT NULL,
-    `apellido` varchar(100) NOT NULL,
-    `email` varchar(100) NOT NULL,
-    `telefono` varchar(100) NOT NULL,
-    `celular` varchar(100) NOT NULL,
-    `direccion` varchar(100) default NULL,
-    `telefonoEmp` varchar(100) NOT NULL,
-    `departamento` int(3) NOT NULL,
-    `categoria` int(3) NOT NULL,
-    `sitioWeb` varchar(100) NOT NULL,
-    `imagenUrl` varchar(100) NOT NULL,
-    `facebookUrl` varchar(250),
-    `twitterUrl` varchar(250),
-    `linkedinUrl` varchar(250),
-    `descService` varchar(150) NOT NULL,
-    `servicioOfrecido1` varchar(20),
-    `servicioOfrecido2` varchar(20),
-    `servicioOfrecido3` varchar(20),
-    `servicioOfrecido4` varchar(20),
-    `servicioOfrecido5` varchar(20),
-    `servicioOfrecido6` varchar(20),
-    `descServiceLong` varchar(1000) NOT NULL,
-    `username` varchar(100) NOT NULL,
-    `password` varchar(100) NOT NULL,
+  `idUser` int(11) NOT NULL auto_increment,
+  `nombre` varchar(100) NOT NULL,
+  `apellido` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `telefono` varchar(100) NOT NULL,
+  `celular` varchar(100) NOT NULL,
+  `direccion` varchar(100) default NULL,
+  `telefonoEmp` varchar(100) NOT NULL,
+  `departamento` int(3) NOT NULL,
+  `categoria` int(3) NOT NULL,
+  `sitioWeb` varchar(100) NOT NULL,
+  `imagenUrl` varchar(100) NOT NULL,
+  `facebookUrl` varchar(250) default NULL,
+  `twitterUrl` varchar(250) default NULL,
+  `linkedinUrl` varchar(250) default NULL,
+  `descService` varchar(1000) NOT NULL,
+  `servicioOfrecido1` varchar(20) default NULL,
+  `servicioOfrecido2` varchar(20) default NULL,
+  `servicioOfrecido3` varchar(20) default NULL,
+  `servicioOfrecido4` varchar(20) default NULL,
+  `servicioOfrecido5` varchar(20) default NULL,
+  `servicioOfrecido6` varchar(20) default NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
   PRIMARY KEY  (`idUser`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 -- 
 -- Dumping data for table `users`
 -- 
---                          id  nombre  apellido email                      telefono     celular    direccion     telefonoEmp dep cat web            imgNombre               facebook                                   twitter                  linkedin
+
 INSERT INTO `users` VALUES (1, 'Alec', 'Ellis', 'alecellis1985@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'Brindo el mejor service que puedas ver en tu vida contratame ya!!!', 'afsaf', 'asfas', 'fasf', 'fasf', 'fasf', 'fasf', 'Palomo', 'pwpwpw');
 INSERT INTO `users` VALUES (2, 'Sam', 'Gusto', 'elgroso@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'Por 3 mangos te doy clase las 24 horas, te llevo el carrito de panchos y todo lo que quieras a la hora que quieras. Se bailar y cantar pero no canto a menudo.', 'afsaf', 'asfas', 'fasf', 'fasf', 'fasf', 'fasf', 'El_Triste', 'pwpwpw');
 INSERT INTO `users` VALUES (3, 'Tomy', 'Potatoue', 'los_pi@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'afsaf', 'asfas', 'fasf', 'fasf', 'fasf', 'fasf', 'Gomon', 'pwpwpw');
 INSERT INTO `users` VALUES (4, 'Charli', 'Gut', 'matoluzen@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'afsaf', 'asfas', 'fasf', 'fasf', 'fasf', 'fasf', 'Alexander', 'pwpwpw');
 INSERT INTO `users` VALUES (5, 'Juan', 'Gonzales', 'elgonchi@gmail.com', '262321651', '09861651', 'tucuman 2121', '6251651651', 2, 1, 'wawa.com.uy', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'asfa', 'fasfas', 'asfaf', 'fasf', 'fasf', 'fasf', 'El_Gonchi', 'ahfahf');
 INSERT INTO `users` VALUES (6, 'Terry', 'Fierry', 'el_garca@gmail.com', '262321651', '09861651', 'tucuman 2121', '6251651651', 2, 1, 'wawa.com.uy', 'logoJPG.jpg', '', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'asfa', 'fasfas', 'asfaf', 'fasf', 'fasf', 'fasf', 'El_Tierri', 'zukulu');
-
+INSERT INTO `users` VALUES (11, 'BinAD', 'Ladennw', 'alecellis1985@gmail.com', '26013794', '098635923', 'Maximo tajen 3565', '26013794', 2, 1, '', '', '', '', '', 'qcpdEXwvoSTaqqSxKkBFQPSxrjJcLhpUgOoZFRKuOsOIpXzzuw', 'vxlvwXZOKZKLrUlcuusu', 'NXJPWGYJzUNZDACXkgDo', 'trSfWKgWkXIYJtLElBsA', 'LSyjbXeRmkYDwaCVIAsq', 'djYguRtulZwpstZDYzow', 'zMYvRrVKXzKAPWGrsxAJ', 'BspcijE', 'a8f5f167f44f4964e6c998dee827110c');
+INSERT INTO `users` VALUES (10, 'Binkg', 'LadeneP', 'alecellis1985@gmail.com', '26013794', '098635923', 'Maximo tajen 3565', '26013794', 2, 2, '', '', '', '', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'iJvKNLEmUFpfARQGjWxPjQFhReYRPLeUTnyeHezyVDYboFClpO', 'gmhtcJLGGEBMlFBgRfVK', 'UQoQoMAlhQxoWVrCpAyI', 'qIBMfQfbGqpXbvXFqrKs', 'piKfAawYfRCuzdcTJOhK', 'XpXiUaAzxCCdyFlflNfW', 'larZYrIPksrMTDKXSLSD', 'AJFuihD', 'a8f5f167f44f4964e6c998dee827110c');
