@@ -5,6 +5,9 @@ function getUsers($categoria,$departamento) {
     $response = null;
     if ($conn->conectar()) {
         $sql = "select * FROM users WHERE categoria = :categoria and departamento = :departamento ORDER BY nombre";
+        //$sql = "SELECT u.*, m.* FROM users u, mapa m WHERE u.idUser = m.IdUser and u.categoria = :categoria and u.departamento = :departamento GROUP BY u.idUser ORDER BY u.nombre ";
+        //$sql = "SELECT u.*, (SELECT * FROM mapa m WHERE u.idUser = m.IdUser) AS Locations, FROM users u WHERE u.categoria = :categoria and u.departamento = :departamento ORDER BY u.nombre";
+                
         $params = array();
         $params[0] = array("departamento",(int)$departamento,"int",5);
         $params[1] = array("categoria",(int)$categoria,"int",5);

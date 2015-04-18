@@ -9,23 +9,24 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             $scope.validateImg($scope.files);
         });
 
-        
-        $scope.randomString = function(letters)
+
+        $scope.randomString = function (letters)
         {
             var text = "";
             var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
-            for( var i=0; i < letters; i++ )
+            for (var i = 0; i < letters; i++)
                 text += possible.charAt(Math.floor(Math.random() * possible.length));
             return text;
         }
-        
-        $scope.fillNewUserCamps = function()
+
+        $scope.fillNewUserCamps = function ()
         {
-            $scope.user.nombre = "Bin"+$scope.randomString(2);
-            $scope.user.apellido = "Laden"+$scope.randomString(2);
+            $scope.user.nombre = "Bin" + $scope.randomString(2);
+            $scope.user.apellido = "Laden" + $scope.randomString(2);
             $scope.user.username = $scope.randomString(7);
             $scope.user.password = "asdasd";
+            $scope.user.passwordConfirm = "asdasd";
             $scope.user.email = "alecellis1985@gmail.com";
             $scope.user.telefono = "26013794";
             $scope.user.celular = "098635923";
@@ -33,15 +34,15 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             $scope.user.telefonoEmp = "26013794";
             $scope.depSelected.idDepartamento = 2;
             $scope.selectedCategoria.categoriaId = 2;
-            $scope.user.descService = $scope.randomString(50);
-            $scope.user.servicioOfrecido1 = $scope.randomString(25);
-            $scope.user.servicioOfrecido2 = $scope.randomString(25);
-            $scope.user.servicioOfrecido3 = $scope.randomString(25);
-            $scope.user.servicioOfrecido4 = $scope.randomString(25);
-            $scope.user.servicioOfrecido5 = $scope.randomString(25);
-            $scope.user.servicioOfrecido6 = $scope.randomString(25);
+//            $scope.user.descService = $scope.randomString(50);
+//            $scope.user.servicioOfrecido1 = $scope.randomString(25);
+//            $scope.user.servicioOfrecido2 = $scope.randomString(25);
+//            $scope.user.servicioOfrecido3 = $scope.randomString(25);
+//            $scope.user.servicioOfrecido4 = $scope.randomString(25);
+//            $scope.user.servicioOfrecido5 = $scope.randomString(25);
+//            $scope.user.servicioOfrecido6 = $scope.randomString(25);
         }
-        
+
         $scope.validateImg = function (files) {
             if (files && files.length) {
                 var file = files[0];
@@ -97,29 +98,46 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         $scope.departamentosList = departamentosList.data;
         $scope.departamentosList.unshift({nombreDepartamento: "Seleccione Departamento", idDepartamento: -1});
         $scope.depSelected = $scope.departamentosList[0];
-        
+
         var initHour = new Date();
         initHour.setHours(8);
         initHour.setMinutes(0);
-        
+
         $scope.user = {
-            horaComienzo : initHour,
-            horaFin: initHour
+            horaComienzo: initHour,
+            horaFin: initHour,
+            diasAtencion: {
+                lunes: false,
+                martes: false,
+                miercoles: false,
+                jueves: false,
+                viernes: false,
+                sabado: false,
+                domingo: false
+            },
+            formaDePago: {
+                contado: false,
+                debito: false,
+                credito: false,
+                otras: false
+            }
+
         };
-        
+
         $scope.fillNewUserCamps();
-        
+
         $scope.markers = [];
 
         $scope.registrarUsuario = function ()
         {
             //Need to map the marker position to latitude longitude to save in the db
-            var markersArr = $scope.markers.map(function(obj){
-                        return {
-                            'latitude':obj.position.k.toString(),
-                            'longitude':obj.position.D.toString(),
-                        }
-                    });
+            var markersArr = $scope.markers.map(function (obj) {
+                return {
+                    'latitude': obj.position.k.toString(),
+                    'longitude': obj.position.D.toString(),
+                }
+            });
+
             var data = {
                 'nombre': $scope.user.nombre,
                 'apellido': $scope.user.apellido,
@@ -144,7 +162,12 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                 'servicioOfrecido4': $scope.user.servicioOfrecido4,
                 'servicioOfrecido5': $scope.user.servicioOfrecido5,
                 'servicioOfrecido6': $scope.user.servicioOfrecido6,
-                'markers':markersArr
+                'descServiceLong': $scope.user.descServiceLong,
+                'formaDePago': $scope.user.formaDePago,
+                'diasAtencion': $scope.user.diasAtencion,
+                'horaComienzo': $scope.user.horaComienzo.getTime().toString().toHHMMSS(),
+                'horaFin': $scope.user.horaFin.getTime().toString().toHHMMSS(),
+                'markers': markersArr
             };
             var imgFile = null;
             if (!(typeof $scope.files === 'undefined') && !$scope.files === null)
@@ -159,3 +182,23 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             });
         };
     }]);
+
+//TODO: Move to another js file
+String.prototype.toHHMMSS = function () {
+    var sec_num = parseInt(this, 10); // don't forget the second param
+    var hours = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+    if (hours < 10) {
+        hours = "0" + hours;
+    }
+    if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
+    if (seconds < 10) {
+        seconds = "0" + seconds;
+    }
+    var time = hours + ':' + minutes + ':' + seconds;
+    return time;
+}

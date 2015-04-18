@@ -170,29 +170,29 @@
             </div>
             <div class="row">
                 <div class="form-group col-xs-12 col-md-4">
-                    <input type="text" class="form-control" name="servicioOfrecido1" ng-model="user.servicioOfrecido1" placeholder="Servicio ofrecido" maxlength="20" ng-pattern="/^\b[a-zA-Z0-9_]+\b$/">
+                    <input type="text" class="form-control" name="servicioOfrecido1" ng-model="user.servicioOfrecido1" placeholder="Servicio ofrecido" maxlength="20" ng-pattern="/^\b[a-zA-Z0-9_]*\b$/">
                     <span ng-show="registerUser.servicioOfrecido1.$touched && registerUser.servicioOfrecido1.$error.pattern" class="error">Debe ser una unica palabra</span>
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
-                    <input type="text" class="form-control" name="servicioOfrecido2" ng-model="user.servicioOfrecido2" placeholder="Servicio ofrecido" maxlength="20" ng-pattern="/^\b[a-zA-Z0-9_]+\b$/">
+                    <input type="text" class="form-control" name="servicioOfrecido2" ng-model="user.servicioOfrecido2" placeholder="Servicio ofrecido" maxlength="20" ng-pattern="/^\b[a-zA-Z0-9_]*\b$/">
                     <span ng-show="registerUser.servicioOfrecido2.$touched && registerUser.servicioOfrecido2.$error.pattern" class="error">Debe ser una unica palabra</span>
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
-                    <input type="text" class="form-control" name="servicioOfrecido3" ng-model="user.servicioOfrecido3" placeholder="Servicio ofrecido" maxlength="20" ng-pattern="/^\b[a-zA-Z0-9_]+\b$/">
+                    <input type="text" class="form-control" name="servicioOfrecido3" ng-model="user.servicioOfrecido3" placeholder="Servicio ofrecido" maxlength="20" ng-pattern="/^\b[a-zA-Z0-9_]*\b$/">
                     <span ng-show="registerUser.servicioOfrecido3.$touched && registerUser.servicioOfrecido3.$error.pattern" class="error">Debe ser una unica palabra</span>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-xs-12 col-md-4">
-                    <input type="text" class="form-control" name="servicioOfrecido4" ng-model="user.servicioOfrecido4" placeholder="Servicio ofrecido" maxlength="20" ng-pattern="/^\b[a-zA-Z0-9_]+\b$/">
+                    <input type="text" class="form-control" name="servicioOfrecido4" ng-model="user.servicioOfrecido4" placeholder="Servicio ofrecido" maxlength="20" ng-pattern="/^\b[a-zA-Z0-9_]*\b$/">
                     <span ng-show="registerUser.servicioOfrecido4.$touched && registerUser.servicioOfrecido4.$error.pattern" class="error">Debe ser una unica palabra</span>
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
-                    <input type="text" class="form-control" name="servicioOfrecido5" ng-model="user.servicioOfrecido5" placeholder="Servicio ofrecido" maxlength="20" ng-pattern="/^\b[a-zA-Z0-9_]+\b$/">
+                    <input type="text" class="form-control" name="servicioOfrecido5" ng-model="user.servicioOfrecido5" placeholder="Servicio ofrecido" maxlength="20" ng-pattern="/^\b[a-zA-Z0-9_]*\b$/">
                     <span ng-show="registerUser.servicioOfrecido5.$touched && registerUser.servicioOfrecido5.$error.pattern" class="error">Debe ser una unica palabra</span>
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
-                    <input type="text" class="form-control" name="servicioOfrecido6" ng-model="user.servicioOfrecido6" placeholder="Servicio ofrecido" maxlength="20" ng-pattern="/^\b[a-zA-Z0-9_]+\b$/">
+                    <input type="text" class="form-control" name="servicioOfrecido6" ng-model="user.servicioOfrecido6" placeholder="Servicio ofrecido" maxlength="20" ng-pattern="/^\b[a-zA-Z0-9_]*\b$/">
                     <span ng-show="registerUser.servicioOfrecido6.$touched && registerUser.servicioOfrecido6.$error.pattern" class="error">Debe ser una unica palabra</span>
                 </div>
             </div>
@@ -215,9 +215,9 @@
                 <div class="form-group col-xs-12 col-md-6">
                     <div class="btn-group">
                         <label class="btn btn-default" ng-model="user.formaDePago.contado" btn-checkbox>Contado</label>
-                        <label class="btn btn-default" ng-model="user.diasAtencion.debito" btn-checkbox>Debito</label>
-                        <label class="btn btn-default" ng-model="user.diasAtencion.credito" btn-checkbox>Credito</label>
-                        <label class="btn btn-default" ng-model="user.diasAtencion.otras" btn-checkbox>Otras</label>
+                        <label class="btn btn-default" ng-model="user.formaDePago.debito" btn-checkbox>Debito</label>
+                        <label class="btn btn-default" ng-model="user.formaDePago.credito" btn-checkbox>Credito</label>
+                        <label class="btn btn-default" ng-model="user.formaDePago.otras" btn-checkbox>Otras</label>
                     </div>
                 </div>
             </div>
@@ -236,7 +236,6 @@
                         <label class="btn btn-default" ng-model="user.diasAtencion.domingo" btn-checkbox>Domingo</label>
                     </div>
                 </div>
-
             </div>
             <div class="row">
                 <div class="form-group col-xs-12 col-md-2"> 
@@ -256,7 +255,7 @@
     <div>
         <div class="form-group col-md-12">
             <button type="submit" class="btn btn-primary pull-right" ng-disabled="registerUser.$invalid">Registrarme</button>
-            <button type="submit" class="btn btn-primary pull-right" >Registrarme</button>
+            <!--<button type="submit" class="btn btn-primary pull-right" >Registrarme</button>-->
             <button class="btn btn-default pull-right" style="margin-right: 15px;" ng-click="goBackRegistration($event)"><i class="fa fa-reply"></i></button>
         </div>
     </div>
