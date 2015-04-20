@@ -3,12 +3,10 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Generation Time: Apr 18, 2015 at 02:02 PM
+-- Generation Time: Apr 20, 2015 at 06:55 PM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6
-DROP DATABASE IF EXISTS `angular_tutorial`;
-CREATE DATABASE `angular_tutorial`;
-USE `angular_tutorial`;
+
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 -- 
@@ -199,6 +197,51 @@ INSERT INTO `departamentos` VALUES (16, 'San José');
 INSERT INTO `departamentos` VALUES (17, 'Soriano');
 INSERT INTO `departamentos` VALUES (18, 'Tacuarembó');
 INSERT INTO `departamentos` VALUES (19, 'Treinta y Tres');
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `diasatencion`
+-- 
+
+CREATE TABLE `diasatencion` (
+  `iddiasAtencion` int(11) NOT NULL auto_increment,
+  `idUser` int(11) NOT NULL,
+  `lunes` tinyint(1) NOT NULL,
+  `martes` tinyint(1) NOT NULL,
+  `miercoles` tinyint(1) NOT NULL,
+  `jueves` tinyint(1) NOT NULL,
+  `viernes` tinyint(1) NOT NULL,
+  `sabado` tinyint(1) NOT NULL,
+  `domingo` tinyint(1) NOT NULL,
+  PRIMARY KEY  (`iddiasAtencion`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- 
+-- Dumping data for table `diasatencion`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `formasdepago`
+-- 
+
+CREATE TABLE `formasdepago` (
+  `idformasDePago` int(11) NOT NULL auto_increment,
+  `idUser` int(11) NOT NULL,
+  `contado` tinyint(1) NOT NULL,
+  `debito` tinyint(1) NOT NULL,
+  `credito` tinyint(1) NOT NULL,
+  `otras` tinyint(1) NOT NULL,
+  PRIMARY KEY  (`idformasDePago`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- 
+-- Dumping data for table `formasdepago`
+-- 
+
 
 -- --------------------------------------------------------
 
