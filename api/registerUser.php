@@ -18,6 +18,7 @@ function registerUser() {
             echo MessageHandler::getErrorResponse("Img error.");
         }
     } else {
+        //TODO: Return and show message : Img failed to upload
         $user['imagenUrl'] = '';
         echo insertNewUser($conn, $user);
     }

@@ -95,10 +95,12 @@
         <div class="panel-body">
             <div class="row">
                 <div class="form-group col-xs-12 col-md-3">
-                    <dropdown-Filter selected-Elem="selectedCategoria" name-Prop="categoriaNombre" elements-Arr="categorias" placeholder-Filter="Filtro de categorias"></dropdown-Filter>                   
+                    <dropdown-Filter selected-Elem="selectedCategoria" name-Prop="categoriaNombre" id-Prop="categoriaId" elements-Arr="categorias" placeholder-Filter="Filtro de categorias" change-Fn="dropDownChange"></dropdown-Filter>                   
+                    <span ng-show="categoriaError" class="error">Seleccione una categoria</span>
                 </div>
                 <div class="form-group col-xs-12 col-md-3">
                     <dropdown-Filter selected-Elem="depSelected" name-Prop="nombreDepartamento" elements-Arr="departamentosList" placeholder-Filter="Filtro de departamentos"></dropdown-Filter> 
+                    <span ng-show="departamentoError" class="error">Seleccione un departamento</span>
                 </div>
                 <div class="form-group col-xs-12 col-md-3" ng-show="depSelected.nombreDepartamento === 'Montevideo'">
                     <dropdown-Filter selected-Elem="selectedBarrio" name-Prop="barrioNombre" elements-Arr="barrios" placeholder-Filter="Filtro de barrios"></dropdown-Filter>                     
