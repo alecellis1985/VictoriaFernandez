@@ -26,7 +26,7 @@
         </div>
     </div>  
 </div>
-<form ng-submit="registrarUsuario()" name="registerUser" style="padding-top: 10px" ng-show="registro.mostrarRegistro" 
+<form ng-submit="registrarUsuario(registerUser.$valid)" name="registerUser" style="padding-top: 10px" ng-show="registro.mostrarRegistro" 
       method="post" novalidate>
     <div class="panel panel-primary">
         <div class="panel-heading">
@@ -243,11 +243,11 @@
                 </div>
                 <div class="form-group col-xs-12 col-md-2">  
                     <label for="horaComienzo">Desde</label>
-                    <timepicker name='horaComienzo' ng-model="user.horaComienzo" hour-step="1" minute-step="10" show-meridian="true"></timepicker>
+                    <timepicker name='horaComienzo' ng-model="user.horaComienzo" hour-step="1" minute-step="10" show-meridian="true" ng-change="checkTime()"></timepicker>
                 </div>
                 <div class="form-group col-xs-12 col-md-2">           
                     <label for="horaComienzo">Hasta</label>
-                    <timepicker name='horaFin' ng-model="user.horaFin" hour-step="1" minute-step="10" show-meridian="true"></timepicker>
+                    <timepicker name='horaFin' ng-model="user.horaFin" hour-step="1" minute-step="10" show-meridian="true" ng-change="checkTime()"></timepicker>
                 </div>
             </div>
         </div>
@@ -255,7 +255,6 @@
     <div>
         <div class="form-group col-md-12">
             <button type="submit" class="btn btn-primary pull-right" ng-disabled="registerUser.$invalid">Registrarme</button>
-            <!--<button type="submit" class="btn btn-primary pull-right" >Registrarme</button>-->
             <button class="btn btn-default pull-right" style="margin-right: 15px;" ng-click="goBackRegistration($event)"><i class="fa fa-reply"></i></button>
         </div>
     </div>

@@ -128,8 +128,21 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
 
         $scope.markers = [];
 
-        $scope.registrarUsuario = function ()
+        $scope.checkTime = function () {
+            debugger;
+            if ($scope.user.horaFin <= $scope.user.horaComienzo) {
+
+                $scope.user.horaFin = new Date($scope.user.horaComienzo.getTime() + 10 * 60000)
+
+            }
+        }
+
+        $scope.registrarUsuario = function (isValid)
         {
+            if (!isValid) {
+                $rootScope.$broadcast('alert-event', {type: 'error', msg: "Existen errores en el formulario!"});
+                return;
+            }
             //Need to map the marker position to latitude longitude to save in the db
             var markersArr = $scope.markers.map(function (obj) {
                 return {
@@ -183,11 +196,11 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         };
     }]);
 
-function stringTime(dateTime){
+function stringTime(dateTime) {
     var hours = dateTime.getHours();
     var minutes = dateTime.getMinutes();
-    var seconds = dateTime.getSeconds();
-    
+    var seconds = 0;//dateTime.getSeconds();
+
     if (hours < 10) {
         hours = "0" + hours;
     }
@@ -197,9 +210,9 @@ function stringTime(dateTime){
     if (seconds < 10) {
         seconds = "0" + seconds;
     }
-    
+
     return hours + ":" + minutes + ":" + seconds;
-    
+
 }
 //TODO: Move to another js file
 //String.prototype.toHHMMSS = function () {
