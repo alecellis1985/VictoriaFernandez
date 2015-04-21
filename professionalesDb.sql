@@ -1,24 +1,20 @@
 -- phpMyAdmin SQL Dump
 -- version 2.10.3
 -- http://www.phpmyadmin.net
--- 
--- Host: localhost
--- Generation Time: Apr 18, 2015 at 02:02 PM
--- Server version: 5.0.51
--- PHP Version: 5.2.6
+
 DROP DATABASE IF EXISTS `angular_tutorial`;
 CREATE DATABASE `angular_tutorial`;
 USE `angular_tutorial`;
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 -- 
--- Database: `angular_tutorial`
+-- Base de datos: `angular_tutorial`
 -- 
 
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table `barrios`
+-- Estructura de tabla para la tabla `barrios`
 -- 
 
 CREATE TABLE `barrios` (
@@ -30,7 +26,7 @@ CREATE TABLE `barrios` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=82 ;
 
 -- 
--- Dumping data for table `barrios`
+-- Volcar la base de datos para la tabla `barrios`
 -- 
 
 INSERT INTO `barrios` VALUES (1, 1, 'Ciudad Vieja');
@@ -117,7 +113,7 @@ INSERT INTO `barrios` VALUES (81, 1, 'Manga Rural');
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table `categorias`
+-- Estructura de tabla para la tabla `categorias`
 -- 
 
 CREATE TABLE `categorias` (
@@ -128,7 +124,7 @@ CREATE TABLE `categorias` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=32 ;
 
 -- 
--- Dumping data for table `categorias`
+-- Volcar la base de datos para la tabla `categorias`
 -- 
 
 INSERT INTO `categorias` VALUES (1, 'Abogados');
@@ -166,7 +162,7 @@ INSERT INTO `categorias` VALUES (31, 'Vidrieros');
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table `departamentos`
+-- Estructura de tabla para la tabla `departamentos`
 -- 
 
 CREATE TABLE `departamentos` (
@@ -177,7 +173,7 @@ CREATE TABLE `departamentos` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 -- 
--- Dumping data for table `departamentos`
+-- Volcar la base de datos para la tabla `departamentos`
 -- 
 
 INSERT INTO `departamentos` VALUES (1, 'Montevideo');
@@ -203,6 +199,7 @@ INSERT INTO `departamentos` VALUES (19, 'Treinta y Tres');
 -- --------------------------------------------------------
 
 -- 
+
 -- Table structure for table `mapa`
 -- 
 
@@ -216,6 +213,47 @@ CREATE TABLE `mapa` (
 
 -- 
 -- Dumping data for table `mapa`
+
+-- Estructura de tabla para la tabla `diasatencion`
+-- 
+
+CREATE TABLE `diasatencion` (
+  `iddiasAtencion` int(11) NOT NULL auto_increment,
+  `idUser` int(11) NOT NULL,
+  `lunes` TINYINT(1) NOT NULL,
+  `martes` TINYINT(1) NOT NULL,
+  `miercoles` TINYINT(1) NOT NULL,
+  `jueves` TINYINT(1) NOT NULL,
+  `viernes` TINYINT(1) NOT NULL,
+  `sabado` TINYINT(1) NOT NULL,
+  `domingo` TINYINT(1) NOT NULL,
+  PRIMARY KEY  (`iddiasAtencion`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- 
+-- Volcar la base de datos para la tabla `diasatencion`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `formasdepago`
+-- 
+
+CREATE TABLE `formasdepago` (
+  `idformasDePago` int(11) NOT NULL auto_increment,
+  `idUser` int(11) NOT NULL,
+  `contado` TINYINT(1) NOT NULL,
+  `debito` TINYINT(1) NOT NULL,
+  `credito` TINYINT(1) NOT NULL,
+  `otras` TINYINT(1) NOT NULL,
+  PRIMARY KEY  (`idformasDePago`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- 
+-- Volcar la base de datos para la tabla `formasdepago`
+
 -- 
 
 INSERT INTO `mapa` VALUES (12, 10, '-34.89564642972746', '-56.16442680358887');
@@ -226,6 +264,12 @@ INSERT INTO `mapa` VALUES (10, 10, '-34.88719824359768', '-56.13764762878418');
 
 -- 
 -- Table structure for table `users`
+-- 
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `users`
 -- 
 
 CREATE TABLE `users` (
@@ -244,28 +288,31 @@ CREATE TABLE `users` (
   `facebookUrl` varchar(250) default NULL,
   `twitterUrl` varchar(250) default NULL,
   `linkedinUrl` varchar(250) default NULL,
-  `descService` varchar(1000) NOT NULL,
+  `descService` varchar(150) NOT NULL,
   `servicioOfrecido1` varchar(20) default NULL,
   `servicioOfrecido2` varchar(20) default NULL,
   `servicioOfrecido3` varchar(20) default NULL,
   `servicioOfrecido4` varchar(20) default NULL,
   `servicioOfrecido5` varchar(20) default NULL,
   `servicioOfrecido6` varchar(20) default NULL,
+  `descServiceLong` varchar(1000) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   PRIMARY KEY  (`idUser`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0;
 
 -- 
--- Dumping data for table `users`
+-- Volcar la base de datos para la tabla `users`
 -- 
-
-INSERT INTO `users` VALUES (1, 'Alec', 'Ellis', 'alecellis1985@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'Brindo el mejor service que puedas ver en tu vida contratame ya!!!', 'afsaf', 'asfas', 'fasf', 'fasf', 'fasf', 'fasf', 'Palomo', 'pwpwpw');
-INSERT INTO `users` VALUES (2, 'Sam', 'Gusto', 'elgroso@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'Por 3 mangos te doy clase las 24 horas, te llevo el carrito de panchos y todo lo que quieras a la hora que quieras. Se bailar y cantar pero no canto a menudo.', 'afsaf', 'asfas', 'fasf', 'fasf', 'fasf', 'fasf', 'El_Triste', 'pwpwpw');
-INSERT INTO `users` VALUES (3, 'Tomy', 'Potatoue', 'los_pi@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'afsaf', 'asfas', 'fasf', 'fasf', 'fasf', 'fasf', 'Gomon', 'pwpwpw');
-INSERT INTO `users` VALUES (4, 'Charli', 'Gut', 'matoluzen@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'afsaf', 'asfas', 'fasf', 'fasf', 'fasf', 'fasf', 'Alexander', 'pwpwpw');
-INSERT INTO `users` VALUES (5, 'Juan', 'Gonzales', 'elgonchi@gmail.com', '262321651', '09861651', 'tucuman 2121', '6251651651', 2, 1, 'wawa.com.uy', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'asfa', 'fasfas', 'asfaf', 'fasf', 'fasf', 'fasf', 'El_Gonchi', 'ahfahf');
-INSERT INTO `users` VALUES (6, 'Terry', 'Fierry', 'el_garca@gmail.com', '262321651', '09861651', 'tucuman 2121', '6251651651', 2, 1, 'wawa.com.uy', 'logoJPG.jpg', '', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'asfa', 'fasfas', 'asfaf', 'fasf', 'fasf', 'fasf', 'El_Tierri', 'zukulu');
-INSERT INTO `users` VALUES (11, 'BinAD', 'Ladennw', 'alecellis1985@gmail.com', '26013794', '098635923', 'Maximo tajen 3565', '26013794', 2, 1, '', '', '', '', '', 'qcpdEXwvoSTaqqSxKkBFQPSxrjJcLhpUgOoZFRKuOsOIpXzzuw', 'vxlvwXZOKZKLrUlcuusu', 'NXJPWGYJzUNZDACXkgDo', 'trSfWKgWkXIYJtLElBsA', 'LSyjbXeRmkYDwaCVIAsq', 'djYguRtulZwpstZDYzow', 'zMYvRrVKXzKAPWGrsxAJ', 'BspcijE', 'a8f5f167f44f4964e6c998dee827110c');
-INSERT INTO `users` VALUES (10, 'Binkg', 'LadeneP', 'alecellis1985@gmail.com', '26013794', '098635923', 'Maximo tajen 3565', '26013794', 2, 2, '', '', '', '', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'iJvKNLEmUFpfARQGjWxPjQFhReYRPLeUTnyeHezyVDYboFClpO', 'gmhtcJLGGEBMlFBgRfVK', 'UQoQoMAlhQxoWVrCpAyI', 'qIBMfQfbGqpXbvXFqrKs', 'piKfAawYfRCuzdcTJOhK', 'XpXiUaAzxCCdyFlflNfW', 'larZYrIPksrMTDKXSLSD', 'AJFuihD', 'a8f5f167f44f4964e6c998dee827110c');
+-- 
+-- 
+-- INSERT INTO `users` VALUES (1, 'Alec', 'Ellis', 'alecellis1985@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'Brindo el mejor service que puedas ver en tu vida contratame ya!!!', 'afsaf', 'asfas', 'fasf', 'fasf', 'fasf', 'fasf', 'Palomo', 'pwpwpw');
+-- INSERT INTO `users` VALUES (2, 'Sam', 'Gusto', 'elgroso@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'Por 3 mangos te doy clase las 24 horas, te llevo el carrito de panchos y todo lo que quieras a la hora que quieras. Se bailar y cantar pero no canto a menudo.', 'afsaf', 'asfas', 'fasf', 'fasf', 'fasf', 'fasf', 'El_Triste', 'pwpwpw');
+-- INSERT INTO `users` VALUES (3, 'Tomy', 'Potatoue', 'los_pi@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'afsaf', 'asfas', 'fasf', 'fasf', 'fasf', 'fasf', 'Gomon', 'pwpwpw');
+-- INSERT INTO `users` VALUES (4, 'Charli', 'Gut', 'matoluzen@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'afsaf', 'asfas', 'fasf', 'fasf', 'fasf', 'fasf', 'Alexander', 'pwpwpw');
+-- INSERT INTO `users` VALUES (5, 'Juan', 'Gonzales', 'elgonchi@gmail.com', '262321651', '09861651', 'tucuman 2121', '6251651651', 2, 1, 'wawa.com.uy', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'asfa', 'fasfas', 'asfaf', 'fasf', 'fasf', 'fasf', 'El_Gonchi', 'ahfahf');
+-- INSERT INTO `users` VALUES (6, 'Terry', 'Fierry', 'el_garca@gmail.com', '262321651', '09861651', 'tucuman 2121', '6251651651', 2, 1, 'wawa.com.uy', 'logoJPG.jpg', '', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'asfa', 'fasfas', 'asfaf', 'fasf', 'fasf', 'fasf', 'El_Tierri', 'zukulu');
+-- INSERT INTO `users` VALUES (11, 'BinAD', 'Ladennw', 'alecellis1985@gmail.com', '26013794', '098635923', 'Maximo tajen 3565', '26013794', 2, 1, '', '', '', '', '', 'qcpdEXwvoSTaqqSxKkBFQPSxrjJcLhpUgOoZFRKuOsOIpXzzuw', 'vxlvwXZOKZKLrUlcuusu', 'NXJPWGYJzUNZDACXkgDo', 'trSfWKgWkXIYJtLElBsA', 'LSyjbXeRmkYDwaCVIAsq', 'djYguRtulZwpstZDYzow', 'zMYvRrVKXzKAPWGrsxAJ', 'BspcijE', 'a8f5f167f44f4964e6c998dee827110c');
+-- INSERT INTO `users` VALUES (10, 'Binkg', 'LadeneP', 'alecellis1985@gmail.com', '26013794', '098635923', 'Maximo tajen 3565', '26013794', 2, 2, '', '', '', '', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'iJvKNLEmUFpfARQGjWxPjQFhReYRPLeUTnyeHezyVDYboFClpO', 'gmhtcJLGGEBMlFBgRfVK', 'UQoQoMAlhQxoWVrCpAyI', 'qIBMfQfbGqpXbvXFqrKs', 'piKfAawYfRCuzdcTJOhK', 'XpXiUaAzxCCdyFlflNfW', 'larZYrIPksrMTDKXSLSD', 'AJFuihD', 'a8f5f167f44f4964e6c998dee827110c');
+-- 

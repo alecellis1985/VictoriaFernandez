@@ -6,7 +6,7 @@
         long : -79.4000
     }]
  */
-				  Professionals.directive('mapLoadMarkers', function () {
+Professionals.directive('mapLoadMarkers', function () {
     return {
         restrict:'E',
         scope:{            
