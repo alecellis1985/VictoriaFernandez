@@ -90,7 +90,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         };
 
         $scope.barrios = barriosList.data;
-        $scope.barrios.unshift({barrioNombre: "Seleccione Barrio", id: -1});
+        $scope.barrios.unshift({barrioNombre: "Seleccione Barrio", barrioId: -1});
         $scope.selectedBarrio = $scope.barrios[0];
         $scope.categorias = categoriasList.data;
         $scope.categorias.unshift({categoriaNombre: "Seleccione Categoria", categoriaId: -1});
@@ -156,34 +156,35 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
 
         }
         
-         var dropDownChange =  function(){
-             //Check category is set
+         var dropDownCheck =  function(){
+              //Check category is set
             $scope.categoriaError = parseInt($scope.selectedCategoria.categoriaId) < 0;
             
             //Check depto is set
             $scope.departamentoError = parseInt($scope.depSelected.idDepartamento) < 0;
+            
+            //Check barrio is set if depto == Montevideo
+            $scope.barrioError = $scope.depSelected.nombreDepartamento === 'Montevideo' && parseInt($scope.selectedBarrio.barrioId) < 0;
+            
         };
         
         $scope.$watch("selectedCategoria", function(){
-            dropDownChange();
+            dropDownCheck();
         });       
        
-       $scope.$watch("selectedCategoria", function(){
-            dropDownChange();
+       $scope.$watch("depSelected", function(){
+            dropDownCheck();
         });   
         
-        $scope.$watch("selectedCategoria", function(){
-            dropDownChange();
+        $scope.$watch("selectedBarrio", function(){
+            dropDownCheck();
         });   
         
         var validForm = function () {
             
             var errors = false;
-            //Check category is set
-            $scope.categoriaError = parseInt($scope.selectedCategoria.categoriaId) < 0;
             
-            //Check depto is set
-            $scope.departamentoError = parseInt($scope.depSelected.idDepartamento) < 0;
+            dropDownCheck();
             
             //Check errors
             errors = $scope.categoriaError || $scope.departamentoError;
@@ -218,6 +219,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                 'telefonoEmp': $scope.user.telefonoEmp,
                 'departamento': parseInt($scope.depSelected.idDepartamento),
                 'categoria': parseInt($scope.selectedCategoria.categoriaId),
+                'barrio' : parseInt($scope.selectedBarrio.barrioId),
                 'sitioWeb': $scope.user.sitioWeb,
                 'imagen': $scope.user.imagen,
                 'facebookUrl': $scope.user.facebookUrl,
