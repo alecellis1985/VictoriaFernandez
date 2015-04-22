@@ -18,6 +18,7 @@ function registerUser() {
             echo MessageHandler::getErrorResponse("Img error.");
         }
     } else {
+        //TODO: Return and show message : Img failed to upload
         $user['imagenUrl'] = '';
         echo insertNewUser($conn, $user);
     }
@@ -101,11 +102,11 @@ function insertNewUser($conn, $user) {
                     $paramsDias[7] = array("domingo", $user['diasAtencion']['domingo'], "int",1);
                     $paramsDias[8] = array("horaComienzo", $user['horaComienzo'], "string", 20);
                     $paramsDias[9] = array("horaFin", $user['horaFin'], "string", 20);
-
+                   
                     if ($conn->consulta($sqlDias, $paramsDias)) {
                         
                     } else {
-                        
+                        $error = true;
                     }
                 } else {
                     //tirar error
@@ -119,7 +120,6 @@ function insertNewUser($conn, $user) {
                 $response = MessageHandler::getErrorResponse("Mi puto error.");
             }
         } else {
-            //$response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
             echo MessageHandler::getErrorResponse("Primer consulta error.");
         }
     }

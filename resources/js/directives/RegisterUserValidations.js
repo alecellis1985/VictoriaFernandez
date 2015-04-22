@@ -74,3 +74,4 @@ Professionals.directive("compareTo", function () {
         }
     };
 });
+

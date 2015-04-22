@@ -32,8 +32,8 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             $scope.user.celular = "098635923";
             $scope.user.direccion = "Maximo tajen 3565";
             $scope.user.telefonoEmp = "26013794";
-            $scope.depSelected.idDepartamento = 2;
-            $scope.selectedCategoria.categoriaId = 2;
+//            $scope.depSelected.idDepartamento = 2;
+//            $scope.selectedCategoria.categoriaId = 2;
 //            $scope.user.descService = $scope.randomString(50);
 //            $scope.user.servicioOfrecido1 = $scope.randomString(25);
 //            $scope.user.servicioOfrecido2 = $scope.randomString(25);
@@ -128,8 +128,76 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
 
         $scope.markers = [];
 
-        $scope.registrarUsuario = function ()
+        $scope.checkTime = function () {
+            debugger;
+            if ($scope.user.horaFin <= $scope.user.horaComienzo) {
+
+                $scope.user.horaFin = new Date($scope.user.horaComienzo.getTime() + 10 * 60000)
+
+            }
+        }
+
+        function stringTime(dateTime) {
+            var hours = dateTime.getHours();
+            var minutes = dateTime.getMinutes();
+            var seconds = 0;//dateTime.getSeconds();
+
+            if (hours < 10) {
+                hours = "0" + hours;
+            }
+            if (minutes < 10) {
+                minutes = "0" + minutes;
+            }
+            if (seconds < 10) {
+                seconds = "0" + seconds;
+            }
+
+            return hours + ":" + minutes + ":" + seconds;
+
+        }
+        
+         var dropDownChange =  function(){
+             //Check category is set
+            $scope.categoriaError = parseInt($scope.selectedCategoria.categoriaId) < 0;
+            
+            //Check depto is set
+            $scope.departamentoError = parseInt($scope.depSelected.idDepartamento) < 0;
+        };
+        
+        $scope.$watch("selectedCategoria", function(){
+            dropDownChange();
+        });       
+       
+       $scope.$watch("selectedCategoria", function(){
+            dropDownChange();
+        });   
+        
+        $scope.$watch("selectedCategoria", function(){
+            dropDownChange();
+        });   
+        
+        var validForm = function () {
+            
+            var errors = false;
+            //Check category is set
+            $scope.categoriaError = parseInt($scope.selectedCategoria.categoriaId) < 0;
+            
+            //Check depto is set
+            $scope.departamentoError = parseInt($scope.depSelected.idDepartamento) < 0;
+            
+            //Check errors
+            errors = $scope.categoriaError || $scope.departamentoError;
+             
+            return !errors;           
+        };
+
+        $scope.registrarUsuario = function (isValid)
         {
+            if (!isValid || !validForm()) {
+                $rootScope.$broadcast('alert-event', {type: 'error', msg: "Existen errores en el formulario!"});
+                return;
+            }
+            
             //Need to map the marker position to latitude longitude to save in the db
             var markersArr = $scope.markers.map(function (obj) {
                 return {
@@ -165,8 +233,8 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                 'descServiceLong': $scope.user.descServiceLong,
                 'formaDePago': $scope.user.formaDePago,
                 'diasAtencion': $scope.user.diasAtencion,
-                'horaComienzo': $scope.user.horaComienzo.getTime().toString().toHHMMSS(),
-                'horaFin': $scope.user.horaFin.getTime().toString().toHHMMSS(),
+                'horaComienzo': stringTime($scope.user.horaComienzo),
+                'horaFin': stringTime($scope.user.horaFin),
                 'markers': markersArr
             };
             var imgFile = null;
@@ -183,22 +251,23 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         };
     }]);
 
-//TODO: Move to another js file
-String.prototype.toHHMMSS = function () {
-    var sec_num = parseInt(this, 10); // don't forget the second param
-    var hours = Math.floor(sec_num / 3600);
-    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-    var seconds = sec_num - (hours * 3600) - (minutes * 60);
 
-    if (hours < 10) {
-        hours = "0" + hours;
-    }
-    if (minutes < 10) {
-        minutes = "0" + minutes;
-    }
-    if (seconds < 10) {
-        seconds = "0" + seconds;
-    }
-    var time = hours + ':' + minutes + ':' + seconds;
-    return time;
-}
+//TODO: Move to another js file
+//String.prototype.toHHMMSS = function () {
+//    var sec_num = parseInt(this, 10); // don't forget the second param
+//    var hours = Math.floor(sec_num / 3600);
+//    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+//    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+//
+//    if (hours < 10) {
+//        hours = "0" + hours;
+//    }
+//    if (minutes < 10) {
+//        minutes = "0" + minutes;
+//    }
+//    if (seconds < 10) {
+//        seconds = "0" + seconds;
+//    }
+//    var time = hours + ':' + minutes + ':' + seconds;
+//    return time;
+//}

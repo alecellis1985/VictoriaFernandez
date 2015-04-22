@@ -26,7 +26,7 @@
         </div>
     </div>  
 </div>
-<form ng-submit="registrarUsuario()" name="registerUser" style="padding-top: 10px" ng-show="registro.mostrarRegistro" 
+<form ng-submit="registrarUsuario(registerUser.$valid)" name="registerUser" style="padding-top: 10px" ng-show="registro.mostrarRegistro" 
       method="post" novalidate>
     <div class="panel panel-primary">
         <div class="panel-heading">
@@ -95,10 +95,12 @@
         <div class="panel-body">
             <div class="row">
                 <div class="form-group col-xs-12 col-md-3">
-                    <dropdown-Filter selected-Elem="selectedCategoria" name-Prop="categoriaNombre" elements-Arr="categorias" placeholder-Filter="Filtro de categorias"></dropdown-Filter>                   
+                    <dropdown-Filter selected-Elem="selectedCategoria" name-Prop="categoriaNombre" id-Prop="categoriaId" elements-Arr="categorias" placeholder-Filter="Filtro de categorias" change-Fn="dropDownChange"></dropdown-Filter>                   
+                    <span ng-show="categoriaError" class="error">Seleccione una categoria</span>
                 </div>
                 <div class="form-group col-xs-12 col-md-3">
                     <dropdown-Filter selected-Elem="depSelected" name-Prop="nombreDepartamento" elements-Arr="departamentosList" placeholder-Filter="Filtro de departamentos"></dropdown-Filter> 
+                    <span ng-show="departamentoError" class="error">Seleccione un departamento</span>
                 </div>
                 <div class="form-group col-xs-12 col-md-3" ng-show="depSelected.nombreDepartamento === 'Montevideo'">
                     <dropdown-Filter selected-Elem="selectedBarrio" name-Prop="barrioNombre" elements-Arr="barrios" placeholder-Filter="Filtro de barrios"></dropdown-Filter>                     
@@ -243,11 +245,11 @@
                 </div>
                 <div class="form-group col-xs-12 col-md-2">  
                     <label for="horaComienzo">Desde</label>
-                    <timepicker name='horaComienzo' ng-model="user.horaComienzo" hour-step="1" minute-step="10" show-meridian="true"></timepicker>
+                    <timepicker name='horaComienzo' ng-model="user.horaComienzo" hour-step="1" minute-step="10" show-meridian="true" ng-change="checkTime()"></timepicker>
                 </div>
                 <div class="form-group col-xs-12 col-md-2">           
                     <label for="horaComienzo">Hasta</label>
-                    <timepicker name='horaFin' ng-model="user.horaFin" hour-step="1" minute-step="10" show-meridian="true"></timepicker>
+                    <timepicker name='horaFin' ng-model="user.horaFin" hour-step="1" minute-step="10" show-meridian="true" ng-change="checkTime()"></timepicker>
                 </div>
             </div>
         </div>
@@ -255,7 +257,6 @@
     <div>
         <div class="form-group col-md-12">
             <button type="submit" class="btn btn-primary pull-right" ng-disabled="registerUser.$invalid">Registrarme</button>
-            <!--<button type="submit" class="btn btn-primary pull-right" >Registrarme</button>-->
             <button class="btn btn-default pull-right" style="margin-right: 15px;" ng-click="goBackRegistration($event)"><i class="fa fa-reply"></i></button>
         </div>
     </div>
