@@ -12,19 +12,20 @@ function getUsers($categoria,$departamento) {
             $users = $conn->restantesRegistros();
             
             $sqlMaps = "SELECT m.* FROM maps m WHERE m.IdUser in (";
-            
-            for($i=0;$i<count($users);$i++)
-            {
-                $sqlMaps = $sqlMaps . $users->IdUser;
-            }
+            var_dump($users[0]->IdUser);
+//            for($i=0;$i<count($users);$i++)
+//            {
+//                
+//                $sqlMaps = $sqlMaps . $users[$i];
+//            }
             $sqlMaps = $sqlMaps . ')';
             
-            if($conn->consulta($sqlMaps))
-            {
-                $sqlret = $conn->restantesRegistros();
-            }
-            
-            $response = MessageHandler::getSuccessResponse("",$sqlret);
+//            if($conn->consulta($sqlMaps))
+//            {
+//                $sqlret = $conn->restantesRegistros();
+//            }
+//            
+//            $response = MessageHandler::getSuccessResponse("",$sqlret);
             //$response = MessageHandler::getSuccessResponse("",$users);
         } else {
             $response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
