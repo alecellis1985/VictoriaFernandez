@@ -1,210 +1,110 @@
--- phpMyAdmin SQL Dump
--- version 2.10.3
--- http://www.phpmyadmin.net
--- 
--- Servidor: localhost
--- Tiempo de generación: 20-04-2015 a las 20:17:22
--- Versión del servidor: 5.0.51
--- Versión de PHP: 5.2.6
+CREATE DATABASE  IF NOT EXISTS `profesionales` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `profesionales`;
+-- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)
+--
+-- Host: localhost    Database: profesionales
+-- ------------------------------------------------------
+-- Server version	5.0.51b-community-nt-log
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- 
--- Base de datos: `angular_tutorial`
--- 
+--
+-- Not dumping tablespaces as no INFORMATION_SCHEMA.FILES table on this server
+--
 
--- --------------------------------------------------------
+--
+-- Table structure for table `barrios`
+--
 
--- 
--- Estructura de tabla para la tabla `barrios`
--- 
-
-CREATE TABLE IF NOT EXISTS `barrios` (
+DROP TABLE IF EXISTS `barrios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `barrios` (
   `barrioId` int(11) NOT NULL auto_increment,
   `departamentoId` int(11) NOT NULL,
   `barrioNombre` varchar(250) NOT NULL,
   PRIMARY KEY  (`barrioId`),
   UNIQUE KEY `barrioNombre` (`barrioNombre`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=82 ;
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- 
--- Volcar la base de datos para la tabla `barrios`
--- 
+--
+-- Dumping data for table `barrios`
+--
 
-INSERT INTO `barrios` VALUES (1, 1, 'Ciudad Vieja');
-INSERT INTO `barrios` VALUES (3, 1, 'Centro');
-INSERT INTO `barrios` VALUES (4, 1, 'Barrio Sur');
-INSERT INTO `barrios` VALUES (5, 1, 'Cordón');
-INSERT INTO `barrios` VALUES (6, 1, 'Palermo');
-INSERT INTO `barrios` VALUES (7, 1, 'Parque Rodó');
-INSERT INTO `barrios` VALUES (8, 1, 'Punta Carretas');
-INSERT INTO `barrios` VALUES (9, 1, 'Pocitos');
-INSERT INTO `barrios` VALUES (10, 1, 'Buceo');
-INSERT INTO `barrios` VALUES (11, 1, 'Parque Batlle');
-INSERT INTO `barrios` VALUES (12, 1, 'Villa Dolores');
-INSERT INTO `barrios` VALUES (13, 1, 'Malvín');
-INSERT INTO `barrios` VALUES (14, 1, 'Malvín Norte');
-INSERT INTO `barrios` VALUES (15, 1, 'Punta Gorda');
-INSERT INTO `barrios` VALUES (16, 1, 'Carrasco');
-INSERT INTO `barrios` VALUES (17, 1, 'Carrasco Norte');
-INSERT INTO `barrios` VALUES (18, 1, 'Bañados de Carrasco');
-INSERT INTO `barrios` VALUES (19, 1, 'Maroñas');
-INSERT INTO `barrios` VALUES (20, 1, 'Parque Guaraní');
-INSERT INTO `barrios` VALUES (21, 1, 'Flor de Maroñas');
-INSERT INTO `barrios` VALUES (22, 1, 'Las Canteras');
-INSERT INTO `barrios` VALUES (23, 1, 'Punta de Rieles');
-INSERT INTO `barrios` VALUES (24, 1, 'Bella Italia');
-INSERT INTO `barrios` VALUES (25, 1, 'Jardines del Hipódromo');
-INSERT INTO `barrios` VALUES (26, 1, 'Ituzaingó');
-INSERT INTO `barrios` VALUES (27, 1, 'Unión');
-INSERT INTO `barrios` VALUES (28, 1, 'Villa Española');
-INSERT INTO `barrios` VALUES (29, 1, 'Mercado Modelo');
-INSERT INTO `barrios` VALUES (30, 1, 'Bolívar');
-INSERT INTO `barrios` VALUES (31, 1, 'Castro');
-INSERT INTO `barrios` VALUES (32, 1, 'Pérez Castellanos');
-INSERT INTO `barrios` VALUES (33, 1, 'Cerrito de la Victoria');
-INSERT INTO `barrios` VALUES (34, 1, 'Las Acacias');
-INSERT INTO `barrios` VALUES (35, 1, 'Aires Puros');
-INSERT INTO `barrios` VALUES (36, 1, 'Casavalle');
-INSERT INTO `barrios` VALUES (37, 1, 'Piedras Blancas');
-INSERT INTO `barrios` VALUES (38, 1, 'Manga');
-INSERT INTO `barrios` VALUES (39, 1, 'Toledo Chico');
-INSERT INTO `barrios` VALUES (40, 1, 'Paso de las Duranas');
-INSERT INTO `barrios` VALUES (41, 1, 'Peñarol');
-INSERT INTO `barrios` VALUES (42, 1, 'Lavalleja');
-INSERT INTO `barrios` VALUES (43, 1, 'Villa del Cerro');
-INSERT INTO `barrios` VALUES (44, 1, 'Casabó');
-INSERT INTO `barrios` VALUES (45, 1, 'Pajas Blancas');
-INSERT INTO `barrios` VALUES (46, 1, 'La Paloma');
-INSERT INTO `barrios` VALUES (47, 1, 'Tomkinson');
-INSERT INTO `barrios` VALUES (48, 1, 'La Teja');
-INSERT INTO `barrios` VALUES (49, 1, 'Prado');
-INSERT INTO `barrios` VALUES (50, 1, 'Nueva Savona');
-INSERT INTO `barrios` VALUES (51, 1, 'Capurro');
-INSERT INTO `barrios` VALUES (52, 1, 'Bella Vista');
-INSERT INTO `barrios` VALUES (53, 1, 'Arroyo Seco');
-INSERT INTO `barrios` VALUES (54, 1, 'Aguada');
-INSERT INTO `barrios` VALUES (55, 1, 'Reducto');
-INSERT INTO `barrios` VALUES (56, 1, 'Atahualpa');
-INSERT INTO `barrios` VALUES (57, 1, 'Jacinto Vera');
-INSERT INTO `barrios` VALUES (58, 1, 'La Figurita');
-INSERT INTO `barrios` VALUES (59, 1, 'Larrañaga');
-INSERT INTO `barrios` VALUES (60, 1, 'La Blanqueada');
-INSERT INTO `barrios` VALUES (61, 1, 'Villa Muñoz');
-INSERT INTO `barrios` VALUES (62, 1, 'Retiro');
-INSERT INTO `barrios` VALUES (63, 1, 'Goes');
-INSERT INTO `barrios` VALUES (64, 1, 'La Comercial');
-INSERT INTO `barrios` VALUES (65, 1, 'Tres Cruces');
-INSERT INTO `barrios` VALUES (66, 1, 'Brazo Oriental');
-INSERT INTO `barrios` VALUES (67, 1, 'Sayago');
-INSERT INTO `barrios` VALUES (68, 1, 'Conciliación');
-INSERT INTO `barrios` VALUES (69, 1, 'Belvedere');
-INSERT INTO `barrios` VALUES (70, 1, 'Nuevo París');
-INSERT INTO `barrios` VALUES (71, 1, 'Tres Ombúes');
-INSERT INTO `barrios` VALUES (72, 1, 'Pueblo Victoria');
-INSERT INTO `barrios` VALUES (73, 1, 'Paso de la Arena');
-INSERT INTO `barrios` VALUES (74, 1, 'Santiago Vázquez');
-INSERT INTO `barrios` VALUES (75, 1, 'Colón Sureste');
-INSERT INTO `barrios` VALUES (76, 1, 'Abayubá');
-INSERT INTO `barrios` VALUES (77, 1, 'Colón Centro y Noroeste');
-INSERT INTO `barrios` VALUES (78, 1, 'Lezica');
-INSERT INTO `barrios` VALUES (79, 1, 'Melilla');
-INSERT INTO `barrios` VALUES (80, 1, 'Villa García');
-INSERT INTO `barrios` VALUES (81, 1, 'Manga Rural');
+LOCK TABLES `barrios` WRITE;
+/*!40000 ALTER TABLE `barrios` DISABLE KEYS */;
+INSERT INTO `barrios` VALUES (1,1,'Ciudad Vieja'),(3,1,'Centro'),(4,1,'Barrio Sur'),(5,1,'Cordón'),(6,1,'Palermo'),(7,1,'Parque Rodó'),(8,1,'Punta Carretas'),(9,1,'Pocitos'),(10,1,'Buceo'),(11,1,'Parque Batlle'),(12,1,'Villa Dolores'),(13,1,'Malvín'),(14,1,'Malvín Norte'),(15,1,'Punta Gorda'),(16,1,'Carrasco'),(17,1,'Carrasco Norte'),(18,1,'Bañados de Carrasco'),(19,1,'Maroñas'),(20,1,'Parque Guaraní'),(21,1,'Flor de Maroñas'),(22,1,'Las Canteras'),(23,1,'Punta de Rieles'),(24,1,'Bella Italia'),(25,1,'Jardines del Hipódromo'),(26,1,'Ituzaingó'),(27,1,'Unión'),(28,1,'Villa Española'),(29,1,'Mercado Modelo'),(30,1,'Bolívar'),(31,1,'Castro'),(32,1,'Pérez Castellanos'),(33,1,'Cerrito de la Victoria'),(34,1,'Las Acacias'),(35,1,'Aires Puros'),(36,1,'Casavalle'),(37,1,'Piedras Blancas'),(38,1,'Manga'),(39,1,'Toledo Chico'),(40,1,'Paso de las Duranas'),(41,1,'Peñarol'),(42,1,'Lavalleja'),(43,1,'Villa del Cerro'),(44,1,'Casabó'),(45,1,'Pajas Blancas'),(46,1,'La Paloma'),(47,1,'Tomkinson'),(48,1,'La Teja'),(49,1,'Prado'),(50,1,'Nueva Savona'),(51,1,'Capurro'),(52,1,'Bella Vista'),(53,1,'Arroyo Seco'),(54,1,'Aguada'),(55,1,'Reducto'),(56,1,'Atahualpa'),(57,1,'Jacinto Vera'),(58,1,'La Figurita'),(59,1,'Larrañaga'),(60,1,'La Blanqueada'),(61,1,'Villa Muñoz'),(62,1,'Retiro'),(63,1,'Goes'),(64,1,'La Comercial'),(65,1,'Tres Cruces'),(66,1,'Brazo Oriental'),(67,1,'Sayago'),(68,1,'Conciliación'),(69,1,'Belvedere'),(70,1,'Nuevo París'),(71,1,'Tres Ombúes'),(72,1,'Pueblo Victoria'),(73,1,'Paso de la Arena'),(74,1,'Santiago Vázquez'),(75,1,'Colón Sureste'),(76,1,'Abayubá'),(77,1,'Colón Centro y Noroeste'),(78,1,'Lezica'),(79,1,'Melilla'),(80,1,'Villa García'),(81,1,'Manga Rural');
+/*!40000 ALTER TABLE `barrios` ENABLE KEYS */;
+UNLOCK TABLES;
 
--- --------------------------------------------------------
+--
+-- Table structure for table `categorias`
+--
 
--- 
--- Estructura de tabla para la tabla `categorias`
--- 
-
-CREATE TABLE IF NOT EXISTS `categorias` (
+DROP TABLE IF EXISTS `categorias`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `categorias` (
   `categoriaId` int(11) NOT NULL auto_increment,
   `categoriaNombre` varchar(250) NOT NULL,
   PRIMARY KEY  (`categoriaId`),
   KEY `categoriaNombre` (`categoriaNombre`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=32 ;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- 
--- Volcar la base de datos para la tabla `categorias`
--- 
+--
+-- Dumping data for table `categorias`
+--
 
-INSERT INTO `categorias` VALUES (1, 'Abogados');
-INSERT INTO `categorias` VALUES (2, 'Alambradores');
-INSERT INTO `categorias` VALUES (3, 'Albañiles');
-INSERT INTO `categorias` VALUES (4, 'Animadores');
-INSERT INTO `categorias` VALUES (5, 'Arquitectos');
-INSERT INTO `categorias` VALUES (6, 'Carpinteros');
-INSERT INTO `categorias` VALUES (7, 'Constructores');
-INSERT INTO `categorias` VALUES (8, 'Contadores');
-INSERT INTO `categorias` VALUES (9, 'Corredores de seguro');
-INSERT INTO `categorias` VALUES (10, 'Decoradores y Diseñadores de Interiores');
-INSERT INTO `categorias` VALUES (11, 'Desarrolladores Web');
-INSERT INTO `categorias` VALUES (12, 'Despachantes de aduana');
-INSERT INTO `categorias` VALUES (13, 'Diseñadores gráficos');
-INSERT INTO `categorias` VALUES (14, 'Economistas');
-INSERT INTO `categorias` VALUES (15, 'Electricistas');
-INSERT INTO `categorias` VALUES (16, 'Escribanos');
-INSERT INTO `categorias` VALUES (17, 'Estilistas/Esteticistas');
-INSERT INTO `categorias` VALUES (18, 'Fisioterapeutas');
-INSERT INTO `categorias` VALUES (19, 'Fonoaudiólogos');
-INSERT INTO `categorias` VALUES (20, 'Herreros');
-INSERT INTO `categorias` VALUES (21, 'Ingenieros');
-INSERT INTO `categorias` VALUES (22, 'Médicos');
-INSERT INTO `categorias` VALUES (23, 'Nutricionistas');
-INSERT INTO `categorias` VALUES (24, 'Odontólogos');
-INSERT INTO `categorias` VALUES (25, 'Pintores');
-INSERT INTO `categorias` VALUES (26, 'Podólogos');
-INSERT INTO `categorias` VALUES (27, 'Psicólogos');
-INSERT INTO `categorias` VALUES (28, 'Sanitarios');
-INSERT INTO `categorias` VALUES (29, 'Tapiceros');
-INSERT INTO `categorias` VALUES (30, 'Veterinarios');
-INSERT INTO `categorias` VALUES (31, 'Vidrieros');
+LOCK TABLES `categorias` WRITE;
+/*!40000 ALTER TABLE `categorias` DISABLE KEYS */;
+INSERT INTO `categorias` VALUES (1,'Abogados'),(2,'Alambradores'),(3,'Albañiles'),(4,'Animadores'),(5,'Arquitectos'),(6,'Carpinteros'),(7,'Constructores'),(8,'Contadores'),(9,'Corredores de seguro'),(10,'Decoradores y Diseñadores de Interiores'),(11,'Desarrolladores Web'),(12,'Despachantes de aduana'),(13,'Diseñadores gráficos'),(14,'Economistas'),(15,'Electricistas'),(16,'Escribanos'),(17,'Estilistas/Esteticistas'),(18,'Fisioterapeutas'),(19,'Fonoaudiólogos'),(20,'Herreros'),(21,'Ingenieros'),(22,'Médicos'),(23,'Nutricionistas'),(24,'Odontólogos'),(25,'Pintores'),(26,'Podólogos'),(27,'Psicólogos'),(28,'Sanitarios'),(29,'Tapiceros'),(30,'Veterinarios'),(31,'Vidrieros');
+/*!40000 ALTER TABLE `categorias` ENABLE KEYS */;
+UNLOCK TABLES;
 
--- --------------------------------------------------------
+--
+-- Table structure for table `departamentos`
+--
 
--- 
--- Estructura de tabla para la tabla `departamentos`
--- 
-
-CREATE TABLE IF NOT EXISTS `departamentos` (
+DROP TABLE IF EXISTS `departamentos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `departamentos` (
   `idDepartamento` int(11) NOT NULL auto_increment,
   `nombreDepartamento` varchar(250) NOT NULL,
   PRIMARY KEY  (`idDepartamento`),
   UNIQUE KEY `nombreDepartamento` (`nombreDepartamento`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- 
--- Volcar la base de datos para la tabla `departamentos`
--- 
+--
+-- Dumping data for table `departamentos`
+--
 
-INSERT INTO `departamentos` VALUES (1, 'Montevideo');
-INSERT INTO `departamentos` VALUES (2, 'Artigas');
-INSERT INTO `departamentos` VALUES (3, 'Canelones');
-INSERT INTO `departamentos` VALUES (4, 'Cerro Largo');
-INSERT INTO `departamentos` VALUES (5, 'Colonia');
-INSERT INTO `departamentos` VALUES (6, 'Durazno');
-INSERT INTO `departamentos` VALUES (7, 'Flores');
-INSERT INTO `departamentos` VALUES (8, 'Florida');
-INSERT INTO `departamentos` VALUES (9, 'Lavalleja');
-INSERT INTO `departamentos` VALUES (10, 'Maldonado');
-INSERT INTO `departamentos` VALUES (11, 'Paysandú');
-INSERT INTO `departamentos` VALUES (12, 'Río Negro');
-INSERT INTO `departamentos` VALUES (13, 'Rivera');
-INSERT INTO `departamentos` VALUES (14, 'Rocha');
-INSERT INTO `departamentos` VALUES (15, 'Salto');
-INSERT INTO `departamentos` VALUES (16, 'San José');
-INSERT INTO `departamentos` VALUES (17, 'Soriano');
-INSERT INTO `departamentos` VALUES (18, 'Tacuarembó');
-INSERT INTO `departamentos` VALUES (19, 'Treinta y Tres');
+LOCK TABLES `departamentos` WRITE;
+/*!40000 ALTER TABLE `departamentos` DISABLE KEYS */;
+INSERT INTO `departamentos` VALUES (2,'Artigas'),(3,'Canelones'),(4,'Cerro Largo'),(5,'Colonia'),(6,'Durazno'),(7,'Flores'),(8,'Florida'),(9,'Lavalleja'),(10,'Maldonado'),(1,'Montevideo'),(11,'Paysandú'),(12,'Río Negro'),(13,'Rivera'),(14,'Rocha'),(15,'Salto'),(16,'San José'),(17,'Soriano'),(18,'Tacuarembó'),(19,'Treinta y Tres');
+/*!40000 ALTER TABLE `departamentos` ENABLE KEYS */;
+UNLOCK TABLES;
 
--- --------------------------------------------------------
+--
+-- Table structure for table `diasatencion`
+--
 
--- 
--- Estructura de tabla para la tabla `diasatencion`
--- 
-
-CREATE TABLE IF NOT EXISTS `diasatencion` (
+DROP TABLE IF EXISTS `diasatencion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `diasatencion` (
   `iddiasAtencion` int(11) NOT NULL auto_increment,
   `idUser` int(11) NOT NULL,
   `lunes` tinyint(1) NOT NULL,
@@ -216,71 +116,85 @@ CREATE TABLE IF NOT EXISTS `diasatencion` (
   `domingo` tinyint(1) NOT NULL,
   `horaComienzo` time NOT NULL,
   `horaFin` time NOT NULL,
-  PRIMARY KEY  (`iddiasAtencion`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  PRIMARY KEY  (`iddiasAtencion`),
+  KEY `diasatencion_users_idx` (`idUser`),
+  CONSTRAINT `diasatencion_users` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- 
--- Volcar la base de datos para la tabla `diasatencion`
--- 
+--
+-- Dumping data for table `diasatencion`
+--
 
-INSERT INTO `diasatencion` VALUES (1, 45, 1, 1, 1, 1, 1, 1, 1, '08:00:00', '18:00:00');
+LOCK TABLES `diasatencion` WRITE;
+/*!40000 ALTER TABLE `diasatencion` DISABLE KEYS */;
+/*!40000 ALTER TABLE `diasatencion` ENABLE KEYS */;
+UNLOCK TABLES;
 
--- --------------------------------------------------------
+--
+-- Table structure for table `formasdepago`
+--
 
--- 
--- Estructura de tabla para la tabla `formasdepago`
--- 
-
-CREATE TABLE IF NOT EXISTS `formasdepago` (
+DROP TABLE IF EXISTS `formasdepago`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `formasdepago` (
   `idformasDePago` int(11) NOT NULL auto_increment,
   `idUser` int(11) NOT NULL,
   `contado` tinyint(1) NOT NULL,
   `debito` tinyint(1) NOT NULL,
   `credito` tinyint(1) NOT NULL,
   `otras` tinyint(1) NOT NULL,
-  PRIMARY KEY  (`idformasDePago`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+  PRIMARY KEY  (`idformasDePago`),
+  KEY `formasdepago_users_idx` (`idUser`),
+  CONSTRAINT `formasdepago_users` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- 
--- Volcar la base de datos para la tabla `formasdepago`
--- 
+--
+-- Dumping data for table `formasdepago`
+--
 
-INSERT INTO `formasdepago` VALUES (1, 20, 0, 0, 0, 0);
-INSERT INTO `formasdepago` VALUES (2, 21, 1, 1, 1, 1);
-INSERT INTO `formasdepago` VALUES (3, 22, 0, 0, 0, 0);
-INSERT INTO `formasdepago` VALUES (4, 23, 0, 0, 0, 0);
-INSERT INTO `formasdepago` VALUES (5, 24, 0, 0, 0, 0);
-INSERT INTO `formasdepago` VALUES (6, 25, 0, 0, 0, 0);
+LOCK TABLES `formasdepago` WRITE;
+/*!40000 ALTER TABLE `formasdepago` DISABLE KEYS */;
+INSERT INTO `formasdepago` VALUES (1,20,0,0,0,0),(2,21,1,1,1,1),(3,22,0,0,0,0),(4,23,0,0,0,0),(5,24,0,0,0,0),(6,25,0,0,0,0);
+/*!40000 ALTER TABLE `formasdepago` ENABLE KEYS */;
+UNLOCK TABLES;
 
--- --------------------------------------------------------
+--
+-- Table structure for table `mapa`
+--
 
--- 
--- Estructura de tabla para la tabla `mapa`
--- 
-
-CREATE TABLE IF NOT EXISTS `mapa` (
+DROP TABLE IF EXISTS `mapa`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `mapa` (
   `IdMapa` int(11) NOT NULL auto_increment,
   `IdUser` int(11) NOT NULL,
   `latitude` varchar(30) NOT NULL,
   `longitude` varchar(30) NOT NULL,
   PRIMARY KEY  (`IdMapa`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- 
--- Volcar la base de datos para la tabla `mapa`
--- 
+--
+-- Dumping data for table `mapa`
+--
 
-INSERT INTO `mapa` VALUES (12, 10, '-34.89564642972746', '-56.16442680358887');
-INSERT INTO `mapa` VALUES (11, 10, '-34.88226973385945', '-56.165971755981445');
-INSERT INTO `mapa` VALUES (10, 10, '-34.88719824359768', '-56.13764762878418');
+LOCK TABLES `mapa` WRITE;
+/*!40000 ALTER TABLE `mapa` DISABLE KEYS */;
+INSERT INTO `mapa` VALUES (10,10,'-34.88719824359768','-56.13764762878418'),(11,10,'-34.88226973385945','-56.165971755981445'),(12,10,'-34.89564642972746','-56.16442680358887');
+/*!40000 ALTER TABLE `mapa` ENABLE KEYS */;
+UNLOCK TABLES;
 
--- --------------------------------------------------------
+--
+-- Table structure for table `users`
+--
 
--- 
--- Estructura de tabla para la tabla `users`
--- 
-
-CREATE TABLE IF NOT EXISTS `users` (
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
   `idUser` int(11) NOT NULL auto_increment,
   `nombre` varchar(100) NOT NULL,
   `apellido` varchar(100) NOT NULL,
@@ -308,24 +222,33 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   PRIMARY KEY  (`idUser`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
+  UNIQUE KEY `username` (`username`),
+  KEY `users_barrios_idx` (`barrio`),
+  KEY `users_departamento_idx` (`departamento`),
+  KEY `users_categoria_idx` (`categoria`),
+  CONSTRAINT `users_categoria` FOREIGN KEY (`categoria`) REFERENCES `categorias` (`categoriaId`) ON UPDATE CASCADE,
+  CONSTRAINT `users_barrios` FOREIGN KEY (`barrio`) REFERENCES `barrios` (`barrioId`) ON UPDATE CASCADE,
+  CONSTRAINT `users_departamento` FOREIGN KEY (`departamento`) REFERENCES `departamentos` (`idDepartamento`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- 
--- Volcar la base de datos para la tabla `users`
--- 
+--
+-- Dumping data for table `users`
+--
 
-INSERT INTO `users` VALUES (12, 'Alec', 'Ellis', 'alecellis1985@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1,null, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'Brindo el mejor service que puedas ver en tu vida contratame ya!!!', 'afsaf', 'asfas', 'fasf', 'fasf', 'fasf', 'fasf', 'fasf', 'Palomo', '15efd829b89e9eb2287901e77c2aae1d');
-INSERT INTO `users` VALUES (13, 'Sam', 'Gusto', 'elgroso@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1,null, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'Por 3 mangos te doy clase las 24 horas, te llevo el carrito de panchos y todo lo que quieras a la hora que quieras. Se bailar y cantar pero no canto a', 'fasf', 'afsaf', 'asfas', 'fasf', 'fasf', 'fasf', 'fasf', 'El_Triste', 'pwpwpw');
-INSERT INTO `users` VALUES (14, 'Tomy', 'Potatoue', 'los_pi@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1,null, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'afsaf', 'asfas', 'fasf', 'fasf', 'fasf', 'fasf', 'fasf', 'Gomon', 'pwpwpw');
-INSERT INTO `users` VALUES (15, 'Charli', 'Gut', 'matoluzen@gmail.com', '26013794', '09865321', 'tajes 7530', '303030303', 2, 1,null, 'www.alec.com', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'afsaf', 'asfas', 'fasf', 'fasf', 'fasf', 'fasf', 'fasf', 'Alexander', 'pwpwpw');
-INSERT INTO `users` VALUES (16, 'Juan', 'Gonzales', 'elgonchi@gmail.com', '262321651', '09861651', 'tucuman 2121', '6251651651', 2, 1,null, 'wawa.com.uy', 'logoJPG.jpg', 'https://www.facebook.com/alec.ellis.714', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'asfa', 'fasfas', 'asfaf', 'fasf', 'fasf', 'fasf', 'fasf', 'El_Gonchi', 'ahfahf');
-INSERT INTO `users` VALUES (17, 'Terry', 'Fierry', 'el_garca@gmail.com', '262321651', '09861651', 'tucuman 2121', '6251651651', 2, 1,null, 'wawa.com.uy', 'logoJPG.jpg', '', 'https://www.twitter.com', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'afsaf', 'asfa', 'fasfas', 'asfaf', 'fasf', 'fasf', 'fasf', 'fasf', 'El_Tierri', 'zukulu');
-INSERT INTO `users` VALUES (18, 'BinAD', 'Ladennw', 'alecellis1985@gmail.com', '26013794', '098635923', 'Maximo tajen 3565', '26013794', 2, 1,null, '', '', '', '', '', 'qcpdEXwvoSTaqqSxKkBFQPSxrjJcLhpUgOoZFRKuOsOIpXzzuw', 'vxlvwXZOKZKLrUlcuusu', 'NXJPWGYJzUNZDACXkgDo', 'trSfWKgWkXIYJtLElBsA', 'LSyjbXeRmkYDwaCVIAsq', 'djYguRtulZwpstZDYzow', 'zMYvRrVKXzKAPWGrsxAJ', 'fasf', 'BspcijE', 'a8f5f167f44f4964e6c998dee827110c');
-INSERT INTO `users` VALUES (19, 'Binkg', 'LadeneP', 'alecellis1985@gmail.com', '26013794', '098635923', 'Maximo tajen 3565', '26013794', 2, 2,null, '', '', '', '', 'https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile', 'iJvKNLEmUFpfARQGjWxPjQFhReYRPLeUTnyeHezyVDYboFClpO', 'gmhtcJLGGEBMlFBgRfVK', 'UQoQoMAlhQxoWVrCpAyI', 'qIBMfQfbGqpXbvXFqrKs', 'piKfAawYfRCuzdcTJOhK', 'XpXiUaAzxCCdyFlflNfW', 'larZYrIPksrMTDKXSLSD', 'fasf', 'AJFuihD', 'a8f5f167f44f4964e6c998dee827110c');
-INSERT INTO `users` VALUES (20, 'BinWY', 'LadenMk', 'alecellis1985@gmail.com', '26013794', '098635923', 'Maximo tajen 3565', '26013794', 3, 2,null, '', '', '', '', '', '', '', '', '', '', '', '', '', 'ehNDzsb', 'a8f5f167f44f4964e6c998dee827110c');
-INSERT INTO `users` VALUES (21, 'BinQa', 'LadenQw', 'alecellis1985@gmail.com', '26013794', '098635923', 'Maximo tajen 3565', '26013794', 2, 2,null, '', '', '', '', '', '', '', '', '', '', '', '', '', 'JmddKRN', 'a8f5f167f44f4964e6c998dee827110c');
-INSERT INTO `users` VALUES (22, 'BinPL', 'LadenzG', 'alecellis1985@gmail.com', '26013794', '098635923', 'Maximo tajen 3565', '26013794', 2, 2,null, '', '', '', '', '', '', '', '', '', '', '', '', '', 'aIlkhYo', 'a8f5f167f44f4964e6c998dee827110c');
-INSERT INTO `users` VALUES (23, 'BinWH', 'LadendD', 'alecellis1985@gmail.com', '26013794', '098635923', 'Maximo tajen 3565', '26013794', 2, 2,null, '', '', '', '', '', '', '', '', '', '', '', '', '', 'AypaNRD', 'a8f5f167f44f4964e6c998dee827110c');
-INSERT INTO `users` VALUES (24, 'Bincw', 'LadentX', 'alecellis1985@gmail.com', '26013794', '098635923', 'Maximo tajen 3565', '26013794', 2, 2,null, '', '', '', '', '', '', '', '', '', '', '', '', '', 'sdPSmOi', 'a8f5f167f44f4964e6c998dee827110c');
-INSERT INTO `users` VALUES (25, 'Bingd', 'LadenPf', 'alecellis1985@gmail.com', '26013794', '098635923', 'Maximo tajen 3565', '26013794', 2, 2,null, '', '', '', '', '', '', '', '', '', '', '', '', '', 'yAvwMxn', 'a8f5f167f44f4964e6c998dee827110c');
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (12,'Alec','Ellis','alecellis1985@gmail.com','26013794','09865321','tajes 7530','303030303',2,1,NULL,'www.alec.com','logoJPG.jpg','https://www.facebook.com/alec.ellis.714','https://www.twitter.com','https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile','Brindo el mejor service que puedas ver en tu vida contratame ya!!!','afsaf','asfas','fasf','fasf','fasf','fasf','fasf','Palomo','15efd829b89e9eb2287901e77c2aae1d'),(13,'Sam','Gusto','elgroso@gmail.com','26013794','09865321','tajes 7530','303030303',2,1,NULL,'www.alec.com','logoJPG.jpg','https://www.facebook.com/alec.ellis.714','https://www.twitter.com','https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile','Por 3 mangos te doy clase las 24 horas, te llevo el carrito de panchos y todo lo que quieras a la hora que quieras. Se bailar y cantar pero no canto a','fasf','afsaf','asfas','fasf','fasf','fasf','fasf','El_Triste','pwpwpw'),(14,'Tomy','Potatoue','los_pi@gmail.com','26013794','09865321','tajes 7530','303030303',2,1,NULL,'www.alec.com','logoJPG.jpg','https://www.facebook.com/alec.ellis.714','https://www.twitter.com','https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile','afsaf','afsaf','asfas','fasf','fasf','fasf','fasf','fasf','Gomon','pwpwpw'),(15,'Charli','Gut','matoluzen@gmail.com','26013794','09865321','tajes 7530','303030303',2,1,NULL,'www.alec.com','logoJPG.jpg','https://www.facebook.com/alec.ellis.714','https://www.twitter.com','https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile','afsaf','afsaf','asfas','fasf','fasf','fasf','fasf','fasf','Alexander','pwpwpw'),(16,'Juan','Gonzales','elgonchi@gmail.com','262321651','09861651','tucuman 2121','6251651651',2,1,NULL,'wawa.com.uy','logoJPG.jpg','https://www.facebook.com/alec.ellis.714','https://www.twitter.com','https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile','afsaf','asfa','fasfas','asfaf','fasf','fasf','fasf','fasf','El_Gonchi','ahfahf'),(17,'Terry','Fierry','el_garca@gmail.com','262321651','09861651','tucuman 2121','6251651651',2,1,NULL,'wawa.com.uy','logoJPG.jpg','','https://www.twitter.com','https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile','afsaf','asfa','fasfas','asfaf','fasf','fasf','fasf','fasf','El_Tierri','zukulu'),(18,'BinAD','Ladennw','alecellis1985@gmail.com','26013794','098635923','Maximo tajen 3565','26013794',2,1,NULL,'','','','','','qcpdEXwvoSTaqqSxKkBFQPSxrjJcLhpUgOoZFRKuOsOIpXzzuw','vxlvwXZOKZKLrUlcuusu','NXJPWGYJzUNZDACXkgDo','trSfWKgWkXIYJtLElBsA','LSyjbXeRmkYDwaCVIAsq','djYguRtulZwpstZDYzow','zMYvRrVKXzKAPWGrsxAJ','fasf','BspcijE','a8f5f167f44f4964e6c998dee827110c'),(19,'Binkg','LadeneP','alecellis1985@gmail.com','26013794','098635923','Maximo tajen 3565','26013794',2,2,NULL,'','','','','https://www.linkedin.com/profile/view?id=172168721&trk=nav_responsive_tab_profile','iJvKNLEmUFpfARQGjWxPjQFhReYRPLeUTnyeHezyVDYboFClpO','gmhtcJLGGEBMlFBgRfVK','UQoQoMAlhQxoWVrCpAyI','qIBMfQfbGqpXbvXFqrKs','piKfAawYfRCuzdcTJOhK','XpXiUaAzxCCdyFlflNfW','larZYrIPksrMTDKXSLSD','fasf','AJFuihD','a8f5f167f44f4964e6c998dee827110c'),(20,'BinWY','LadenMk','alecellis1985@gmail.com','26013794','098635923','Maximo tajen 3565','26013794',3,2,NULL,'','','','','','','','','','','','','','ehNDzsb','a8f5f167f44f4964e6c998dee827110c'),(21,'BinQa','LadenQw','alecellis1985@gmail.com','26013794','098635923','Maximo tajen 3565','26013794',2,2,NULL,'','','','','','','','','','','','','','JmddKRN','a8f5f167f44f4964e6c998dee827110c'),(22,'BinPL','LadenzG','alecellis1985@gmail.com','26013794','098635923','Maximo tajen 3565','26013794',2,2,NULL,'','','','','','','','','','','','','','aIlkhYo','a8f5f167f44f4964e6c998dee827110c'),(23,'BinWH','LadendD','alecellis1985@gmail.com','26013794','098635923','Maximo tajen 3565','26013794',2,2,NULL,'','','','','','','','','','','','','','AypaNRD','a8f5f167f44f4964e6c998dee827110c'),(24,'Bincw','LadentX','alecellis1985@gmail.com','26013794','098635923','Maximo tajen 3565','26013794',2,2,NULL,'','','','','','','','','','','','','','sdPSmOi','a8f5f167f44f4964e6c998dee827110c'),(25,'Bingd','LadenPf','alecellis1985@gmail.com','26013794','098635923','Maximo tajen 3565','26013794',2,2,NULL,'','','','','','','','','','','','','','yAvwMxn','a8f5f167f44f4964e6c998dee827110c');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2015-04-23 13:51:30

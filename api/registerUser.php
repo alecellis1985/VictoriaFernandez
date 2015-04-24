@@ -43,7 +43,7 @@ function insertNewUser($conn, $user) {
         $params[6] = array("telefonoEmp", $user['telefonoEmp'], "string", 50);
         $params[7] = array("departamento", (int) $user['departamento'], "int", 5);
         $params[8] = array("categoria", (int) $user['categoria'], "int", 5);
-        $params[9] = array("barrio", (int) $user['barrio'], "int", 5);
+        $params[9] = $user['barrio'] == NULL ? array("barrio", null, "null") : array("barrio", (int) $user['barrio'], "int", 5);
         $params[10] = array("sitioWeb", $user['sitioWeb'], "string", 50);
         $params[11] = array("imagenUrl", $user['imagenUrl'], "string", 100);
         $params[12] = array("facebookUrl", $user['facebookUrl'], "string", 250);
@@ -59,7 +59,7 @@ function insertNewUser($conn, $user) {
         $params[22] = array("descServiceLong", $user['descServiceLong'], "string", 1000);
         $params[23] = array("username", $user['username'], "string", 50);
         $params[24] = array("password", md5($user['password']), "string", 10);
-
+        
         if ($conn->consulta($sql, $params)) {
             $user['id'] = $conn->ultimoIdInsert();
 
@@ -147,7 +147,7 @@ function getArrayFromRequest($request) {
         "telefonoEmp" => is_null($request->post('telefonoEmp')) ? "" : $request->post('telefonoEmp'),
         "departamento" => is_null($request->post('departamento')) ? "" : $request->post('departamento'),
         "categoria" => is_null($request->post('categoria')) ? "" : $request->post('categoria'),
-        "barrio" => is_null($request->post('barrio')) ? "" : $request->post('barrio'),
+        "barrio" => $request->post('barrio') == 'null' ? NULL : $request->post('barrio'),//is_null($request->post('barrio')) ? "" : ($request->post('barrio') == '-1' ? null : $request->post('barrio')),
         "sitioWeb" => is_null($request->post('sitioWeb')) ? "" : $request->post('sitioWeb'),
         "facebookUrl" => is_null($request->post('facebookUrl')) ? "" : $request->post('facebookUrl'),
         "twitterUrl" => is_null($request->post('twitterUrl')) ? "" : $request->post('twitterUrl'),

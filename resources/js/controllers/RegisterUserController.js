@@ -90,7 +90,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         };
 
         $scope.barrios = barriosList.data;
-        $scope.barrios.unshift({barrioNombre: "Seleccione Barrio", barrioId: -1});
+        $scope.barrios.unshift({barrioNombre: "Seleccione Barrio", barrioId: null});
         $scope.selectedBarrio = $scope.barrios[0];
         $scope.categorias = categoriasList.data;
         $scope.categorias.unshift({categoriaNombre: "Seleccione Categoria", categoriaId: -1});

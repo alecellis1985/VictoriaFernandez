@@ -12,7 +12,7 @@ if ($_SERVER['SERVER_NAME'] != "localhost") {
 //    define("CANTPAGCOMMENTS", 5);
     define("DRIVER", "mysql");
     define("SERVIDOR", "localhost");
-    define("BASE", "angular_tutorial");
+    define("BASE", "profesionales");
     define("USUARIO", "root");
     //define("CLAVE", "turtleman1");
     define("CLAVE", "oso2203");
