@@ -486,3 +486,45 @@ p
       padding: 20px 10px;
 }
 
+.planes>.panel-body>.row>div:first-child>span>.fa{
+  color: #949494;
+  font-size: 42px;
+}
+
+.planes>.panel-body>.row>div:first-child>span,.planes> .panel-body > .row:not(:first-child)>div:nth-child(2)>span,
+.planes> .panel-body > .row:not(:first-child)>div:nth-child(3)>span{
+    display:block;
+    text-align: center;
+}
+
+.planes>.panel-body>.row:not(:first-child){
+    border-top: 1px solid #e1e1e1;
+}
+
+.planes>.panel-body>.row:not(:first-child)>div{
+    padding-top: 10px;  
+    line-height: normal;
+    height:73px;
+}
+
+.centerText{
+    display: block;
+    text-align: center;
+}
+
+.planes> .panel-body > .row:not(:first-child)>div:nth-child(2), .planes> .panel-body > .row:not(:first-child)>div:nth-child(3){
+    border-right:1px solid #e1e1e1;
+}  
+
+.planes .fa-check{
+  color: #8ecc70;
+  font-size: 42px;  
+}
+
+.planes .fa-times{
+  color: #9c9c9c;
+  font-size: 42px;  
+}
+
+
+  
