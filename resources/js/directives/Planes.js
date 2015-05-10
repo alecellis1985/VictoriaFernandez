@@ -3,9 +3,9 @@ Professionals.directive('planesDetails', function(){
         restrict: 'E',
         templateUrl: 'resources/tpl/planes.html',
         scope: {
-            selectedCard: '=',
+            selectedPlan: '=',
             elemColapsed:'=',
-            selectedPlan:'&'
+            selectedPlanFn:'&'
         },
         replace: true,
         link:function($scope,element,attr){

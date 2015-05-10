@@ -8,7 +8,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             //perform img validation 
             $scope.validateImg($scope.files);
         });
-
+        $scope.isCollapsed = true;
 
         $scope.randomString = function (letters)
         {
@@ -18,7 +18,18 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             for (var i = 0; i < letters; i++)
                 text += possible.charAt(Math.floor(Math.random() * possible.length));
             return text;
+        };
+        
+        $scope.selectedPlan = {};
+        
+        $scope.showPlan = function(plan)
+        {
+            $scope.selectedPlan.tipo = plan;
+            $scope.selectedPlan.nombre = plan === 0?'Plan Profesionales':'Plan Empresas'
+            $scope.isCollapsed = false;
         }
+        
+        
 
         $scope.fillNewUserCamps = function ()
         {
@@ -121,7 +132,6 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                 credito: false,
                 otras: false
             }
-
         };
 
         $scope.fillNewUserCamps();
@@ -242,13 +252,11 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             var imgFile = null;
             if (!(typeof $scope.files === 'undefined') && !$scope.files === null)
                 imgFile = $scope.files[0];
-
             CommonService.postRequestWithFile('api/agregar_usuario', data, imgFile).then(function (result) {
                 if (result.data.success)
                     $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Has sido registrado con exito'});
                 else
                     $rootScope.$broadcast('alert-event', {type: 'error', msg: result.data.msg});
-
             });
         };
     }]);
