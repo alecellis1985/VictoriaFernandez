@@ -1,6 +1,7 @@
 <?php
 function getBarrios() {
     $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
+    $response = null;
     if ($conn->conectar()) {
         $sql = "SELECT * FROM barrios ORDER BY barrioNombre";// ORDER BY nombreDepartamento
         if ($conn->consulta($sql)) {

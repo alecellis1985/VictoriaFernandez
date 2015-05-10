@@ -460,3 +460,28 @@ p
            font-size: 119px;
     }
 }
+
+.recaptcha-checkbox-checkmark{
+    cursor:pointer;
+}
+
+.footer h3>a{
+    color:#FFFFFF;
+}
+
+.registroProf h2
+{
+    text-align: center;
+}
+.registroProf .glyphicon
+{
+    color:#c00;
+}
+
+.registroProf .thumbnail{
+    margin-bottom: 0px
+}
+
+.registroProf .card{
+      padding: 20px 10px;
+}

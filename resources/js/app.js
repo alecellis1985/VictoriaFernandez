@@ -1,23 +1,8 @@
 'use strict';
 
-var Professionals = angular.module('Professionals', ['ngRoute', 'angularFileUpload', 'ui.bootstrap']);//, 'ngSanitize'
-Professionals.config(function ($routeProvider, $httpProvider) { //, $provide
-
-    $routeProvider.otherwise({
-        templateUrl: 'resources/tpl/busquedaProfesionales.html',
-        controller: 'ProfessionalsSearchController',
-        resolve: {
-            departamentosList: function (CommonService) {
-                return CommonService.getRequest('api/departamentos');
-            },
-            categoriasList: function (CommonService) {
-                return CommonService.getRequest('api/categorias');
-            },
-            barriosList: function (CommonService) {
-                return CommonService.getRequest('api/barrios');
-            }
-        }
-    });
+var Professionals = angular.module('Professionals', ['ngRoute', 'angularFileUpload', 'ui.bootstrap','noCAPTCHA']);//, 'ngSanitize'
+Professionals.config(['$routeProvider','$httpProvider',function ($routeProvider, $httpProvider) {
+    
 
     $routeProvider.when('/registro-usuario', {
         templateUrl: 'resources/tpl/registroUsuario.html',
@@ -34,11 +19,34 @@ Professionals.config(function ($routeProvider, $httpProvider) { //, $provide
             }
         }
     });
+    
     $routeProvider.when('/contacto', {
         templateUrl: 'resources/tpl/contacto.html',
         controller: 'ContactoController'
     });
-});
+    
+    $routeProvider.when('/quienessomos', {
+        templateUrl: 'resources/tpl/quienessomos.html'
+//        controller: 'ContactoController'
+    });
+    
+    $routeProvider.otherwise({
+        templateUrl: 'resources/tpl/busquedaProfesionales.html',
+        controller: 'ProfessionalsSearchController',
+        resolve: {
+            departamentosList: function (CommonService) {
+                return CommonService.getRequest('api/departamentos');
+            },
+            categoriasList: function (CommonService) {
+                return CommonService.getRequest('api/categorias');
+            },
+            barriosList: function (CommonService) {
+                return CommonService.getRequest('api/barrios');
+            }
+        }
+    });
+    
+}]);
 
 Professionals.run(function ($rootScope, $http, $location, $timeout, $filter) {
   

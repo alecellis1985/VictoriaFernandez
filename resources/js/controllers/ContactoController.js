@@ -2,6 +2,16 @@
 
 Professionals.controller('ContactoController', ['$scope', '$routeParams', '$http', '$rootScope', '$location','CommonService', function ($scope, $routeParams, $http, $rootScope, $location,CommonService) {
 
+    $scope.gRecaptchaResponse = '';
+
+    $scope.$watch('gRecaptchaResponse', function (){
+      $scope.expired = false;
+    });
+
+    $scope.expiredCallback = function expiredCallback(){
+      $scope.expired = true;
+    };
+          
     $scope.enviarMail = function(isValid){
         if (!isValid ) {
                 $rootScope.$broadcast('alert-event', {type: 'error', msg: "Existen errores en el formulario!"});

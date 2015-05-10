@@ -1,6 +1,7 @@
 <?php
 function getDepartamentos() {
     $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
+    $response = null;
     if ($conn->conectar()) {
         $sql = "SELECT * FROM departamentos ORDER BY nombreDepartamento"; 
         if ($conn->consulta($sql)) {

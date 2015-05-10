@@ -1,6 +1,7 @@
 <?php
 function getCategorias() {
     $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
+    $response = null;
     if ($conn->conectar()) {
         $sql = "SELECT * FROM categorias ORDER BY categoriaNombre";// ORDER BY nombreDepartamento
         if ($conn->consulta($sql)) {
