@@ -25,7 +25,7 @@
                 <i ng-class="{'searchIconActive':selectedList === 2}" ng-click="setListType(2)" class="glyphicon glyphicon-th-large searchIcons"></i>
             </div>  
         </div>
-        <user-Details selected-User="selectedUser" elem-Colapsed="isCollapsed"></user-Details>
+        <user-Details selected-User="selectedUser" elem-Colapsed="isCollapsed" ng-if="!isCollapsed"></user-Details>
         <div class="panel panel-primary " ng-if="selectedList === 1">
             <div class="panel-heading">
                 <h3 class="panel-title">Usuarios</h3>
@@ -95,9 +95,9 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-xs-12">
-                            <a href-Link='{{user.facebookUrl}}' title="Facebook" target="_blank" stop-Event ><i class="fa fa-facebook-official"></i></a>
-                            <a href-Link='{{user.twitterUrl}}' title="Twitter" target="_blank" stop-Event ><i class="fa fa-twitter-square"></i></a>
-                            <a href-Link='{{user.linkedinUrl}}' title="Linkedin" target="_blank" stop-Event ><i class="fa fa-linkedin-square"></i></a>
+                            <prof-a-custom href-Link="user.facebookUrl" icon="fa fa-facebook-official" icon-Title="Facebook"></prof-a-custom>
+                            <prof-a-custom href-Link="user.twitterUrl" icon="fa fa-twitter-square" icon-Title="Twitter"></prof-a-custom>
+                            <prof-a-custom href-Link="user.linkedinUrl" icon="fa fa-linkedin-square" icon-Title="Linkedin"></prof-a-custom>
                             <button type="submit" class="btn btn-primary pull-right" title="Contactar me" ng-click='sendMailToUser($event,user)'>
                                 <i class="glyphicon glyphicon-envelope"></i>
                             </button>
