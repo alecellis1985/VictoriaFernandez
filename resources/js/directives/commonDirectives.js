@@ -180,3 +180,29 @@ Professionals.directive('dropdownFilter', function () {
         }
     };
 });
+
+Professionals.directive('resize', function ($window) {
+    return function (scope, element, attrs) {
+        var w = angular.element($window);
+        scope.getWindowDimensions = function () {
+            return { 'h': w.height(), 'w': w.width() };
+        };
+        scope.$watch(scope.getWindowDimensions, function (newValue, oldValue) {
+            scope.windowHeight = newValue.h;
+            scope.windowWidth = newValue.w;
+            scope.style = function () {
+                //Added but this should't be inside directive
+                var footerHeight = $('.footer').height();
+                //
+                return {
+                    'min-height': (newValue.h - attrs.resizeHeight -footerHeight) + 'px',
+                    //'width': (newValue.w - 100) + 'px'
+                };
+            };
+        }, true);
+
+        w.bind('resize', function () {
+            scope.$apply();
+        });
+    }
+});

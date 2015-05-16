@@ -10,6 +10,7 @@ require_once 'crudDepartamentos.php';
 require_once 'crudBarrios.php';
 require_once 'crudCategorias.php';
 require_once 'registerUser.php';
+require_once 'Login.php';
 require_once 'getUsers.php';
 require_once 'mailHandler.php';
 
@@ -20,6 +21,8 @@ $app->post('/add_user', 'addUser');
 $app->put('/users/:id', 'updateUser');
 $app->delete('/users/:id', 'deleteUser');
 $app->post('/sendMail', 'sendEmail');
+
+$app->post('/login', 'login');
 
 $app->get('/departamentos', 'getDepartamentos');
 $app->get('/categorias', 'getCategorias');

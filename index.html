@@ -18,7 +18,7 @@
             <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
         </div>
         <div id="header" ng-controller="HeaderController" ng-include="template.header"></div>
-        <div class="container contentContainer" style="margin-top: 5px;">
+        <div class="container contentContainer" style="margin-top: 5px;" ng-style="style()" resize resize-height="120">
             <!--<div class="row propagandaMargins" ng-controller="TopPropagandaController" ng-include="template.topPropaganda"></div>-->
             <div ng-view></div>
         </div>
