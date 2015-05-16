@@ -1,7 +1,7 @@
 <div class="panel panel-primary user-details planes"  collapse="elemColapsed">
     <div class="panel-heading">
          <h3 class="panel-title">{{selectedPlan.nombre}}</h3>
-         <button  type="button" class="close" ng-click="elemColapsed = true" style="position: relative;top: -18px;">
+         <button  type="button" class="close" ng-click="clearSelectedPlan()" style="position: relative;top: -18px;">
              <span aria-hidden="true">×</span>
          </button>
      </div>
@@ -28,7 +28,7 @@
             </div>
              <div class="col-xs-3 col-md-9 col-sm-3">
                 <label>Publique su anuncio y datos de contacto en profesionales.com.uy</label>
-            <p>Promocione su empresa en el único directorio exclusivo de profesionales<br />
+            <p>Promocione su empresa en el único directorio exclusivo de profesionales
                 de Uruguay y vea potenciada su comunicación online.</p>
             </div>
             <div class="col-xs-3 col-md-1 col-sm-3">
@@ -46,7 +46,7 @@
             </div>
              <div class="col-xs-3 col-md-9 col-sm-3">
                 <label>Reciba solicitudes de información y presupuestos vía email</label>
-                     <p>Potenciales clientes se comunicarán con usted en forma <br />
+                     <p>Potenciales clientes se comunicarán con usted en forma 
                         instantanea vía mail..</p>
             </div>
             <div class="col-xs-3 col-md-1 col-sm-3">
@@ -64,7 +64,7 @@
             </div>
              <div class="col-xs-3 col-md-9 col-sm-3">
                 <label>Datos de contacto</label>
-                     <p>En las solicitudes que reciba van a aparecer los datos de<br />
+                     <p>En las solicitudes que reciba van a aparecer los datos de
                         contacto del potencial cliente: nombre, email y teléfono.</p>
             </div>
             <div class="col-xs-3 col-md-1 col-sm-3">
@@ -82,7 +82,7 @@
             </div>
              <div class="col-xs-3 col-md-9 col-sm-3">
                 <label>Solicitudes a través del teléfono</label>
-                     <p>Su número de teléfono va a estar visible en su apartado.<br />
+                     <p>Su número de teléfono va a estar visible en su apartado.
                         De esta forma  los clientes van a poder contactar con usted directamente.</p>
             </div>
             <div class="col-xs-3 col-md-1 col-sm-3">
@@ -100,8 +100,8 @@
             </div>
              <div class="col-xs-3 col-md-9 col-sm-3">
                 <label>Posicion destacada del resto</label>
-                     <p>Va a aparecer destacado a partir de la primera página en las búsquedas<br />
-                        que hagan los usuarios  en el departamento y categoría de su negocio.<br />
+                     <p>Va a aparecer destacado a partir de la primera página en las búsquedas
+                        que hagan los usuarios  en el departamento y categoría de su negocio.
                         Ademas va a tener un banner destacado a la derecha de los resultados de búsqueda.
                      </p>
             </div>
@@ -113,46 +113,23 @@
             </div>
         </div>
          <div class="row">
-             <button ng-click="selectedPlanFn({e: $event})">PLAM</button>
-         </div>
-         <!--<div class="row">
-             
-             <div class="col-xs-9 col-md-9 col-sm-3">
-                 <div class="row">
-                     <label>Publique su anuncio y datos de contacto en profesionales.com.uy</label>
-                     <p>Promocione su empresa en el único directorio exclusivo de profesionales<br />
-                         de Uruguay y vea potenciada su comunicación online.</p>
-                 </div>
-                 <div class="row">
-                     <label>Reciba solicitudes de información y presupuestos vía email</label>
-                     <p>Potenciales clientes se comunicarán con usted en forma <br />
-                        instantanea vía mail..</p>
-                 </div>
-                 <div class="row">
-                     <label>Datos de contacto</label>
-                     <p>En las solicitudes que reciba van a aparecer los datos de<br />
-                        contacto del potencial cliente: nombre, email y teléfono.</p>
-                 </div>
-                 <div class="row">
-                     <label>Solicitudes a través del teléfono</label>
-                     <p>Su número de teléfono va a estar visible en su apartado.<br />
-                        De esta forma  los clientes van a poder contactar con usted directamente.</p>
-                 </div>
-                 <div class="row">
-                     <label>Posicion destacada del resto</label>
-                     <p>Va a aparecer destacado a partir de la primera página en las búsquedas<br />
-                        que hagan los usuarios  en el departamento y categoría de su negocio.<br />
-                        Ademas va a tener un banner destacado a la derecha de los resultados de búsqueda.
-                     </p>
-                 </div>
-                 <button ng-click="selectedPlanFn({e: $event})">PLAM</button>
-             </div>
-            <div class="col-xs-3 col-md-2 col-sm-3">
-                <div class='row'>
-                    <div class="col-xs-12 col-md-12 col-sm-12">
-                    </div>
-                </div>
+             <div class="col-xs-3 col-md-1 col-sm-3">
+                 <span><i class="fa fa-usd"></i></span>
             </div>
-        </div>-->
+             <div class="col-xs-3 col-md-9 col-sm-3">
+                <label>Precio mensual</label>
+                <p>Reciba solicitudes de presupuesto, consiga nuevos clientes y multiplique el éxito de su negocio.
+                    Llegue a miles de usuarios interesados en sus servicios profesionales.
+                    <b style="color:red">Registro gratis por 3 meses.</b>
+                     </p>
+            </div>
+             <div class="col-xs-3 col-md-1 col-sm-3">
+                 <button class="btn btn-primary pull-right" ng-click="selectedPlanFn({e: $event})"><i class="fa fa-usd"></i>500</button>
+                
+            </div>
+            <div class="col-xs-3 col-md-1 col-sm-3">
+                <button class="btn btn-primary pull-right" ng-click="selectedPlanFn({e: $event})"><i class="fa fa-usd"></i>900</button>
+            </div>
+        </div>
      </div>
  </div>

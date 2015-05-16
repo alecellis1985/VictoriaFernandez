@@ -162,11 +162,15 @@ body {
       margin-top: 4px;
 }
 
-.card:hover
+.card:hover,.cardhover
 {
     box-shadow: 0 0 1em rgba(187, 200, 0, 0.77);
     cursor:pointer;
 }
+.cardhover>.thumbnail{
+  background: #EAEAEA;  
+}
+  
 
 .card .glyphicon-envelope
 {
@@ -491,8 +495,9 @@ p
   font-size: 42px;
 }
 
-.planes>.panel-body>.row>div:first-child>span,.planes> .panel-body > .row:not(:first-child)>div:nth-child(2)>span,
-.planes> .panel-body > .row:not(:first-child)>div:nth-child(3)>span{
+.planes> .panel-body > .row>div:first-child>span,
+.planes> .panel-body > .row:not(:first-child) > div:nth-child(3)>span,
+.planes> .panel-body > .row:not(:first-child) > div:nth-child(4)>span{
     display:block;
     text-align: center;
 }
@@ -512,7 +517,8 @@ p
     text-align: center;
 }
 
-.planes> .panel-body > .row:not(:first-child)>div:nth-child(2), .planes> .panel-body > .row:not(:first-child)>div:nth-child(3){
+.planes> .panel-body > .row:not(:first-child)>div:nth-child(2), 
+.planes> .panel-body > .row:not(:first-child)>div:nth-child(3){
     border-right:1px solid #e1e1e1;
 }  
 

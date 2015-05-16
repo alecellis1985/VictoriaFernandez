@@ -24,12 +24,18 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         
         $scope.showPlan = function(plan)
         {
-            $scope.selectedPlan.tipo = plan;
-            $scope.selectedPlan.nombre = plan === 0?'Plan Profesionales':'Plan Empresas'
-            $scope.isCollapsed = false;
+            if($scope.selectedPlan.tipo === plan)
+            {
+                $scope.isCollapsed = true;
+                $scope.selectedPlan = {};
+            }
+            else
+            {
+                $scope.selectedPlan.tipo = plan;
+                $scope.selectedPlan.nombre = plan === 0?'Plan Profesionales':'Plan Empresas'
+                $scope.isCollapsed = false;
+            }
         }
-        
-        
 
         $scope.fillNewUserCamps = function ()
         {
@@ -52,7 +58,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
 //            $scope.user.servicioOfrecido4 = $scope.randomString(25);
 //            $scope.user.servicioOfrecido5 = $scope.randomString(25);
 //            $scope.user.servicioOfrecido6 = $scope.randomString(25);
-        }
+        };
 
         $scope.validateImg = function (files) {
             if (files && files.length) {
@@ -141,9 +147,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         $scope.checkTime = function () {
             debugger;
             if ($scope.user.horaFin <= $scope.user.horaComienzo) {
-
-                $scope.user.horaFin = new Date($scope.user.horaComienzo.getTime() + 10 * 60000)
-
+                $scope.user.horaFin = new Date($scope.user.horaComienzo.getTime() + 10 * 60000);
             }
         }
 

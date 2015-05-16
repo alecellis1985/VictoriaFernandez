@@ -9,7 +9,10 @@ Professionals.directive('planesDetails', function(){
         },
         replace: true,
         link:function($scope,element,attr){
-            
+            $scope.clearSelectedPlan = function(){
+                $scope.elemColapsed = true;
+                $scope.selectedPlan = {};
+            }
         }
     };
 });
