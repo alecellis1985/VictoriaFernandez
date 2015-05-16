@@ -19,7 +19,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                 text += possible.charAt(Math.floor(Math.random() * possible.length));
             return text;
         };
-        
+        //cambiar por tipo: {basico:{},premium:{} }; para que en la bd quede bien
         $scope.profesionalesAvailablePlans = {
             0:{
                 basico:500,
