@@ -104,17 +104,15 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             $scope.registro.mostrarRegistro = false;
             $scope.registro.empresa = false;
         };
-
-        $scope.showProfessionalRegistration = function (e) {
+        
+        /**************** PARA EL REGISTRO MIRAR ESTO **********************************/
+        //Con $scope.selectedPlan.categoria tengo que valor de plan eligio
+        //Con $scope.selectedPlan.tipo se si es 0 o 1 o sea profesional o empresa
+        $scope.showRegistration = function (e) {
             e.preventDefault();
+            $scope.selectedPlan.categoria = parseInt(e.target.textContent);
             $scope.registro.mostrarRegistro = true;
-            $scope.registro.empresa = false;
-        };
-
-        $scope.showEnterpriseRegistration = function (e) {
-            e.preventDefault();
-            $scope.registro.mostrarRegistro = true;
-            $scope.registro.empresa = true;
+            $scope.registro.empresa = $scope.selectedPlan.tipo === 1;
         };
 
         $scope.barrios = barriosList.data;
