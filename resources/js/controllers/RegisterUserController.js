@@ -20,6 +20,17 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             return text;
         };
         
+        $scope.profesionalesAvailablePlans = {
+            0:{
+                basico:500,
+                premium:900
+            },
+            1:{
+                basico:800,
+                premium:1200
+            }
+        };
+        
         $scope.selectedPlan = {};
         
         $scope.showPlan = function(plan)

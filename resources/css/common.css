@@ -506,6 +506,10 @@ p
     border-top: 1px solid #e1e1e1;
 }
 
+.planes>.panel-body>.row:last-child{
+    border-bottom: 1px solid #e1e1e1;
+}
+
 .planes>.panel-body>.row:not(:first-child)>div{
     padding-top: 10px;  
     line-height: normal;

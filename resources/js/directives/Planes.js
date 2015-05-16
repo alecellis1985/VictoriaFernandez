@@ -5,7 +5,8 @@ Professionals.directive('planesDetails', function(){
         scope: {
             selectedPlan: '=',
             elemColapsed:'=',
-            selectedPlanFn:'&'
+            selectedPlanFn:'&',
+            availablePlans:'='
         },
         replace: true,
         link:function($scope,element,attr){
