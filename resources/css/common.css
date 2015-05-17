@@ -90,10 +90,6 @@ body {
     height: 33px;
 }
 
-/*.contentContainer {
-  min-height: 500px;
-}*/
-
 .filterUl
 {
    padding-top: 0;
@@ -536,5 +532,7 @@ p
   font-size: 42px;  
 }
 
-
-  
+.fa-spinner{
+    font-size: 43px;
+    text-align: center;
+}

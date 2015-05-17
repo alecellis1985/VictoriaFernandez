@@ -16,6 +16,9 @@ Professionals.config(['$routeProvider','$httpProvider',function ($routeProvider,
             },
             barriosList: function (CommonService) {
                 return CommonService.getRequest('api/barrios');
+            },
+            planes:function(CommonService){
+                return CommonService.getRequest('api/planes');
             }
         }
     });
@@ -29,6 +32,13 @@ Professionals.config(['$routeProvider','$httpProvider',function ($routeProvider,
         templateUrl: 'resources/tpl/quienessomos.html'
 //        controller: 'ContactoController'
     });
+    
+    $routeProvider.when('/administrar-users', {
+        templateUrl: 'resources/tpl/users.html',
+        controller: 'UsersController'
+    });
+    
+  
     
     $routeProvider.otherwise({
         templateUrl: 'resources/tpl/busquedaProfesionales.html',

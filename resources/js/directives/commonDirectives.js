@@ -197,6 +197,7 @@ Professionals.directive('resize', function ($window) {
                 return {
                     'min-height': (newValue.h - attrs.resizeHeight -footerHeight) + 'px',
                     //'width': (newValue.w - 100) + 'px'
+                    //width could work if you ant responsive width
                 };
             };
         }, true);

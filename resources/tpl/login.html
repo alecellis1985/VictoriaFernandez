@@ -1,16 +1,16 @@
 <div class="modal-header">
     <h3 class="modal-title">Ingresar</h3>
 </div>
-<form id="logInForm" role="form" action="login.php" method="POST">
+<form ng-submit="login(registerUser.$valid)" name="loginUser" style="padding-top: 10px" method="post" novalidate>
     <div class="modal-body">
         <div class="modal-body">
                 <div class="form-group">
                     <label for="userName">Usuario:</label>
-                    <input type="text" class="form-control" name="username" id="userName" placeholder="usuario" required>
+                    <input type="text" class="form-control" name="username" id="userName" ng-model="userlogin.usuario" placeholder="usuario" required>
                 </div>
                 <div class="form-group">
                     <label for="pwd">Contraseña:</label>
-                    <input type="password" class="form-control" name="password" id="pwd" placeholder="contraseña" required>
+                    <input type="password" class="form-control" name="password" id="pwd" ng-model="userlogin.password" placeholder="contraseña" required>
                 </div>
                 <div class="form-group hide">
                     <span id="logInErrors" class="error"></span>
@@ -18,7 +18,7 @@
             </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-default" ng-click="ok()">Ingresar</button>
+        <button type="submit" class="btn btn-default" ng-disabled="loginUser.$invalid">Ingresar</button>
         <button class="btn btn-primary" ng-click="cancel()">Cerrar</button>
     </div>
 </form>

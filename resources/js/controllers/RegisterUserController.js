@@ -1,13 +1,14 @@
 'use strict';
 
 Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$rootScope', '$location', '$upload',
-    'CommonService', 'departamentosList', 'categoriasList', 'barriosList',
-    function ($scope, $routeParams, $rootScope, $location, $upload, CommonService, departamentosList, categoriasList, barriosList) {
+    'CommonService', 'departamentosList', 'categoriasList', 'barriosList','planes',
+    function ($scope, $routeParams, $rootScope, $location, $upload, CommonService, departamentosList, categoriasList, barriosList,planes) {
         //FOR UPLOAD FILE (IMG)
         $scope.$watch('files', function () {
             //perform img validation 
             $scope.validateImg($scope.files);
         });
+        $scope.planes = planes;
         $scope.isCollapsed = true;
 
         $scope.randomString = function (letters)
