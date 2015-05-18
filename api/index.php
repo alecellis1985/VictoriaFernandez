@@ -24,12 +24,12 @@ $app->get('/users', 'getAllUsers');
 $app->post('/sendMail', 'sendEmail');
 
 $app->post('/login', 'loginUser');
-
+$app->get('/planes', 'getCategorias2');
 $app->get('/departamentos', 'getDepartamentos');
 $app->get('/categorias', 'getCategorias');
 $app->get('/barrios', 'getBarrios');
 //$app->get('/planes', 'getPlanes');
-$app->get('/planes', 'getCategorias2');
+
 
 
 $app->get('/users/:categoria/:departamento', 'getUsers');
