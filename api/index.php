@@ -22,9 +22,7 @@ $app->get('/users', 'getAllUsers');
 //$app->put('/users/:id', 'updateUser');
 //$app->delete('/users/:id', 'deleteUser');
 $app->post('/sendMail', 'sendEmail');
-
-
-$app->get('/planes', 'getCategorias2');
+$app->get('/userPlans', 'getPlanes');
 $app->get('/departamentos', 'getDepartamentos');
 $app->get('/categorias', 'getCategorias');
 $app->get('/barrios', 'getBarrios');

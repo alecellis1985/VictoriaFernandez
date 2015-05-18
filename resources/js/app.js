@@ -18,7 +18,7 @@ Professionals.config(['$routeProvider','$httpProvider',function ($routeProvider,
                 return CommonService.getRequest('api/barrios');
             },
             planes:function(CommonService){
-                return CommonService.getRequest('api/planes');
+                return CommonService.getRequest('api/userPlans');
             }
         }
     });
