@@ -22,12 +22,15 @@ $app->get('/users', 'getAllUsers');
 //$app->put('/users/:id', 'updateUser');
 //$app->delete('/users/:id', 'deleteUser');
 $app->post('/sendMail', 'sendEmail');
-$app->get('/planes','getPlanes');
+
 $app->post('/login', 'loginUser');
 
 $app->get('/departamentos', 'getDepartamentos');
 $app->get('/categorias', 'getCategorias');
 $app->get('/barrios', 'getBarrios');
+//$app->get('/planes', 'getPlanes');
+$app->get('/planes', 'getCategorias2');
+
 
 $app->get('/users/:categoria/:departamento', 'getUsers');
 $app->post('/agregar_usuario', 'registerUser');
