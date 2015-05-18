@@ -219,15 +219,15 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         $scope.registrarUsuario = function (isValid)
         {
             if (!isValid || !validForm()) {
-                $rootScope.$broadcast('alert-event', {type: 'error', msg: "Existen errores en el formulario!"});
+                $rootScope.$broadcast('alert-event', {type: 'danger', msg: "Existen errores en el formulario!"});
                 return;
             }
             
             //Need to map the marker position to latitude longitude to save in the db
             var markersArr = $scope.markers.map(function (obj) {
                 return {
-                    'latitude': obj.position.k.toString(),
-                    'longitude': obj.position.D.toString(),
+                    'latitude': obj.position.A.toString(),
+                    'longitude': obj.position.F.toString(),
                 }
             });
 
@@ -267,10 +267,13 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             if (!(typeof $scope.files === 'undefined') && !$scope.files === null)
                 imgFile = $scope.files[0];
             CommonService.postRequestWithFile('api/agregar_usuario', data, imgFile).then(function (result) {
-                if (result.data.success)
+                if (result.data.success) {
                     $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Has sido registrado con exito'});
+                    $location.path('/index.html');
+                }
                 else
-                    $rootScope.$broadcast('alert-event', {type: 'error', msg: result.data.msg});
+                    $rootScope.$broadcast('alert-event', {type: 'danger', msg: result.data.msg});
+
             });
         };
     }]);

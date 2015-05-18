@@ -49,6 +49,38 @@ class ConexionBD {
         }
         return $retorno;
     }
+    
+     /*
+     * 	Close cursor
+     */
+
+    function closeCursor() {
+        $this->sentencia->closeCursor();
+    }
+    
+    /*
+     * 	Begin transaction
+     */
+
+    function beginTransaction() {
+        $this->conexion->beginTransaction();
+    }
+    
+    /*
+     * 	Begin transaction
+     */
+
+    function commitTransaction() {
+        $this->conexion->commit();
+    }
+    
+    /*
+     * 	RollBack
+     */
+
+    function rollbackTransaction() {
+        $this->conexion->rollBack();
+    }
 
     /*
      * 	Método que elimina la conexión establecida

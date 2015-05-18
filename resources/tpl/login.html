@@ -1,24 +1,26 @@
-<div class="modal-header">
-    <h3 class="modal-title">Ingresar</h3>
-</div>
-<form ng-submit="login(registerUser.$valid)" name="loginUser" style="padding-top: 10px" method="post" novalidate>
-    <div class="modal-body">
+<script type="text/ng-template" id="resources/tpl/login.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Ingresar</h3>
+    </div>
+    <form ng-submit="loginUser($event)" id="logInForm" role="form" method="POST">
         <div class="modal-body">
-                <div class="form-group">
-                    <label for="userName">Usuario:</label>
-                    <input type="text" class="form-control" name="username" id="userName" ng-model="userlogin.usuario" placeholder="usuario" required>
+            <div class="modal-body">
+                    <div class="form-group">
+                        <label for="userName">Usuario:</label>
+                        <input type="text" name="username" class="form-control" id="userName" ng-model="userLogin.username" placeholder="usuario" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Contraseña:</label>
+                        <input type="password" class="form-control" name="password" id="pwd" ng-model="userLogin.password" placeholder="contraseña" required>
+                    </div>
+                    <div class="form-group hide">
+                        <span id="logInErrors" class="error"></span>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="pwd">Contraseña:</label>
-                    <input type="password" class="form-control" name="password" id="pwd" ng-model="userlogin.password" placeholder="contraseña" required>
-                </div>
-                <div class="form-group hide">
-                    <span id="logInErrors" class="error"></span>
-                </div>
-            </div>
-    </div>
-    <div class="modal-footer">
-        <button type="submit" class="btn btn-default" ng-disabled="loginUser.$invalid">Ingresar</button>
-        <button class="btn btn-primary" ng-click="cancel()">Cerrar</button>
-    </div>
-</form>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-default">Ingresar</button>
+            <button class="btn btn-primary" ng-click="cancel()">Cerrar</button>
+        </div>
+    </form>
+</script>

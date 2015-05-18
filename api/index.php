@@ -10,7 +10,7 @@ require_once 'crudDepartamentos.php';
 require_once 'crudBarrios.php';
 require_once 'crudCategorias.php';
 require_once 'registerUser.php';
-require_once 'login.php';
+require_once 'loginUser.php';
 require_once 'getUsers.php';
 require_once 'mailHandler.php';
 require_once 'planes.php';
@@ -23,15 +23,13 @@ $app->get('/users', 'getAllUsers');
 //$app->delete('/users/:id', 'deleteUser');
 $app->post('/sendMail', 'sendEmail');
 
-$app->post('/login', 'loginUser');
+
 $app->get('/planes', 'getCategorias2');
 $app->get('/departamentos', 'getDepartamentos');
 $app->get('/categorias', 'getCategorias');
 $app->get('/barrios', 'getBarrios');
 //$app->get('/planes', 'getPlanes');
-
-
-
+$app->post('/login-user', 'loginUser');
 $app->get('/users/:categoria/:departamento', 'getUsers');
 $app->post('/agregar_usuario', 'registerUser');
 $app->post('/check-username', 'checkUsername');

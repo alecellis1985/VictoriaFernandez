@@ -68,7 +68,7 @@ Professionals.directive('mapSetMarkers', function () {
         },
         template:'<div class="row">'+
         '<div class="form-group col-xs-12">'+
-            '<button ng-click="clearMarkers()" class="btn btn-primary pull-left">Borrar Marcadores</button>'+
+            '<button ng-click="clearMarkers($event)" class="btn btn-primary pull-left">Borrar Marcadores</button>'+
             '</div>'+
         '</div>'+
         '<div class="row">'+
@@ -105,7 +105,8 @@ Professionals.directive('mapSetMarkers', function () {
                 google.maps.event.trigger(selectedMarker, 'click');
             };
             
-            $scope.clearMarkers = function() {
+            $scope.clearMarkers = function(e) {
+                e.preventDefault();
                 var arrLength = $scope.markersArr.length;
                 for (var i = 0; i < arrLength; i++) {
                   $scope.markersArr[i].setMap(null);
