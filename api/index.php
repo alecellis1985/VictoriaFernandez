@@ -26,7 +26,6 @@ $app->get('/userPlans', 'getPlanes');
 $app->get('/departamentos', 'getDepartamentos');
 $app->get('/categorias', 'getCategorias');
 $app->get('/barrios', 'getBarrios');
-//$app->get('/planes', 'getPlanes');
 $app->post('/login-user', 'loginUser');
 $app->get('/users/:categoria/:departamento', 'getUsers');
 $app->post('/agregar_usuario', 'registerUser');

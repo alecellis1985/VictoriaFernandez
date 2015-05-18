@@ -158,11 +158,10 @@ Professionals.directive('dropdownFilter', function () {
             nameProp: '@',
             idProp: '@',
             elementsArr: '=',
-            selectedElementFn: '='
+            selectedElementFn: '=',
         },
         replace: true,
         link: function ($scope, elem, attr) {
-
             $scope.clearModel = function (evt)
             {
                 $scope.dropdownFilter = '';
@@ -177,6 +176,39 @@ Professionals.directive('dropdownFilter', function () {
             };
 
 
+        }
+    };
+});
+
+Professionals.directive('dropdownWValidation', function () {
+    return {
+        restrict: 'E',
+        templateUrl: 'resources/tpl/dropdownWValidation.html',
+        scope: {
+            selectedElem: '=',
+            placeholderFilter: '@',
+            nameProp: '@',
+            elementsArr: '=',
+            selectedElementFn: '=',
+            checkFn:'&',
+            errorMsg:'@'
+        },
+        replace: true,
+        link: function ($scope, elem, attr) {
+            $scope.dropdownError = false;
+            $scope.clearModel = function (evt)
+            {
+                $scope.dropdownFilter = '';
+                evt.preventDefault();
+                evt.stopPropagation();
+            };
+               
+            $scope.selectedElement = $scope.selectedElementFn || function (e, elem)
+            {
+                e.preventDefault();
+                $scope.selectedElem = elem;
+                $scope.dropdownError = $scope.checkFn({elem:$scope.selectedElem});
+            };
         }
     };
 });

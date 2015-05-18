@@ -117,7 +117,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         };
 
         $scope.barrios = barriosList.data;
-        $scope.barrios.unshift({barrioNombre: "Seleccione Barrio", barrioId: null});
+        $scope.barrios.unshift({barrioNombre: "Seleccione Barrio", barrioId: -1});
         $scope.selectedBarrio = $scope.barrios[0];
         $scope.categorias = categoriasList.data;
         $scope.categorias.unshift({categoriaNombre: "Seleccione Categoria", categoriaId: -1});
@@ -180,38 +180,50 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
 
         }
         
-         var dropDownCheck =  function(){
-              //Check category is set
-            $scope.categoriaError = parseInt($scope.selectedCategoria.categoriaId) < 0;
-            
-            //Check depto is set
-            $scope.departamentoError = parseInt($scope.depSelected.idDepartamento) < 0;
-            
-            //Check barrio is set if depto == Montevideo
-            $scope.barrioError = $scope.depSelected.nombreDepartamento === 'Montevideo' && parseInt($scope.selectedBarrio.barrioId) < 0;
-            
+//         $scope.dropDownCheck =  function(){
+//              //Check category is set
+////            $scope.categoriaError = parseInt($scope.selectedCategoria.categoriaId) < 0;
+//            
+//            //Check depto is set
+////            $scope.departamentoError = parseInt($scope.depSelected.idDepartamento) < 0;
+//            
+//            //Check barrio is set if depto == Montevideo
+//           // $scope.barrioError = $scope.depSelected.nombreDepartamento === 'Montevideo' && parseInt($scope.selectedBarrio.barrioId) < 0;
+//            
+//        };
+        
+        $scope.checkCategoria = function(elem){
+            return parseInt(elem.categoriaId) < 0;
         };
         
-        $scope.$watch("selectedCategoria", function(){
-            dropDownCheck();
-        });       
-       
-       $scope.$watch("depSelected", function(){
-            dropDownCheck();
-        });   
+        $scope.checkDepto = function(elem){
+            return parseInt(elem.idDepartamento) < 0;
+        };
         
-        $scope.$watch("selectedBarrio", function(){
-            dropDownCheck();
-        });   
+        $scope.checkBarrio = function(elem){
+            return $scope.depSelected.nombreDepartamento === 'Montevideo' &&  parseInt(elem.barrioId) < 0;
+        };
+        
+//        $scope.$watch("selectedCategoria", function(){
+//            $scope.dropDownCheck();
+//        });       
+       
+//       $scope.$watch("depSelected", function(){
+//            $scope.dropDownCheck();
+//        });   
+//        
+//        $scope.$watch("selectedBarrio", function(){
+//            $scope.dropDownCheck();
+//        });   
         
         var validForm = function () {
             
             var errors = false;
             
-            dropDownCheck();
+//            $scope.dropDownCheck();
             
             //Check errors
-            errors = $scope.categoriaError || $scope.departamentoError;
+//            errors = $scope.categoriaError || $scope.departamentoError;
              
             return !errors;           
         };

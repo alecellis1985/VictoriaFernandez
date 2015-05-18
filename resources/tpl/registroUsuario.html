@@ -36,7 +36,7 @@
         </div>  
     </div>
 </div>
-<form ng-submit="registrarUsuario(registerUser.$valid)" name="registerUser" style="padding-top: 10px" ng-if="registro.mostrarRegistro" 
+<form ng-submit="registrarUsuario(registerUser.$valid)" name="registerUser" style="padding-top: 10px" ng-show="registro.mostrarRegistro" 
       method="post" novalidate>
     <div class="panel panel-primary">
         <div class="panel-heading">
@@ -105,16 +105,13 @@
         <div class="panel-body">
             <div class="row">
                 <div class="form-group col-xs-12 col-md-3">
-                    <dropdown-Filter selected-Elem="selectedCategoria" name-Prop="categoriaNombre" id-Prop="categoriaId" elements-Arr="categorias" placeholder-Filter="Filtro de categorias" change-Fn="dropDownChange"></dropdown-Filter>                   
-                    <span ng-show="categoriaError" class="error">Seleccione una categoria</span>
+                    <dropdown-w-validation check-fn="checkCategoria(elem)" error-msg="Seleccione una categoria" selected-Elem="selectedCategoria" name-Prop="categoriaNombre" elements-Arr="categorias" placeholder-Filter="Filtro de categorias"></dropdown-w-validation>
                 </div>
                 <div class="form-group col-xs-12 col-md-3">
-                    <dropdown-Filter selected-Elem="depSelected" name-Prop="nombreDepartamento" elements-Arr="departamentosList" placeholder-Filter="Filtro de departamentos"></dropdown-Filter> 
-                    <span ng-show="departamentoError" class="error">Seleccione un departamento</span>
+                    <dropdown-w-validation check-fn="checkDepto(elem)" error-msg="Seleccione un departamento" selected-Elem="depSelected" name-Prop="nombreDepartamento" elements-Arr="departamentosList" placeholder-Filter="Filtro de departamentos"></dropdown-w-validation> 
                 </div>
                 <div class="form-group col-xs-12 col-md-3" ng-show="depSelected.nombreDepartamento === 'Montevideo'">
-                    <dropdown-Filter selected-Elem="selectedBarrio" name-Prop="barrioNombre" elements-Arr="barrios" placeholder-Filter="Filtro de barrios"></dropdown-Filter>                     
-                    <span ng-show="barrioError" class="error">Seleccione un barrio de Mvdeo.</span>
+                    <dropdown-w-validation check-fn="checkBarrio(elem)" error-msg="Seleccione un barrio de Mdeo" selected-Elem="selectedBarrio" name-Prop="barrioNombre" elements-Arr="barrios" placeholder-Filter="Filtro de barrios"></dropdown-w-validation>                     
                 </div>
                 <div class="form-group col-xs-12 col-md-3">
                     <input type="text" name="direccion" class="form-control" ng-model="user.direccion" placeholder="Direccion" required>
@@ -169,7 +166,8 @@
                     <label>Haga click en el mapa para establecer la ubicación</label>
                 </div>
             </div>
-            <map-Set-Markers markers-Arr="markers"></map-Set-Markers>
+            
+            <map-Set-Markers ng-if="registro.mostrarRegistro" markers-Arr="markers"></map-Set-Markers>
         </div>
     </div>
     <div class="panel panel-primary">
