@@ -3,7 +3,7 @@ function getPlanes(){
     $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
     $response = null;
     if ($conn->conectar()) {
-        $sql = "SELECT * FROM users";   
+        $sql = "SELECT * FROM plan";   
         if ($conn->consulta($sql)) {
             $planes = $conn->restantesRegistros();
             $response = MessageHandler::getSuccessResponse("",$planes);
