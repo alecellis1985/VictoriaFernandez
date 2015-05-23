@@ -536,6 +536,11 @@ p
     text-align: center;
 }
 
+.centerDiv{
+    text-align: center;
+    width: 100%;
+}
+
 @media (min-width: 1366px){
     .container {
         width: 1324px;
