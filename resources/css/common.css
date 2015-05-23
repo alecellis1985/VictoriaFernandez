@@ -13,7 +13,6 @@ body {
     color:#FFFFFF!important;
 }
 
-
 .navbar-fixed-top .navbar-header > a:hover,.navbar-inverse .navbar-nav>li>a:hover
 {
     transition: background-color 1900ms;
@@ -535,4 +534,25 @@ p
 .fa-spinner{
     font-size: 43px;
     text-align: center;
+}
+
+@media (min-width: 1366px){
+    .container {
+        width: 1324px;
+    }
+}
+@media (min-width: 1440px){
+    .container {
+        width: 1400px;
+    }
+}
+@media (min-width: 1600px){
+    .container {
+        width: 1550px;
+    }
+}
+@media (min-width: 1920px){
+    .container {
+        width: 1870px;
+    }
 }
