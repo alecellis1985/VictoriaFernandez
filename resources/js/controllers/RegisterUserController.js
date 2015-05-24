@@ -22,14 +22,41 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         };
         //cambiar por tipo: {basico:{},premium:{} }; para que en la bd quede bien
         $scope.profesionalesAvailablePlans = {
-            0:{
-                basico:500,
-                premium:900
+            0:{//Profesional
+                Basico:{
+                    Mensual:500,
+                    Semestral:2550,
+                    Anual:4800
+                },
+                Premium:{
+                    Mensual:900,
+                    Semestral:4590,
+                    Anual:8640
+                }
             },
-            1:{
-                basico:800,
-                premium:1200
+            1:{//Empresarial
+                basico:{
+                    Mensual:800,
+                    Semestral:4080,
+                    Anual:4800
+                },
+                premium:{
+                    Mensual:1200,
+                    Semestral:6120,
+                    Anual:11520
+                }
             }
+        };
+        
+        $scope.getPlan = function(tipo,categoria,duracionPlan){
+            return $scope.planes.filter(function(elem){
+                return elem.Tipo === tipo && elem.Categoria === categoria && elem.DuracionPlan === duracionPlan;
+            });
+        };
+        
+        $scope.getPlanCash = function(tipo,categoria,duracionPlan){
+            var plan = $scope.getPlan(tipo,categoria,duracionPlan);
+            return plan.length>0?plan.Precio:0;
         };
         
         $scope.selectedPlan = {};
@@ -285,7 +312,6 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                 }
                 else
                     $rootScope.$broadcast('alert-event', {type: 'danger', msg: result.data.msg});
-
             });
         };
     }]);

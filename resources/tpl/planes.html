@@ -112,7 +112,7 @@
                 <span><i class="fa fa-check"></i></span>
             </div>
         </div>
-         <div class="row">
+         <div class="row" ng-repeat="plan in planes">
              <div class="col-xs-3 col-md-1 col-sm-3">
                  <span><i class="fa fa-usd"></i></span>
             </div>
@@ -123,17 +123,14 @@
                     <b style="color:red">Registro gratis por 3 meses.</b>
                      </p>
             </div>
-             <div class="col-xs-3 col-md-1 col-sm-3">
-                 
-                 <button class="btn btn-primary" ng-click="selectedPlanFn({e: $event})"><i class="fa fa-usd"></i>{{availablePlans[selectedPlan.tipo].basico}}</button>
-                 
-                
+             <div class="col-xs-3 col-md-1 col-sm-3 displaycenterText">
+                 <button class="btn btn-primary" ng-click="selectedPlanFn({e: $event})"><i class="fa fa-usd"></i>{{availablePlans[selectedPlan.tipo].Basico.Mensual}}</button>
             </div>
-            <div class="col-xs-3 col-md-1 col-sm-3">
-                <button class="btn btn-primary" ng-click="selectedPlanFn({e: $event})"><i class="fa fa-usd"></i>{{availablePlans[selectedPlan.tipo].premium}}</button>
+            <div class="col-xs-3 col-md-1 col-sm-3 displaycenterText">
+                <button class="btn btn-primary" ng-click="selectedPlanFn({e: $event})"><i class="fa fa-usd"></i>{{availablePlans[selectedPlan.tipo].Premium.Mensual}}</button>
             </div>
         </div>
-         <div class="row">
+        <div class="row">
              <div class="col-xs-3 col-md-1 col-sm-3">
                  <span><i class="fa fa-usd"></i></span>
             </div>
@@ -144,15 +141,15 @@
                     <b style="color:red">Registro gratis por 3 meses.</b>
                      </p>
             </div>
-             <div class="col-xs-3 col-md-1 col-sm-3">
-                 <button class="btn btn-primary" ng-click="selectedPlanFn({e: $event})"><i class="fa fa-usd"></i>{{availablePlans[selectedPlan.tipo].basico}}</button>
-                
+             <div class="col-xs-3 col-md-1 col-sm-3 displaycenterText">
+                 
+                 <button class="btn btn-primary" ng-click="selectedPlanFn({e: $event})"><i class="fa fa-usd"></i>{{availablePlans[selectedPlan.tipo].Basico.Semestral}}</button>
             </div>
-            <div class="col-xs-3 col-md-1 col-sm-3">
-                <button class="btn btn-primary" ng-click="selectedPlanFn({e: $event})"><i class="fa fa-usd"></i>{{availablePlans[selectedPlan.tipo].premium}}</button>
+            <div class="col-xs-3 col-md-1 col-sm-3 displaycenterText">
+                <button class="btn btn-primary" ng-click="selectedPlanFn({e: $event})"><i class="fa fa-usd"></i>{{availablePlans[selectedPlan.tipo].Premium.Semestral}}</button>
             </div>
         </div>
-         <div class="row">
+        <div class="row">
              <div class="col-xs-3 col-md-1 col-sm-3">
                  <span><i class="fa fa-usd"></i></span>
             </div>
@@ -161,14 +158,13 @@
                 <p>Reciba solicitudes de presupuesto, consiga nuevos clientes y multiplique el éxito de su negocio.
                     Llegue a miles de usuarios interesados en sus servicios profesionales.
                     <b style="color:red">Registro gratis por 3 meses.</b>
-                </p>
+                     </p>
             </div>
-             <div class="col-xs-3 col-md-1 col-sm-3">
-                 <button class="btn btn-primary" ng-click="selectedPlanFn({e: $event})"><i class="fa fa-usd"></i>{{availablePlans[selectedPlan.tipo].basico}}</button>
-                
+             <div class="col-xs-3 col-md-1 col-sm-3 displaycenterText">
+                 <button class="btn btn-primary" ng-click="selectedPlanFn({e: $event})"><i class="fa fa-usd"></i>{{availablePlans[selectedPlan.tipo].Basico.Anual}}</button>
             </div>
-            <div class="col-xs-3 col-md-1 col-sm-3">
-                <button class="btn btn-primary" ng-click="selectedPlanFn({e: $event})"><i class="fa fa-usd"></i>{{availablePlans[selectedPlan.tipo].premium}}</button>
+            <div class="col-xs-3 col-md-1 col-sm-3 displaycenterText">
+                <button class="btn btn-primary" ng-click="selectedPlanFn({e: $event})"><i class="fa fa-usd"></i>{{availablePlans[selectedPlan.tipo].Premium.Anual}}</button>
             </div>
         </div>
      </div>

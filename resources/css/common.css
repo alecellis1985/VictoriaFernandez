@@ -536,9 +536,8 @@ p
     text-align: center;
 }
 
-.centerDiv{
+.displaycenterText{
     text-align: center;
-    width: 100%;
 }
 
 @media (min-width: 1366px){
