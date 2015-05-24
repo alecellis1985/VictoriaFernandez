@@ -6,5 +6,16 @@ Professionals.controller('FooterController', ['$scope', '$routeParams', '$http',
         "footer": "resources/tpl/footer.html"
     };
 
+    $scope.triggerLogin = function(){
+        
+    }
+    
+    
+    $scope.ingresarClk = function(evt){
+        evt.preventDefault();
+        evt.stopPropagation();
+        $('#profIngresar').trigger('click');
+    };
+    
     $scope.clicked = false;
 }]);

@@ -4,8 +4,8 @@ body {
 
 .navbar-fixed-top
 {
-    background: #c00;
-    border-bottom: 2px solid #990000;
+    background: #4169E1;
+    border-bottom: 2px solid #5D41E1;
 }
 
 .navbar-fixed-top .navbar-header > a,.navbar-inverse .navbar-nav>li>a
@@ -16,7 +16,7 @@ body {
 .navbar-fixed-top .navbar-header > a:hover,.navbar-inverse .navbar-nav>li>a:hover
 {
     transition: background-color 1900ms;
-  background-color: #B50000;
+    background-color: #2E37DD;
 }
 
 .panel-primary
