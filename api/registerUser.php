@@ -30,10 +30,10 @@ function insertNewUser($conn, $user) {
         try {
             $conn->beginTransaction();
             $sql = "INSERT INTO users (nombre, apellido, email, telefono, celular, direccion, telefonoEmp, "
-                    . "departamento, categoria,barrio, sitioWeb, imagenUrl, facebookUrl, twitterUrl, linkedinUrl, descService, servicioOfrecido1,"
+                    . "departamento, categoria,barrio, plan ,sitioWeb, imagenUrl, facebookUrl, twitterUrl, linkedinUrl, descService, servicioOfrecido1,"
                     . " servicioOfrecido2, servicioOfrecido3, servicioOfrecido4, servicioOfrecido5, servicioOfrecido6, descServiceLong, username, password) "
                     . "VALUES (:nombre, :apellido, :email, :telefono, :celular, :direccion, :telefonoEmp, :departamento,"
-                    . " :categoria,:barrio, :sitioWeb, :imagenUrl, :facebookUrl, :twitterUrl, :linkedinUrl, :descService, :servicioOfrecido1,"
+                    . " :categoria,:barrio,:plan, :sitioWeb, :imagenUrl, :facebookUrl, :twitterUrl, :linkedinUrl, :descService, :servicioOfrecido1,"
                     . " :servicioOfrecido2, :servicioOfrecido3, :servicioOfrecido4, :servicioOfrecido5, :servicioOfrecido6,:descServiceLong, :username, :password)";
             $params = array();
             $params[0] = array("nombre", $user['nombre'], "string", 50);
@@ -45,22 +45,23 @@ function insertNewUser($conn, $user) {
             $params[6] = array("telefonoEmp", $user['telefonoEmp'], "string", 50);
             $params[7] = array("departamento", (int) $user['departamento'], "int", 5);
             $params[8] = array("categoria", (int) $user['categoria'], "int", 5);
-            $params[9] = $user['barrio'] == NULL ? array("barrio", null, "null") : array("barrio", (int) $user['barrio'], "int", 5);
-            $params[10] = array("sitioWeb", $user['sitioWeb'], "string", 50);
-            $params[11] = array("imagenUrl", $user['imagenUrl'], "string", 100);
-            $params[12] = array("facebookUrl", $user['facebookUrl'], "string", 250);
-            $params[13] = array("twitterUrl", $user['twitterUrl'], "string", 250);
-            $params[14] = array("linkedinUrl", $user['linkedinUrl'], "string", 250);
-            $params[15] = array("descService", $user['descService'], "string", 150);
-            $params[16] = array("servicioOfrecido1", $user['servicioOfrecido1'], "string", 20);
-            $params[17] = array("servicioOfrecido2", $user['servicioOfrecido2'], "string", 20);
-            $params[18] = array("servicioOfrecido3", $user['servicioOfrecido3'], "string", 20);
-            $params[19] = array("servicioOfrecido4", $user['servicioOfrecido4'], "string", 20);
-            $params[20] = array("servicioOfrecido5", $user['servicioOfrecido5'], "string", 20);
-            $params[21] = array("servicioOfrecido6", $user['servicioOfrecido6'], "string", 20);
-            $params[22] = array("descServiceLong", $user['descServiceLong'], "string", 1000);
-            $params[23] = array("username", $user['username'], "string", 50);
-            $params[24] = array("password", md5($user['password']), "string", 10);
+            $params[9] = $user['barrio'] == NULL ? array("barrio", null, "null") : array("barrio", (int) $user['barrio'], "int", 5);            
+            $params[10] = array("plan", (int) $user['plan'], "int", 5);
+            $params[11] = array("sitioWeb", $user['sitioWeb'], "string", 50);
+            $params[12] = array("imagenUrl", $user['imagenUrl'], "string", 100);
+            $params[13] = array("facebookUrl", $user['facebookUrl'], "string", 250);
+            $params[14] = array("twitterUrl", $user['twitterUrl'], "string", 250);
+            $params[15] = array("linkedinUrl", $user['linkedinUrl'], "string", 250);
+            $params[16] = array("descService", $user['descService'], "string", 150);
+            $params[17] = array("servicioOfrecido1", $user['servicioOfrecido1'], "string", 20);
+            $params[18] = array("servicioOfrecido2", $user['servicioOfrecido2'], "string", 20);
+            $params[19] = array("servicioOfrecido3", $user['servicioOfrecido3'], "string", 20);
+            $params[20] = array("servicioOfrecido4", $user['servicioOfrecido4'], "string", 20);
+            $params[21] = array("servicioOfrecido5", $user['servicioOfrecido5'], "string", 20);
+            $params[22] = array("servicioOfrecido6", $user['servicioOfrecido6'], "string", 20);
+            $params[23] = array("descServiceLong", $user['descServiceLong'], "string", 1000);
+            $params[24] = array("username", $user['username'], "string", 50);
+            $params[25] = array("password", md5($user['password']), "string", 10);
 
             if ($conn->consulta($sql, $params)) {
                 $user['id'] = $conn->ultimoIdInsert();
@@ -156,6 +157,7 @@ function getArrayFromRequest($request) {
         "departamento" => is_null($request->post('departamento')) ? "" : $request->post('departamento'),
         "categoria" => is_null($request->post('categoria')) ? "" : $request->post('categoria'),
         "barrio" => $request->post('barrio') == 'null' ? NULL : $request->post('barrio'), //is_null($request->post('barrio')) ? "" : ($request->post('barrio') == '-1' ? null : $request->post('barrio')),
+        "plan" => is_null($request->post('plan')) ? "" : $request->post('plan'),
         "sitioWeb" => is_null($request->post('sitioWeb')) ? "" : $request->post('sitioWeb'),
         "facebookUrl" => is_null($request->post('facebookUrl')) ? "" : $request->post('facebookUrl'),
         "twitterUrl" => is_null($request->post('twitterUrl')) ? "" : $request->post('twitterUrl'),

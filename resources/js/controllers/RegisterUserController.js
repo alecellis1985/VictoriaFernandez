@@ -35,21 +35,24 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                 }
             },
             1:{//Empresarial
-                basico:{
+                Basico:{
                     Mensual:800,
                     Semestral:4080,
                     Anual:4800
                 },
-                premium:{
+                Premium:{
                     Mensual:1200,
                     Semestral:6120,
                     Anual:11520
                 }
             }
         };
+        $scope.convertIntToPlanType = function(num){
+            return num === 0?'Profesional':'Empresarial';
+        };
         
         $scope.getPlan = function(tipo,categoria,duracionPlan){
-            return $scope.planes.filter(function(elem){
+            return $scope.planes.data.filter(function(elem){
                 return elem.Tipo === tipo && elem.Categoria === categoria && elem.DuracionPlan === duracionPlan;
             });
         };
@@ -136,9 +139,13 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         /**************** PARA EL REGISTRO MIRAR ESTO **********************************/
         //Con $scope.selectedPlan.categoria tengo que valor de plan eligio
         //Con $scope.selectedPlan.tipo se si es 0 o 1 o sea profesional o empresa
-        $scope.showRegistration = function (e) {
+        $scope.showRegistration = function (e,tipo,duracion,categoria) {
             e.preventDefault();
-            $scope.selectedPlan.categoria = parseInt(e.target.textContent);
+            $scope.userPlan = $scope.getPlan($scope.convertIntToPlanType(tipo),categoria,duracion);
+            if($scope.userPlan.length>0)
+            {
+                $scope.IdPlan = $scope.userPlan[0].IdPlan;
+            }
             $scope.registro.mostrarRegistro = true;
             $scope.registro.empresa = $scope.selectedPlan.tipo === 1;
         };
@@ -284,6 +291,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                 'categoria': parseInt($scope.selectedCategoria.categoriaId),
                 'barrio' : parseInt($scope.selectedBarrio.barrioId),
                 'sitioWeb': $scope.user.sitioWeb,
+                'plan':$scope.IdPlan,
                 'imagen': $scope.user.imagen,
                 'facebookUrl': $scope.user.facebookUrl,
                 'twitterUrl': $scope.user.twitterUrl,

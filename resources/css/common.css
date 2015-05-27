@@ -560,3 +560,13 @@ p
         width: 1870px;
     }
 }
+
+mark{
+    background: #fedc45;
+    background: rgba(254,220,69,.7);
+    color: #000;
+    display: inline-block;
+    padding: .08em .2em;
+    font-weight: 700;
+    margin-top: 4px;
+}

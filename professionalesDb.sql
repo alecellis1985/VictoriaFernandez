@@ -243,16 +243,16 @@ CREATE TABLE `plan` (
 
 INSERT INTO `plan` VALUES (1, 'Profesional', 'Basico', 500, 'Mensual');
 INSERT INTO `plan` VALUES (2, 'Profesional', 'Premium', 900, 'Mensual');
-INSERT INTO `plan` VALUES (3, 'Profesional', ' Basico', 2550, 'Semestral');
-INSERT INTO `plan` VALUES (4, 'Profesional', ' Basico', 4800, 'Anual');
-INSERT INTO `plan` VALUES (5, 'Profesional', ' Premium', 4590, 'Semestral');
-INSERT INTO `plan` VALUES (6, 'Profesional', ' Premium', 8640, 'Anual');
+INSERT INTO `plan` VALUES (3, 'Profesional', 'Basico', 2550, 'Semestral');
+INSERT INTO `plan` VALUES (4, 'Profesional', 'Basico', 4800, 'Anual');
+INSERT INTO `plan` VALUES (5, 'Profesional', 'Premium', 4590, 'Semestral');
+INSERT INTO `plan` VALUES (6, 'Profesional', 'Premium', 8640, 'Anual');
 INSERT INTO `plan` VALUES (7, 'Empresarial', 'Basico', 800, 'Mensual');
 INSERT INTO `plan` VALUES (8, 'Empresarial', 'Premium', 1200, 'Mensual');
-INSERT INTO `plan` VALUES (9, 'Empresarial', ' Basico', 4080, 'Semestral');
-INSERT INTO `plan` VALUES (10, 'Empresarial', ' Basico', 7680, 'Anual');
-INSERT INTO `plan` VALUES (11, 'Empresarial', ' Premium', 6120, 'Semestral');
-INSERT INTO `plan` VALUES (12, 'Empresarial', ' Premium', 11520, 'Anual');
+INSERT INTO `plan` VALUES (9, 'Empresarial', 'Basico', 4080, 'Semestral');
+INSERT INTO `plan` VALUES (10, 'Empresarial', 'Basico', 7680, 'Anual');
+INSERT INTO `plan` VALUES (11, 'Empresarial', 'Premium', 6120, 'Semestral');
+INSERT INTO `plan` VALUES (12, 'Empresarial', 'Premium', 11520, 'Anual');
 --
 -- Table structure for table `mapa`
 --
@@ -327,6 +327,38 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+INSERT INTO  `profesionales`.`users` (
+`idUser` ,
+`nombre` ,
+`apellido` ,
+`email` ,
+`telefono` ,
+`celular` ,
+`direccion` ,
+`telefonoEmp` ,
+`departamento` ,
+`categoria` ,
+`barrio` ,
+`plan` ,
+`sitioWeb` ,
+`imagenUrl` ,
+`facebookUrl` ,
+`twitterUrl` ,
+`linkedinUrl` ,
+`descService` ,
+`servicioOfrecido1` ,
+`servicioOfrecido2` ,
+`servicioOfrecido3` ,
+`servicioOfrecido4` ,
+`servicioOfrecido5` ,
+`servicioOfrecido6` ,
+`descServiceLong` ,
+`username` ,
+`password`
+)
+VALUES (
+NULL ,  'Alec',  'Ellis',  'alecellis1985@hotmail.com',  '26013794',  '098635923',  'm.tajes 7530',  '26013794',  '2',  '1', NULL ,  '5',  '',  '',  'https://www.facebook.com/alec.ellis.714', NULL , NULL ,  'construccion de paginas web',  'SEO',  'OPTIMIZATION', NULL , NULL , NULL , NULL ,  'database performance optimization', MD5(  'turtleman1' ) , MD5(  'turtleman1' )
+);
 --
 -- Dumping data for table `users`
 --

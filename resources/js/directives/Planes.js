@@ -17,3 +17,26 @@ Professionals.directive('planesDetails', function(){
         }
     };
 });
+
+/*
+ * <mark>Save {{parseInt(availablePlans[selectedPlan.tipo].Basico.Mensual*3/availablePlans[selectedPlan.tipo].Basico.Semestral*100)}}</mark>
+ */
+Professionals.directive('discountDirective', function(){
+    return {
+        restrict: 'E',
+        templateUrl: 'resources/tpl/discountDirective.html',
+        scope: {
+            dividendo :'=',
+            divisor:'=',
+            meses:'='
+        },
+        link:function($scope,element,attr){
+            $scope.cociente = 0; 
+            $scope.$watch('divisor',function(newVal){
+                if(newVal !== undefined){
+                    $scope.cociente = parseInt($scope.dividendo*$scope.meses/$scope.divisor*100-100);
+                }
+            });
+        }
+    };
+});
