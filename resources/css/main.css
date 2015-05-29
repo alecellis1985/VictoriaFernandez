@@ -183,8 +183,8 @@ html {
 }
 .footer {
     color: #efefef;
-    background: #4169E1;
-    border-top: 2px solid #5D41E1;
+    background: #2B4DA5;
+    border-top: 2px solid #20429D;
 }
 .footer a {
     color: #CABEBE;
@@ -346,16 +346,7 @@ body{
 }
 
 .contentContainer{
-    /*    background-color: white;
-        background-size: 100% 100%;
-        background-position: center;
-        background-repeat: no-repeat;*/
-    background-image: url("../img/logobackground.png");
-    background-repeat: repeat;
     min-height: 400px;
-    -webkit-box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.75);
-    box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.75);
 }
 
 textarea{
