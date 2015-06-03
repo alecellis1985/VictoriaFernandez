@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS `profesionales`;
+DROP DATABASE IF EXISTS `profesionales`;
 CREATE DATABASE  IF NOT EXISTS `profesionales` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `profesionales`;
 -- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)

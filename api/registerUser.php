@@ -61,8 +61,8 @@ function insertNewUser($conn, $user) {
             $params[22] = array("servicioOfrecido6", $user['servicioOfrecido6'], "string", 20);
             $params[23] = array("descServiceLong", $user['descServiceLong'], "string", 1000);
             $params[24] = array("username", $user['username'], "string", 50);
-            $params[25] = array("password", md5($user['password']), "string", 10);
-
+            $params[25] = array("password", md5($user['password']), "string", 100);
+            
             if ($conn->consulta($sql, $params)) {
                 $user['id'] = $conn->ultimoIdInsert();
                 $conn->closeCursor();
