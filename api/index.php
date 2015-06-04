@@ -42,6 +42,7 @@ $app->post('/login-user', 'loginUser');
 $app->post('/logout-user', 'logoutUser');
 $app->get('/users/:categoria/:departamento', 'getUsers');
 $app->post('/agregar_usuario', 'registerUser');
+$app->post('/editar_usuario', 'editUser');
 $app->post('/check-username', 'checkUsername');
 
 $app->run();

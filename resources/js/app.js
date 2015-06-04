@@ -23,6 +23,25 @@ Professionals.config(['$routeProvider', '$httpProvider', function ($routeProvide
                 }
             }
         });
+        
+        $routeProvider.when('/edit-usuario', {
+            templateUrl: 'resources/tpl/registroUsuario.html',
+            controller: 'RegisterUserController',
+            resolve: {
+                departamentosList: function (CommonService) {
+                    return CommonService.getRequest('api/departamentos');
+                },
+                categoriasList: function (CommonService) {
+                    return CommonService.getRequest('api/categorias');
+                },
+                barriosList: function (CommonService) {
+                    return CommonService.getRequest('api/barrios');
+                },
+                planes: function (CommonService) {
+                    return CommonService.getRequest('api/userPlans');
+                }
+            }
+        });
 
         $routeProvider.when('/contacto', {
             templateUrl: 'resources/tpl/contacto.html',
