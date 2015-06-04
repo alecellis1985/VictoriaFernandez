@@ -1,7 +1,7 @@
 'use strict';
 
-Professionals.controller('LoginController', ['$scope', '$routeParams', '$http', '$rootScope', '$location', '$modalInstance', 'CommonService',
-    function ($scope, $routeParams, $http, $rootScope, $location, $modalInstance, CommonService) {
+Professionals.controller('LoginController', ['$scope', '$routeParams', '$http', '$rootScope', '$location', '$modalInstance', 'CommonService', 'HeaderOptions',
+    function LoginController($scope, $routeParams, $http, $rootScope, $location, $modalInstance, CommonService, HeaderOptions) {
         $scope.ok = function () {
             $modalInstance.close($scope.selected.item);
         };
@@ -22,12 +22,15 @@ Professionals.controller('LoginController', ['$scope', '$routeParams', '$http', 
 
             CommonService.postJsonRequest('api/login-user', data).then(function (result) {
                 if (result.success) {
-                    $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Loggeado con exito'});
+                    $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Bienvenido ' + result.data.username + '!'});
                     //TODO: check this
-                    $("#profRegistarse").addClass('hide');
-                    $('#profIngresar').addClass('hide');
-                    $('#profSalir').removeClass('hide');
-                    $('.privateComponent').show();
+//                    $("#profRegistarse").addClass('hide');
+//                    $('#profIngresar').addClass('hide');
+//                    $('#profSalir').removeClass('hide');
+//                    $('.privateComponent').show();
+                    HeaderOptions.sinSesion = false;
+                    HeaderOptions.enSesion = true;
+                    HeaderOptions.esAdmin = false;
 //TODO: Descomentar despues de agregar isAdmin
 //                    if (result.data.isAdmin) {
 //                        $('.privateAdminComponent').show();

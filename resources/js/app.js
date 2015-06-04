@@ -60,33 +60,5 @@ Professionals.config(['$routeProvider', '$httpProvider', function ($routeProvide
     }]);
 
 Professionals.run(function ($rootScope, $http, $location, $timeout, $filter, CommonService) {
-
     $('.alertsTop').removeClass('hideAll');
-    angular.element(document).ready(function () {
-        CommonService.getRequest('api/users/loggedUser').then(function (result) {
-            if (result.success)
-            {
-                $("#profRegistarse").addClass('hide');
-                $('#profIngresar').addClass('hide');
-                $('#profSalir').removeClass('hide');
-                $('.privateComponent').show();
-
-                if (result.isAdmin) {
-                    $('.privateAdminComponent').show();
-                } else {
-                    $('.privateAdminComponent').hide();
-                }
-            }
-            else
-            {
-                $("#profRegistarse").removeClass('hide');
-                $('#profIngresar').removeClass('hide');
-                $('#profSalir').removeClass('hide').addClass('hide');
-                $('.privateComponent').hide();
-
-                $('.privateAdminComponent').hide();
-            }
-        });
-
-    });
 });

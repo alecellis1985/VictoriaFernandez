@@ -1,8 +1,35 @@
 'use strict';
 
-Professionals.controller('HeaderController', ['$scope', '$routeParams', '$http', '$rootScope', '$location', '$modal', 'CommonService',
-    function ($scope, $routeParams, $http, $rootScope, $location, $modal, CommonService) {
+Professionals.controller('HeaderController', ['$scope', '$routeParams', '$http', '$rootScope', '$location', '$modal', 'CommonService','HeaderOptions',
+    function HeaderController($scope, $routeParams, $http, $rootScope, $location, $modal, CommonService, HeaderOptions) {
 
+        $scope.sinSesion = HeaderOptions.sinSesion;
+        $scope.enSesion = HeaderOptions.enSesion;
+        $scope.esAdmin = HeaderOptions.esAdmin;
+
+
+        angular.element(document).ready(function () {
+            CommonService.getRequest('api/users/loggedUser').then(function (result) {
+                if (result.success)
+                {
+                    $scope.sinSesion = false;
+                    $scope.enSesion = true;
+
+                    if (result.isAdmin) {
+                        $scope.esAdmin = true;
+                    } else {
+                        $scope.esAdmin = false;
+                    }
+                }
+                else
+                {
+                    $scope.sinSesion = true;
+                    $scope.enSesion = false;
+                    $scope.esAdmin = false;
+                }
+            });
+
+        });
 
         $scope.template = {
             "header": "resources/tpl/header.html"
@@ -41,11 +68,9 @@ Professionals.controller('HeaderController', ['$scope', '$routeParams', '$http',
                 if (result.success) {
                     $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Ha salido con exito! Hasta la proxima :)'});
 
-                    $("#profRegistarse").removeClass('hide');
-                    $('#profIngresar').removeClass('hide');
-                    $('#profSalir').removeClass('hide').addClass('hide');
-                    $('.privateComponent').hide();
-                    $('.privateAdminComponent').hide();
+                    $scope.sinSesion = true;
+                    $scope.enSesion = false;
+                    $scope.esAdmin = false;
 
                 } else
                     $rootScope.$broadcast('alert-event', {type: 'error', msg: result.msg});
