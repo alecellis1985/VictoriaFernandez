@@ -1,6 +1,7 @@
 'use strict';
 
-Professionals.controller('HeaderController', ['$scope', '$routeParams', '$http', '$rootScope', '$location', '$modal', function ($scope, $routeParams, $http, $rootScope, $location, $modal) {
+Professionals.controller('HeaderController', ['$scope', '$routeParams', '$http', '$rootScope', '$location', '$modal', 'CommonService',
+    function ($scope, $routeParams, $http, $rootScope, $location, $modal, CommonService) {
 
 
         $scope.template = {
@@ -29,6 +30,27 @@ Professionals.controller('HeaderController', ['$scope', '$routeParams', '$http',
             }, function () {
                 console.log('Modal dismissed at: ' + new Date());
             });
+        };
+
+        $scope.salirAction = function (evt) {
+            evt.preventDefault();
+            evt.stopPropagation();
+
+            CommonService.postJsonRequest('api/logout-user', {}).then(function (result) {
+                if (result.success) {
+                    $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Ha salido con exito! Hasta la proxima :)'});
+
+                    $("#profRegistarse").removeClass('hide');
+                    $('#profIngresar').removeClass('hide');
+                    $('#profSalir').removeClass('hide').addClass('hide');
+                    $('.privateComponent').hide();
+                    $('.privateAdminComponent').hide();
+
+                } else
+                    $rootScope.$broadcast('alert-event', {type: 'error', msg: result.msg});
+
+            });
+
         };
 
         //$scope.profesionalesList = ["Abogados","Alambradores","Albañiles","Animadores","Arquitectos","Carpinteros","Constructores","Contadores","Corredores de seguro","Decoradores y Diseñadores de Interiores","Desarrolladores Web","Despachantes de aduana","Diseñadores gráficos","Economistas","Economistas","Electricistas","Escribanos","Estilistas/Esteticistas","Fisioterapeutas","Fonoaudiólogos","Herreros","Ingenieros","Médicos","Nutricionistas","Odontólogos","Pintores","Podólogos","Psicólogos","Sanitarios","Tapiceros","Veterinarios","Vidrieros"];

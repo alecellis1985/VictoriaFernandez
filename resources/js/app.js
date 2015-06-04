@@ -60,7 +60,7 @@ Professionals.config(['$routeProvider', '$httpProvider', function ($routeProvide
     }]);
 
 Professionals.run(function ($rootScope, $http, $location, $timeout, $filter, CommonService) {
-    
+
     angular.element(document).ready(function () {
         CommonService.getRequest('api/users/loggedUser').then(function (result) {
             if (result.success)
@@ -87,9 +87,5 @@ Professionals.run(function ($rootScope, $http, $location, $timeout, $filter, Com
             }
         });
 
-
-//        $('#logIn').click(clearLogInForm);
-//        $('#logOut').click(logOut);
-//        $("#logInForm").submit(logIn);
     });
 });
