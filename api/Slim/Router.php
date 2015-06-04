@@ -42,7 +42,7 @@
  * @author  Josh Lockhart <info@joshlockhart.com>
  * @since   Version 1.0
  */
-class Slim_Router implements IteratorAggregate {
+class Slim_Router {
 
     /**
      * @var Slim_Http_Request
@@ -80,15 +80,12 @@ class Slim_Router implements IteratorAggregate {
      */
     public function __construct( Slim_Http_Request $request ) {
         $this->request = $request;
-        $this->routes = array();
-    }
-
-    /**
-     * Get Iterator
-     * @return ArrayIterator
-     */
-    public function getIterator() {
-        return new ArrayIterator($this->getMatchedRoutes());
+        $this->routes = array(
+            'GET' => array(),
+            'POST' => array(),
+            'PUT' => array(),
+            'DELETE' => array()
+        );
     }
 
     /**
@@ -115,7 +112,8 @@ class Slim_Router implements IteratorAggregate {
     public function getMatchedRoutes( $reload = false ) {
         if ( $reload || is_null($this->matchedRoutes) ) {
             $this->matchedRoutes = array();
-            foreach ( $this->routes as $route ) {
+            $method = $this->request->isHead() ? Slim_Http_Request::METHOD_GET : $this->request->getMethod();
+            foreach ( $this->routes[$method] as $route ) {
                 if ( $route->matches($this->request->getResourceUri()) ) {
                     $this->matchedRoutes[] = $route;
                 }
@@ -128,12 +126,14 @@ class Slim_Router implements IteratorAggregate {
      * Map a route to a callback function
      * @param   string      $pattern    The URL pattern (ie. "/books/:id")
      * @param   mixed       $callable   Anything that returns TRUE for is_callable()
+     * @param   string      $method     The HTTP request method (GET, POST, PUT, DELETE)
      * @return  Slim_Route
      */
-    public function map( $pattern, $callable ) {
+    public function map( $pattern, $callable, $method ) {
         $route = new Slim_Route($pattern, $callable);
         $route->setRouter($this);
-        $this->routes[] = $route;
+        $methodKey = ( $method === Slim_Http_Request::METHOD_HEAD ) ? Slim_Http_Request::METHOD_GET : $method;
+        $this->routes[$methodKey][] = $route;
         return $route;
     }
 

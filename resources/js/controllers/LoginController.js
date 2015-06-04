@@ -1,6 +1,6 @@
 'use strict';
 
-Professionals.controller('LoginController', ['$scope', '$routeParams', '$http', '$rootScope','$location', '$modalInstance', 'CommonService',
+Professionals.controller('LoginController', ['$scope', '$routeParams', '$http', '$rootScope', '$location', '$modalInstance', 'CommonService',
     function ($scope, $routeParams, $http, $rootScope, $location, $modalInstance, CommonService) {
         $scope.ok = function () {
             $modalInstance.close($scope.selected.item);
@@ -24,6 +24,16 @@ Professionals.controller('LoginController', ['$scope', '$routeParams', '$http', 
                 if (result.success) {
                     $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Loggeado con exito'});
                     //TODO: check this
+                    $("#profRegistarse").addClass('hide');
+                    $('#profIngresar').addClass('hide');
+                    $('#profSalir').removeClass('hide');
+                    $('.privateComponent').show();
+//TODO: Descomentar despues de agregar isAdmin
+//                    if (result.data.isAdmin) {
+//                        $('.privateAdminComponent').show();
+//                    } else {
+//                        $('.privateAdminComponent').hide();
+//                    }
                     $modalInstance.close(0);
                 } else
                     $rootScope.$broadcast('alert-event', {type: 'error', msg: result.msg});

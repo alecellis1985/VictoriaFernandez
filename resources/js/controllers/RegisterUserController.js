@@ -180,7 +180,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             if ($scope.user.horaFin <= $scope.user.horaComienzo) {
                 $scope.user.horaFin = new Date($scope.user.horaComienzo.getTime() + 10 * 60000);
             }
-        }
+        };
 
         $scope.dropdownsValid = true;
         $scope.dropDownCheck = function () {
@@ -215,7 +215,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                 return {
                     'latitude': obj.position.A.toString(),
                     'longitude': obj.position.F.toString(),
-                }
+                };
             });
 
             var data = {

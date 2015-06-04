@@ -45,7 +45,7 @@ function insertNewUser($conn, $user) {
             $params[6] = array("telefonoEmp", $user['telefonoEmp'], "string", 50);
             $params[7] = array("departamento", (int) $user['departamento'], "int", 5);
             $params[8] = array("categoria", (int) $user['categoria'], "int", 5);
-            $params[9] = $user['barrio'] == NULL ? array("barrio", null, "null") : array("barrio", (int) $user['barrio'], "int", 5);            
+            $params[9] = $user['barrio'] == NULL ? array("barrio", null, "null") : array("barrio", (int) $user['barrio'], "int", 5);
             $params[10] = array("plan", (int) $user['plan'], "int", 5);
             $params[11] = array("sitioWeb", $user['sitioWeb'], "string", 50);
             $params[12] = array("imagenUrl", $user['imagenUrl'], "string", 100);
@@ -62,7 +62,7 @@ function insertNewUser($conn, $user) {
             $params[23] = array("descServiceLong", $user['descServiceLong'], "string", 1000);
             $params[24] = array("username", $user['username'], "string", 50);
             $params[25] = array("password", md5($user['password']), "string", 100);
-            
+
             if ($conn->consulta($sql, $params)) {
                 $user['id'] = $conn->ultimoIdInsert();
                 $conn->closeCursor();

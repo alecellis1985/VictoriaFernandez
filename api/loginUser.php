@@ -24,6 +24,8 @@ function logUser($conn, $userLogin) {
                 $_SESSION['ingreso'] = true;
                 $_SESSION['usuario'] = $user->username;
                 $_SESSION['password'] = $user->password;
+                //TODO: Agregar campo isAdmin para el administrador
+                $_SESSION['isAdmin'] = false;
                 setcookie('usuario', $user->username);
                 $error = false;
             } else {
@@ -54,4 +56,24 @@ function getUserArrayFromRequest($request) {
         "username" => is_null($request->post('username')) ? "" : $request->post('username'),
         "password" => is_null($request->post('password')) ? "" : $request->post('password')
     );
+}
+
+function logoutUser() {
+    $response = null;
+    
+    $_SESSION['ingreso'] = false;
+    $_SESSION['isAdmin'] = false;
+    unset($_SESSION['usuario']);
+    unset($_SESSION['password']);
+    
+    if (isset($_COOKIE['usuario'])) {
+        unset($_COOKIE['usuario']);
+    }
+    if (!isset($_COOKIE['usuario']) && !isset($_SESSION['usuario'])) {
+        $response = MessageHandler::getSuccessResponse("Successfully logged in!", null);
+    } else {
+        $response = MessageHandler::getErrorResponse("Error in logout, try again later");
+    }
+    
+    return $response;
 }
