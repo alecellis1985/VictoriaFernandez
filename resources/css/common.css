@@ -63,6 +63,9 @@ header >nav{
     line-height: 15px;
     text-align: left;
 }
+.hideAll{
+    display:none;
+}
 .btn
 {
     padding: 7px 12px 4px;

@@ -61,6 +61,7 @@ Professionals.config(['$routeProvider', '$httpProvider', function ($routeProvide
 
 Professionals.run(function ($rootScope, $http, $location, $timeout, $filter, CommonService) {
 
+    $('.alertsTop').removeClass('hideAll');
     angular.element(document).ready(function () {
         CommonService.getRequest('api/users/loggedUser').then(function (result) {
             if (result.success)
