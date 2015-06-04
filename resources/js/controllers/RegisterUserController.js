@@ -1,15 +1,18 @@
 'use strict';
 
 Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$rootScope', '$location', '$upload',
-    'CommonService', 'departamentosList', 'categoriasList', 'barriosList', 'planes', 'Helper',
-    function ($scope, $routeParams, $rootScope, $location, $upload, CommonService, departamentosList, categoriasList, barriosList, planes, Helper) {
+    'CommonService', 'departamentosList', 'categoriasList', 'barriosList', 'planes', 'Helper', 'userData', 'newUser',
+    function ($scope, $routeParams, $rootScope, $location, $upload, CommonService, departamentosList, categoriasList,
+            barriosList, planes, Helper, userData, newUser) {
         //FOR UPLOAD FILE (IMG)
         $scope.$watch('files', function () {
             //perform img validation 
             $scope.validateImg($scope.files);
         });
         $scope.planes = planes;
-        $scope.isCollapsed = true;
+        $scope.newUser = newUser;
+        $scope.isCollapsed = newUser;
+
         //cambiar por tipo: {basico:{},premium:{} }; para que en la bd quede bien
         $scope.profesionalesAvailablePlans = {
             0: {//Profesional
@@ -116,8 +119,8 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         };
 
         $scope.registro = {
-            mostrarRegistro: false,
-            empresa: false
+            mostrarRegistro: !newUser,
+            empresa: userData.plan > 6
         };
 
         $scope.goBackRegistration = function (e) {
@@ -174,7 +177,12 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             }
         };
 
-        $scope.fillNewUserCamps();
+        if (newUser) {
+            $scope.fillNewUserCamps();
+        } else {
+            $scope.user = userData.data;
+        }
+
         $scope.markers = [];
         $scope.checkTime = function () {
             if ($scope.user.horaFin <= $scope.user.horaComienzo) {
@@ -254,13 +262,24 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             var imgFile = null;
             if (!(typeof $scope.files === 'undefined') && !($scope.files === null))
                 imgFile = $scope.files[0];
-            CommonService.postRequestWithFile('api/agregar_usuario', data, imgFile).then(function (result) {
-                if (result.data.success) {
-                    $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Has sido registrado con exito'});
-                    $location.path('/index.html');
-                }
-                else
-                    $rootScope.$broadcast('alert-event', {type: 'danger', msg: result.data.msg});
-            });
+            if (newUser)
+                CommonService.postRequestWithFile('api/agregar_usuario', data, imgFile).then(function (result) {
+                    if (result.data.success) {
+                        $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Has sido registrado con exito'});
+                        $location.path('/index.html');
+                    }
+                    else
+                        $rootScope.$broadcast('alert-event', {type: 'danger', msg: result.data.msg});
+                });
+            else
+                CommonService.postRequestWithFile('api/editar_usuario', data, imgFile).then(function (result) {
+                    if (result.data.success) {
+                        $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Datos actualizados!'});
+                        $location.path('/index.html');
+                    }
+                    else
+                        $rootScope.$broadcast('alert-event', {type: 'danger', msg: result.data.msg});
+                });
+
         };
     }]);

@@ -61,7 +61,7 @@ function getAllUsers() {
     }
 }
 
-function getLoggedUser() {
+function isUserLogged() {
     if (array_key_exists("usuario", $_SESSION)) {
         $user = $_SESSION['usuario'];
         $isAdmin = $_SESSION['isAdmin'];
@@ -76,5 +76,28 @@ function getLoggedUser() {
     } else {
         $result = array("success" => false);
         echo json_encode($result);
+    }
+}
+
+function getLoggedUser() {
+    $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
+    $response = null;
+    if ($conn->conectar()) {
+        $sql = "select * FROM users WHERE username = :username";
+        $params = array();
+        $params[0] = array("username", $_SESSION['usuario'], "string", 100);
+        if ($conn->consulta($sql, $params)) {
+            $users = $conn->restantesRegistros();
+            $response = MessageHandler::getSuccessResponse("", $users[0]);
+        } else {
+            $response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
+        }
+    }
+    if ($response == null) {
+        header('HTTP/1.1 400 Bad Request');
+        echo MessageHandler::getDBErrorResponse();
+    } else {
+        $conn->desconectar();
+        echo $response;
     }
 }

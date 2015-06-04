@@ -29,7 +29,7 @@ $app = new Slim();
 
 $app->get('/users', 'getAllUsers');
 //$app->get('/users/:id', 'getUser');
-$app->get('/users/loggedUser', 'getLoggedUser');
+$app->get('/users/loggedUser', 'isUserLogged');
 //$app->post('/add_user', 'addUser');
 //$app->put('/users/:id', 'updateUser');
 //$app->delete('/users/:id', 'deleteUser');
@@ -44,6 +44,7 @@ $app->get('/users/:categoria/:departamento', 'getUsers');
 $app->post('/agregar_usuario', 'registerUser');
 $app->post('/editar_usuario', 'editUser');
 $app->post('/check-username', 'checkUsername');
+$app->get('/getCurrentUser', 'getLoggedUser');
 
 $app->run();
 
