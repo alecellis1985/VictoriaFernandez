@@ -37,6 +37,7 @@ Professionals.controller('HeaderController', ['$scope', '$routeParams', '$http',
             evt.stopPropagation();
 
             CommonService.postJsonRequest('api/logout-user', {}).then(function (result) {
+                debugger;
                 if (result.success) {
                     $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Ha salido con exito! Hasta la proxima :)'});
 

@@ -59,6 +59,7 @@ function getUserArrayFromRequest($request) {
 }
 
 function logoutUser() {
+   
     $response = null;
     
     $_SESSION['ingreso'] = false;
@@ -69,11 +70,12 @@ function logoutUser() {
     if (isset($_COOKIE['usuario'])) {
         unset($_COOKIE['usuario']);
     }
+    
     if (!isset($_COOKIE['usuario']) && !isset($_SESSION['usuario'])) {
         $response = MessageHandler::getSuccessResponse("Successfully logged in!", null);
     } else {
         $response = MessageHandler::getErrorResponse("Error in logout, try again later");
     }
-    
-    return $response;
+   
+    echo $response;
 }
