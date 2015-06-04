@@ -180,7 +180,7 @@ Professionals.directive('dropdownFilter', function () {
     };
 });
 
-Professionals.directive('dropdownWValidation', function () {
+Professionals.directive('dropdownWValidation', function ($timeout) {
     return {
         restrict: 'E',
         templateUrl: 'resources/tpl/dropdownWValidation.html',
@@ -190,8 +190,9 @@ Professionals.directive('dropdownWValidation', function () {
             nameProp: '@',
             elementsArr: '=',
             selectedElementFn: '=',
-            checkFn:'&',
-            errorMsg:'@'
+            checkFn: '&',
+            errorMsg: '@',
+            postSelectionFn: '&'
         },
         replace: true,
         link: function ($scope, elem, attr) {
@@ -202,13 +203,27 @@ Professionals.directive('dropdownWValidation', function () {
                 evt.preventDefault();
                 evt.stopPropagation();
             };
-               
+
             $scope.selectedElement = $scope.selectedElementFn || function (e, elem)
             {
                 e.preventDefault();
                 $scope.selectedElem = elem;
-                $scope.dropdownError = $scope.checkFn({elem:$scope.selectedElem});
+                $scope.dropdownError = $scope.checkFn({elem: $scope.selectedElem});
+                $timeout(function () {
+                    $scope.postSelectionFn();
+                }, 100);
             };
+
+//            $scope.checkValsBeforeSubmit = function()
+//            {
+//                if($scope.selectedElem === null ||$scope.selectedElem === undefined || $scope.selectedElem == -1 ){
+//                    $scope.dropdownError = true;
+//                }
+//                else
+//                {
+//                    $scope.dropdownError = $scope.checkFn({elem:$scope.selectedElem});
+//                }
+//            }
         }
     };
 });
@@ -217,7 +232,7 @@ Professionals.directive('resize', function ($window) {
     return function (scope, element, attrs) {
         var w = angular.element($window);
         scope.getWindowDimensions = function () {
-            return { 'h': w.height(), 'w': w.width() };
+            return {'h': w.height(), 'w': w.width()};
         };
         scope.$watch(scope.getWindowDimensions, function (newValue, oldValue) {
             scope.windowHeight = newValue.h;
@@ -227,7 +242,7 @@ Professionals.directive('resize', function ($window) {
                 var footerHeight = $('.footer').height();
                 //
                 return {
-                    'min-height': (newValue.h - attrs.resizeHeight -footerHeight) + 'px',
+                    'min-height': (newValue.h - attrs.resizeHeight - footerHeight) + 'px',
                     //'width': (newValue.w - 100) + 'px'
                     //width could work if you ant responsive width
                 };

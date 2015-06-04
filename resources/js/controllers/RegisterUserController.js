@@ -1,8 +1,8 @@
 'use strict';
 
 Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$rootScope', '$location', '$upload',
-    'CommonService', 'departamentosList', 'categoriasList', 'barriosList', 'planes',
-    function ($scope, $routeParams, $rootScope, $location, $upload, CommonService, departamentosList, categoriasList, barriosList, planes) {
+    'CommonService', 'departamentosList', 'categoriasList', 'barriosList', 'planes', 'Helper',
+    function ($scope, $routeParams, $rootScope, $location, $upload, CommonService, departamentosList, categoriasList, barriosList, planes, Helper) {
         //FOR UPLOAD FILE (IMG)
         $scope.$watch('files', function () {
             //perform img validation 
@@ -10,16 +10,6 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         });
         $scope.planes = planes;
         $scope.isCollapsed = true;
-
-        $scope.randomString = function (letters)
-        {
-            var text = "";
-            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-
-            for (var i = 0; i < letters; i++)
-                text += possible.charAt(Math.floor(Math.random() * possible.length));
-            return text;
-        };
         //cambiar por tipo: {basico:{},premium:{} }; para que en la bd quede bien
         $scope.profesionalesAvailablePlans = {
             0: {//Profesional
@@ -81,9 +71,9 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
 
         $scope.fillNewUserCamps = function ()
         {
-            $scope.user.nombre = "Bin" + $scope.randomString(2);
-            $scope.user.apellido = "Laden" + $scope.randomString(2);
-            $scope.user.username = $scope.randomString(7);
+            $scope.user.nombre = "Bin" + Helper.randomString(2);
+            $scope.user.apellido = "Laden" + Helper.randomString(2);
+            $scope.user.username = Helper.randomString(7);
             $scope.user.password = "asdasd";
             $scope.user.passwordConfirm = "asdasd";
             $scope.user.email = "alecellis1985@gmail.com";
@@ -185,46 +175,22 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         };
 
         $scope.fillNewUserCamps();
-
         $scope.markers = [];
-
         $scope.checkTime = function () {
-            debugger;
             if ($scope.user.horaFin <= $scope.user.horaComienzo) {
                 $scope.user.horaFin = new Date($scope.user.horaComienzo.getTime() + 10 * 60000);
             }
         }
 
-        function stringTime(dateTime) {
-            var hours = dateTime.getHours();
-            var minutes = dateTime.getMinutes();
-            var seconds = 0;//dateTime.getSeconds();
-
-            if (hours < 10) {
-                hours = "0" + hours;
-            }
-            if (minutes < 10) {
-                minutes = "0" + minutes;
-            }
-            if (seconds < 10) {
-                seconds = "0" + seconds;
-            }
-
-            return hours + ":" + minutes + ":" + seconds;
-
-        }
-
-//         $scope.dropDownCheck =  function(){
-//              //Check category is set
-////            $scope.categoriaError = parseInt($scope.selectedCategoria.categoriaId) < 0;
-//            
-//            //Check depto is set
-////            $scope.departamentoError = parseInt($scope.depSelected.idDepartamento) < 0;
-//            
-//            //Check barrio is set if depto == Montevideo
-//           // $scope.barrioError = $scope.depSelected.nombreDepartamento === 'Montevideo' && parseInt($scope.selectedBarrio.barrioId) < 0;
-//            
-//        };
+        $scope.dropdownsValid = true;
+        $scope.dropDownCheck = function () {
+            $scope.dropdownsValid = Helper.isUndefinedOrNull($scope.selectedCategoria.categoriaId) ||
+                    Helper.isUndefinedOrNull($scope.depSelected.idDepartamento) ||
+                    parseInt($scope.selectedCategoria.categoriaId) < 0 ||
+                    parseInt($scope.depSelected.idDepartamento) < 0 ||
+                    ($scope.depSelected.nombreDepartamento === 'Montevideo' && Helper.isUndefinedOrNull($scope.selectedCategoria.categoriaId)
+                            && parseInt($scope.selectedBarrio.barrioId) < 0);
+        };
 
         $scope.checkCategoria = function (elem) {
             return parseInt(elem.categoriaId) < 0;
@@ -238,39 +204,12 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             return $scope.depSelected.nombreDepartamento === 'Montevideo' && parseInt(elem.barrioId) < 0;
         };
 
-//        $scope.$watch("selectedCategoria", function(){
-//            $scope.dropDownCheck();
-//        });       
-
-//       $scope.$watch("depSelected", function(){
-//            $scope.dropDownCheck();
-//        });   
-//        
-//        $scope.$watch("selectedBarrio", function(){
-//            $scope.dropDownCheck();
-//        });   
-
-        var validForm = function () {
-
-            var errors = false;
-
-//            $scope.dropDownCheck();
-
-            //Check errors
-//            errors = $scope.categoriaError || $scope.departamentoError;
-
-            return !errors;
-        };
-
         $scope.registrarUsuario = function (isValid)
         {
-            
-            
-            if (!isValid || !validForm()) {
-                $rootScope.$broadcast('alert-event', {type: 'danger', msg: "Existen errores en el formulario!"});
+            if (!isValid || $scope.dropdownsValid) {
+                $rootScope.$broadcast('alert-event', {type: 'danger', msg: "Verifique que todos los campos esten correctamente completados!"});
                 return;
             }
-
             //Need to map the marker position to latitude longitude to save in the db
             var markersArr = $scope.markers.map(function (obj) {
                 return {
@@ -308,11 +247,10 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                 'descServiceLong': $scope.user.descServiceLong,
                 'formaDePago': $scope.user.formaDePago,
                 'diasAtencion': $scope.user.diasAtencion,
-                'horaComienzo': stringTime($scope.user.horaComienzo),
-                'horaFin': stringTime($scope.user.horaFin),
+                'horaComienzo': Helper.stringTime($scope.user.horaComienzo),
+                'horaFin': Helper.stringTime($scope.user.horaFin),
                 'markers': markersArr
             };
-            debugger;
             var imgFile = null;
             if (!(typeof $scope.files === 'undefined') && !($scope.files === null))
                 imgFile = $scope.files[0];

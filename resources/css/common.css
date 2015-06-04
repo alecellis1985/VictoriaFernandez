@@ -25,7 +25,7 @@ header >nav{
 
 .panel-primary
 {
-/*    background: #c00;*/
+    /*    background: #c00;*/
     border-color:#990000;
 }
 .panel-primary>.panel-heading{
@@ -33,10 +33,10 @@ header >nav{
     border-color: #990000;
 }
 .form-control:focus {
-  border-color: #E96666;
-  outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(233, 102, 102, 0.6);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(233, 102, 102, 0.6);
+    border-color: #E96666;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(233, 102, 102, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(233, 102, 102, 0.6);
 }
 
 .headerSearch
@@ -55,7 +55,8 @@ header >nav{
 .overflowDots
 {
     display:inline-block;
-    width: 180px;
+    /*    width: 180px;*/
+    width:90%;
     white-space: nowrap;
     overflow:hidden !important;
     text-overflow: ellipsis;
@@ -95,7 +96,7 @@ header >nav{
 
 .filterUl
 {
-   padding-top: 0;
+    padding-top: 0;
 }
 
 .filterUl .btn-default
@@ -117,7 +118,7 @@ header >nav{
     border-left: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
     outline: none;
-   -webkit-box-shadow: none;
+    -webkit-box-shadow: none;
     box-shadow: none;
 }
 
@@ -152,13 +153,13 @@ header >nav{
 
 .card img
 {
-/*    height: 100px;*/
+    /*    height: 100px;*/
     margin-top: 4px;
 }
 
 .card h2
 {
-      margin-top: 4px;
+    margin-top: 4px;
 }
 
 .card:hover,.cardhover
@@ -167,9 +168,9 @@ header >nav{
     cursor:pointer;
 }
 .cardhover>.thumbnail{
-  background: #EAEAEA;  
+    background: #EAEAEA;  
 }
-  
+
 
 .card .glyphicon-envelope
 {
@@ -187,17 +188,17 @@ header >nav{
 }
 .fa-twitter-square
 {
-      color: #00aced;
+    color: #00aced;
 }
 .fa-linkedin-square
 {
-      color: #007bb6;
+    color: #007bb6;
 }
 
 .fa-facebook-official,.fa-twitter-square,.fa-linkedin-square, .big-fa>a>.fa,.fa-arrow-circle-up
 {
     font-size: 31px;
-    
+
 }
 
 .card .fa-facebook-official:hover,.card .fa-twitter-square:hover,.card .fa-linkedin-square:hover
@@ -333,13 +334,13 @@ header >nav{
 }
 
 .nav-tabs>li>a:hover {
-  border-color: #990000;
+    border-color: #990000;
 }
 
 .nav>li>a:focus, .nav>li>a:hover {
-  text-decoration: none;
-  transition: background-color 900ms;
-  background-color: #A90000;
+    text-decoration: none;
+    transition: background-color 900ms;
+    background-color: #A90000;
 }
 
 .tab-content
@@ -349,8 +350,8 @@ header >nav{
 }
 
 .nav-tabs>li>a {
-  background: #CB3939;
-  color: #FFFFFF;
+    background: #CB3939;
+    color: #FFFFFF;
 }
 
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover
@@ -446,21 +447,21 @@ p
 {
     .card .fa-user
     {
-           font-size: 119px;
+        font-size: 119px;
     }
 }
 @media (min-width:992px)
 {
     .card .fa-user
     {
-           font-size: 109px;
+        font-size: 109px;
     }
 }
 @media (min-width:1200px)
 {
     .card .fa-user
     {
-           font-size: 119px;
+        font-size: 119px;
     }
 }
 
@@ -486,12 +487,12 @@ p
 }
 
 .registroProf .card{
-      padding: 20px 10px;
+    padding: 20px 10px;
 }
 
 .planes>.panel-body>.row>div:first-child>span>.fa{
-  color: #949494;
-  font-size: 42px;
+    color: #949494;
+    font-size: 42px;
 }
 
 .planes> .panel-body > .row>div:first-child>span,
@@ -526,13 +527,13 @@ p
 }  
 
 .planes .fa-check{
-  color: #8ecc70;
-  font-size: 42px;  
+    color: #8ecc70;
+    font-size: 42px;  
 }
 
 .planes .fa-times{
-  color: #9c9c9c;
-  font-size: 42px;  
+    color: #9c9c9c;
+    font-size: 42px;  
 }
 
 .fa-spinner{
@@ -585,5 +586,12 @@ mark{
     /* box-shadow: 0 3px 3px 0 rgba(0,0,0,.2); */
 }
 .navbar-inverse{
-      border-color: white;
+    border-color: white;
+}
+.requiredAst{
+    position: absolute;
+    right: 5px;
+    top: -3px;
+    font-size: 21px;
+    color: red;
 }

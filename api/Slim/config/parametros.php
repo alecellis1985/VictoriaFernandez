@@ -5,8 +5,8 @@
     define("SERVIDOR", "localhost");
     define("BASE", "profesionales");
     define("USUARIO", "root");
-    //define("CLAVE", "turtleman1");
-    define("CLAVE", "oso2203");
+    define("CLAVE", "turtleman1");
+    //define("CLAVE", "oso2203");
    
 //    Deeploi settin
 //    define("USUARIO", "hawkman");
