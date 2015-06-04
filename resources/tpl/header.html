@@ -19,12 +19,19 @@
                         <a  href="#contacto">Contacto</a>
                     </li>
                     <li>
-                        <a  href="#registro-usuario">Registrarse</a>
+                        <a id="profRegistarse" href="#registro-usuario">Registrarse</a>
+                    </li>
+                    <li class="privateComponent">
+                        <a  href="#editar-usuario">Editar Perfil</a>
                     </li>
                     <li>
                         <a id="profIngresar" ng-click="ingresarAction($event,'lg')" href="#">Ingresar</a>
                     </li>
-                    <li>
+                     <li>
+                        <a id="profSalir" ng-click="salirAction($event,'lg')" href="#">Salir</a>
+                    </li>
+                    
+                    <li class="privateAdminComponent">
                         <a href="#administrar-users">Administrar Usuarios</a>
                     </li>
                 </ul>

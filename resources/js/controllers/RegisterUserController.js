@@ -189,11 +189,10 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         $scope.markers = [];
 
         $scope.checkTime = function () {
-            debugger;
             if ($scope.user.horaFin <= $scope.user.horaComienzo) {
                 $scope.user.horaFin = new Date($scope.user.horaComienzo.getTime() + 10 * 60000);
             }
-        }
+        };
 
         function stringTime(dateTime) {
             var hours = dateTime.getHours();
@@ -264,7 +263,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
 
         $scope.registrarUsuario = function (isValid)
         {
-            
+                
             
             if (!isValid || !validForm()) {
                 $rootScope.$broadcast('alert-event', {type: 'danger', msg: "Existen errores en el formulario!"});
@@ -276,7 +275,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                 return {
                     'latitude': obj.position.A.toString(),
                     'longitude': obj.position.F.toString(),
-                }
+                };
             });
 
             var data = {

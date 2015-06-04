@@ -1,6 +1,7 @@
 <?php
 
 require 'Slim/Slim.php';
+
 require_once("Slim/includes/class.Conexion.BD.php");
 require_once("Slim/config/parametros.php");
 require_once("Slim/includes/MessageHandler.php");
@@ -15,9 +16,20 @@ require_once 'getUsers.php';
 require_once 'mailHandler.php';
 require_once 'planes.php';
 
+session_cache_limiter(false);
+session_start();
+//$_SESSION['ingreso'] = false;
+//$_SESSION['usuario'] = '';
+//$_SESSION['password'] = '';
+//$_SESSION['isAdmin'] = false;
 $app = new Slim();
+
+//SESSION
+//$app->add(new SessionCookie(array('secret' => 'myappsecret')));
+
 $app->get('/users', 'getAllUsers');
 //$app->get('/users/:id', 'getUser');
+$app->get('/users/loggedUser', 'getLoggedUser');
 //$app->post('/add_user', 'addUser');
 //$app->put('/users/:id', 'updateUser');
 //$app->delete('/users/:id', 'deleteUser');

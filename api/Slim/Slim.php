@@ -61,6 +61,9 @@ if ( @date_default_timezone_set(date_default_timezone_get()) === false ) {
     date_default_timezone_set('UTC');
 }
 
+//Set global Error handler
+set_error_handler(array('Slim', 'handleErrors'));
+
 /**
  * Slim
  *
@@ -182,9 +185,7 @@ class Slim {
             'cookies.user_id' => 'DEFAULT',
             //Session handler
             'session.handler' => new Slim_Session_Handler_Cookies(),
-            'session.flash_key' => 'flash',
-            //HTTP
-            'http.version' => null
+            'session.flash_key' => 'flash'
         ), $userSettings);
 
         //Determine application mode
@@ -199,7 +200,6 @@ class Slim {
             'mcrypt_mode' => $this->settings['cookies.cipher_mode'],
             'enable_ssl' => $this->settings['cookies.secure']
         )));
-        $this->response->httpVersion($this->settings['http.version']);
         $this->router = new Slim_Router($this->request);
 
         //Start session if not already started
@@ -208,7 +208,6 @@ class Slim {
             if ( $sessionHandler instanceof Slim_Session_Handler ) {
                 $sessionHandler->register($this);
             }
-            session_cache_limiter(false); 
             session_start();
         }
 
@@ -219,9 +218,6 @@ class Slim {
         if ( !isset(self::$apps['default']) ) {
             $this->setName('default');
         }
-
-        //Set global Error handler after Slim app instantiated
-        set_error_handler(array('Slim', 'handleErrors'));
     }
 
     /**
@@ -233,12 +229,7 @@ class Slim {
             if ( isset($_ENV['SLIM_MODE']) ) {
                 $this->mode = (string)$_ENV['SLIM_MODE'];
             } else {
-                $envMode = getenv('SLIM_MODE');
-                if ( $envMode !== false ) {
-                    $this->mode = $envMode;
-                } else {
-                    $this->mode = (string)$this->config('mode');
-                }
+                $this->mode = (string)$this->config('mode');
             }
         }
         return $this->mode;
@@ -359,41 +350,32 @@ class Slim {
      * In-Between:  mixed   Anything that returns TRUE for `is_callable` (OPTIONAL)
      * Last:        mixed   Anything that returns TRUE for `is_callable` (REQUIRED)
      *
-     * The first argument is required and must always be the
+     * The first argument is required and must always be the 
      * route pattern (ie. '/books/:id').
      *
-     * The last argument is required and must always be the callable object
+     * The last argument is required and must always be the callable object 
      * to be invoked when the route matches an HTTP request.
      *
-     * You may also provide an unlimited number of in-between arguments;
-     * each interior argument must be callable and will be invoked in the
+     * You may also provide an unlimited number of in-between arguments; 
+     * each interior argument must be callable and will be invoked in the 
      * order specified before the route's callable is invoked.
      *
      * USAGE:
      *
      * Slim::get('/foo'[, middleware, middleware, ...], callable);
      *
-     * @param   array (See notes above)
+     * @param   string                      The HTTP method (ie. GET, POST, PUT, DELETE)
+     * @param   array                       See notes above
      * @return  Slim_Route
      */
-    protected function mapRoute($args) {
+    protected function mapRoute($type, $args) {
         $pattern = array_shift($args);
         $callable = array_pop($args);
-        $route = $this->router->map($pattern, $callable);
+        $route = $this->router->map($pattern, $callable, $type);
         if ( count($args) > 0 ) {
             $route->setMiddleware($args);
         }
         return $route;
-    }
-
-    /**
-     * Add generic route without associated HTTP method
-     * @see Slim::mapRoute
-     * @return Slim_Route
-     */
-    public function map() {
-        $args = func_get_args();
-        return $this->mapRoute($args);
     }
 
     /**
@@ -403,7 +385,7 @@ class Slim {
      */
     public function get() {
         $args = func_get_args();
-        return $this->mapRoute($args)->via(Slim_Http_Request::METHOD_GET, Slim_Http_Request::METHOD_HEAD);
+        return $this->mapRoute(Slim_Http_Request::METHOD_GET, $args);
     }
 
     /**
@@ -413,7 +395,7 @@ class Slim {
      */
     public function post() {
         $args = func_get_args();
-        return $this->mapRoute($args)->via(Slim_Http_Request::METHOD_POST);
+        return $this->mapRoute(Slim_Http_Request::METHOD_POST, $args);
     }
 
     /**
@@ -423,7 +405,7 @@ class Slim {
      */
     public function put() {
         $args = func_get_args();
-        return $this->mapRoute($args)->via(Slim_Http_Request::METHOD_PUT);
+        return $this->mapRoute(Slim_Http_Request::METHOD_PUT, $args);
     }
 
     /**
@@ -433,17 +415,7 @@ class Slim {
      */
     public function delete() {
         $args = func_get_args();
-        return $this->mapRoute($args)->via(Slim_Http_Request::METHOD_DELETE);
-    }
-
-    /**
-     * Add OPTIONS route
-     * @see     Slim::mapRoute
-     * @return  Slim_Route
-     */
-    public function options() {
-        $args = func_get_args();
-        return $this->mapRoute($args)->via(Slim_Http_Request::METHOD_OPTIONS);
+        return $this->mapRoute(Slim_Http_Request::METHOD_DELETE, $args);
     }
 
     /**
@@ -491,34 +463,30 @@ class Slim {
      *
      * 1. When declaring the handler:
      *
-     * If the $argument parameter is callable, this
+     * If the $callable parameter is not null and is callable, this
      * method will register the callable to be invoked when an uncaught
-     * Exception is detected, or when otherwise explicitly invoked.
-     * The handler WILL NOT be invoked in this context.
+     * Exception or Error is detected. It WILL NOT invoke the handler.
      *
      * 2. When invoking the handler:
      *
-     * If the $argument parameter is not callable, Slim assumes you want
+     * If the $callable parameter is null, Slim assumes you want
      * to invoke an already-registered handler. If the handler has been
-     * registered and is callable, it is invoked and passed the caught Exception
-     * as its one and only argument. The error handler's output is captured
-     * into an output buffer and sent as the body of a 500 HTTP Response.
+     * registered and is callable, it is invoked and sends a 500 HTTP Response
+     * whose body is the output of the Error handler.
      *
-     * @param   mixed $argument Callable|Exception
+     * @param   mixed $callable Anything that returns true for is_callable()
      * @return  void
      */
-    public function error( $argument = null ) {
-        if ( is_callable($argument) ) {
-            //Register error handler
-            $this->router->error($argument);
+    public function error( $callable = null ) {
+        if ( !is_null($callable) && $callable instanceof Exception === false ) {
+            $this->router->error($callable);
         } else {
-            //Invoke error handler
             ob_start();
             $customErrorHandler = $this->router->error();
             if ( is_callable($customErrorHandler) ) {
-                call_user_func_array($customErrorHandler, array($argument));
+                call_user_func_array($customErrorHandler, array($callable));
             } else {
-                call_user_func_array(array($this, 'defaultError'), array($argument));
+                call_user_func_array(array($this, 'defaultError'), array($callable));
             }
             $this->halt(500, ob_get_clean());
         }
@@ -750,7 +718,7 @@ class Slim {
         $value = $this->response->getCookieJar()->getCookieValue($name);
         return ($value === false) ? null : $value;
     }
-
+    
     /**
      * Delete a Cookie (for both normal or encrypted Cookies)
      *
@@ -807,7 +775,7 @@ class Slim {
         if ( $flash ) {
             $flash->save();
         }
-        session_write_close();
+        //session_write_close();
         $this->response->send();
         throw new Slim_Exception_Stop();
     }
@@ -1031,63 +999,57 @@ class Slim {
      * routes are found.
      *
      * This method will also catch any unexpected Exceptions thrown by this
-     * application; the Exceptions will be logged to this application's log
+     * application; the Exceptions will be logged to this application's log 
      * and rethrown to the global Exception handler.
      *
      * @return void
      */
     public function run() {
         try {
+            $this->applyHook('slim.before');
+            ob_start();
+            $this->applyHook('slim.before.router');
+            $dispatched = false;
+            foreach( $this->router->getMatchedRoutes() as $route ) {
+                try {
+                    $this->applyHook('slim.before.dispatch');
+                    $dispatched = $route->dispatch();
+                    $this->applyHook('slim.after.dispatch');
+                    if ( $dispatched ) {
+                        break;
+                    }
+                } catch ( Slim_Exception_Pass $e ) {
+                    continue;
+                }
+            }
+            if ( !$dispatched ) {
+                $this->notFound();
+            }
+            $this->response()->write(ob_get_clean());
+            $this->applyHook('slim.after.router');
+            $this->view->getData('flash')->save();
+            //session_write_close();
+            $this->response->send();
+            $this->applyHook('slim.after');
+        } catch ( Slim_Exception_RequestSlash $e ) {
             try {
-                $this->applyHook('slim.before');
-                ob_start();
-                $this->applyHook('slim.before.router');
-                $dispatched = false;
-                $httpMethod = $this->request()->getMethod();
-                $httpMethodsAllowed = array();
-                foreach ( $this->router as $route ) {
-                    if ( $route->supportsHttpMethod($httpMethod) ) {
-                        try {
-                            $this->applyHook('slim.before.dispatch');
-                            $dispatched = $route->dispatch();
-                            $this->applyHook('slim.after.dispatch');
-                            if ( $dispatched ) {
-                                break;
-                            }
-                        } catch ( Slim_Exception_Pass $e ) {
-                            continue;
-                        }
-                    } else {
-                        $httpMethodsAllowed = array_merge($httpMethodsAllowed, $route->getHttpMethods());
-                    }
-                }
-                if ( !$dispatched ) {
-                    if ( $httpMethodsAllowed ) {
-                        $this->response()->header('Allow', implode(' ', $httpMethodsAllowed));
-                        $this->halt(405);
-                    } else {
-                        $this->notFound();
-                    }
-                }
-                $this->response()->write(ob_get_clean());
-                $this->applyHook('slim.after.router');
-                $this->view->getData('flash')->save();
-                session_write_close();
-                $this->response->send();
-                $this->applyHook('slim.after');
-            } catch ( Slim_Exception_RequestSlash $e ) {
                 $this->redirect($this->request->getRootUri() . $this->request->getResourceUri() . '/', 301);
-            } catch ( Exception $e ) {
-                if ( $e instanceof Slim_Exception_Stop ) throw $e;
-                $this->getLog()->error($e);
+            } catch ( Slim_Exception_Stop $e2 ) {
+                //Ignore Slim_Exception_Stop and exit application context
+            }
+        } catch ( Slim_Exception_Stop $e ) {
+            //Exit application context
+        } catch ( Exception $e ) {
+            $this->getLog()->error($e);
+            try {
                 if ( $this->config('debug') === true ) {
                     $this->halt(500, self::generateErrorMarkup($e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
                 } else {
                     $this->error($e);
                 }
+            } catch ( Slim_Exception_Stop $e2 ) {
+                //Ignore Slim_Exception_Stop and exit application context
             }
-        } catch ( Slim_Exception_Stop $e ) {
-            //Exit application context
         }
     }
 
@@ -1099,7 +1061,7 @@ class Slim {
      * This is the global Error handler that will catch reportable Errors
      * and convert them into ErrorExceptions that are caught and handled
      * by each Slim application.
-     *
+     * 
      * @param   int     $errno      The numeric type of the Error
      * @param   string  $errstr     The error message
      * @param   string  $errfile    The absolute path to the affected file

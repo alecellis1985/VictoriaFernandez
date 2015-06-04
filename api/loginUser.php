@@ -24,13 +24,15 @@ function logUser($conn, $userLogin) {
                 $_SESSION['ingreso'] = true;
                 $_SESSION['usuario'] = $user->username;
                 $_SESSION['password'] = $user->password;
+                //TODO: Agregar campo isAdmin para el administrador
+                $_SESSION['isAdmin'] = false; //$user->password;
                 setcookie('usuario', $user->username);
                 $error = false;
             } else {
                 $_SESSION['ingreso'] = false;
                 $error = true;
             }
-
+            
             if (!$error) {
                 $response = MessageHandler::getSuccessResponse("Successfully logged in!", $user);
             } else {
