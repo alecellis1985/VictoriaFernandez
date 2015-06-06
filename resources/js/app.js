@@ -4,7 +4,6 @@ var Professionals = angular.module('Professionals', ['ngRoute', 'angularFileUplo
 
 Professionals.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
 
-
         $routeProvider.when('/registro-usuario', {
             templateUrl: 'resources/tpl/registroUsuario.html',
             controller: 'RegisterUserController',
@@ -39,8 +38,6 @@ Professionals.config(['$routeProvider', '$httpProvider', function ($routeProvide
             controller: 'UsersController'
         });
 
-
-
         $routeProvider.otherwise({
             templateUrl: 'resources/tpl/busquedaProfesionales.html',
             controller: 'ProfessionalsSearchController',
@@ -56,9 +53,32 @@ Professionals.config(['$routeProvider', '$httpProvider', function ($routeProvide
                 }
             }
         });
-
     }]);
 
-Professionals.run(function ($rootScope, $http, $location, $timeout, $filter, CommonService) {
-    $('.alertsTop').removeClass('hideAll');
-});
+Professionals.run(['$rootScope', '$http', '$location', '$timeout', '$filter', 'Helper',
+    function ($rootScope, $http, $location, $timeout, $filter, Helper) {
+        $('.alertsTop').removeClass('hideAll');
+
+        /*Obtain username*/
+        Helper.getUser();
+//        /*When change the url, dispach the main loader*/
+//        $rootScope.$on('$locationChangeSuccess', function () {
+//            $rootScope.$broadcast('event:loader', {container: "#loader", sts: true});
+//        });
+//
+//        /*Once the main content is loaded we should close the main loader*/
+//        $rootScope.$on('$viewContentLoaded', function () {
+//            $rootScope.$broadcast('event:loader', {container: "#loader", sts: false});
+//        });
+
+        /**
+         * Dispach main loader
+         * @args JSON Object
+         * @args[container] the element identifier
+         * @args[sts] the final status of the loader
+         */
+//        $rootScope.$on('event:loader', function (envent, args) {
+//            $(args.container).css('display', args.sts ? 'block' : 'none');
+//        });
+
+    }]);

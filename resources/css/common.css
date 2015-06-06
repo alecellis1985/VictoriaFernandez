@@ -20,12 +20,12 @@ header >nav{
 .navbar-fixed-top .navbar-header > a:hover,.navbar-inverse .navbar-nav>li>a:hover
 {
     transition: background-color 1900ms;
-    background-color: #2E37DD;
+    background-color: #324C8C;
 }
 
 .panel-primary
 {
-    /*    background: #c00;*/
+    /*background: #c00;*/
     border-color:#990000;
 }
 .panel-primary>.panel-heading{
