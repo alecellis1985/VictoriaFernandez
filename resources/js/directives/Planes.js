@@ -32,9 +32,10 @@ Professionals.directive('discountDirective', function(){
         },
         link:function($scope,element,attr){
             $scope.cociente = 0; 
+            element.css('display','inline-block');
             $scope.$watch('divisor',function(newVal){
                 if(newVal !== undefined){
-                    $scope.cociente = parseInt($scope.dividendo*$scope.meses/$scope.divisor*100-100);
+                    $scope.cociente = parseInt(100-($scope.divisor*100)/($scope.dividendo*$scope.meses));
                 }
             });
         }

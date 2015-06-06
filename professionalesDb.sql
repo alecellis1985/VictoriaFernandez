@@ -243,16 +243,16 @@ CREATE TABLE `plan` (
 
 INSERT INTO `plan` VALUES (1, 'Profesional', 'Basico', 500, 'Mensual');
 INSERT INTO `plan` VALUES (2, 'Profesional', 'Premium', 900, 'Mensual');
-INSERT INTO `plan` VALUES (3, 'Profesional', 'Basico', 2550, 'Semestral');
-INSERT INTO `plan` VALUES (4, 'Profesional', 'Basico', 4800, 'Anual');
-INSERT INTO `plan` VALUES (5, 'Profesional', 'Premium', 4590, 'Semestral');
-INSERT INTO `plan` VALUES (6, 'Profesional', 'Premium', 8640, 'Anual');
+INSERT INTO `plan` VALUES (3, 'Profesional', 'Basico', 2400, 'Semestral');
+INSERT INTO `plan` VALUES (4, 'Profesional', 'Basico', 3600, 'Anual');
+INSERT INTO `plan` VALUES (5, 'Profesional', 'Premium', 4320, 'Semestral');
+INSERT INTO `plan` VALUES (6, 'Profesional', 'Premium', 6480, 'Anual');
 INSERT INTO `plan` VALUES (7, 'Empresarial', 'Basico', 800, 'Mensual');
 INSERT INTO `plan` VALUES (8, 'Empresarial', 'Premium', 1200, 'Mensual');
-INSERT INTO `plan` VALUES (9, 'Empresarial', 'Basico', 4080, 'Semestral');
-INSERT INTO `plan` VALUES (10, 'Empresarial', 'Basico', 7680, 'Anual');
-INSERT INTO `plan` VALUES (11, 'Empresarial', 'Premium', 6120, 'Semestral');
-INSERT INTO `plan` VALUES (12, 'Empresarial', 'Premium', 11520, 'Anual');
+INSERT INTO `plan` VALUES (9, 'Empresarial', 'Basico', 3840, 'Semestral');
+INSERT INTO `plan` VALUES (10, 'Empresarial', 'Basico', 5760, 'Anual');
+INSERT INTO `plan` VALUES (11, 'Empresarial', 'Premium', 5760, 'Semestral');
+INSERT INTO `plan` VALUES (12, 'Empresarial', 'Premium', 8640, 'Anual');
 --
 -- Table structure for table `mapa`
 --

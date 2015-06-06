@@ -15,25 +15,25 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             0: {//Profesional
                 Basico: {
                     Mensual: 500,
-                    Semestral: 2550,
-                    Anual: 4800
+                    Semestral: 2400,
+                    Anual: 3600
                 },
                 Premium: {
                     Mensual: 900,
-                    Semestral: 4590,
-                    Anual: 8640
+                    Semestral: 4320,
+                    Anual: 6480
                 }
             },
             1: {//Empresarial
                 Basico: {
                     Mensual: 800,
-                    Semestral: 4080,
-                    Anual: 4800
+                    Semestral: 3840,
+                    Anual: 5760
                 },
                 Premium: {
                     Mensual: 1200,
-                    Semestral: 6120,
-                    Anual: 11520
+                    Semestral: 5760,
+                    Anual: 8640
                 }
             }
         };
