@@ -157,6 +157,7 @@ header >nav{
     background: rgba(187, 200, 0, 0.09);
     box-shadow: 0 0 1em rgba(187, 200, 0, 0.28);
     margin-bottom: 17px;
+    border-radius: 5px;
 }
 
 .card img
@@ -172,13 +173,25 @@ header >nav{
 
 .card:hover,.cardhover
 {
-    box-shadow: 0 0 1em rgba(187, 200, 0, 0.77);
-    cursor:pointer;
+    box-shadow: 0 0 1em #324C8C;
+/*    background-color: #FFFFFF;*/
+/*    transition: background-color 1900ms;*/
+    cursor: pointer;
 }
+
+.cardhover{
+      background-color: #324C8C;
+}
+
+.card:hover{
+    transition: box-shadow 1900ms;
+    transition: background-color 1900ms;
+    background-color: #324C8C;
+}
+
 .cardhover>.thumbnail{
     background: #EAEAEA;  
 }
-
 
 .card .glyphicon-envelope
 {
@@ -393,7 +406,7 @@ header >nav{
     position: fixed;
     top: 60%;
     right: 0px;
-    color: #c00;
+    color: #20429D;
 }
 
 .fa-arrow-circle-up:hover
@@ -486,7 +499,7 @@ p
 }
 .registroProf .glyphicon
 {
-    color:#c00;
+    color:#324C8C;
 }
 
 .registroProf .thumbnail{

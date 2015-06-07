@@ -43,7 +43,15 @@ Professionals.factory('Helper',['$rootScope', '$q', '$http',function ($rootScope
 //                    }
 
                     /*Once the request is finished, resolves the general promise.*/
-                    $rootScope.user = user;
+                    if(user.success)
+                    {
+                        $rootScope.user = user;
+                    }
+                    else
+                    {
+                        delete $rootScope.user;
+                    }
+                    
                     helper.resolveUserPromises(user);
                 });
             }
