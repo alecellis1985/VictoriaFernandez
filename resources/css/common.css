@@ -637,3 +637,11 @@ label{
 {
     min-height:90px;
 }
+.registerTitle
+{
+    background-color: #324C8C;
+    color:white;
+    box-shadow: 0 0 1em #324C8C;
+/*    margin-bottom: 17px;*/
+    border-radius: 5px;
+}

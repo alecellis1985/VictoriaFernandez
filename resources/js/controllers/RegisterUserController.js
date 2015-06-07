@@ -56,6 +56,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
 
         $scope.showPlan = function (plan)
         {
+            
             if ($scope.selectedPlan.tipo === plan)
             {
                 $scope.isCollapsed = true;
@@ -130,6 +131,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         //Con $scope.selectedPlan.categoria tengo que valor de plan eligio
         //Con $scope.selectedPlan.tipo se si es 0 o 1 o sea profesional o empresa
         $scope.showRegistration = function (e, tipo, duracion, categoria) {
+            window.scrollTo(0, 0);
             e.preventDefault();
             $scope.userPlan = $scope.getPlan($scope.convertIntToPlanType(tipo), categoria, duracion);
             if ($scope.userPlan.length > 0)
