@@ -612,11 +612,6 @@ label{
       color: #5b616a;
 }
 
-/*.planes> .panel-body > .row:nth-child(n+7){
-    min-height:90px;
-}*/
-
-
 .planes>.panel-body>.row:not(:first-child)>div{
     padding-top: 10px;  
     line-height: normal;
