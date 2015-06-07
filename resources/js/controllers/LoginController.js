@@ -1,7 +1,7 @@
 'use strict';
 
-Professionals.controller('LoginController', ['$scope', '$routeParams', '$http', '$rootScope', '$location', '$modalInstance', 'CommonService', 'HeaderOptions',
-    function LoginController($scope, $routeParams, $http, $rootScope, $location, $modalInstance, CommonService, HeaderOptions) {
+Professionals.controller('LoginController', ['$scope', '$routeParams', '$http', '$rootScope', '$location', '$modalInstance', 'CommonService',
+    function LoginController($scope, $routeParams, $http, $rootScope, $location, $modalInstance, CommonService) {
         $scope.ok = function () {
             $modalInstance.close($scope.selected.item);
         };
@@ -20,7 +20,7 @@ Professionals.controller('LoginController', ['$scope', '$routeParams', '$http', 
             };
             CommonService.postJsonRequest('api/login-user', data).then(function (result) {
                 if (result.success) {
-                    $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Bienvenido ' + result.data.username + '!'});
+                    $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Bienvenido ' + result.data.username + ' !'});
                     $rootScope.user = result.data;
                     $modalInstance.close(0);
                 } else
