@@ -151,15 +151,15 @@
             </div>
             <div class="row ">
                 <div class="form-group col-xs-12 col-md-4">
-                    <input type="url" name="facebookUrl" class="form-control" ng-model="user.facebookUrl" placeholder="Enlaces de facebook" >
+                    <input type="url" name="facebookUrl" class="form-control" title="Clickea en tu perfil de facebook y copia la url del browser" ng-model="user.facebookUrl" placeholder="Enlace de facebook ej: https://www.facebook.com/pages/Profesionales-UY/1623709471210001" >
                     <span ng-show="registerUser.facebookUrl.$touched && registerUser.facebookUrl.$error.url" class="error">URL invalida</span>
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
-                    <input type="url" name="twitterUrl" class="form-control" ng-model="user.twitterUrl" placeholder="Enlaces de twitter" >
+                    <input type="url" name="twitterUrl" class="form-control" title="Clickea en tu perfil de twiter y copia la url del browser" ng-model="user.twitterUrl" placeholder="Enlace de twitter" >
                     <span ng-show="registerUser.twitterUrl.$touched && registerUser.twitterUrl.$error.url" class="error">URL invalida</span>
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
-                    <input type="url" name="linkedinUrl" class="form-control" ng-model="user.linkedinUrl" placeholder="Enlaces de linkedin">
+                    <input type="url" name="linkedinUrl" class="form-control" title="Clickea en tu perfil de linkedin y copia la url del browser" ng-model="user.linkedinUrl" placeholder="Enlace de linkedin">
                     <span ng-show="registerUser.linkedinUrl.$touched && registerUser.linkedinUrl.$error.url" class="error">URL invalida</span>
                 </div>
 
@@ -192,30 +192,24 @@
             </div>
             <div class="row">
                 <div class="form-group col-xs-12 col-md-4">
-                    <input type="text" class="form-control" name="servicioOfrecido1" ng-model="user.servicioOfrecido1" placeholder="Servicio ofrecido" maxlength="20" ng-pattern="/^\b[a-zA-Z0-9_]*\b$/">
-                    <span ng-show="registerUser.servicioOfrecido1.$touched && registerUser.servicioOfrecido1.$error.pattern" class="error">Debe ser una unica palabra</span>
+                    <input type="text" class="form-control" name="servicioOfrecido1" ng-model="user.servicioOfrecido1" placeholder="Servicio ofrecido" maxlength="20" >
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
-                    <input type="text" class="form-control" name="servicioOfrecido2" ng-model="user.servicioOfrecido2" placeholder="Servicio ofrecido" maxlength="20" ng-pattern="/^\b[a-zA-Z0-9_]*\b$/">
-                    <span ng-show="registerUser.servicioOfrecido2.$touched && registerUser.servicioOfrecido2.$error.pattern" class="error">Debe ser una unica palabra</span>
+                    <input type="text" class="form-control" name="servicioOfrecido2" ng-model="user.servicioOfrecido2" placeholder="Servicio ofrecido" maxlength="20" >
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
-                    <input type="text" class="form-control" name="servicioOfrecido3" ng-model="user.servicioOfrecido3" placeholder="Servicio ofrecido" maxlength="20" ng-pattern="/^\b[a-zA-Z0-9_]*\b$/">
-                    <span ng-show="registerUser.servicioOfrecido3.$touched && registerUser.servicioOfrecido3.$error.pattern" class="error">Debe ser una unica palabra</span>
+                    <input type="text" class="form-control" name="servicioOfrecido3" ng-model="user.servicioOfrecido3" placeholder="Servicio ofrecido" maxlength="20" >
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-xs-12 col-md-4">
-                    <input type="text" class="form-control" name="servicioOfrecido4" ng-model="user.servicioOfrecido4" placeholder="Servicio ofrecido" maxlength="20" ng-pattern="/^\b[a-zA-Z0-9_]*\b$/">
-                    <span ng-show="registerUser.servicioOfrecido4.$touched && registerUser.servicioOfrecido4.$error.pattern" class="error">Debe ser una unica palabra</span>
+                    <input type="text" class="form-control" name="servicioOfrecido4" ng-model="user.servicioOfrecido4" placeholder="Servicio ofrecido" maxlength="20" >
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
-                    <input type="text" class="form-control" name="servicioOfrecido5" ng-model="user.servicioOfrecido5" placeholder="Servicio ofrecido" maxlength="20" ng-pattern="/^\b[a-zA-Z0-9_]*\b$/">
-                    <span ng-show="registerUser.servicioOfrecido5.$touched && registerUser.servicioOfrecido5.$error.pattern" class="error">Debe ser una unica palabra</span>
+                    <input type="text" class="form-control" name="servicioOfrecido5" ng-model="user.servicioOfrecido5" placeholder="Servicio ofrecido" maxlength="20" >
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
-                    <input type="text" class="form-control" name="servicioOfrecido6" ng-model="user.servicioOfrecido6" placeholder="Servicio ofrecido" maxlength="20" ng-pattern="/^\b[a-zA-Z0-9_]*\b$/">
-                    <span ng-show="registerUser.servicioOfrecido6.$touched && registerUser.servicioOfrecido6.$error.pattern" class="error">Debe ser una unica palabra</span>
+                    <input type="text" class="form-control" name="servicioOfrecido6" ng-model="user.servicioOfrecido6" placeholder="Servicio ofrecido" maxlength="20" >
                 </div>
             </div>
         </div>
