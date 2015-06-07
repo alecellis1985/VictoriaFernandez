@@ -174,8 +174,6 @@ header >nav{
 .card:hover,.cardhover
 {
     box-shadow: 0 0 1em #324C8C;
-/*    background-color: #FFFFFF;*/
-/*    transition: background-color 1900ms;*/
     cursor: pointer;
 }
 
@@ -187,6 +185,10 @@ header >nav{
     transition: box-shadow 1900ms;
     transition: background-color 1900ms;
     background-color: #324C8C;
+}
+
+.busquedaprofList .card:hover{
+    background-color: #FFFFFF;
 }
 
 .cardhover>.thumbnail{
