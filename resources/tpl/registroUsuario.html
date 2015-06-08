@@ -14,12 +14,13 @@
         <div class="container registroProf">
             <div class="row">
                 <div class="col-xs-12 col-md-12 col-sm-12">
+                    <div class="col-xs-12 col-md-8 col-sm-8 registerTitle">
                     <h1>Haga crecer su negocio con Profesionales.uy!</h1>
-
                     <h3>¿Qué le ofrecemos?</h3>
                     <p>Un completo anuncio donde le van a ver miles de personas y empresas interesados en sus servicios.<br />
                         Una plataforma de comunicación y marketing de referencia en el sector de profesionales online.<br />
-                        Un completo equipo de profesionales a su servicio que va hacer crecer su negocio.	</p>
+                        Un completo equipo de profesionales a su servicio que va hacer crecer su negocio.</p>
+                    </div>
                 </div>
             </div>
             <div class="row" style="margin-top:15px;">
@@ -66,7 +67,7 @@
                     <span class="requiredAst">*</span>
                     <span ng-show="registerUser.apellido.$touched && registerUser.apellido.$error.required" class="error">Apellido es requerido</span>
                 </div>
-                <div class="form-group col-xs-10 col-md-3" ng-show="newUser">
+                <div class="form-group col-xs-10 col-md-3">
                     <span class="requiredAst">*</span>
                     <input type="text" class="form-control" name="username" ng-model="user.username" placeholder="Nombre de usuario" 
                            required username ng-model-options="{ debounce: 500 }">
@@ -133,9 +134,9 @@
                     <dropdown-w-validation check-fn="checkBarrio(elem)" error-msg="Seleccione un barrio de Mdeo" post-Selection-Fn="dropDownCheck()" selected-Elem="selectedBarrio" name-Prop="barrioNombre" elements-Arr="barrios" placeholder-Filter="Filtro de barrios"></dropdown-w-validation>                     
                 </div>
                 <div class="form-group col-xs-12 col-md-3">
-                    <span class="requiredAst">*</span>
+                    <!--<span class="requiredAst">*</span>-->
                     <input type="text" name="direccion" class="form-control" ng-model="user.direccion" placeholder="Direccion" required>
-                    <span ng-show="registerUser.direccion.$touched && registerUser.direccion.$error.required" class="error">Direccion es requerido</span>
+                    <!--<span ng-show="registerUser.direccion.$touched && registerUser.direccion.$error.required" class="error">Direccion es requerido</span>-->
                 </div>
             </div>
             <div class="row ">
@@ -162,15 +163,15 @@
             </div>
             <div class="row ">
                 <div class="form-group col-xs-12 col-md-4">
-                    <input type="url" name="facebookUrl" class="form-control" ng-model="user.facebookUrl" placeholder="Enlaces de facebook" >
+                    <input type="url" name="facebookUrl" class="form-control" title="Clickea en tu perfil de facebook y copia la url del browser" ng-model="user.facebookUrl" placeholder="Enlace de facebook ej: https://www.facebook.com/pages/Profesionales-UY/1623709471210001" >
                     <span ng-show="registerUser.facebookUrl.$touched && registerUser.facebookUrl.$error.url" class="error">URL invalida</span>
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
-                    <input type="url" name="twitterUrl" class="form-control" ng-model="user.twitterUrl" placeholder="Enlaces de twitter" >
+                    <input type="url" name="twitterUrl" class="form-control" title="Clickea en tu perfil de twiter y copia la url del browser" ng-model="user.twitterUrl" placeholder="Enlace de twitter" >
                     <span ng-show="registerUser.twitterUrl.$touched && registerUser.twitterUrl.$error.url" class="error">URL invalida</span>
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
-                    <input type="url" name="linkedinUrl" class="form-control" ng-model="user.linkedinUrl" placeholder="Enlaces de linkedin">
+                    <input type="url" name="linkedinUrl" class="form-control" title="Clickea en tu perfil de linkedin y copia la url del browser" ng-model="user.linkedinUrl" placeholder="Enlace de linkedin">
                     <span ng-show="registerUser.linkedinUrl.$touched && registerUser.linkedinUrl.$error.url" class="error">URL invalida</span>
                 </div>
 
@@ -203,30 +204,24 @@
             </div>
             <div class="row">
                 <div class="form-group col-xs-12 col-md-4">
-                    <input type="text" class="form-control" name="servicioOfrecido1" ng-model="user.servicioOfrecido1" placeholder="Servicio ofrecido" maxlength="20" ng-pattern="/^\b[a-zA-Z0-9_]*\b$/">
-                    <span ng-show="registerUser.servicioOfrecido1.$touched && registerUser.servicioOfrecido1.$error.pattern" class="error">Debe ser una unica palabra</span>
+                    <input type="text" class="form-control" name="servicioOfrecido1" ng-model="user.servicioOfrecido1" placeholder="Servicio ofrecido" maxlength="20" >
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
-                    <input type="text" class="form-control" name="servicioOfrecido2" ng-model="user.servicioOfrecido2" placeholder="Servicio ofrecido" maxlength="20" ng-pattern="/^\b[a-zA-Z0-9_]*\b$/">
-                    <span ng-show="registerUser.servicioOfrecido2.$touched && registerUser.servicioOfrecido2.$error.pattern" class="error">Debe ser una unica palabra</span>
+                    <input type="text" class="form-control" name="servicioOfrecido2" ng-model="user.servicioOfrecido2" placeholder="Servicio ofrecido" maxlength="20" >
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
-                    <input type="text" class="form-control" name="servicioOfrecido3" ng-model="user.servicioOfrecido3" placeholder="Servicio ofrecido" maxlength="20" ng-pattern="/^\b[a-zA-Z0-9_]*\b$/">
-                    <span ng-show="registerUser.servicioOfrecido3.$touched && registerUser.servicioOfrecido3.$error.pattern" class="error">Debe ser una unica palabra</span>
+                    <input type="text" class="form-control" name="servicioOfrecido3" ng-model="user.servicioOfrecido3" placeholder="Servicio ofrecido" maxlength="20" >
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-xs-12 col-md-4">
-                    <input type="text" class="form-control" name="servicioOfrecido4" ng-model="user.servicioOfrecido4" placeholder="Servicio ofrecido" maxlength="20" ng-pattern="/^\b[a-zA-Z0-9_]*\b$/">
-                    <span ng-show="registerUser.servicioOfrecido4.$touched && registerUser.servicioOfrecido4.$error.pattern" class="error">Debe ser una unica palabra</span>
+                    <input type="text" class="form-control" name="servicioOfrecido4" ng-model="user.servicioOfrecido4" placeholder="Servicio ofrecido" maxlength="20" >
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
-                    <input type="text" class="form-control" name="servicioOfrecido5" ng-model="user.servicioOfrecido5" placeholder="Servicio ofrecido" maxlength="20" ng-pattern="/^\b[a-zA-Z0-9_]*\b$/">
-                    <span ng-show="registerUser.servicioOfrecido5.$touched && registerUser.servicioOfrecido5.$error.pattern" class="error">Debe ser una unica palabra</span>
+                    <input type="text" class="form-control" name="servicioOfrecido5" ng-model="user.servicioOfrecido5" placeholder="Servicio ofrecido" maxlength="20" >
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
-                    <input type="text" class="form-control" name="servicioOfrecido6" ng-model="user.servicioOfrecido6" placeholder="Servicio ofrecido" maxlength="20" ng-pattern="/^\b[a-zA-Z0-9_]*\b$/">
-                    <span ng-show="registerUser.servicioOfrecido6.$touched && registerUser.servicioOfrecido6.$error.pattern" class="error">Debe ser una unica palabra</span>
+                    <input type="text" class="form-control" name="servicioOfrecido6" ng-model="user.servicioOfrecido6" placeholder="Servicio ofrecido" maxlength="20" >
                 </div>
             </div>
         </div>
@@ -287,8 +282,7 @@
     </div>
     <div>
         <div class="form-group col-md-12">
-            <button type="submit" class="btn btn-primary pull-right" title="[]" ng-disabled="registerUser.$invalid || dropdownsValid" ng-show="newUser">Registrarme</button>
-            <button type="submit" class="btn btn-primary pull-right" title="[]" ng-disabled="registerUser.$invalid || dropdownsValid" ng-hide="newUser">Guardar Cambios</button>
+            <button type="submit" class="btn btn-primary pull-right" title="[]" ng-disabled="registerUser.$invalid || dropdownsValid">Registrarme</button>
             <button class="btn btn-default pull-right" style="margin-right: 15px;" ng-click="goBackRegistration($event)"><i class="fa fa-reply"></i></button>
         </div>
     </div>

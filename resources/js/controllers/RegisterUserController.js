@@ -18,25 +18,25 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             0: {//Profesional
                 Basico: {
                     Mensual: 500,
-                    Semestral: 2550,
-                    Anual: 4800
+                    Semestral: 2400,
+                    Anual: 3600
                 },
                 Premium: {
                     Mensual: 900,
-                    Semestral: 4590,
-                    Anual: 8640
+                    Semestral: 4320,
+                    Anual: 6480
                 }
             },
             1: {//Empresarial
                 Basico: {
                     Mensual: 800,
-                    Semestral: 4080,
-                    Anual: 4800
+                    Semestral: 3840,
+                    Anual: 5760
                 },
                 Premium: {
                     Mensual: 1200,
-                    Semestral: 6120,
-                    Anual: 11520
+                    Semestral: 5760,
+                    Anual: 8640
                 }
             }
         };
@@ -59,6 +59,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
 
         $scope.showPlan = function (plan)
         {
+            
             if ($scope.selectedPlan.tipo === plan)
             {
                 $scope.isCollapsed = true;
@@ -137,6 +138,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         //Con $scope.selectedPlan.categoria tengo que valor de plan eligio
         //Con $scope.selectedPlan.tipo se si es 0 o 1 o sea profesional o empresa
         $scope.showRegistration = function (e, tipo, duracion, categoria) {
+            window.scrollTo(0, 0);
             e.preventDefault();
             $scope.userPlan = $scope.getPlan($scope.convertIntToPlanType(tipo), categoria, duracion);
             if ($scope.userPlan.length > 0)

@@ -1,5 +1,9 @@
 body {
     padding-top: 70px;
+    color: #888888;
+}
+h2{
+    color: #5b616a;
 }
 
 /*.navbar-fixed-top
@@ -20,17 +24,18 @@ header >nav{
 .navbar-fixed-top .navbar-header > a:hover,.navbar-inverse .navbar-nav>li>a:hover
 {
     transition: background-color 1900ms;
-    background-color: #2E37DD;
+    background-color: #324C8C;
 }
 
 .panel-primary
 {
-    /*    background: #c00;*/
-    border-color:#990000;
+    /*background: #c00;*/
+    border-color:#324C8C;
+    
 }
 .panel-primary>.panel-heading{
-    background-color: #c00;
-    border-color: #990000;
+    border-color: #1F439E;
+    background: #2B4DA5;
 }
 .form-control:focus {
     border-color: #E96666;
@@ -55,13 +60,13 @@ header >nav{
 .overflowDots
 {
     display:inline-block;
-    /*    width: 180px;*/
     width:90%;
     white-space: nowrap;
     overflow:hidden !important;
     text-overflow: ellipsis;
     line-height: 15px;
     text-align: left;
+    color: #5b616a;
 }
 .hideAll{
     display:none;
@@ -72,8 +77,8 @@ header >nav{
 }
 .btn-primary
 {
-    background: #c00;
-    border: 2px solid #BE0303;
+    background: #2B4DA5;
+    border: 2px solid #1E42A0;
 }
 
 .btn-primary.active, .btn-primary.focus, .btn-primary:active, .btn-primary:focus, .btn-primary:hover, .open>.dropdown-toggle.btn-primary
@@ -84,8 +89,8 @@ header >nav{
 
 .btn-primary[disabled]
 {
-    background: #c00;
-    border: 2px solid #BE0303;
+    background: #2B4DA5;
+    border: 2px solid #1E42A0;
 }
 
 .caret
@@ -152,6 +157,7 @@ header >nav{
     background: rgba(187, 200, 0, 0.09);
     box-shadow: 0 0 1em rgba(187, 200, 0, 0.28);
     margin-bottom: 17px;
+    border-radius: 5px;
 }
 
 .card img
@@ -167,13 +173,27 @@ header >nav{
 
 .card:hover,.cardhover
 {
-    box-shadow: 0 0 1em rgba(187, 200, 0, 0.77);
-    cursor:pointer;
+    box-shadow: 0 0 1em #324C8C;
+    cursor: pointer;
 }
+
+.cardhover{
+      background-color: #324C8C;
+}
+
+.card:hover{
+    transition: box-shadow 1900ms;
+    transition: background-color 1900ms;
+    background-color: #324C8C;
+}
+
+.busquedaprofList .card:hover{
+    background-color: #FFFFFF;
+}
+
 .cardhover>.thumbnail{
     background: #EAEAEA;  
 }
-
 
 .card .glyphicon-envelope
 {
@@ -217,14 +237,12 @@ header >nav{
 .fa-phone-square
 {
     font-size: 22px;
-    color: #c00;
-    background: white;
+    color: #9E9B9B;
 }
 .fa-mobile{
     font-size: 30px;
     padding: 0 2px;
-    color: #c00;
-    background: white;
+    color: #9E9B9B;
 }
 
 .alertsTop
@@ -337,23 +355,23 @@ header >nav{
 }
 
 .nav-tabs>li>a:hover {
-    border-color: #990000;
+    border-color: #324C8C;
 }
 
 .nav>li>a:focus, .nav>li>a:hover {
     text-decoration: none;
     transition: background-color 900ms;
-    background-color: #A90000;
+    background-color: #324C8C;
 }
 
 .tab-content
 {
-    border:1px solid #c00;
+    border:1px solid #324C8C;
     min-height: 250px;
 }
 
 .nav-tabs>li>a {
-    background: #CB3939;
+    background: #2B4DA5;
     color: #FFFFFF;
 }
 
@@ -361,8 +379,9 @@ header >nav{
 {
     color: #FFFFFF;
     cursor: default;
-    background-color: #A90000;
-    border: 1px solid #A90000;
+/*    background-color: #A90000;*/
+    border: 1px solid #324C8C;
+    background-color: #324C8C;
     border-bottom-color: transparent;
 }
 
@@ -389,7 +408,7 @@ header >nav{
     position: fixed;
     top: 60%;
     right: 0px;
-    color: #c00;
+    color: #20429D;
 }
 
 .fa-arrow-circle-up:hover
@@ -482,7 +501,7 @@ p
 }
 .registroProf .glyphicon
 {
-    color:#c00;
+    color:#324C8C;
 }
 
 .registroProf .thumbnail{
@@ -511,12 +530,6 @@ p
 
 .planes>.panel-body>.row:last-child{
     border-bottom: 1px solid #e1e1e1;
-}
-
-.planes>.panel-body>.row:not(:first-child)>div{
-    padding-top: 10px;  
-    line-height: normal;
-    height:73px;
 }
 
 .centerText{
@@ -597,4 +610,38 @@ mark{
     top: -3px;
     font-size: 21px;
     color: red;
+}
+
+.user-details .fa-home,.card .fa-home
+{
+    font-size: 22px;
+    color: #9E9B9B;
+}
+
+.profLogoImg{
+    height: 51px;
+    margin-left: 44px;
+    margin-top: 17px;
+}
+label{
+      color: #5b616a;
+}
+
+.planes>.panel-body>.row:not(:first-child)>div{
+    padding-top: 10px;  
+    line-height: normal;
+    min-height:73px;
+}
+
+.planes>.panel-body>.row:nth-child(n+8)>div
+{
+    min-height:90px;
+}
+.registerTitle
+{
+    background-color: #324C8C;
+    color:white;
+    box-shadow: 0 0 1em #324C8C;
+/*    margin-bottom: 17px;*/
+    border-radius: 5px;
 }

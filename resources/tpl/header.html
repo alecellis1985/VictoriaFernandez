@@ -18,20 +18,21 @@
                     <li>
                         <a  href="#contacto">Contacto</a>
                     </li>
-                    <li ng-show="sinSesion">
+                    
+                    <li class="ng-hide" ng-show="$root.user === undefined">
                         <a id="profRegistarse" href="#registro-usuario" >Registrarse</a>
                     </li>
-                    <li class="privateComponent" ng-show="enSesion">
-                        <a href="#editar-usuario">Editar Perfil</a>
+                    <li class="privateComponent ng-hide" ng-show="$root.user !== undefined">
+                        <a  href="#editar-usuario">Editar Perfil</a>
                     </li>
-                    <li ng-show="sinSesion">
+                    <li class="ng-hide" ng-show="$root.user === undefined">
                         <a id="profIngresar" ng-click="ingresarAction($event,'lg')" href="#">Ingresar</a>
                     </li>
-                     <li ng-show="enSesion">
+                     <li class="ng-hide" ng-show="$root.user !== undefined">
                         <a id="profSalir" ng-click="salirAction($event)" href="#">Salir</a>
                     </li>
                     
-                    <li class="privateAdminComponent" ng-show="esAdmin && enSesion">
+                    <li class="privateAdminComponent ng-hide" ng-show="$root.user !== undefined && $root.user.isAdmin">
                         <a href="#administrar-users">Administrar Usuarios</a>
                     </li>
                 </ul>
@@ -41,6 +42,6 @@
         <!-- /.container -->
     </nav>
     <div class="row logoRow">
-        <div class="col-md-12"><img src="./resources/img/LogoProfesionales.png" alt="Profesionales UY" style="height:85px;margin-left: 44px;"></div>
+        <div class="col-md-12"><img class="profLogoImg" src="./resources/img/LogoProfesionales.png" alt="Profesionales UY"></div>
     </div>
 </header>

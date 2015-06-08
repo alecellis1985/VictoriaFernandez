@@ -1,4 +1,4 @@
-Professionals.factory('Helper', function ($rootScope, $q, $http) {
+Professionals.factory('Helper',['$rootScope', '$q', '$http',function ($rootScope, $q, $http) {
     var helper = {};
     //Regular expresions used in validations along the app
     helper.onlyNumbersRegex = /^[0-9]{1,10}$/;
@@ -11,20 +11,76 @@ Professionals.factory('Helper', function ($rootScope, $q, $http) {
     helper.actualDate = new Date();
     helper.actualY = helper.actualDate.getFullYear();
 
+    /*
+     * Retrieves all information about a user
+     * If a request is in progres, returns the same request
+     */
+    helper.getUserRequestFlag = false;
+    helper.getUserPromises = [];
+    
     //Retrieves the username
-//    helper.getUserName = function () {
-//        $http.get(usernameUrl).success(function (data) {
-//            $rootScope.userFullname = JSON.parse(data);
-//
-//            //We need to change de display element cause a chrome render bug
-//            $('li.user-name').css('display', 'block');
-//            $('li.user-name').css('display', 'inline-block');
-//
-//            //Make visible the user name and logout option
-//            $('li.user-name a').css('visibility', 'visible');
-//
-//        });
-//    };
+    helper.getUser = function (forceRequest) {
+        var currentPromise = $q.defer();
+        /*If we don't want the cached user, then force the request*/
+        if (!$rootScope.user || forceRequest === true) {
+            /*Add a new promise to the promises array, to be resolved once the current request is finished*/
+            helper.pushUserPromise(currentPromise);
+            /*If there isn't a request in progress*/
+            if (helper.getUserRequestFlag === false) {
+                helper.getUserRequestFlag = true;
+                $http.get('api/users/loggedUser').success(function (user) {
+                    /*Once the request is finished, turns the flag to false again*/
+                    helper.getUserRequestFlag = false;
+                    /*When user is in admin mode, we send an aditional parameter in the header*/
+                    
+//                    if (user.IsAdminMode) {
+//                        $http.defaults.headers.common.IsAdminMode = true;
+//                    }
+//                    else {
+//                        if ($http.defaults.headers.common.IsAdminMode) {
+//                            delete $http.defaults.headers.common.IsAdminMode;
+//                        }
+//                    }
+
+                    /*Once the request is finished, resolves the general promise.*/
+                    if(user.success)
+                    {
+                        $rootScope.user = user;
+                    }
+                    else
+                    {
+                        delete $rootScope.user;
+                    }
+                    
+                    helper.resolveUserPromises(user);
+                });
+            }
+        }
+        else {
+            /*If we want the user info which is in cache*/
+            currentPromise.resolve($rootScope.user);
+        }
+        return currentPromise.promise;
+    };
+    
+    helper.pushUserPromise = function (userPromise) {
+        helper.getUserPromises.push(userPromise);
+    }
+
+    /*Resolves all promises that waits for a request to finish*/
+    helper.resolveUserPromises = function (userInfo) {
+        var q = $q.defer();
+
+        while (helper.getUserPromises.length) {
+            var lastPromise = helper.getUserPromises.pop();
+            lastPromise.resolve(userInfo);
+            if (!helper.getUserPromises.length) {
+                q.resolve();
+            }
+        }
+
+        return q.promise;
+    };
 
     //Get a cookie by name
     helper.getCookie = function (c_name) {
@@ -336,4 +392,4 @@ Professionals.factory('Helper', function ($rootScope, $q, $http) {
     };
 
     return helper;
-});
+}]);
