@@ -125,8 +125,12 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
 
         $scope.goBackRegistration = function (e) {
             e.preventDefault();
-            $scope.registro.mostrarRegistro = false;
-            $scope.registro.empresa = false;
+            if (newUser) {
+                $scope.registro.mostrarRegistro = false;
+                $scope.registro.empresa = false;
+            } else {
+                $location.path('/index.html');
+            }
         };
 
         /**************** PARA EL REGISTRO MIRAR ESTO **********************************/
