@@ -59,7 +59,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
 
         $scope.showPlan = function (plan)
         {
-            
+
             if ($scope.selectedPlan.tipo === plan)
             {
                 $scope.isCollapsed = true;
@@ -73,35 +73,14 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             }
         }
 
-        $scope.fillNewUserCamps = function ()
-        {
-            $scope.user.nombre = "Bin" + Helper.randomString(2);
-            $scope.user.apellido = "Laden" + Helper.randomString(2);
-            $scope.user.username = Helper.randomString(7);
-            $scope.user.password = "asdasd";
-            $scope.user.passwordConfirm = "asdasd";
-            $scope.user.email = "alecellis1985@gmail.com";
-            $scope.user.telefono = "26013794";
-            $scope.user.celular = "098635923";
-            $scope.user.direccion = "Maximo tajen 3565";
-            $scope.user.telefonoEmp = "26013794";
-//            $scope.depSelected.idDepartamento = 2;
-//            $scope.selectedCategoria.categoriaId = 2;
-//            $scope.user.descService = $scope.randomString(50);
-//            $scope.user.servicioOfrecido1 = $scope.randomString(25);
-//            $scope.user.servicioOfrecido2 = $scope.randomString(25);
-//            $scope.user.servicioOfrecido3 = $scope.randomString(25);
-//            $scope.user.servicioOfrecido4 = $scope.randomString(25);
-//            $scope.user.servicioOfrecido5 = $scope.randomString(25);
-//            $scope.user.servicioOfrecido6 = $scope.randomString(25);
-        };
+
 
         $scope.validateImg = function (files) {
             if (files && files.length) {
                 var file = files[0];
                 var error;
                 if (file.type.indexOf('image') === -1) {
-                    error = 'Image extension not allowed, please choose a JPEG or PNG file.'
+                    error = 'Image extension not allowed, please choose a JPEG or PNG file.';
                 }
 
                 if (file.size > 2097152) {
@@ -183,10 +162,59 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             }
         };
 
+        $scope.fillNewUserCamps = function ()
+        {
+            $scope.user.nombre = "Bin" + Helper.randomString(2);
+            $scope.user.apellido = "Laden" + Helper.randomString(2);
+            $scope.user.username = Helper.randomString(7);
+            $scope.user.password = "asdasd";
+            $scope.user.passwordConfirm = "asdasd";
+            $scope.user.email = "alecellis1985@gmail.com";
+            $scope.user.telefono = "26013794";
+            $scope.user.celular = "098635923";
+            $scope.user.direccion = "Maximo tajen 3565";
+            $scope.user.telefonoEmp = "26013794";
+//            $scope.depSelected.idDepartamento = 2;
+//            $scope.selectedCategoria.categoriaId = 2;
+//            $scope.user.descService = $scope.randomString(50);
+//            $scope.user.servicioOfrecido1 = $scope.randomString(25);
+//            $scope.user.servicioOfrecido2 = $scope.randomString(25);
+//            $scope.user.servicioOfrecido3 = $scope.randomString(25);
+//            $scope.user.servicioOfrecido4 = $scope.randomString(25);
+//            $scope.user.servicioOfrecido5 = $scope.randomString(25);
+//            $scope.user.servicioOfrecido6 = $scope.randomString(25);
+        };
+
+        $scope.fillEditUserCamps = function () {
+            debugger;
+            $scope.user = userData.data;
+            $scope.user.passwordConfirm = userData.data.password;
+            $scope.currentUsername = userData.data.username;
+            var categoriaId = parseInt(userData.data.categoria);
+            $scope.selectedCategoria = $scope.categorias.sort(sortById("categoriaId"))[categoriaId];
+
+            var departamentoId = parseInt(userData.data.departamento);
+            $scope.depSelected = $scope.departamentosList.sort(sortById("idDepartamento"))[departamentoId];
+
+            if ($scope.depSelected.nombreDepartamento.toLowerCase() === "montevideo") {
+                var barrioId = parseInt(userData.data.barrio);
+                $scope.selectedBarrio = $scope.barrios.sort(sortById("barrioId"))[barrioId];
+
+            }
+        };
+
+        function sortById(propertyName) {
+            return function(a, b) {
+                var aId = parseInt(a[propertyName]);
+                var bId = parseInt(b[propertyName]);
+                return ((aId < bId) ? -1 : ((aId > bId) ? 1 : 0));
+            };
+        }
+
         if (newUser) {
             $scope.fillNewUserCamps();
         } else {
-            $scope.user = userData.data;
+            $scope.fillEditUserCamps();
         }
 
         $scope.markers = [];

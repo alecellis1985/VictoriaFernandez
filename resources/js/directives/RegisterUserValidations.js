@@ -38,6 +38,9 @@ Professionals.directive('username', function ($q, $timeout, $http) {
 
                 var def = $q.defer();
 
+                if (scope.currentUsername == modelValue)
+                    return def.resolve();
+
                 $http.post('api/check-username', {'userName': modelValue}, {headers: {'Content-Type': 'application/json;charset=utf-8'}})
                         .success(function (data, status, headers, cfg) {
                             if (data.success && data.data.isUnique)

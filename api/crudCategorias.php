@@ -1,12 +1,13 @@
 <?php
+
 function getCategorias() {
     $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
     $response = null;
     if ($conn->conectar()) {
-        $sql = "SELECT * FROM categorias ORDER BY categoriaNombre";// ORDER BY nombreDepartamento
+        $sql = "SELECT * FROM categorias ORDER BY categoriaNombre"; // ORDER BY nombreDepartamento
         if ($conn->consulta($sql)) {
-            $categorias = $conn->restantesRegistros(); 
-            $response = MessageHandler::getSuccessResponse("",$categorias);
+            $categorias = $conn->restantesRegistros();
+            $response = MessageHandler::getSuccessResponse("", $categorias);
         } else {
             $response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
         }

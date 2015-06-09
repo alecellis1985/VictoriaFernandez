@@ -1,9 +1,9 @@
-<div class="row" ng-hide="!registro.mostrarRegistro">
+<div class="row" ng-show="registro.mostrarRegistro && !newUser">
     <div class="row">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-12 col-sm-12">
-                    <h3>Editar usuario {{user.username}}</h3>
+                    <h3>Editar usuario {{currentUsername}}</h3>
                 </div>
             </div>
         </div>
