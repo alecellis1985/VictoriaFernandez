@@ -200,20 +200,23 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             diasAtencion.viernes = parseInt(userData.data.diasAtencion.viernes) === 1;
             diasAtencion.sabado = parseInt(userData.data.diasAtencion.sabado) === 1;
             diasAtencion.domingo = parseInt(userData.data.diasAtencion.domingo) === 1;
-            
-            var formasDePago = {};            
+
+            var formasDePago = {};
             formasDePago.contado = parseInt(userData.data.formasDePago.contado) === 1;
             formasDePago.debito = parseInt(userData.data.formasDePago.debito) === 1;
             formasDePago.credito = parseInt(userData.data.formasDePago.credito) === 1;
             formasDePago.otras = parseInt(userData.data.formasDePago.otras) === 1;
-            
+
             $scope.user.diasAtencion = diasAtencion;
             $scope.user.formaDePago = formasDePago;
             
+            $scope.user.horaComienzo = Helper.timeFromString(userData.data.diasAtencion.horaComienzo);
+            $scope.user.horaFin = Helper.timeFromString(userData.data.diasAtencion.horaFin);
+
         };
 
         function sortById(propertyName) {
-            return function(a, b) {
+            return function (a, b) {
                 var aId = parseInt(a[propertyName]);
                 var bId = parseInt(b[propertyName]);
                 return ((aId < bId) ? -1 : ((aId > bId) ? 1 : 0));
