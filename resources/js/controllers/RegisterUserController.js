@@ -162,6 +162,16 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             }
         };
 
+        $scope.dropdownsValid = true;
+        $scope.dropDownCheck = function () {
+            $scope.dropdownsValid = Helper.isUndefinedOrNull($scope.selectedCategoria.categoriaId) ||
+                    Helper.isUndefinedOrNull($scope.depSelected.idDepartamento) ||
+                    parseInt($scope.selectedCategoria.categoriaId) < 0 ||
+                    parseInt($scope.depSelected.idDepartamento) < 0 ||
+                    ($scope.depSelected.nombreDepartamento === 'Montevideo' && Helper.isUndefinedOrNull($scope.selectedCategoria.categoriaId)
+                            && parseInt($scope.selectedBarrio.barrioId) < 0);
+        };
+
         $scope.fillNewUserCamps = function ()
         {
             $scope.user.nombre = "Bin" + Helper.randomString(2);
@@ -209,9 +219,11 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
 
             $scope.user.diasAtencion = diasAtencion;
             $scope.user.formaDePago = formasDePago;
-            
+
             $scope.user.horaComienzo = Helper.timeFromString(userData.data.diasAtencion.horaComienzo);
             $scope.user.horaFin = Helper.timeFromString(userData.data.diasAtencion.horaFin);
+
+            $scope.dropDownCheck();
 
         };
 
@@ -236,15 +248,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             }
         };
 
-        $scope.dropdownsValid = true;
-        $scope.dropDownCheck = function () {
-            $scope.dropdownsValid = Helper.isUndefinedOrNull($scope.selectedCategoria.categoriaId) ||
-                    Helper.isUndefinedOrNull($scope.depSelected.idDepartamento) ||
-                    parseInt($scope.selectedCategoria.categoriaId) < 0 ||
-                    parseInt($scope.depSelected.idDepartamento) < 0 ||
-                    ($scope.depSelected.nombreDepartamento === 'Montevideo' && Helper.isUndefinedOrNull($scope.selectedCategoria.categoriaId)
-                            && parseInt($scope.selectedBarrio.barrioId) < 0);
-        };
+
 
         $scope.checkCategoria = function (elem) {
             return parseInt(elem.categoriaId) < 0;
