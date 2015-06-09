@@ -35,7 +35,7 @@ CREATE TABLE `barrios` (
   `barrioNombre` varchar(250) NOT NULL,
   PRIMARY KEY  (`barrioId`),
   UNIQUE KEY `barrioNombre` (`barrioNombre`)
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -60,7 +60,7 @@ CREATE TABLE `categorias` (
   `categoriaNombre` varchar(250) NOT NULL,
   PRIMARY KEY  (`categoriaId`),
   KEY `categoriaNombre` (`categoriaNombre`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,7 +145,7 @@ CREATE TABLE `departamentos` (
   `nombreDepartamento` varchar(250) NOT NULL,
   PRIMARY KEY  (`idDepartamento`),
   UNIQUE KEY `nombreDepartamento` (`nombreDepartamento`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -209,18 +209,18 @@ CREATE TABLE `formasdepago` (
   PRIMARY KEY  (`idformasDePago`),
   KEY `formasdepago_users_idx` (`idUser`),
   CONSTRAINT `formasdepago_users` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `formasdepago`
 --
 
-LOCK TABLES `formasdepago` WRITE;
-/*!40000 ALTER TABLE `formasdepago` DISABLE KEYS */;
-INSERT INTO `formasdepago` VALUES (1,20,0,0,0,0),(2,21,1,1,1,1),(3,22,0,0,0,0),(4,23,0,0,0,0),(5,24,0,0,0,0),(6,25,0,0,0,0);
-/*!40000 ALTER TABLE `formasdepago` ENABLE KEYS */;
-UNLOCK TABLES;
+-- LOCK TABLES `formasdepago` WRITE;
+-- /*!40000 ALTER TABLE `formasdepago` DISABLE KEYS */;
+-- INSERT INTO `formasdepago` VALUES (1,20,0,0,0,0),(2,21,1,1,1,1),(3,22,0,0,0,0),(4,23,0,0,0,0),(5,24,0,0,0,0),(6,25,0,0,0,0);
+-- /*!40000 ALTER TABLE `formasdepago` ENABLE KEYS */;
+-- UNLOCK TABLES;
 
 -- 
 -- Table structure for table `plan`
@@ -324,7 +324,7 @@ CREATE TABLE `users` (
   CONSTRAINT `users_categoria` FOREIGN KEY (`categoria`) REFERENCES `categorias` (`categoriaId`) ON UPDATE CASCADE,
   CONSTRAINT `users_barrios` FOREIGN KEY (`barrio`) REFERENCES `barrios` (`barrioId`) ON UPDATE CASCADE,
   CONSTRAINT `users_departamento` FOREIGN KEY (`departamento`) REFERENCES `departamentos` (`idDepartamento`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 INSERT INTO  `profesionales`.`users` (

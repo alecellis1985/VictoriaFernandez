@@ -174,33 +174,42 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             $scope.user.celular = "098635923";
             $scope.user.direccion = "Maximo tajen 3565";
             $scope.user.telefonoEmp = "26013794";
-//            $scope.depSelected.idDepartamento = 2;
-//            $scope.selectedCategoria.categoriaId = 2;
-//            $scope.user.descService = $scope.randomString(50);
-//            $scope.user.servicioOfrecido1 = $scope.randomString(25);
-//            $scope.user.servicioOfrecido2 = $scope.randomString(25);
-//            $scope.user.servicioOfrecido3 = $scope.randomString(25);
-//            $scope.user.servicioOfrecido4 = $scope.randomString(25);
-//            $scope.user.servicioOfrecido5 = $scope.randomString(25);
-//            $scope.user.servicioOfrecido6 = $scope.randomString(25);
         };
 
         $scope.fillEditUserCamps = function () {
             debugger;
-            $scope.user = userData.data;
-            $scope.user.passwordConfirm = userData.data.password;
-            $scope.currentUsername = userData.data.username;
-            var categoriaId = parseInt(userData.data.categoria);
+            $scope.user = userData.data.user;
+            $scope.user.passwordConfirm = userData.data.user.password;
+            $scope.currentUsername = userData.data.user.username;
+            var categoriaId = parseInt(userData.data.user.categoria);
             $scope.selectedCategoria = $scope.categorias.sort(sortById("categoriaId"))[categoriaId];
 
-            var departamentoId = parseInt(userData.data.departamento);
+            var departamentoId = parseInt(userData.data.user.departamento);
             $scope.depSelected = $scope.departamentosList.sort(sortById("idDepartamento"))[departamentoId];
 
             if ($scope.depSelected.nombreDepartamento.toLowerCase() === "montevideo") {
-                var barrioId = parseInt(userData.data.barrio);
+                var barrioId = parseInt(userData.data.user.barrio);
                 $scope.selectedBarrio = $scope.barrios.sort(sortById("barrioId"))[barrioId];
 
             }
+            var diasAtencion = {};
+            diasAtencion.lunes = parseInt(userData.data.diasAtencion.lunes) === 1;
+            diasAtencion.martes = parseInt(userData.data.diasAtencion.martes) === 1;
+            diasAtencion.miercoles = parseInt(userData.data.diasAtencion.miercoles) === 1;
+            diasAtencion.jueves = parseInt(userData.data.diasAtencion.jueves) === 1;
+            diasAtencion.viernes = parseInt(userData.data.diasAtencion.viernes) === 1;
+            diasAtencion.sabado = parseInt(userData.data.diasAtencion.sabado) === 1;
+            diasAtencion.domingo = parseInt(userData.data.diasAtencion.domingo) === 1;
+            
+            var formasDePago = {};            
+            formasDePago.contado = parseInt(userData.data.formasDePago.contado) === 1;
+            formasDePago.debito = parseInt(userData.data.formasDePago.debito) === 1;
+            formasDePago.credito = parseInt(userData.data.formasDePago.credito) === 1;
+            formasDePago.otras = parseInt(userData.data.formasDePago.otras) === 1;
+            
+            $scope.user.diasAtencion = diasAtencion;
+            $scope.user.formaDePago = formasDePago;
+            
         };
 
         function sortById(propertyName) {

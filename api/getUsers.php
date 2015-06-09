@@ -88,7 +88,31 @@ function getLoggedUser() {
         $params[0] = array("username", $_SESSION['usuario'], "string", 100);
         if ($conn->consulta($sql, $params)) {
             $users = $conn->restantesRegistros();
-            $response = MessageHandler::getSuccessResponse("", $users[0]);
+            $currentUser = $users[0];
+            $userData['user'] = $currentUser;
+            $sqlFormasDePago = "select * from formasdepago where idUser = :userId";
+            $paramsFormasDePago = array();
+            $paramsFormasDePago[0] = array("userId", $currentUser->idUser, "int", 11);
+            if ($conn->consulta($sqlFormasDePago, $paramsFormasDePago)) {
+                $formasDePago = $conn->restantesRegistros();
+                $formaDePagoUser = $formasDePago[0];
+                $userData['formasDePago'] = $formaDePagoUser;
+
+                $sqlDiasAtencion = "select * from diasatencion where idUser = :userId";
+                $paramsDiasAtencion = array();
+                $paramsDiasAtencion[0] = array("userId", $currentUser->idUser, "int", 11);
+                if ($conn->consulta($sqlDiasAtencion, $paramsDiasAtencion)) {
+                    $diasAtencion = $conn->restantesRegistros();
+                    $diasAtencionUser = $diasAtencion[0];
+                    $userData['diasAtencion'] = $diasAtencionUser;
+
+                    $response = MessageHandler::getSuccessResponse("", $userData);
+                } else {
+                    $response = MessageHandler::getErrorResponse("Error con la consulta!");
+                }
+            } else {
+                $response = MessageHandler::getErrorResponse("Error con la consulta!");
+            }
         } else {
             $response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
         }
