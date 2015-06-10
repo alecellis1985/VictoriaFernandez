@@ -190,9 +190,9 @@ function updateUser($conn, $user) {
                         $paramsPagos = array();
                         $paramsPagos[0] = array("idUser", $userId, "int", 11);
                         $paramsPagos[1] = array("contado", $user['formaDePago']['contado'], "int", 1);
-                        $paramsPagos[2] = array("debito", $user['formaDePago']['contado'], "int", 1);
-                        $paramsPagos[3] = array("credito", $user['formaDePago']['contado'], "int", 1);
-                        $paramsPagos[4] = array("otras", $user['formaDePago']['contado'], "int", 1);
+                        $paramsPagos[2] = array("debito", $user['formaDePago']['debito'], "int", 1);
+                        $paramsPagos[3] = array("credito", $user['formaDePago']['credito'], "int", 1);
+                        $paramsPagos[4] = array("otras", $user['formaDePago']['otras'], "int", 1);
 
                         if ($conn->consulta($sqlPagos, $paramsPagos)) {
                             $conn->closeCursor();

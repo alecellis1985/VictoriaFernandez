@@ -211,6 +211,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             diasAtencion.domingo = parseInt(userData.data.diasAtencion.domingo) === 1;
 
             var formasDePago = {};
+            debugger;
             formasDePago.contado = parseInt(userData.data.formasDePago.contado) === 1;
             formasDePago.debito = parseInt(userData.data.formasDePago.debito) === 1;
             formasDePago.credito = parseInt(userData.data.formasDePago.credito) === 1;
@@ -310,6 +311,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                 'horaFin': Helper.stringTime($scope.user.horaFin),
                 'markers': markersArr
             };
+            debugger;
             var imgFile = null;
             if (!(typeof $scope.files === 'undefined') && !($scope.files === null))
                 imgFile = $scope.files[0];
