@@ -23,6 +23,7 @@ function logUser($conn, $userLogin) {
             if ($user && isset($user->username)) {
                 $_SESSION['ingreso'] = true;
                 $_SESSION['usuario'] = $user->username;
+                $_SESSION['idUser'] = $user->idUser;
                 $_SESSION['password'] = $user->password;
                 //TODO: Agregar campo isAdmin para el administrador
                 $_SESSION['isAdmin'] = false;

@@ -187,7 +187,6 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         };
 
         $scope.fillEditUserCamps = function () {
-            debugger;
             $scope.user = userData.data.user;
             $scope.user.passwordConfirm = userData.data.user.password;
             $scope.currentUsername = userData.data.user.username;
@@ -222,6 +221,8 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
 
             $scope.user.horaComienzo = Helper.timeFromString(userData.data.diasAtencion.horaComienzo);
             $scope.user.horaFin = Helper.timeFromString(userData.data.diasAtencion.horaFin);
+            
+            $scope.IdPlan = $scope.user.plan;
 
             $scope.dropDownCheck();
 
