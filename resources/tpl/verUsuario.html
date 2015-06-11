@@ -1,0 +1,201 @@
+<div class="row" ng-show="registro.mostrarRegistro && !newUser">
+    <div class="row">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-12 col-sm-12">
+                    <h3>Usuario {{currentUsername}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title" ng-hide="registro.empresa">Datos personales de contacto</h3>
+        <h3 class="panel-title" ng-show="registro.empresa">Datos de la Empresa</h3>
+    </div>
+    <div class="panel-body personalData">
+        <div class="row ">
+            <div class="form-group col-xs-12 col-md-4">
+                <label for="nombre">Nombre</label>
+                <p id="nombre" class="form-group-inline">{{user.nombre}}</p>
+            </div>
+            <div class="form-group col-xs-12 col-md-4" ng-hide="registro.empresa">
+                <label for="apellido">Apellido</label>
+                <p id="apellido" class="form-group-inline">{{user.apellido}}</p>
+            </div>
+            <div class="form-group col-xs-10 col-md-3">
+                <label for="username">Nombre de Usuario</label>
+                <p id="username" class="form-group-inline">{{user.username}}</p>
+            </div>
+        </div>
+        <div class="row">            
+            <div class="form-group col-xs-12 col-md-4">
+                <label for="email">Email</label>
+                <p id="email" class="form-group-inline">{{user.email}}</p>
+            </div>  
+            <div class="form-group col-xs-12 col-md-4" ng-hide="registro.empresa">
+                <label for="telefono">Telefono</label>
+                <p id="telefono" class="form-group-inline">{{user.telefono}}</p>
+            </div>
+            <div class="form-group col-xs-12 col-md-4" ng-hide="registro.empresa">
+                <label for="celular">Celular</label>
+                <p id="celular" class="form-group-inline">{{user.celular}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Datos de tu negocio</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="form-group col-xs-12 col-md-4">
+                <label for="categoria">Categoria</label>
+                <p id="categoria" class="form-group-inline">{{user.selectedCategoriaText}}</p>
+            </div>
+            <div class="form-group col-xs-12 col-md-4">
+                <label for="departamento">Departamento</label>
+                <p id="departamento" class="form-group-inline">{{user.selectedDepartamentoText}}</p>
+            </div>
+            <div class="form-group col-xs-12 col-md-4" ng-show="depSelected.nombreDepartamento === 'Montevideo'">
+                <label for="barrio">Barrio</label>
+                <p id="barrio" class="form-group-inline">{{user.selectedBarrioText}}</p>
+            </div>
+
+        </div>
+        <div class="row ">
+            <div class="form-group col-xs-12 col-md-4">
+                <label for="direccion">Direccion</label>
+                <p id="direccion" class="form-group-inline">{{user.direccion}}</p>
+            </div>
+            <div class="form-group col-xs-12 col-md-4">
+                <label for="telefonoEmp">TelefonoEmp</label>
+                <p id="telefonoEmp" class="form-group-inline">{{user.telefonoEmp}}</p>
+            </div>
+            <div class="form-group col-xs-12 col-md-4">
+                <label for="sitioWeb">Sitio Web</label>
+                <p id="sitioWeb" class="form-group-inline">{{user.sitioWeb}}</p>
+            </div>       
+
+        </div>
+        <div class="row ">
+            <div class="form-group col-xs-12 col-md-4">
+                <label for="facebookUrl">Facebook</label>
+                <p id="facebookUrl" class="form-group-inline">{{user.facebookUrl}}</p>
+            </div>
+            <div class="form-group col-xs-12 col-md-4">
+                <label for="twitterUrl">Twitter</label>
+                <p id="twitterUrl" class="form-group-inline">{{user.twitterUrl}}</p>
+            </div>
+            <div class="form-group col-xs-12 col-md-4">
+                <label for="linkedinUrl">LinkedIn</label>
+                <p id="linkedinUrl" class="form-group-inline">{{user.linkedinUrl}}</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Ubicacion en mapa</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="form-group col-xs-12 col-md-12 col-sm-12"> 
+                <label>Haga click en el mapa para establecer la ubicación</label>
+            </div>
+        </div>
+
+        <map-Set-Markers ng-if="registro.mostrarRegistro" markers-Arr="markers"></map-Set-Markers>
+    </div>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Servicios Prestados</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="form-group col-xs-12">
+                <label for="descService">Breve Descripcion</label>
+                <p id="descService" >{{user.descService}}</p>
+            </div>
+        </div> 
+        <div class="row">
+            <div class="form-group col-xs-12">
+                <label>Servicios Ofrecidos</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-12 col-md-4">
+                <p class="form-group-inline">{{user.servicioOfrecido1}}</p>
+            </div>
+            <div class="form-group col-xs-12 col-md-4">
+                <p class="form-group-inline">{{user.servicioOfrecido2}}</p>
+            </div>
+            <div class="form-group col-xs-12 col-md-4">
+                <p class="form-group-inline">{{user.servicioOfrecido3}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-12 col-md-4">
+                <p class="form-group-inline">{{user.servicioOfrecido4}}</p>
+            </div>
+            <div class="form-group col-xs-12 col-md-4">
+                <p class="form-group-inline">{{user.servicioOfrecido5}}</p>
+            </div>
+            <div class="form-group col-xs-12 col-md-4">
+                <p class="form-group-inline">{{user.servicioOfrecido5}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Describa su negocio y/o servicios</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="form-group col-xs-12">
+                <label for="descServiceLong">Descripcion detallada</label>
+                <p id="descServiceLong" >{{user.descServiceLong}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-12 col-md-12"> 
+                <label>Formas de Pago</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-12 col-md-12"> 
+                <p id="formasDePago" >{{user.formasDePagoText}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-12 col-md-2"> 
+                <label>Dias de atención</label>
+            </div>            
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-12 col-md-12"> 
+                <p id="diasAtencion" >{{user.diasAtencionText}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-12 col-md-2"> 
+                <label>Horario de atención</label>
+            </div>
+            <div class="form-group col-xs-12 col-md-2">  
+                <label for="horaComienzo">Desde</label>
+                <timepicker name='horaComienzo' ng-model="user.horaComienzo" hour-step="1" minute-step="10" show-meridian="true" ng-change="checkTime()"></timepicker>
+            </div>
+            <div class="form-group col-xs-12 col-md-2">           
+                <label for="horaComienzo">Hasta</label>
+                <timepicker name='horaFin' ng-model="user.horaFin" hour-step="1" minute-step="10" show-meridian="true" ng-change="checkTime()"></timepicker>
+            </div>
+        </div>
+    </div>
+</div>
+

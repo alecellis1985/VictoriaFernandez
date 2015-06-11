@@ -55,6 +55,28 @@ Professionals.config(['$routeProvider', '$httpProvider', function ($routeProvide
             }
         });
 
+        $routeProvider.when('/ver-usuario', {
+            templateUrl: 'resources/tpl/verUsuario.html',
+            controller: 'VerUserController',
+            resolve: {
+                departamentosList: function (CommonService) {
+                    return CommonService.getRequest('api/departamentos');
+                },
+                categoriasList: function (CommonService) {
+                    return CommonService.getRequest('api/categorias');
+                },
+                barriosList: function (CommonService) {
+                    return CommonService.getRequest('api/barrios');
+                },
+                planes: function (CommonService) {
+                    return CommonService.getRequest('api/userPlans');
+                },
+                userData: function (CommonService) {
+                    return CommonService.getRequest('api/getCurrentUser');
+                }
+            }
+        });
+
         $routeProvider.when('/contacto', {
             templateUrl: 'resources/tpl/contacto.html',
             controller: 'ContactoController'

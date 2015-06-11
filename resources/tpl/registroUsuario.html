@@ -84,13 +84,13 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-xs-12 col-md-4">
+                <div class="form-group col-xs-12 col-md-4" ng-show="newUser">
                     <span class="requiredAst">*</span>
                     <input type="password" class="form-control" name="password" ng-model="user.password" placeholder="Contraseña" 
                            required ng-minlength=6>
                     <span ng-show="registerUser.password.$touched && registerUser.password.$error.required" class="error">Contraseña es requerida</span>
                 </div>
-                <div class="form-group col-xs-12 col-md-4">
+                <div class="form-group col-xs-12 col-md-4" ng-show="newUser">
                     <span class="requiredAst">*</span>
                     <input type="password" class="form-control" name="passwordConfirm" ng-model="user.passwordConfirm" placeholder="Confirmar Contraseña" 
                            required ng-minlength=6 ng-model-options="{ updateOn: 'blur' }" compare-to="registerUser.password.$viewValue">
@@ -150,7 +150,7 @@
                     <input type="url" name="sitioWeb" class="form-control" ng-model="user.sitioWeb" placeholder="Sitio Web">
                     <span ng-show="registerUser.sitioWeb.$touched && registerUser.sitioWeb.$error.url" class="error">URL invalida</span>
                 </div>
-                <div class="form-group col-xs-12 col-md-4">
+                <div class="form-group col-xs-12 col-md-4" ng-show="newUser">
 
                     <input id="uploadFile" name="imageUpload" class="form-control" style="display: inline-block; width: 85%" 
                            placeholder="Foto o Logo" disabled="disabled" ng-model="files[0].name"/>

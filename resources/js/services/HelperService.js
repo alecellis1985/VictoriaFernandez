@@ -406,7 +406,52 @@ Professionals.factory('Helper', ['$rootScope', '$q', '$http', function ($rootSco
             initHour.setMinutes(minute);
             
             return initHour;
+        };
+        
+        helper.getDiasAtencionText = function(diasAtencion) {
+            var textResult = "";
+            if (diasAtencion.lunes)
+                textResult = "Lunes";
+            if (diasAtencion.martes) {
+                textResult += (textResult === "" ? "Martes" : ", Martes");
+            }
+            if (diasAtencion.miercoles) {
+                textResult += (textResult === "" ? "Miercoles" : ", Miercoles");
+            }
+            if (diasAtencion.jueves) {
+                textResult += (textResult === "" ? "Jueves" : ", Jueves");
+            }
+            if (diasAtencion.viernes) {
+                textResult += (textResult === "" ? "Viernes" : ", Viernes");
+            }
+
+            if (diasAtencion.sabado) {
+                textResult += (textResult === "" ? "Sabado" : ", Sabado");
+            }
+
+            if (diasAtencion.domingo) {
+                textResult += (textResult === "" ? "Domingo" : ", Domingo");
+            }
+
+            return textResult;
         }
+               
+        helper.getFormasDePagoText = function(formasDePago) {
+            var textResult = "";
+            if (formasDePago.contado)
+                textResult = "Contado";
+            if (formasDePago.debito) {
+                textResult += (textResult === "" ? "Debito" : ", Debito");
+            }
+            if (formasDePago.credito) {
+                textResult += (textResult === "" ? "Credito" : ", Credito");
+            }
+            if (formasDePago.otras) {
+                textResult += (textResult === "" ? "Otras" : ", Otras");
+            }
+
+            return textResult;
+        };
 
         return helper;
     }]);

@@ -1,18 +1,18 @@
 'use strict';
 
-Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$rootScope', '$location', '$upload',
-    'CommonService', 'departamentosList', 'categoriasList', 'barriosList', 'planes', 'Helper', 'userData', 'newUser',
+Professionals.controller('VerUserController', ['$scope', '$routeParams', '$rootScope', '$location', '$upload',
+    'CommonService', 'departamentosList', 'categoriasList', 'barriosList', 'planes', 'Helper', 'userData',
     function ($scope, $routeParams, $rootScope, $location, $upload, CommonService, departamentosList, categoriasList,
-            barriosList, planes, Helper, userData, newUser) {
+            barriosList, planes, Helper, userData) {
         //FOR UPLOAD FILE (IMG)
         $scope.$watch('files', function () {
             //perform img validation 
             $scope.validateImg($scope.files);
         });
         $scope.planes = planes;
-        $scope.newUser = newUser;
-        $scope.isCollapsed = newUser;
-        $scope.editMode = newUser;
+        $scope.newUser = false;
+        $scope.isCollapsed = false;
+        $scope.editMode = false;
 
         //cambiar por tipo: {basico:{},premium:{} }; para que en la bd quede bien
         $scope.profesionalesAvailablePlans = {
@@ -100,13 +100,13 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         };
 
         $scope.registro = {
-            mostrarRegistro: !newUser,
+            mostrarRegistro: !false,
             empresa: userData.plan > 6
         };
 
         $scope.goBackRegistration = function (e) {
             e.preventDefault();
-            if (newUser) {
+            if (false) {
                 $scope.registro.mostrarRegistro = false;
                 $scope.registro.empresa = false;
             } else {
@@ -187,21 +187,26 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             $scope.user.telefonoEmp = "26013794";
         };
 
+        
+
         $scope.fillEditUserCamps = function () {
             $scope.user = userData.data.user;
             $scope.user.passwordConfirm = userData.data.user.password;
             $scope.currentUsername = userData.data.user.username;
             var categoriaId = parseInt(userData.data.user.categoria);
             $scope.selectedCategoria = $scope.categorias.sort(sortById("categoriaId"))[categoriaId];
+            $scope.user.selectedCategoriaText = $scope.selectedCategoria.categoriaNombre;
 
             var departamentoId = parseInt(userData.data.user.departamento);
             $scope.depSelected = $scope.departamentosList.sort(sortById("idDepartamento"))[departamentoId];
+            $scope.user.selectedDepartamentoText = $scope.depSelected.nombreDepartamento;
 
             if ($scope.depSelected.nombreDepartamento.toLowerCase() === "montevideo") {
                 var barrioId = parseInt(userData.data.user.barrio);
                 $scope.selectedBarrio = $scope.barrios.sort(sortById("barrioId"))[barrioId];
-
+                $scope.user.selectedBarrioText = $scope.selectedBarrio.barrioNombre;
             }
+
             var diasAtencion = {};
             diasAtencion.lunes = parseInt(userData.data.diasAtencion.lunes) === 1;
             diasAtencion.martes = parseInt(userData.data.diasAtencion.martes) === 1;
@@ -220,9 +225,12 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             $scope.user.diasAtencion = diasAtencion;
             $scope.user.formaDePago = formasDePago;
 
+            $scope.user.formasDePagoText = Helper.getFormasDePagoText(formasDePago);
+            $scope.user.diasAtencionText = Helper.getDiasAtencionText(diasAtencion);
+
             $scope.user.horaComienzo = Helper.timeFromString(userData.data.diasAtencion.horaComienzo);
             $scope.user.horaFin = Helper.timeFromString(userData.data.diasAtencion.horaFin);
-            
+
             $scope.IdPlan = $scope.user.plan;
 
             $scope.dropDownCheck();
@@ -237,7 +245,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             };
         }
 
-        if (newUser) {
+        if (false) {
             $scope.fillNewUserCamps();
         } else {
             $scope.fillEditUserCamps();
@@ -314,7 +322,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             var imgFile = null;
             if (!(typeof $scope.files === 'undefined') && !($scope.files === null))
                 imgFile = $scope.files[0];
-            if (newUser)
+            if (false)
                 CommonService.postRequestWithFile('api/agregar_usuario', data, imgFile).then(function (result) {
                     if (result.data.success) {
                         $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Has sido registrado con exito'});
