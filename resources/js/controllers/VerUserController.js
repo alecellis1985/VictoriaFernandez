@@ -230,6 +230,7 @@ Professionals.controller('VerUserController', ['$scope', '$routeParams', '$rootS
 
             $scope.user.horaComienzo = Helper.timeFromString(userData.data.diasAtencion.horaComienzo);
             $scope.user.horaFin = Helper.timeFromString(userData.data.diasAtencion.horaFin);
+            $scope.user.horarioAtencionText = Helper.getHorarioAtencionText(userData.data.diasAtencion.horaComienzo, userData.data.diasAtencion.horaFin);
 
             $scope.IdPlan = $scope.user.plan;
 

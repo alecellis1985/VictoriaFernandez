@@ -390,7 +390,7 @@ Professionals.factory('Helper', ['$rootScope', '$q', '$http', function ($rootSco
             }
             return hours + ":" + minutes + ":" + seconds;
         };
-        
+
 
         helper.timeFromString = function (stringTime) {
             var pieces = stringTime.split(':')
@@ -404,11 +404,20 @@ Professionals.factory('Helper', ['$rootScope', '$q', '$http', function ($rootSco
             var initHour = new Date();
             initHour.setHours(hour);
             initHour.setMinutes(minute);
-            
+
             return initHour;
         };
-        
-        helper.getDiasAtencionText = function(diasAtencion) {
+
+        helper.getHorarioAtencionText = function (comienzo, fin) {
+            var horaInicio = comienzo.substring(0, comienzo.length - 3);
+            var horaFin = fin.substring(0, fin.length - 3);
+            var textResult = "";
+            textResult = "De " + horaInicio + " hs a " + horaFin + " hs";
+            return textResult;
+
+        };
+
+        helper.getDiasAtencionText = function (diasAtencion) {
             var textResult = "";
             if (diasAtencion.lunes)
                 textResult = "Lunes";
@@ -435,8 +444,8 @@ Professionals.factory('Helper', ['$rootScope', '$q', '$http', function ($rootSco
 
             return textResult;
         }
-               
-        helper.getFormasDePagoText = function(formasDePago) {
+
+        helper.getFormasDePagoText = function (formasDePago) {
             var textResult = "";
             if (formasDePago.contado)
                 textResult = "Contado";

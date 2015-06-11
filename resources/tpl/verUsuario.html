@@ -187,13 +187,10 @@
             <div class="form-group col-xs-12 col-md-2"> 
                 <label>Horario de atención</label>
             </div>
-            <div class="form-group col-xs-12 col-md-2">  
-                <label for="horaComienzo">Desde</label>
-                <timepicker name='horaComienzo' ng-model="user.horaComienzo" hour-step="1" minute-step="10" show-meridian="true" ng-change="checkTime()"></timepicker>
-            </div>
-            <div class="form-group col-xs-12 col-md-2">           
-                <label for="horaComienzo">Hasta</label>
-                <timepicker name='horaFin' ng-model="user.horaFin" hour-step="1" minute-step="10" show-meridian="true" ng-change="checkTime()"></timepicker>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-12 col-md-12"> 
+                <p id="horarioAtencion" >{{user.horarioAtencionText}}</p>
             </div>
         </div>
     </div>
