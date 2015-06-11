@@ -110,7 +110,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                 $scope.registro.mostrarRegistro = false;
                 $scope.registro.empresa = false;
             } else {
-                $location.path('/index.html');
+                $location.path('/ver-usuario');
             }
         };
 
