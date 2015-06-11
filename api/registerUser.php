@@ -1,5 +1,74 @@
 <?php
 
+function editImg() {
+    $request = Slim::getInstance()->request();
+
+    //$user = getArrayFromRequest($request);
+    $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
+    $userName = $_SESSION['usuario'];
+    //Save File
+    //TODO: Validate format and size
+    if (validateFileToUpload()) {
+        $filenameAndExt = explode(".", $_FILES['file']['name']);
+        $destination = '../uploaded/' . md5($filenameAndExt[0]) . "_" . md5($userName) . "." . $filenameAndExt[1];
+        if (move_uploaded_file($_FILES['file']['tmp_name'], $destination)) {
+            $newImgUrl = md5($filenameAndExt[0]) . "_" . md5($userName) . "." . $filenameAndExt[1];
+            echo updateUserImg($conn, $newImgUrl);
+        } else {
+            echo MessageHandler::getErrorResponse("Img error.");
+        }
+    } else {
+        echo MessageHandler::getErrorResponse("Img error.");
+    }
+}
+
+function updateUserImg($conn, $newImgUrl) {
+    $response = null;
+    if ($conn->conectar()) {
+        try {
+            $conn->beginTransaction();
+
+            $sql = "SELECT * FROM users"
+                    . " WHERE username = '" . $_SESSION['usuario'] . "'";
+
+            if ($conn->consulta($sql)) {
+                $users = $conn->restantesRegistros();
+                $currentUser = $users[0];
+                $userImgUrl = $currentUser->imagenUrl;
+                $deleteDestination = '../uploaded/' . $userImgUrl;
+                $conn->closeCursor();
+
+                if (unlink($deleteDestination)) {
+
+                    $sqlUpdateImg = "UPDATE users SET imagenUrl = '" . $newImgUrl . "'"
+                            . " WHERE username = '" . $_SESSION['usuario'] . "'";
+
+                    if ($conn->consulta($sqlUpdateImg)) {
+                        $conn->commitTransaction();
+                        $response = MessageHandler::getSuccessResponse("Cambios guardados exitosamente!", $user);
+                    } else {
+                        $response = MessageHandler::getErrorResponse("Mi puto error.");
+                    }
+                } else {
+                    $response = MessageHandler::getErrorResponse("Mi puto error. 1");
+                }
+            } else {
+                $response = MessageHandler::getErrorResponse("Primer consulta error.Edit IMG");
+            }
+        } catch (Exception $exc) {
+            $response = null;
+            $conn->rollbackTransaction();
+        }
+    }
+    if ($response == null) {
+        header('HTTP/1.1 400 Bad Request');
+        return MessageHandler::getDBErrorResponse();
+    } else {
+        $conn->desconectar();
+        return $response;
+    }
+}
+
 function registerUser() {
     $request = Slim::getInstance()->request();
 

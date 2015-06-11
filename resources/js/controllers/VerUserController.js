@@ -1,8 +1,8 @@
 'use strict';
 
-Professionals.controller('VerUserController', ['$scope', '$location', 'departamentosList', 'categoriasList', 'barriosList',
+Professionals.controller('VerUserController', ['$scope', '$location', 'departamentosList', 'categoriasList', 'barriosList', '$modal',
     'planes', 'Helper', 'userData',
-    function ($scope, $location, departamentosList, categoriasList, barriosList, planes, Helper, userData) {
+    function ($scope, $location, departamentosList, categoriasList, barriosList, $modal, planes, Helper, userData) {
 
         $scope.planes = planes;
         $scope.newUser = false;
@@ -110,6 +110,27 @@ Professionals.controller('VerUserController', ['$scope', '$location', 'departame
         $scope.editUserData = function (e) {
             e.preventDefault();
             $location.path('/editar-usuario');
+
+        };
+
+        $scope.editUserImg = function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var modalInstance = $modal.open({
+                templateUrl: 'resources/tpl/editImg.html',
+                controller: 'EditImgController',
+                size: 'lg'
+                        //        resolve: {
+                        //          items: function () {
+                        //            return $scope.items;
+                        //          }
+                        //        }
+            });
+            modalInstance.result.then(function () {
+                //$scope.selected = selectedItem;
+            }, function () {
+                console.log('Modal dismissed at: ' + new Date());
+            });
 
         };
     }]);
