@@ -23,6 +23,7 @@ Professionals.controller('LoginController', ['$scope', '$routeParams', '$http', 
                     $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Bienvenido ' + result.data.username + ' !'});
                     $rootScope.user = result.data;
                     $modalInstance.close(0);
+                    $location.path('/ver-usuario');
                 } else
                     $rootScope.$broadcast('alert-event', {type: 'error', msg: result.msg});
 

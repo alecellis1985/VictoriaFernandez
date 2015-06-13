@@ -24,7 +24,7 @@ Professionals.controller('HeaderController', ['$scope', '$routeParams', '$http',
             modalInstance.result.then(function () {
                 //$scope.selected = selectedItem;
             }, function () {
-                console.log('Modal dismissed at: ' + new Date());
+//                console.log('Modal dismissed at: ' + new Date());
             });
         };
 
@@ -33,6 +33,7 @@ Professionals.controller('HeaderController', ['$scope', '$routeParams', '$http',
             evt.stopPropagation();
             CommonService.postJsonRequest('api/logout-user', {}).then(function (result) {
                 if (result.success) {
+                    $location.path('/');
                     $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Ha salido con exito! Hasta la proxima :)'});
                     delete $rootScope.user;
                 } else
