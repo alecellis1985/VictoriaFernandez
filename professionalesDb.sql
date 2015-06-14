@@ -330,37 +330,8 @@ CREATE TABLE `users` (
 ALTER TABLE  `users` ADD  `IsAdmin` TINYINT( 1 ) NOT NULL DEFAULT  '0' AFTER  `password` ;
 ALTER TABLE  `users` ADD  `IsActive` TINYINT( 1 ) NOT NULL DEFAULT  '1' AFTER  `IsAdmin` ;
 
-INSERT INTO  `profesionales`.`users` (
-`idUser` ,
-`nombre` ,
-`apellido` ,
-`email` ,
-`telefono` ,
-`celular` ,
-`direccion` ,
-`telefonoEmp` ,
-`departamento` ,
-`categoria` ,
-`barrio` ,
-`plan` ,
-`sitioWeb` ,
-`imagenUrl` ,
-`facebookUrl` ,
-`twitterUrl` ,
-`linkedinUrl` ,
-`descService` ,
-`servicioOfrecido1` ,
-`servicioOfrecido2` ,
-`servicioOfrecido3` ,
-`servicioOfrecido4` ,
-`servicioOfrecido5` ,
-`servicioOfrecido6` ,
-`descServiceLong` ,
-`username` ,
-`password`
-)
-VALUES (
-NULL ,  'Alec',  'Ellis',  'alecellis1985@hotmail.com',  '26013794',  '098635923',  'm.tajes 7530',  '26013794',  '2',  '1', NULL ,  '5',  '',  '',  'https://www.facebook.com/alec.ellis.714', NULL , NULL ,  'construccion de paginas web',  'SEO',  'OPTIMIZATION', NULL , NULL , NULL , NULL ,  'database performance optimization', MD5(  'turtleman1' ) , MD5(  'turtleman1' ),1
+INSERT INTO  `profesionales`.`users` VALUES (
+default ,  'Alec',  'Ellis',  'alecellis1985@hotmail.com',  '26013794',  '098635923',  'm.tajes 7530',  '26013794',  '2',  '1', NULL ,  '5',  '',  '',  'https://www.facebook.com/alec.ellis.714', NULL , NULL ,  'construccion de paginas web',  'SEO',  'OPTIMIZATION', NULL , NULL , NULL , NULL ,  'database performance optimization', MD5(  'turtleman1' ) , MD5(  'turtleman1' ),1,1
 );
 --
 -- Dumping data for table `users`
