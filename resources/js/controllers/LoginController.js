@@ -26,7 +26,6 @@ Professionals.controller('LoginController', ['$scope', '$routeParams', '$http', 
                     $location.path('/ver-usuario');
                 } else
                     $rootScope.$broadcast('alert-event', {type: 'error', msg: result.msg});
-
             });
         };
 

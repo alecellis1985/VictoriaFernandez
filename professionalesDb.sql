@@ -327,6 +327,9 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+ALTER TABLE  `users` ADD  `IsAdmin` TINYINT( 1 ) NOT NULL DEFAULT  '0' AFTER  `password` ;
+ALTER TABLE  `users` ADD  `IsActive` TINYINT( 1 ) NOT NULL DEFAULT  '1' AFTER  `IsAdmin` ;
+
 INSERT INTO  `profesionales`.`users` (
 `idUser` ,
 `nombre` ,
@@ -357,7 +360,7 @@ INSERT INTO  `profesionales`.`users` (
 `password`
 )
 VALUES (
-NULL ,  'Alec',  'Ellis',  'alecellis1985@hotmail.com',  '26013794',  '098635923',  'm.tajes 7530',  '26013794',  '2',  '1', NULL ,  '5',  '',  '',  'https://www.facebook.com/alec.ellis.714', NULL , NULL ,  'construccion de paginas web',  'SEO',  'OPTIMIZATION', NULL , NULL , NULL , NULL ,  'database performance optimization', MD5(  'turtleman1' ) , MD5(  'turtleman1' )
+NULL ,  'Alec',  'Ellis',  'alecellis1985@hotmail.com',  '26013794',  '098635923',  'm.tajes 7530',  '26013794',  '2',  '1', NULL ,  '5',  '',  '',  'https://www.facebook.com/alec.ellis.714', NULL , NULL ,  'construccion de paginas web',  'SEO',  'OPTIMIZATION', NULL , NULL , NULL , NULL ,  'database performance optimization', MD5(  'turtleman1' ) , MD5(  'turtleman1' ),1
 );
 --
 -- Dumping data for table `users`

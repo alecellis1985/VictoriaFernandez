@@ -16,7 +16,6 @@ function logUser($conn, $userLogin) {
         $params = array();
         $params[0] = array("username", $userLogin->username, "string");
         $params[1] = array("password", md5($userLogin->password), "string");
-
         if ($conn->consulta($sql, $params)) {
             $user = $conn->siguienteRegistro();
             //$user = $users[0];
@@ -26,7 +25,7 @@ function logUser($conn, $userLogin) {
                 $_SESSION['idUser'] = $user->idUser;
                 $_SESSION['password'] = $user->password;
                 //TODO: Agregar campo isAdmin para el administrador
-                $_SESSION['isAdmin'] = false;
+                $_SESSION['IsAdmin'] = $user->IsAdmin == 1;
                 setcookie('usuario', $user->username);
                 $error = false;
             } else {
@@ -62,9 +61,8 @@ function getUserArrayFromRequest($request) {
 function logoutUser() {
    
     $response = null;
-    
     $_SESSION['ingreso'] = false;
-    $_SESSION['isAdmin'] = false;
+    $_SESSION['IsAdmin'] = false;
     unset($_SESSION['usuario']);
     unset($_SESSION['password']);
     

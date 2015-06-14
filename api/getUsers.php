@@ -5,7 +5,7 @@ function getUsers($categoria, $departamento) {
     $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
     $response = null;
     if ($conn->conectar()) {
-        $sql = "select * FROM users WHERE categoria = :categoria and departamento = :departamento ORDER BY nombre";
+        $sql = "select * FROM users WHERE categoria = :categoria and departamento = :departamento and IsAdmin = 0 and IsActive = 1 ORDER BY nombre";
         $params = array();
         $params[0] = array("departamento", (int) $departamento, "int", 5);
         $params[1] = array("categoria", (int) $categoria, "int", 5);
@@ -44,7 +44,7 @@ function getAllUsers() {
     $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
     $response = null;
     if ($conn->conectar()) {
-        $sql = "select * FROM users ORDER BY nombre";
+        $sql = "SELECT * FROM users where IsAdmin = 0 ORDER BY nombre";
         if ($conn->consulta($sql)) {
             $users = $conn->restantesRegistros();
             $response = MessageHandler::getSuccessResponse("", $users);
@@ -64,10 +64,10 @@ function getAllUsers() {
 function isUserLogged() {
     if (array_key_exists("usuario", $_SESSION)) {
         $user = $_SESSION['usuario'];
-        $isAdmin = $_SESSION['isAdmin'];
+        $isAdmin = $_SESSION['IsAdmin'];
 
         if ($_SESSION['ingreso'] && isset($user)) {
-            $result = array("success" => true, "user" => $user, "isAdmin" => $isAdmin);
+            $result = array("success" => true, "user" => $user, "IsAdmin" => $isAdmin);
             echo json_encode($result);
         } else {
             $result = array("success" => false);
@@ -90,6 +90,8 @@ function getLoggedUser() {
             $users = $conn->restantesRegistros();
             $currentUser = $users[0];
             $userData['user'] = $currentUser;
+            $_SESSION['IsAdmin'] = $currentUser->IsAdmin == 1;
+            $currentUser->IsAdmin = $currentUser->IsAdmin == 1;
             $sqlFormasDePago = "select * from formasdepago where idUser = :userId";
             $paramsFormasDePago = array();
             $paramsFormasDePago[0] = array("userId", $currentUser->idUser, "int", 11);
