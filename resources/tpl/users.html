@@ -36,7 +36,8 @@
                     <td>{{user.direccion}}</td>
                     <td>{{user.departamento}}</td>
                     <td>{{user.categoria}}</td>
-                    <td><button class="btn btn-primary">Activar</button></td>
+                    <td ng-if="user.IsActive != 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Activar</button></td>
+                    <td ng-if="user.IsActive == 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Desactivar</button></td>
                   </tr>
                 </tbody>
               </table>
