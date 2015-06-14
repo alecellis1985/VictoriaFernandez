@@ -357,10 +357,14 @@ INSERT INTO  `profesionales`.`users` (
 `servicioOfrecido6` ,
 `descServiceLong` ,
 `username` ,
-`password`
+`password`,
+`IsAdmin`,
+`IsActive`
 )
 VALUES (
-NULL ,  'Alec',  'Ellis',  'alecellis1985@hotmail.com',  '26013794',  '098635923',  'm.tajes 7530',  '26013794',  '2',  '1', NULL ,  '5',  '',  '',  'https://www.facebook.com/alec.ellis.714', NULL , NULL ,  'construccion de paginas web',  'SEO',  'OPTIMIZATION', NULL , NULL , NULL , NULL ,  'database performance optimization', MD5(  'turtleman1' ) , MD5(  'turtleman1' ),1
+NULL ,  'Alec',  'Ellis',  'alecellis1985@hotmail.com',  '26013794',  '098635923',  'm.tajes 7530',  '26013794',  '2',  '1', NULL ,  '5',  '',  '',  'https://www.facebook.com/alec.ellis.714', NULL , NULL ,  'construccion de paginas web',  'SEO',  'OPTIMIZATION', NULL , NULL , NULL , NULL ,  'database performance optimization', 'Alec10' , MD5(  'turtleman1' ),1,1
+),(
+NULL ,  'Alec',  'Ellis',  'alecellis1985@hotmail.com',  '26013794',  '098635923',  'm.tajes 7530',  '26013794',  '2',  '1', NULL ,  '5',  '',  '',  'https://www.facebook.com/alec.ellis.714', NULL , NULL ,  'construccion de paginas web',  'SEO',  'OPTIMIZATION', NULL , NULL , NULL , NULL ,  'database performance optimization', 'Alec' , MD5(  'turtleman1' ),0,1
 );
 --
 -- Dumping data for table `users`
