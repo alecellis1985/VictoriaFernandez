@@ -174,8 +174,23 @@ Professionals.directive('dropdownFilter', function () {
                 e.preventDefault();
                 $scope.selectedElem = elem;
             };
+            
+            function removeAccents(value) {
+                return value
+                    .replace(/á/g, 'a')            
+                    .replace(/é/g, 'e')
+                    .replace(/í/g, 'i')
+                    .replace(/ó/g, 'o')
+                    .replace(/ú/g, 'u');
+            }
 
-
+            $scope.ignoreAccents = function(item) {               
+                if (!$scope.dropdownFilter)
+                    return true;       
+                var text = removeAccents(item[$scope.nameProp].toLowerCase());
+                var search = removeAccents($scope.dropdownFilter.toLowerCase());
+                return text.indexOf(search) > -1;
+            };
         }
     };
 });
@@ -214,16 +229,22 @@ Professionals.directive('dropdownWValidation', function ($timeout) {
                 }, 100);
             };
 
-//            $scope.checkValsBeforeSubmit = function()
-//            {
-//                if($scope.selectedElem === null ||$scope.selectedElem === undefined || $scope.selectedElem == -1 ){
-//                    $scope.dropdownError = true;
-//                }
-//                else
-//                {
-//                    $scope.dropdownError = $scope.checkFn({elem:$scope.selectedElem});
-//                }
-//            }
+            function removeAccents(value) {
+                return value
+                    .replace(/á/g, 'a')            
+                    .replace(/é/g, 'e')
+                    .replace(/í/g, 'i')
+                    .replace(/ó/g, 'o')
+                    .replace(/ú/g, 'u');
+            }
+
+            $scope.ignoreAccents = function(item) {               
+                if (!$scope.dropdownFilter)
+                    return true;       
+                var text = removeAccents(item[$scope.nameProp].toLowerCase());
+                var search = removeAccents($scope.dropdownFilter.toLowerCase());
+                return text.indexOf(search) > -1;
+            };    
         }
     };
 });
