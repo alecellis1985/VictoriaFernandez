@@ -25,9 +25,9 @@ function editImg() {
 function updateUserImg($conn, $newImgUrl) {
     $response = null;
     if ($conn->conectar()) {
+        $conn->beginTransaction();
         try {
-            $conn->beginTransaction();
-
+            
             $sql = "SELECT * FROM users"
                     . " WHERE username = '" . $_SESSION['usuario'] . "'";
 
@@ -38,20 +38,21 @@ function updateUserImg($conn, $newImgUrl) {
                 $deleteDestination = '../uploaded/' . $userImgUrl;
                 $conn->closeCursor();
 
-                if (unlink($deleteDestination)) {
+                $sqlUpdateImg = "UPDATE users SET imagenUrl = '" . $newImgUrl . "'"
+                        . " WHERE username = '" . $_SESSION['usuario'] . "'";
 
-                    $sqlUpdateImg = "UPDATE users SET imagenUrl = '" . $newImgUrl . "'"
-                            . " WHERE username = '" . $_SESSION['usuario'] . "'";
-
-                    if ($conn->consulta($sqlUpdateImg)) {
-                        $conn->commitTransaction();
-                        $response = MessageHandler::getSuccessResponse("Cambios guardados exitosamente!", $user);
-                    } else {
-                        $response = MessageHandler::getErrorResponse("Mi puto error.");
-                    }
-                } else {
-                    $response = MessageHandler::getErrorResponse("Mi puto error. 1");
+                if ($userImgUrl !== '') {
+                    unlink($deleteDestination);
                 }
+                
+                if ($conn->consulta($sqlUpdateImg)) {
+                    $conn->commitTransaction();
+                    $response = MessageHandler::getSuccessResponse("Cambios guardados exitosamente!", array("newImgUrl" => $newImgUrl));
+                } else {
+                    $response = MessageHandler::getErrorResponse("Mi puto error.");
+                }
+                
+                
             } else {
                 $response = MessageHandler::getErrorResponse("Primer consulta error.Edit IMG");
             }
