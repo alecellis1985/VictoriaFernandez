@@ -1,8 +1,8 @@
 'use strict';
 
 Professionals.controller('VerUserController', ['$scope', '$location', 'departamentosList', 'categoriasList', 'barriosList', '$modal',
-    'planes', 'Helper', 'userData',
-    function ($scope, $location, departamentosList, categoriasList, barriosList, $modal, planes, Helper, userData) {
+    'planes', 'Helper', 'userData', 'imageUrl',
+    function ($scope, $location, departamentosList, categoriasList, barriosList, $modal, planes, Helper, userData, imageUrl) {
 
         $scope.planes = planes;
         $scope.newUser = false;
@@ -92,7 +92,10 @@ Professionals.controller('VerUserController', ['$scope', '$location', 'departame
             $scope.user.horarioAtencionText = Helper.getHorarioAtencionText(userData.data.diasAtencion.horaComienzo, userData.data.diasAtencion.horaFin);
 
             $scope.IdPlan = $scope.user.plan;
-
+            debugger;
+            imageUrl.set(userData.data.user.imagenUrl);
+            $scope.imageUrl = imageUrl;
+            
 
         };
 

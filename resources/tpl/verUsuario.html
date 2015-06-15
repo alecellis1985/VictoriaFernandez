@@ -49,8 +49,8 @@
         </div>
         <div class="row">
             <div class="col-xs-3 col-md-2 col-sm-3">
-                <img class="img-responsive img-rounded" ng-if="user.imagenUrl !== ''" ng-src="{{'uploaded/' + user.imagenUrl}}">
-                <i ng-if="user.imagenUrl === '' || user.imagenUrl === undefined" class="img-responsive fa fa-user"></i>
+                <img class="img-responsive img-rounded" ng-if="imageUrl.get() !== ''" ng-src="{{'uploaded/' + imageUrl.get()}}">
+                <i ng-if="imageUrl.get() === '' || imageUrl.get() === undefined" class="img-responsive fa fa-user"></i>
                 <button class="btn btn-primary pull-right" ng-click="editUserImg($event)"><i class="fa fa-pencil"></i></button>
         </div>
     </div>

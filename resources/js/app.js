@@ -109,6 +109,20 @@ Professionals.config(['$routeProvider', '$httpProvider', function ($routeProvide
         });
     }]);
 
+Professionals.factory('imageUrl', function () {
+  
+  var url = '';
+  
+  return {
+    set : function (newUrl) {
+      url = newUrl;
+    },
+    get : function () {
+      return url;
+    }
+  }
+})
+
 Professionals.run(['$rootScope', '$http', '$location', '$timeout', '$filter', 'Helper',
     function ($rootScope, $http, $location, $timeout, $filter, Helper) {
         $('.alertsTop').removeClass('hideAll');

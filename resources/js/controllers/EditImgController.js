@@ -1,7 +1,7 @@
 'use strict';
 
-Professionals.controller('EditImgController', ['$scope', '$routeParams', '$http', '$rootScope', '$location', '$modalInstance', 'CommonService',
-    function EditImgController($scope, $routeParams, $http, $rootScope, $location, $modalInstance, CommonService) {
+Professionals.controller('EditImgController', ['$scope', '$routeParams', '$http', '$rootScope', '$location', '$modalInstance', 'CommonService','imageUrl',
+    function EditImgController($scope, $routeParams, $http, $rootScope, $location, $modalInstance, CommonService, imageUrl) {
         $scope.ok = function () {
             $modalInstance.close($scope.selected.item);
         };
@@ -27,14 +27,12 @@ Professionals.controller('EditImgController', ['$scope', '$routeParams', '$http'
                     error = 'File size cannot exceed 2 MB';
                 }
 
-                if (error === undefined)
-                {
-                    //$rootScope.$broadcast('alert-event', { type: 'success', msg: 'FILE OK!' });
-                }
-                else
+                if (error !== undefined)
                 {
                     $rootScope.$broadcast('alert-event', {type: 'danger', msg: error});
                 }
+
+                return error === undefined;
             }
         };
 
@@ -44,22 +42,26 @@ Professionals.controller('EditImgController', ['$scope', '$routeParams', '$http'
         {
             e.preventDefault();
 
-            var imgFile = null;
-            if (!(typeof $scope.files === 'undefined') && !($scope.files === null))
-                imgFile = $scope.files[0];
+            if ($scope.validateImg($scope.files)) {
 
-            var data = {};
+                var imgFile = null;
+                if (!(typeof $scope.files === 'undefined') && !($scope.files === null))
+                    imgFile = $scope.files[0];
 
-            CommonService.postRequestWithFile('api/editar_img', data, imgFile).then(function (result) {
-                if (result.data.success) {
-                    $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Imagen actualizada!'});
-                    $modalInstance.close(0);
-                                        
-                    //$rootScope.user.imagenUrl = result.data.data.newImgUrl;
-                }
-                else
-                    $rootScope.$broadcast('alert-event', {type: 'danger', msg: result.data.msg});
-            });
+                var data = {};
+
+                CommonService.postRequestWithFile('api/editar_img', data, imgFile).then(function (result) {
+                    if (result.data.success) {
+                        $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Imagen actualizada!'});
+                        $modalInstance.close(0);
+                        
+                        imageUrl.set(result.data.data.newImgUrl);
+                        //$rootScope.user.imagenUrl = result.data.data.newImgUrl;
+                    }
+                    else
+                        $rootScope.$broadcast('alert-event', {type: 'danger', msg: result.data.msg});
+                });
+            }
         };
 
     }]);
