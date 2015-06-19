@@ -69,7 +69,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             else
             {
                 $scope.selectedPlan.tipo = plan;
-                $scope.selectedPlan.nombre = plan === 0 ? 'Plan Profesionales' : 'Plan Empresas'
+                $scope.selectedPlan.nombre = plan === 0 ? 'Planes Profesionales' : 'Planes Empresariales'
                 $scope.isCollapsed = false;
             }
         }
