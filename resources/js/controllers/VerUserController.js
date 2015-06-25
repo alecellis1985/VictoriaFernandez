@@ -136,4 +136,26 @@ Professionals.controller('VerUserController', ['$scope', '$location', 'departame
             });
 
         };
+        
+        
+        $scope.editUserPwd = function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var modalInstance = $modal.open({
+                templateUrl: 'resources/tpl/editPwd.html',
+                controller: 'EditPwdController',
+                size: 'lg'
+                        //        resolve: {
+                        //          items: function () {
+                        //            return $scope.items;
+                        //          }
+                        //        }
+            });
+            modalInstance.result.then(function () {
+                //$scope.selected = selectedItem;
+            }, function () {
+                console.log('Modal dismissed at: ' + new Date());
+            });
+
+        };
     }]);
