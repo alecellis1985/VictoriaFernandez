@@ -92,10 +92,9 @@ Professionals.controller('VerUserController', ['$scope', '$location', 'departame
             $scope.user.horarioAtencionText = Helper.getHorarioAtencionText(userData.data.diasAtencion.horaComienzo, userData.data.diasAtencion.horaFin);
 
             $scope.IdPlan = $scope.user.plan;
-            debugger;
             imageUrl.set(userData.data.user.imagenUrl);
             $scope.imageUrl = imageUrl;
-            
+
 
         };
 
@@ -136,8 +135,8 @@ Professionals.controller('VerUserController', ['$scope', '$location', 'departame
             });
 
         };
-        
-        
+
+
         $scope.editUserPwd = function (e) {
             e.preventDefault();
             e.stopPropagation();
