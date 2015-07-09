@@ -1,5 +1,58 @@
 <?php
 
+function editUserPwd() {
+    $request = Slim::getInstance()->request();
+    $userPwd = json_decode($request->getBody());
+    if (md5($userPwd->oldPwd) == $_SESSION['password']) {
+        $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
+        $userPwdA = array();
+        $userPwdA["oldPwd"] = $userPwd->oldPwd;
+        $userPwdA["newPwd"] = $userPwd->newPwd;
+        echo updateUserPwd($conn, $userPwdA);
+    } else {
+        echo MessageHandler::getErrorResponse("La contraseña actual no es correcta");
+    }
+}
+
+function updateUserPwd($conn, $userPwd) {
+    $response = null;
+    if ($conn->conectar()) {
+        try {
+            $conn->beginTransaction();
+
+            $sql = "UPDATE users SET password = :newPassword"
+                    . " WHERE username = '" . $_SESSION['usuario'] . "'";
+            $params = array();
+            $params[0] = array("newPassword", md5($userPwd['newPwd']), "string", 100);
+            if ($conn->consulta($sql, $params)) {
+                $conn->closeCursor();
+                $userId = $_SESSION['idUser'];
+                $_SESSION['password'] = md5($userPwd['newPwd']);
+                $error = false;
+
+                if (!$error) {
+                    $conn->commitTransaction();
+                    $response = MessageHandler::getSuccessResponse("Contraseña actualizada!", $userPwd);
+                } else {
+                    $response = MessageHandler::getErrorResponse("Mi puto error.");
+                }
+            } else {
+                echo MessageHandler::getErrorResponse("Primer consulta error.Edit");
+            }
+        } catch (Exception $exc) {
+            $response = null;
+            $conn->rollbackTransaction();
+        }
+    }
+    if ($response == null) {
+        header('HTTP/1.1 400 Bad Request');
+        return MessageHandler::getDBErrorResponse();
+    } else {
+        $conn->desconectar();
+        return $response;
+    }
+}
+
 function editImg() {
     $request = Slim::getInstance()->request();
 
@@ -27,7 +80,7 @@ function updateUserImg($conn, $newImgUrl) {
     if ($conn->conectar()) {
         $conn->beginTransaction();
         try {
-            
+
             $sql = "SELECT * FROM users"
                     . " WHERE username = '" . $_SESSION['usuario'] . "'";
 
@@ -44,15 +97,13 @@ function updateUserImg($conn, $newImgUrl) {
                 if ($userImgUrl !== '') {
                     unlink($deleteDestination);
                 }
-                
+
                 if ($conn->consulta($sqlUpdateImg)) {
                     $conn->commitTransaction();
                     $response = MessageHandler::getSuccessResponse("Cambios guardados exitosamente!", array("newImgUrl" => $newImgUrl));
                 } else {
                     $response = MessageHandler::getErrorResponse("Mi puto error.");
                 }
-                
-                
             } else {
                 $response = MessageHandler::getErrorResponse("Primer consulta error.Edit IMG");
             }
@@ -192,22 +243,7 @@ function editUser() {
     $user = getArrayFromRequest($request);
     $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
 
-    //Save File
-    //TODO: Validate format and size
-    if (validateFileToUpload()) {
-        $filenameAndExt = explode(".", $_FILES['file']['name']);
-        $destination = '../uploaded/' . md5($filenameAndExt[0]) . "_" . md5($user['username']) . "." . $filenameAndExt[1];
-        if (move_uploaded_file($_FILES['file']['tmp_name'], $destination)) {
-            $user['imagenUrl'] = md5($filenameAndExt[0]) . "_" . md5($user['username']) . "." . $filenameAndExt[1];
-            echo updateUser($conn, $user);
-        } else {
-            echo MessageHandler::getErrorResponse("Img error.");
-        }
-    } else {
-        //TODO: Return and show message : Img failed to upload
-        $user['imagenUrl'] = '';
-        echo updateUser($conn, $user);
-    }
+    echo updateUser($conn, $user);
 }
 
 function updateUser($conn, $user) {
