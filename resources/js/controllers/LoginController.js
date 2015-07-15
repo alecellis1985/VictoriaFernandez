@@ -21,6 +21,7 @@ Professionals.controller('LoginController', ['$scope', '$routeParams', '$http', 
             CommonService.postJsonRequest('api/login-user', data).then(function (result) {
                 if (result.success) {
                     $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Bienvenido ' + result.data.username + ' !'});
+                    result.data.IsAdmin = result.data.IsAdmin === "1" ? true : false; 
                     $rootScope.user = result.data;
                     $modalInstance.close(0);
                     $location.path('/ver-usuario');
