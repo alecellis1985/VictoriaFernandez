@@ -61,6 +61,43 @@ Professionals.directive('username', function ($q, $timeout, $http) {
     };
 });
 
+Professionals.directive('emailUnique', function ($q, $timeout, $http) {
+    return {
+        require: 'ngModel',
+        link: function (scope, elm, attrs, ctrl) {
+            ctrl.$asyncValidators.emailUnique = function (modelValue, viewValue) {
+
+                if (ctrl.$isEmpty(modelValue)) {
+                    // consider empty model valid
+                    return $q.when();
+                }
+
+                var def = $q.defer();
+
+                if (scope.currentEmail == modelValue)
+                    return def.resolve();
+
+                $http.post('api/check-email', {'email': modelValue}, {headers: {'Content-Type': 'application/json;charset=utf-8'}})
+                        .success(function (data, status, headers, cfg) {
+                            if (data.success && data.data.isUnique)
+                                // c.$setValidity('unique', data.isUnique);
+                                def.resolve();
+                            else
+                                //c.$setValidity('unique', false);
+                                def.reject();
+                        }).error(function (data, status, headers, cfg) {
+                    //c.$setValidity('unique', false);
+                    def.reject();
+                });
+
+
+                return def.promise;
+            };
+        }
+    };
+});
+
+
 //Compares 2 fields and validates that are equal
 Professionals.directive("compareTo", function () {
     return {

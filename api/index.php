@@ -39,6 +39,7 @@ $app->get('/getCurrentUser', 'getLoggedUser');
 $app->post('/editar_img', 'editImg');
 $app->post('/update_userState', 'changeUserState');
 $app->post('/edit-user-pwd', 'editUserPwd');
+$app->post('/check-email', 'checkEmail');
 
 $app->run();
 

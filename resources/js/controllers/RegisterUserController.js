@@ -180,7 +180,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             $scope.user.username = Helper.randomString(7);
             $scope.user.password = "asdasd";
             $scope.user.passwordConfirm = "asdasd";
-            $scope.user.email = "alecellis1985@gmail.com";
+            $scope.user.email = "alecellis1985" + Helper.randomString(2) + "@gmail.com";
             $scope.user.telefono = "26013794";
             $scope.user.celular = "098635923";
             $scope.user.direccion = "Maximo tajen 3565";
@@ -191,6 +191,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             $scope.user = userData.data.user;
             $scope.user.passwordConfirm = userData.data.user.password;
             $scope.currentUsername = userData.data.user.username;
+            $scope.currentEmail = userData.data.user.email;
             var categoriaId = parseInt(userData.data.user.categoria);
             $scope.selectedCategoria = $scope.categorias.sort(sortById("categoriaId"))[categoriaId];
 
@@ -222,7 +223,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
 
             $scope.user.horaComienzo = Helper.timeFromString(userData.data.diasAtencion.horaComienzo);
             $scope.user.horaFin = Helper.timeFromString(userData.data.diasAtencion.horaFin);
-            
+
             $scope.IdPlan = $scope.user.plan;
 
             $scope.dropDownCheck();

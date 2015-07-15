@@ -290,7 +290,7 @@ CREATE TABLE `users` (
   `idUser` int(11) NOT NULL auto_increment,
   `nombre` varchar(100) NOT NULL,
   `apellido` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
+  `email` varchar(100) UNIQUE NOT NULL,
   `telefono` varchar(100) NOT NULL,
   `celular` varchar(100) NOT NULL,
   `direccion` varchar(100) default NULL,
