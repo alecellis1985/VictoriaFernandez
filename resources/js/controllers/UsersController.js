@@ -23,7 +23,7 @@ Professionals.controller('UsersController', ['$scope', '$routeParams', '$http', 
                 user.IsActive = user.IsActive === "1"?"0":"1";
                 $rootScope.$broadcast('alert-event', {type: 'success', msg: result.msg});
                 } else
-                    $rootScope.$broadcast('alert-event', {type: 'error', msg: result.msg});
+                    $rootScope.$broadcast('alert-event', {type: 'danger', msg: result.msg});
         });
     }
     

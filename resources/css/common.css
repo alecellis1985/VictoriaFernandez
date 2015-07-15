@@ -260,6 +260,16 @@ header >nav{
     display: block!important;
 }
 
+.custom-enter,
+.custom-leave,
+.custom-move {
+  -webkit-transition: 1s linear all;
+  -moz-transition: 1s linear all;
+  -o-transition: 1s linear all;
+  transition: 1s linear all;
+  position:relative;
+}
+
 .propagandaMargins
 {
     margin: 8px 0;

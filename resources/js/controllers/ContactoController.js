@@ -14,14 +14,14 @@ Professionals.controller('ContactoController', ['$scope', '$routeParams', '$http
           
     $scope.enviarMail = function(isValid){
         if (!isValid ) {
-                $rootScope.$broadcast('alert-event', {type: 'error', msg: "Existen errores en el formulario!"});
+                $rootScope.$broadcast('alert-event', {type: 'danger', msg: "Existen errores en el formulario!"});
                 return;
         } 
         CommonService.postJsonRequest('api/sendMail', $scope.user).then(function (result) {
             if (result.data.success)
                 $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Has sido registrado con exito'});
             else
-                $rootScope.$broadcast('alert-event', {type: 'error', msg: result.data.msg});
+                $rootScope.$broadcast('alert-event', {type: 'danger', msg: result.data.msg});
         });
     };
 }]);

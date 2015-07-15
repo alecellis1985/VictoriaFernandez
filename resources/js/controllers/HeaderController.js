@@ -37,7 +37,7 @@ Professionals.controller('HeaderController', ['$scope', '$routeParams', '$http',
                     $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Ha salido con exito! Hasta la proxima :)'});
                     delete $rootScope.user;
                 } else
-                    $rootScope.$broadcast('alert-event', {type: 'error', msg: result.msg});
+                    $rootScope.$broadcast('alert-event', {type: 'danger', msg: result.msg});
             });
 
         };

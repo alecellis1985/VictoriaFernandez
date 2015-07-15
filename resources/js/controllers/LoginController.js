@@ -6,7 +6,8 @@ Professionals.controller('LoginController', ['$scope', '$routeParams', '$http', 
             $modalInstance.close($scope.selected.item);
         };
 
-        $scope.cancel = function () {
+        $scope.cancel = function (e) {
+            e.preventDefault();
             $modalInstance.dismiss('cancel');
         };
         $scope.userLogin = {};
@@ -21,12 +22,12 @@ Professionals.controller('LoginController', ['$scope', '$routeParams', '$http', 
             CommonService.postJsonRequest('api/login-user', data).then(function (result) {
                 if (result.success) {
                     $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Bienvenido ' + result.data.username + ' !'});
-                    result.data.IsAdmin = result.data.IsAdmin === "1" ? true : false; 
+                    result.data.IsAdmin = result.data.IsAdmin === "1" ? true : false;
                     $rootScope.user = result.data;
                     $modalInstance.close(0);
                     $location.path('/ver-usuario');
                 } else
-                    $rootScope.$broadcast('alert-event', {type: 'error', msg: result.msg});
+                    $rootScope.$broadcast('alert-event', {type: 'danger', msg: result.msg});
             });
         };
 

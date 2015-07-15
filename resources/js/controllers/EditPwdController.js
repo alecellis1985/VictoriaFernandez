@@ -24,7 +24,7 @@ Professionals.controller('EditPwdController', ['$scope', '$routeParams', '$http'
                     $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Contraseña actualizada correctamente !'});
                     $modalInstance.close(0);
                 } else
-                    $rootScope.$broadcast('alert-event', {type: 'error', msg: result.msg});
+                    $rootScope.$broadcast('alert-event', {type: 'danger', msg: result.msg});
             });
         };
 
