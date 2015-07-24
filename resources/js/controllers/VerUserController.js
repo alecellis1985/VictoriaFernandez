@@ -94,7 +94,7 @@ Professionals.controller('VerUserController', ['$scope', '$location', 'departame
             $scope.IdPlan = $scope.user.plan;
             imageUrl.set(userData.data.user.imagenUrl);
             $scope.imageUrl = imageUrl;
-
+            $scope.markers = userData.data.markers;
 
         };
 

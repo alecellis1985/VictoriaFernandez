@@ -1,4 +1,4 @@
-<div class="panel panel-primary" style="margin-top: 20px">
+<div class="panel panel-primary" style="margin-top: 20px" ng-show="currentUserIsAdmin">
     <div class="panel-heading">
         <h3 class="panel-title">Usuarios</h3>
     </div>
@@ -6,18 +6,18 @@
         <div class="row">
             <table class="table">
                 <thead>
-                  <tr>
-                    <th>Usuario</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Email</th>
-                    <th>Telefono</th>
-                    <th>Celular</th>
-                    <th>Direccion</th>
-                    <th>Departamento</th>
-                    <th>Categoria</th>
-                    <th>Estado</th>
-                  </tr>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Email</th>
+                        <th>Telefono</th>
+                        <th>Celular</th>
+                        <th>Direccion</th>
+                        <th>Departamento</th>
+                        <th>Categoria</th>
+                        <th>Estado</th>
+                    </tr>
                 </thead>
                 <tbody>
                     <tr ng-if="users.length === 0">
@@ -25,22 +25,26 @@
                             <i class="fa fa-spinner fa-spin"></i>
                         </td>
                     </tr>
-                  <tr ng-if="users.length > 0" ng-repeat="user in users">
-                    <td>{{user.username}}</td>
-                    <td>{{user.nombre}}</td>
-                    <td>{{user.apellido}}</td>
-                    <td>{{user.email}}</td>
-                    <td>{{user.telefono}}</td>
-                    <!-- TODO ADD IMG user.imagenUrl-->
-                    <td>{{user.celular}}</td>
-                    <td>{{user.direccion}}</td>
-                    <td>{{user.departamento}}</td>
-                    <td>{{user.categoria}}</td>
-                    <td ng-if="user.IsActive != 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Activar</button></td>
-                    <td ng-if="user.IsActive == 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Desactivar</button></td>
-                  </tr>
+                    <tr ng-if="users.length > 0" ng-repeat="user in users">
+                        <td>{{user.username}}</td>
+                        <td>{{user.nombre}}</td>
+                        <td>{{user.apellido}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.telefono}}</td>
+                        <!-- TODO ADD IMG user.imagenUrl-->
+                        <td>{{user.celular}}</td>
+                        <td>{{user.direccion}}</td>
+                        <td>{{user.departamento}}</td>
+                        <td>{{user.categoria}}</td>
+                        <td ng-if="user.IsActive != 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Activar</button></td>
+                        <td ng-if="user.IsActive == 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Desactivar</button></td>
+                    </tr>
                 </tbody>
-              </table>
+            </table>
         </div>
     </div>
+</div>
+
+<div class="form-group col-xs-12 col-md-4 col-sm-12" ng-show="showUnauthorized">
+    <h3>Area restringida. Volver al inicio</h3>
 </div>

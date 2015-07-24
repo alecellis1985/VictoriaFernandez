@@ -1,24 +1,33 @@
- /* Element exmpl 
-  [{
-        city : 'Toronto',
-        desc : 'This is the best city in the world!',
-        lat : 43.7000,
-        long : -79.4000
-    }]
+/* Element exmpl 
+ [{
+ city : 'Toronto',
+ desc : 'This is the best city in the world!',
+ lat : 43.7000,
+ long : -79.4000
+ }]
  */
 Professionals.directive('mapLoadMarkers', function () {
     return {
-        restrict:'E',
-        scope:{            
-            mapOptions:'=',
-            locations:'='
+        restrict: 'E',
+        scope: {
+            mapOptions: '=',
+            locations: '='
         },
-        template:'<div class="GoogleMap"></div>',
-        link:function($scope,element,attr){
+        template: '<div class="row">' +
+                '<div class="form-group col-xs-12">' +
+                '<button ng-click="clearMarkers($event)" class="btn btn-primary pull-left">Borrar Marcadores</button>' +
+                '</div>' +
+                '</div>' +
+                '<div class="row">' +
+                '<div class="col-xs-12 col-md-12 col-sm-12">' +
+                '<div class="GoogleMap  col-xs-12 col-md-12 col-sm-12"></div>' +
+                '</div>' +
+                '</div>',
+        link: function ($scope, element, attr) {
             //default is montevideo
             $scope.mapOptions = $scope.mapOptions || {
                 zoom: 13,
-                center: new google.maps.LatLng(-34.8746349,-56.1472729),
+                center: new google.maps.LatLng(-34.8746349, -56.1472729),
                 mapTypeId: google.maps.MapTypeId.TERRAIN
             };
 
@@ -27,8 +36,8 @@ Professionals.directive('mapLoadMarkers', function () {
             $scope.markers = [];
 
             var infoWindow = new google.maps.InfoWindow();
-                        
-            $scope.createMarker = function (info){
+
+            $scope.createMarker = function (info) {
                 var marker = new google.maps.Marker({
                     map: $scope.map,
                     position: new google.maps.LatLng(info.lat, info.long),
@@ -36,23 +45,23 @@ Professionals.directive('mapLoadMarkers', function () {
                 });
                 marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
 
-                google.maps.event.addListener(marker, 'click', function(){
+                google.maps.event.addListener(marker, 'click', function () {
                     infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
                     infoWindow.open($scope.map, marker);
                 });
 
                 $scope.markers.push(marker);
-            };  
+            };
 
-            if($scope.locations !== undefined)
+            if ($scope.locations !== undefined)
             {
                 var length = $scope.locations.length;
-                for (var i = 0; i < length; i++){
+                for (var i = 0; i < length; i++) {
                     $scope.createMarker($scope.locations[i]);
                 }
             }
 
-            $scope.openInfoWindow = function(e, selectedMarker){
+            $scope.openInfoWindow = function (e, selectedMarker) {
                 e.preventDefault();
                 google.maps.event.trigger(selectedMarker, 'click');
             };
@@ -62,59 +71,59 @@ Professionals.directive('mapLoadMarkers', function () {
 
 Professionals.directive('mapSetMarkers', function () {
     return {
-        restrict:'E',
-        scope:{
-            markersArr:'='
+        restrict: 'E',
+        scope: {
+            markersArr: '='
         },
-        template:'<div class="row">'+
-        '<div class="form-group col-xs-12">'+
-            '<button ng-click="clearMarkers($event)" class="btn btn-primary pull-left">Borrar Marcadores</button>'+
-            '</div>'+
-        '</div>'+
-        '<div class="row">'+
-            '<div class="col-xs-12 col-md-12 col-sm-12">'+
-            '<div class="GoogleMap  col-xs-12 col-md-12 col-sm-12"></div>'+
-            '</div>'+
-        '</div>',
+        template: '<div class="row">' +
+                '<div class="form-group col-xs-12">' +
+                '<button ng-click="clearMarkers($event)" class="btn btn-primary pull-left">Borrar Marcadores</button>' +
+                '</div>' +
+                '</div>' +
+                '<div class="row">' +
+                '<div class="col-xs-12 col-md-12 col-sm-12">' +
+                '<div class="GoogleMap  col-xs-12 col-md-12 col-sm-12"></div>' +
+                '</div>' +
+                '</div>',
 //        template:'<div class="GoogleMap col-xs-12 col-md-12 col-sm-12"></div>',
-        link:function($scope,element,attr){
+        link: function ($scope, element, attr) {
             //Default is montevideo
             $scope.mapOptions = $scope.mapOptions || {
                 zoom: 13,
-                center: new google.maps.LatLng(-34.8746349,-56.1472729),
+                center: new google.maps.LatLng(-34.8746349, -56.1472729),
                 mapTypeId: google.maps.MapTypeId.TERRAIN
             };
 
             $scope.map = new google.maps.Map(element.find('.GoogleMap')[0], $scope.mapOptions);
 
-            google.maps.event.addListener($scope.map, 'click', function(event) {
+            google.maps.event.addListener($scope.map, 'click', function (event) {
                 $scope.placeMarker(event.latLng);
             });
-            
-            $scope.placeMarker = function(location) {
+
+            $scope.placeMarker = function (location) {
                 var marker = new google.maps.Marker({
                     position: location,
                     map: $scope.map
                 });
-                
+
                 $scope.markersArr.push(marker);
             };
 
-            $scope.openInfoWindow = function(e, selectedMarker){
+            $scope.openInfoWindow = function (e, selectedMarker) {
                 e.preventDefault();
                 google.maps.event.trigger(selectedMarker, 'click');
             };
-            
-            $scope.clearMarkers = function(e) {
+
+            $scope.clearMarkers = function (e) {
                 e.preventDefault();
                 var arrLength = $scope.markersArr.length;
                 for (var i = 0; i < arrLength; i++) {
-                  $scope.markersArr[i].setMap(null);
+                    $scope.markersArr[i].setMap(null);
                 }
-                 $scope.markersArr = [];
-              }
+                $scope.markersArr = [];
+            }
 
-         
+
         }
     };
 });

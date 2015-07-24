@@ -36,6 +36,7 @@ $app->post('/agregar_usuario', 'registerUser');
 $app->post('/editar_usuario', 'editUser');
 $app->post('/check-username', 'checkUsername');
 $app->get('/getCurrentUser', 'getLoggedUser');
+$app->get('/currentUserAdmin', 'isCurrentUserAdmin');
 $app->post('/editar_img', 'editImg');
 $app->post('/update_userState', 'changeUserState');
 $app->post('/edit-user-pwd', 'editUserPwd');
