@@ -225,6 +225,8 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             $scope.user.horaFin = Helper.timeFromString(userData.data.diasAtencion.horaFin);
 
             $scope.IdPlan = $scope.user.plan;
+            
+            $scope.markers = userData.data.markers;
 
             $scope.dropDownCheck();
 
@@ -240,11 +242,12 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
 
         if (newUser) {
             $scope.fillNewUserCamps();
+            $scope.markers = [];
         } else {
             $scope.fillEditUserCamps();
         }
 
-        $scope.markers = [];
+        
         $scope.checkTime = function () {
             if ($scope.user.horaFin <= $scope.user.horaComienzo) {
                 $scope.user.horaFin = new Date($scope.user.horaComienzo.getTime() + 10 * 60000);

@@ -14,11 +14,6 @@ Professionals.directive('mapLoadMarkers', function () {
             locations: '='
         },
         template: '<div class="row">' +
-                '<div class="form-group col-xs-12">' +
-                '<button ng-click="clearMarkers($event)" class="btn btn-primary pull-left">Borrar Marcadores</button>' +
-                '</div>' +
-                '</div>' +
-                '<div class="row">' +
                 '<div class="col-xs-12 col-md-12 col-sm-12">' +
                 '<div class="GoogleMap  col-xs-12 col-md-12 col-sm-12"></div>' +
                 '</div>' +
@@ -43,12 +38,12 @@ Professionals.directive('mapLoadMarkers', function () {
                     position: new google.maps.LatLng(info.lat, info.long),
                     title: info.city
                 });
-                marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
-
-                google.maps.event.addListener(marker, 'click', function () {
-                    infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
-                    infoWindow.open($scope.map, marker);
-                });
+//                marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
+//
+//                google.maps.event.addListener(marker, 'click', function () {
+//                    infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
+//                    infoWindow.open($scope.map, marker);
+//                });
 
                 $scope.markers.push(marker);
             };
@@ -76,8 +71,8 @@ Professionals.directive('mapSetMarkers', function () {
             markersArr: '='
         },
         template: '<div class="row">' +
-                '<div class="form-group col-xs-12">' +
-                '<button ng-click="clearMarkers($event)" class="btn btn-primary pull-left">Borrar Marcadores</button>' +
+                '<div class="form-group col-xs-12 col-md-2">' +
+                '<button ng-enabled="!markerOn" ng-click="setMarkerOn($event)" class="btn btn-primary pull-left">Agregar marcador</button>' +
                 '</div>' +
                 '</div>' +
                 '<div class="row">' +
@@ -94,20 +89,55 @@ Professionals.directive('mapSetMarkers', function () {
                 mapTypeId: google.maps.MapTypeId.TERRAIN
             };
 
+
+            $scope.markerOn = false;
+            $scope.selectedMarker = null;
+
+            $scope.setMarkerOn = function (e) {
+                e.preventDefault();
+                $scope.markerOn = true;
+            };
+
             $scope.map = new google.maps.Map(element.find('.GoogleMap')[0], $scope.mapOptions);
 
             google.maps.event.addListener($scope.map, 'click', function (event) {
-                $scope.placeMarker(event.latLng);
+                if ($scope.markerOn) {
+                    $scope.markerOn = false;
+                    $scope.placeMarker(event.latLng);
+                }
             });
+
+            var infoWindow = new google.maps.InfoWindow();
 
             $scope.placeMarker = function (location) {
                 var marker = new google.maps.Marker({
                     position: location,
                     map: $scope.map
                 });
+                
+                addMarkerInMap(marker);
+
+            };
+
+            $scope.loadMarker = function (info) {
+                var marker = new google.maps.Marker({
+                    map: $scope.map,
+                    position: new google.maps.LatLng(info.lat, info.long)
+                });
+                
+                addMarkerInMap(marker);
+
+            };
+
+            function addMarkerInMap(marker) {
+                google.maps.event.addListener(marker, 'click', function () {
+                    infoWindow.setContent('<button class="btn btn-primary pull-left deleteMarker">Borrar?</button>');
+                    infoWindow.open($scope.map, marker);
+                    $scope.selectedMarker = marker;
+                });
 
                 $scope.markersArr.push(marker);
-            };
+            }
 
             $scope.openInfoWindow = function (e, selectedMarker) {
                 e.preventDefault();
@@ -121,9 +151,31 @@ Professionals.directive('mapSetMarkers', function () {
                     $scope.markersArr[i].setMap(null);
                 }
                 $scope.markersArr = [];
+            };
+
+            $(document).on('click', '.deleteMarker', deleteMarker);
+
+            function deleteMarker(e) {
+                e.preventDefault();
+                var arrLength = $scope.markersArr.length;
+                var toDelete = $scope.selectedMarker;
+                $scope.selectedMarker.setMap(null);
+                $scope.selectedMarker = null;
+                debugger;
+                $scope.markersArr = $.grep($scope.markersArr, function (value) {
+                    return value != toDelete;
+                });
+
             }
 
-
+            if ($scope.markersArr !== undefined)
+            {
+                debugger;
+                var length = $scope.markersArr.length;
+                for (var i = 0; i < length; i++) {
+                    $scope.loadMarker($scope.markersArr[i]);
+                }
+            }
         }
     };
 });
