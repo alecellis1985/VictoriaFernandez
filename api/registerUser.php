@@ -242,6 +242,7 @@ function editUser() {
 
     $user = getArrayFromRequest($request);
     $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
+     $user['imagenUrl'] = '';
 
     echo updateUser($conn, $user);
 }
@@ -266,89 +267,96 @@ function updateUser($conn, $user) {
                 $conn->closeCursor();
                 $userId = $_SESSION['idUser'];
                 $error = false;
-                //TODO: Remove previous markers
-                //TODO: Separated edit for password, photo and markers
-//                $userMarkers = json_decode($user['markers']);
-//                $sqlMap = "INSERT INTO mapa VALUES (NULL, " . $userId . ", :latitude, :longitude) ";
-//                for ($i = 0; $i < count($userMarkers); $i++) {
-//                    $paramsInsertMap = array();
-//                    $latitude = $userMarkers[$i]->latitude;
-//                    $longitude = $userMarkers[$i]->longitude;
-//                    $paramsInsertMap[0] = array("latitude", $latitude, "string", 30);
-//                    $paramsInsertMap[1] = array("longitude", $longitude, "string", 30);
-//
-//                    if ($conn->consulta($sqlMap, $paramsInsertMap)) {
-//                        $conn->closeCursor();
-//                    } else {
-//                        //tirar error
-//                        $error = true;
-//                    }
-//                }
-                if (!$error) {
-                    //TODO: Remove previous payment methods
+                //Remove previous markers
+                $sqlDeleteMarkers = "DELETE FROM mapa WHERE IdUser = " . $userId;
+                if ($conn->consulta($sqlDeleteMarkers)) {
+                    $conn->closeCursor();
+                    
+                    $userMarkers = json_decode($user['markers']);
+                    $sqlMap = "INSERT INTO mapa VALUES (NULL, " . $userId . ", :latitude, :longitude) ";
+                    for ($i = 0; $i < count($userMarkers); $i++) {
+                        $paramsInsertMap = array();
+                        $latitude = $userMarkers[$i]->latitude;
+                        $longitude = $userMarkers[$i]->longitude;
+                        $paramsInsertMap[0] = array("latitude", $latitude, "string", 30);
+                        $paramsInsertMap[1] = array("longitude", $longitude, "string", 30);
 
-                    $sqlDeletePago = "DELETE FROM formasdepago WHERE idUser = " . $userId;
-                    if ($conn->consulta($sqlDeletePago)) {
-                        $conn->closeCursor();
-
-                        $sqlPagos = "INSERT INTO `formasdepago` (`idUser`,`contado`,`debito`,`credito`,`otras`) 
-                                VALUES(:idUser , :contado , :debito, :credito, :otras)";
-                        $paramsPagos = array();
-                        $paramsPagos[0] = array("idUser", $userId, "int", 11);
-                        $paramsPagos[1] = array("contado", $user['formaDePago']['contado'], "int", 1);
-                        $paramsPagos[2] = array("debito", $user['formaDePago']['debito'], "int", 1);
-                        $paramsPagos[3] = array("credito", $user['formaDePago']['credito'], "int", 1);
-                        $paramsPagos[4] = array("otras", $user['formaDePago']['otras'], "int", 1);
-
-                        if ($conn->consulta($sqlPagos, $paramsPagos)) {
+                        if ($conn->consulta($sqlMap, $paramsInsertMap)) {
                             $conn->closeCursor();
-
-                            $sqlDeleteDias = "DELETE FROM diasatencion WHERE idUser = " . $userId;
-                            if ($conn->consulta($sqlDeleteDias)) {
-                                $conn->closeCursor();
-
-                                //TODO: Remove previous open days and hours
-                                $sqlDias = "INSERT INTO `diasatencion`(`idUser`,`lunes`,`martes`,`miercoles`,`jueves`,`viernes`,`sabado`,`domingo`, `horaComienzo`, `horaFin`) 
-                                    VALUES (:idUser, :lunes, :martes, :miercoles, :jueves, :viernes, :sabado, :domingo, :horaComienzo, :horaFin)";
-                                $paramsDias = array();
-                                $paramsDias[0] = array("idUser", $userId, "int", 11);
-                                $paramsDias[1] = array("lunes", $user['diasAtencion']['lunes'], "int", 1);
-                                $paramsDias[2] = array("martes", $user['diasAtencion']['martes'], "int", 1);
-                                $paramsDias[3] = array("miercoles", $user['diasAtencion']['miercoles'], "int", 1);
-                                $paramsDias[4] = array("jueves", $user['diasAtencion']['jueves'], "int", 1);
-                                $paramsDias[5] = array("viernes", $user['diasAtencion']['viernes'], "int", 1);
-                                $paramsDias[6] = array("sabado", $user['diasAtencion']['sabado'], "int", 1);
-                                $paramsDias[7] = array("domingo", $user['diasAtencion']['domingo'], "int", 1);
-                                $paramsDias[8] = array("horaComienzo", $user['horaComienzo'], "string", 20);
-                                $paramsDias[9] = array("horaFin", $user['horaFin'], "string", 20);
-
-                                if ($conn->consulta($sqlDias, $paramsDias)) {
-                                    $conn->closeCursor();
-                                } else {
-                                    $error = true;
-                                }
-                            } else {
-                                $error = true;
-                            }
                         } else {
                             //tirar error
                             $error = true;
                         }
-                    } else {
-                        $error = true;
                     }
-                }
+                    if (!$error) {
+                        //TODO: Remove previous payment methods
 
-                if (!$error) {
-                    $conn->commitTransaction();
-                    $response = MessageHandler::getSuccessResponse("Cambios guardados exitosamente!", $user);
+                        $sqlDeletePago = "DELETE FROM formasdepago WHERE idUser = " . $userId;
+                        if ($conn->consulta($sqlDeletePago)) {
+                            $conn->closeCursor();
+
+                            $sqlPagos = "INSERT INTO `formasdepago` (`idUser`,`contado`,`debito`,`credito`,`otras`) 
+                                VALUES(:idUser , :contado , :debito, :credito, :otras)";
+                            $paramsPagos = array();
+                            $paramsPagos[0] = array("idUser", $userId, "int", 11);
+                            $paramsPagos[1] = array("contado", $user['formaDePago']['contado'], "int", 1);
+                            $paramsPagos[2] = array("debito", $user['formaDePago']['debito'], "int", 1);
+                            $paramsPagos[3] = array("credito", $user['formaDePago']['credito'], "int", 1);
+                            $paramsPagos[4] = array("otras", $user['formaDePago']['otras'], "int", 1);
+
+                            if ($conn->consulta($sqlPagos, $paramsPagos)) {
+                                $conn->closeCursor();
+
+                                $sqlDeleteDias = "DELETE FROM diasatencion WHERE idUser = " . $userId;
+                                if ($conn->consulta($sqlDeleteDias)) {
+                                    $conn->closeCursor();
+
+                                    //TODO: Remove previous open days and hours
+                                    $sqlDias = "INSERT INTO `diasatencion`(`idUser`,`lunes`,`martes`,`miercoles`,`jueves`,`viernes`,`sabado`,`domingo`, `horaComienzo`, `horaFin`) 
+                                    VALUES (:idUser, :lunes, :martes, :miercoles, :jueves, :viernes, :sabado, :domingo, :horaComienzo, :horaFin)";
+                                    $paramsDias = array();
+                                    $paramsDias[0] = array("idUser", $userId, "int", 11);
+                                    $paramsDias[1] = array("lunes", $user['diasAtencion']['lunes'], "int", 1);
+                                    $paramsDias[2] = array("martes", $user['diasAtencion']['martes'], "int", 1);
+                                    $paramsDias[3] = array("miercoles", $user['diasAtencion']['miercoles'], "int", 1);
+                                    $paramsDias[4] = array("jueves", $user['diasAtencion']['jueves'], "int", 1);
+                                    $paramsDias[5] = array("viernes", $user['diasAtencion']['viernes'], "int", 1);
+                                    $paramsDias[6] = array("sabado", $user['diasAtencion']['sabado'], "int", 1);
+                                    $paramsDias[7] = array("domingo", $user['diasAtencion']['domingo'], "int", 1);
+                                    $paramsDias[8] = array("horaComienzo", $user['horaComienzo'], "string", 20);
+                                    $paramsDias[9] = array("horaFin", $user['horaFin'], "string", 20);
+
+                                    if ($conn->consulta($sqlDias, $paramsDias)) {
+                                        $conn->closeCursor();
+                                    } else {
+                                        $error = true;
+                                    }
+                                } else {
+                                    $error = true;
+                                }
+                            } else {
+                                //tirar error
+                                $error = true;
+                            }
+                        } else {
+                            $error = true;
+                        }
+                    }
+
+                    if (!$error) {
+                        $conn->commitTransaction();
+                        $response = MessageHandler::getSuccessResponse("Cambios guardados exitosamente!", $user);
+                    } else {
+                        $response = MessageHandler::getErrorResponse("Mi puto error.");
+                    }
                 } else {
-                    $response = MessageHandler::getErrorResponse("Mi puto error.");
+                    echo MessageHandler::getErrorResponse("Error al borrar markers previos");
                 }
             } else {
                 echo MessageHandler::getErrorResponse("Primer consulta error.Edit");
             }
         } catch (Exception $exc) {
+            var_dump($exc);
             $response = null;
             $conn->rollbackTransaction();
         }
@@ -443,7 +451,7 @@ function checkUsername() {
     }
 }
 
-function checkEmail(){
+function checkEmail() {
     $request = Slim::getInstance()->request();
 
     $email = json_decode($request->getBody())->email;
@@ -470,7 +478,6 @@ function checkEmail(){
         $conn->desconectar();
         echo $response;
     }
-    
 }
 
 function validateFileToUpload() {

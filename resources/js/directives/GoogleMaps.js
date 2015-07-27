@@ -115,21 +115,6 @@ Professionals.directive('mapSetMarkers', function () {
                     map: $scope.map
                 });
                 
-                addMarkerInMap(marker);
-
-            };
-
-            $scope.loadMarker = function (info) {
-                var marker = new google.maps.Marker({
-                    map: $scope.map,
-                    position: new google.maps.LatLng(info.lat, info.long)
-                });
-                
-                addMarkerInMap(marker);
-
-            };
-
-            function addMarkerInMap(marker) {
                 google.maps.event.addListener(marker, 'click', function () {
                     infoWindow.setContent('<button class="btn btn-primary pull-left deleteMarker">Borrar?</button>');
                     infoWindow.open($scope.map, marker);
@@ -137,7 +122,25 @@ Professionals.directive('mapSetMarkers', function () {
                 });
 
                 $scope.markersArr.push(marker);
-            }
+
+            };
+
+            $scope.loadMarker = function (info, position) {
+                var marker = new google.maps.Marker({
+                    map: $scope.map,
+                    position: new google.maps.LatLng(info.lat, info.long)
+                });
+                
+                google.maps.event.addListener(marker, 'click', function () {
+                    infoWindow.setContent('<button class="btn btn-primary pull-left deleteMarker">Borrar?</button>');
+                    infoWindow.open($scope.map, marker);
+                    $scope.selectedMarker = marker;
+                });
+
+                $scope.markersArr[position] = marker;
+
+            };
+
 
             $scope.openInfoWindow = function (e, selectedMarker) {
                 e.preventDefault();
@@ -173,8 +176,9 @@ Professionals.directive('mapSetMarkers', function () {
                 debugger;
                 var length = $scope.markersArr.length;
                 for (var i = 0; i < length; i++) {
-                    $scope.loadMarker($scope.markersArr[i]);
+                    $scope.loadMarker($scope.markersArr[i], i);
                 }
+                
             }
         }
     };

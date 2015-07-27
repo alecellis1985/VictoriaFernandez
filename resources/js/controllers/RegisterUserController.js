@@ -274,6 +274,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                 $rootScope.$broadcast('alert-event', {type: 'danger', msg: "Verifique que todos los campos esten correctamente completados!"});
                 return;
             }
+            debugger;
             //Need to map the marker position to latitude longitude to save in the db
             var markersArr = $scope.markers.map(function (obj) {
                 return {
