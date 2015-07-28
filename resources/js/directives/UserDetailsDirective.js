@@ -16,6 +16,12 @@ Professionals.directive('userDetails', function(){
 //                ,
 //                { title:'Mapa', content:'resources/tpl/tabMap.html'}
               ];
+              
+            $scope.tabSelected = function(tab){
+                console.log(tab);
+            }
+              
+              
         }
     };
 });

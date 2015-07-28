@@ -19,11 +19,13 @@
         </div>
         <div id="header" ng-controller="HeaderController" ng-include="template.header"></div>
         <div class="row propagandaMargins" ng-controller="TopPropagandaController" ng-include="template.topPropaganda"></div>
-        <div class="container contentContainer"  ng-style="style()" resize resize-height="120"> <!--style="margin-top: 68px;"-->
-            <!--<div class="row propagandaMargins" ng-controller="TopPropagandaController" ng-include="template.topPropaganda"></div>-->
-            <div ng-view></div>
+        
+        <div class="row">
+            <div class="container contentContainer"  ng-style="style()" resize resize-height="120"> <!--style="margin-top: 68px;"-->
+                <!--<div class="row propagandaMargins" ng-controller="TopPropagandaController" ng-include="template.topPropaganda"></div>-->
+                <div ng-view></div>
+            </div>
         </div>
-
         <div class="footer" ng-controller="FooterController" ng-include="template.footer"></div>
         <!--CDN DLS TODO: Alexander Ellis check how to include them and dont kill the flow
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
