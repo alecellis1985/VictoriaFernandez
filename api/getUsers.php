@@ -1,14 +1,17 @@
 <?php
 
+//THIS function is called from the main search page
 function getUsers($categoria, $departamento) {
-
     $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
     $response = null;
-    if (!$_SESSION('IsAdmin')) {
-        $response = MessageHandler::getSuccessResponse("", Array());
-    } else {
+    //if (!$_SESSION('IsAdmin')) {
+     //   $response = MessageHandler::getSuccessResponse("", Array());
+    //} else {
         if ($conn->conectar()) {
-            $sql = "select * FROM users WHERE categoria = :categoria and departamento = :departamento and IsAdmin = 0 and IsActive = 1 ORDER BY nombre";
+            //$sql = "select * FROM users WHERE categoria = :categoria and departamento = :departamento and IsAdmin = 0 and IsActive = 1 ORDER BY nombre";
+            //DONT EXPOSE private data to all users
+            $sql = "SELECT idUser,nombre,apellido,email,telefono,celular,direccion,telefonoEmp,departamento,categoria,barrio,sitioWeb,imagenUrl,facebookUrl,twitterUrl,linkedinUrl,descService,servicioOfrecido1,servicioOfrecido2,servicioOfrecido3,servicioOfrecido4,servicioOfrecido5,servicioOfrecido6,descServiceLong "
+                    . "FROM users WHERE categoria = :categoria and departamento = :departamento and IsAdmin = 0 and IsActive = 1 ORDER BY nombre";
             $params = array();
             $params[0] = array("departamento", (int) $departamento, "int", 5);
             $params[1] = array("categoria", (int) $categoria, "int", 5);
@@ -19,7 +22,7 @@ function getUsers($categoria, $departamento) {
                 $response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
             }
         }
-    }
+    //}
     if ($response == null) {
         header('HTTP/1.1 400 Bad Request');
         echo MessageHandler::getDBErrorResponse();
@@ -29,6 +32,7 @@ function getUsers($categoria, $departamento) {
     }
 }
 
+//Function to get users 
 function getAllUsers() {
     $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
     $response = null;

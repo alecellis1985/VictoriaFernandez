@@ -11,13 +11,13 @@
                         <div class='row'>
                             <div class="col-xs-12 col-md-12 col-sm-12">
                                 <img class="img-responsive img-rounded" ng-if="selectedUser.imagenUrl !== ''" ng-src="{{'uploaded/' +  selectedUser.imagenUrl}}">
-                                <i ng-if="user.imagenUrl === '' || user.imagenUrl === undefined" class="img-responsive fa fa-user"></i>
+                                <i ng-if="selectedUser.imagenUrl === '' || selectedUser.imagenUrl === undefined" class="img-responsive fa fa-user"></i>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-9 col-md-10 col-sm-3">
+                    <div class="col-xs-9 col-md-10 col-sm-3 user-detail-icons">
                         <div class="row">
-                            <label>Descripción Del Servicio:</label>
+                            <label>Descripción Del Servicio</label>
                             <p ng-bind="selectedUser.descService" style='text-transform: capitalize;'></p>
                         </div>
                         <div class="row">
