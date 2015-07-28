@@ -114,12 +114,8 @@ Professionals.directive('mapSetMarkers', function () {
                     position: location,
                     map: $scope.map
                 });
-                
-                google.maps.event.addListener(marker, 'click', function () {
-                    infoWindow.setContent('<button class="btn btn-primary pull-left deleteMarker">Borrar?</button>');
-                    infoWindow.open($scope.map, marker);
-                    $scope.selectedMarker = marker;
-                });
+
+                google.maps.event.addListener(marker, 'click', markerClick);
 
                 $scope.markersArr.push(marker);
 
@@ -130,16 +126,18 @@ Professionals.directive('mapSetMarkers', function () {
                     map: $scope.map,
                     position: new google.maps.LatLng(info.lat, info.long)
                 });
-                
-                google.maps.event.addListener(marker, 'click', function () {
-                    infoWindow.setContent('<button class="btn btn-primary pull-left deleteMarker">Borrar?</button>');
-                    infoWindow.open($scope.map, marker);
-                    $scope.selectedMarker = marker;
-                });
+
+                google.maps.event.addListener(marker, 'click', markerClick);
 
                 $scope.markersArr[position] = marker;
 
             };
+
+            function markerClick() {
+                infoWindow.setContent('<button class="btn btn-primary pull-left deleteMarker">Borrar?</button>');
+                infoWindow.open($scope.map, this);
+                $scope.selectedMarker = this;
+            }
 
 
             $scope.openInfoWindow = function (e, selectedMarker) {
@@ -164,21 +162,19 @@ Professionals.directive('mapSetMarkers', function () {
                 var toDelete = $scope.selectedMarker;
                 $scope.selectedMarker.setMap(null);
                 $scope.selectedMarker = null;
-                debugger;
                 $scope.markersArr = $.grep($scope.markersArr, function (value) {
-                    return value != toDelete;
+                    return value !== toDelete;
                 });
 
             }
 
             if ($scope.markersArr !== undefined)
             {
-                debugger;
                 var length = $scope.markersArr.length;
                 for (var i = 0; i < length; i++) {
                     $scope.loadMarker($scope.markersArr[i], i);
                 }
-                
+
             }
         }
     };

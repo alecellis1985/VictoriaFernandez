@@ -3,21 +3,22 @@
     <div class='row'>
         <i class="fa fa-arrow-circle-up pull-right" scroll-To-Top></i>
         <div class='col-sm-4 col-md-4 col-xs-12'>
-            <h3><a href="#/quienessomos">Quienes somos</a></h3>
+            <h3><a href="#/quienessomos">Quienes somos?</a></h3>
         </div>
 
         <div class='col-sm-4 col-xs-12 col-md-4'>
             <h3>Acceso</h3>
             <ul class='list-unstyled'>
-                <li><a id="homeFooterLink" href='#registro-usuario'>Registrarse Gratis</a></li>
-                <li><a id="videoListFooterLink" ng-click="ingresarClk($event)" href="">Ingresar</a></li>
+                <li ng-show="$root.user === undefined"><a href='#registro-usuario'>Registrarse</a></li>
+                <li ng-show="$root.user === undefined"><a ng-click="ingresarClk($event)" href="">Ingresar</a></li>
+                <li ng-show="$root.user !== undefined"><a ng-click="salirClk($event)" href="">Salir</a></li>
             </ul>
         </div>
         <div class='col-sm-4 col-md-4 col-xs-12'>
             <h3><a href='#contacto'>Contáctanos</a></h3>
             <ul class='list-unstyled'>
                 <li><i class='glyphicon glyphicon-globe'></i> Montevideo, UY<li>
-                <li><i class='glyphicon glyphicon-envelope'></i> <a href='#contacto'>envianos un mail</a><li>
+                <li><i class='glyphicon glyphicon-envelope'></i> <a href='#contacto'>Envianos un mail</a><li>
             </ul>
         </div>
     </div>

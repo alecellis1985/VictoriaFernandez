@@ -6,15 +6,19 @@ Professionals.controller('FooterController', ['$scope', '$routeParams', '$http',
         "footer": "resources/tpl/footer.html"
     };
 
-    $scope.triggerLogin = function(){
-        
-    }
-    
     
     $scope.ingresarClk = function(evt){
+        debugger;
         evt.preventDefault();
         evt.stopPropagation();
         $('#profIngresar').trigger('click');
+    };
+    
+    $scope.salirClk = function(evt){
+        
+        evt.preventDefault();
+        evt.stopPropagation();
+        $('#profSalir').trigger('click');
     };
     
     $scope.clicked = false;

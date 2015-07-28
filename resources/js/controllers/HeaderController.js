@@ -1,6 +1,6 @@
 'use strict';
 
-Professionals.controller('HeaderController', ['$scope', '$routeParams', '$http', '$rootScope', '$location', '$modal', 'CommonService','Helper',
+Professionals.controller('HeaderController', ['$scope', '$routeParams', '$http', '$rootScope', '$location', '$modal', 'CommonService', 'Helper',
     function HeaderController($scope, $routeParams, $http, $rootScope, $location, $modal, CommonService, Helper) {
         $scope.template = {
             "header": "resources/tpl/header.html"
@@ -41,12 +41,12 @@ Professionals.controller('HeaderController', ['$scope', '$routeParams', '$http',
             });
 
         };
-        
-        
-    $scope.init = function () {
-        Helper.getUser().then();
-    };
-    //Execute the initial funcitons
-    $scope.init();
+
+
+        $scope.init = function () {
+            Helper.getUser().then();
+        };
+        //Execute the initial funcitons
+        $scope.init();
     }]);
 
