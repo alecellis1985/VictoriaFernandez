@@ -332,7 +332,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                 CommonService.postRequestWithFile('api/editar_usuario', data, imgFile).then(function (result) {
                     if (result.data.success) {
                         $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Datos actualizados!'});
-                        $location.path('/index.html');
+                        $location.path('/ver-usuario');
                     }
                     else
                         $rootScope.$broadcast('alert-event', {type: 'danger', msg: result.data.msg});

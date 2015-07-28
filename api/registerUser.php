@@ -184,9 +184,9 @@ function insertNewUser($conn, $user) {
                     $paramsPagos = array();
                     $paramsPagos[0] = array("idUser", $user['id'], "int", 11);
                     $paramsPagos[1] = array("contado", $user['formaDePago']['contado'], "int", 1);
-                    $paramsPagos[2] = array("debito", $user['formaDePago']['contado'], "int", 1);
-                    $paramsPagos[3] = array("credito", $user['formaDePago']['contado'], "int", 1);
-                    $paramsPagos[4] = array("otras", $user['formaDePago']['contado'], "int", 1);
+                    $paramsPagos[2] = array("debito", $user['formaDePago']['debito'], "int", 1);
+                    $paramsPagos[3] = array("credito", $user['formaDePago']['credito'], "int", 1);
+                    $paramsPagos[4] = array("otras", $user['formaDePago']['otras'], "int", 1);
 
                     if ($conn->consulta($sqlPagos, $paramsPagos)) {
                         $sqlDias = "INSERT INTO `diasatencion`(`idUser`,`lunes`,`martes`,`miercoles`,`jueves`,`viernes`,`sabado`,`domingo`, `horaComienzo`, `horaFin`) 
@@ -242,7 +242,7 @@ function editUser() {
 
     $user = getArrayFromRequest($request);
     $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
-     $user['imagenUrl'] = '';
+    //$user['imagenUrl'] = '';
 
     echo updateUser($conn, $user);
 }
@@ -255,7 +255,7 @@ function updateUser($conn, $user) {
 
             $sql = "UPDATE users SET nombre = :nombre, apellido = :apellido, email = :email, telefono = :telefono, celular = :celular,"
                     . " direccion = :direccion, telefonoEmp = :telefonoEmp, departamento = :departamento, categoria = :categoria,"
-                    . " barrio = :barrio, plan = :plan ,sitioWeb = :sitioWeb, imagenUrl = :imagenUrl, facebookUrl = :facebookUrl,"
+                    . " barrio = :barrio, plan = :plan ,sitioWeb = :sitioWeb, facebookUrl = :facebookUrl,"
                     . " twitterUrl = :twitterUrl, linkedinUrl = :linkedinUrl, descService = :descService, servicioOfrecido1 = :servicioOfrecido1,"
                     . " servicioOfrecido2 = :servicioOfrecido2, servicioOfrecido3 = :servicioOfrecido3, servicioOfrecido4 = :servicioOfrecido4,"
                     . " servicioOfrecido5 = :servicioOfrecido5, servicioOfrecido6 = :servicioOfrecido6, descServiceLong = :descServiceLong,"
@@ -271,7 +271,7 @@ function updateUser($conn, $user) {
                 $sqlDeleteMarkers = "DELETE FROM mapa WHERE IdUser = " . $userId;
                 if ($conn->consulta($sqlDeleteMarkers)) {
                     $conn->closeCursor();
-                    
+
                     $userMarkers = json_decode($user['markers']);
                     $sqlMap = "INSERT INTO mapa VALUES (NULL, " . $userId . ", :latitude, :longitude) ";
                     for ($i = 0; $i < count($userMarkers); $i++) {
@@ -505,21 +505,21 @@ function setUserParams($user, $forEdit) {
     $params[9] = $user['barrio'] == NULL ? array("barrio", null, "null") : array("barrio", (int) $user['barrio'], "int", 5);
     $params[10] = array("plan", (int) $user['plan'], "int", 5);
     $params[11] = array("sitioWeb", $user['sitioWeb'], "string", 50);
-    $params[12] = array("imagenUrl", $user['imagenUrl'], "string", 100);
-    $params[13] = array("facebookUrl", $user['facebookUrl'], "string", 250);
-    $params[14] = array("twitterUrl", $user['twitterUrl'], "string", 250);
-    $params[15] = array("linkedinUrl", $user['linkedinUrl'], "string", 250);
-    $params[16] = array("descService", $user['descService'], "string", 150);
-    $params[17] = array("servicioOfrecido1", $user['servicioOfrecido1'], "string", 20);
-    $params[18] = array("servicioOfrecido2", $user['servicioOfrecido2'], "string", 20);
-    $params[19] = array("servicioOfrecido3", $user['servicioOfrecido3'], "string", 20);
-    $params[20] = array("servicioOfrecido4", $user['servicioOfrecido4'], "string", 20);
-    $params[21] = array("servicioOfrecido5", $user['servicioOfrecido5'], "string", 20);
-    $params[22] = array("servicioOfrecido6", $user['servicioOfrecido6'], "string", 20);
-    $params[23] = array("descServiceLong", $user['descServiceLong'], "string", 1000);
-    $params[24] = array("username", $user['username'], "string", 50);
-    if (!$forEdit)
+    $params[12] = array("facebookUrl", $user['facebookUrl'], "string", 250);
+    $params[13] = array("twitterUrl", $user['twitterUrl'], "string", 250);
+    $params[14] = array("linkedinUrl", $user['linkedinUrl'], "string", 250);
+    $params[15] = array("descService", $user['descService'], "string", 150);
+    $params[16] = array("servicioOfrecido1", $user['servicioOfrecido1'], "string", 20);
+    $params[17] = array("servicioOfrecido2", $user['servicioOfrecido2'], "string", 20);
+    $params[18] = array("servicioOfrecido3", $user['servicioOfrecido3'], "string", 20);
+    $params[19] = array("servicioOfrecido4", $user['servicioOfrecido4'], "string", 20);
+    $params[20] = array("servicioOfrecido5", $user['servicioOfrecido5'], "string", 20);
+    $params[21] = array("servicioOfrecido6", $user['servicioOfrecido6'], "string", 20);
+    $params[22] = array("descServiceLong", $user['descServiceLong'], "string", 1000);
+    $params[23] = array("username", $user['username'], "string", 50);
+    if (!$forEdit) {
+        $params[24] = array("imagenUrl", $user['imagenUrl'], "string", 100);
         $params[25] = array("password", md5($user['password']), "string", 100);
-
+    }
     return $params;
 }
