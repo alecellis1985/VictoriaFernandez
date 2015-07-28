@@ -50,8 +50,25 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
         $scope.depSelected = departamento;
         CommonService.getRequest('api/users'+'/'+$scope.selectedCategoria.categoriaId+'/'+$scope.depSelected.idDepartamento).then(function(data){
             $scope.users = [];
-            $scope.users = data.data;
+            var users = data.data;
+            var length  = users.length;
+            while(length--){
+                $scope.markerPropCreation(users[length]);
+            }
+            
+            $scope.users = users;
         });
     };
+    
+    $scope.markerPropCreation = function(obj)
+    {
+        if(obj.latitude === undefined || obj.longitude === undefined){
+            obj.markers = [];
+        }
+        else
+        {
+            obj.markers = [{lat:obj.latitude,long:obj.longitude}];
+        }
+    }
     
 }]);

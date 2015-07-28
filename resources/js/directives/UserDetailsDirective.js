@@ -12,13 +12,12 @@ Professionals.directive('userDetails', function(){
                 { title:'Servicios', content:'resources/tpl/tabServicios.html' },
                 { title:'Informacion', content:'resources/tpl/tabInformacion.html'},
                 { title:'Promociones', content:'resources/tpl/tabPromociones.html'},
-                { title:'Formas de pago', content:'resources/tpl/tabFormadePago.html'}
-//                ,
-//                { title:'Mapa', content:'resources/tpl/tabMap.html'}
+                { title:'Formas de pago', content:'resources/tpl/tabFormadePago.html'},
+                { title:'Mapa', content:'resources/tpl/tabMap.html'}
               ];
               
             $scope.tabSelected = function(tab){
-                console.log(tab);
+                //console.log(tab);
             }
               
               

@@ -10,14 +10,20 @@ function getUsers($categoria, $departamento) {
         if ($conn->conectar()) {
             //$sql = "select * FROM users WHERE categoria = :categoria and departamento = :departamento and IsAdmin = 0 and IsActive = 1 ORDER BY nombre";
             //DONT EXPOSE private data to all users
-            $sql = "SELECT idUser,nombre,apellido,email,telefono,celular,direccion,telefonoEmp,departamento,categoria,barrio,sitioWeb,imagenUrl,facebookUrl,twitterUrl,linkedinUrl,descService,servicioOfrecido1,servicioOfrecido2,servicioOfrecido3,servicioOfrecido4,servicioOfrecido5,servicioOfrecido6,descServiceLong "
-                    . "FROM users WHERE categoria = :categoria and departamento = :departamento and IsAdmin = 0 and IsActive = 1 ORDER BY nombre";
+            $sql = "SELECT u.idUser,u.nombre,u.apellido,u.email,u.telefono,u.celular,u.direccion,u.telefonoEmp,u.departamento,u.categoria,u.barrio,u.sitioWeb,u.imagenUrl,u.facebookUrl,u.twitterUrl,u.linkedinUrl,u.descService,u.servicioOfrecido1,u.servicioOfrecido2,u.servicioOfrecido3,u.servicioOfrecido4,u.servicioOfrecido5,u.servicioOfrecido6,u.descServiceLong, "
+                    . "m.*,fp.*,da.* "
+                    . "FROM users u, mapa m, formasdepago fp, diasatencion da WHERE "
+                    . "u.idUser = m.IdUser and u.idUser = fp.idUser and u.idUser = da.idUser and "
+                    . "categoria = :categoria and departamento = :departamento and IsAdmin = 0 and IsActive = 1 ORDER BY nombre";
             $params = array();
             $params[0] = array("departamento", (int) $departamento, "int", 5);
             $params[1] = array("categoria", (int) $categoria, "int", 5);
             if ($conn->consulta($sql, $params)) {
                 $users = $conn->restantesRegistros();
+                
+                
                 $response = MessageHandler::getSuccessResponse("", $users);
+                
             } else {
                 $response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
             }
