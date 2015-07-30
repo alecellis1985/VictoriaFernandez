@@ -16,9 +16,9 @@ Professionals.controller('TopPropagandaController', ['$scope', '$routeParams', '
             });
         };
 //        for (var i = 0; i < 4; i++) {
-            $scope.addSlide('http://www.tuprofe.com.uy/blog/wp-content/uploads/2014/10/Seifer-banner.png');
-            $scope.addSlide('http://www.tuprofe.com.uy/blog/wp-content/uploads/2014/10/ifc.jpg');
-            $scope.addSlide('http://www.tuprofe.com.uy/blog/wp-content/uploads/2014/12/banner_web_CCEE_4.jpg');
+            $scope.addSlide('./resources/img/dentista.jpg');
+            $scope.addSlide('./resources/img/profesionales.jpg');
+            $scope.addSlide('./resources/img/contador.jpg');
 //        }
     }]);
 

@@ -673,8 +673,8 @@ label{
 }
 
 .principalCard img{
-    height:200px;
-    width: 100%;
+    height: 366px!important;
+    width: 80%;
 }
 
 .servOfSpans{
@@ -684,4 +684,8 @@ label{
     border-radius: 5px;
     color: #FFFFFF;
     font-weight: normal;
+}
+
+.carousel-inner img{
+    height:200px;
 }
