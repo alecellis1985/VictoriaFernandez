@@ -274,12 +274,12 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                 $rootScope.$broadcast('alert-event', {type: 'danger', msg: "Verifique que todos los campos esten correctamente completados!"});
                 return;
             }
-            debugger;
             //Need to map the marker position to latitude longitude to save in the db
             var markersArr = $scope.markers.map(function (obj) {
                 return {
-                    'latitude': obj.position.A.toString(),
-                    'longitude': obj.position.F.toString(),
+                    //SEEMS PROPERTIES NOW ARE DIFFRNT
+                    'latitude': obj.position.G.toString(),
+                    'longitude': obj.position.K.toString()
                 };
             });
 

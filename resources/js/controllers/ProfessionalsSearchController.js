@@ -61,19 +61,20 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
         });
     };
     
-    $scope.myInterval = 3000;
+    $scope.myInterval = 4000;
         var slides = $scope.slides = [];
-        $scope.addSlide = function (url) {
+        $scope.addSlide = function (url,mainText,subText,categoria) {
             slides.push({
                 image: url,
-                text: ['More', 'Extra', 'Lots of'][slides.length % 3] + ' ' +
-                        ['Cats', 'Kittys', 'Felines'][slides.length % 3]
+                text: mainText,
+                subText:subText,
+                categoria:categoria
             });
         };
 //        for (var i = 0; i < 4; i++) {
-            $scope.addSlide('./resources/img/dentista.jpg');
-            $scope.addSlide('./resources/img/profesionales.jpg');
-            $scope.addSlide('./resources/img/contador.jpg');
+        $scope.addSlide('./resources/img/dentista.jpg',"Buscas un dentista?","Encuentra al profesional que estás buscando","Odontólogos");
+        $scope.addSlide('./resources/img/profesionales.jpg',"Buscas profesionales?","Encuentra al profesional que estás buscando","Escribanos");
+        $scope.addSlide('./resources/img/contador.jpg',"Buscas un contador?","Encuentra al profesional que estás buscando","Contadores");
     
     $scope.setDropdownsAndExecuteQuery = function(nombreCategoria){
         $scope.selectedCategoria = $scope.categorias.filter(function(elem){return elem.categoriaNombre === nombreCategoria;})[0];

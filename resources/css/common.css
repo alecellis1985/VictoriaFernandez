@@ -266,6 +266,9 @@ header >nav{
 .propagandaMargins
 {
     margin: 68px 0 8px;
+    width: 110%;
+    left: -5%;
+    position: relative;
 }
 
 .propagandaMargins > div{
@@ -657,11 +660,11 @@ label{
 }
 
 .middleSearch{
-    margin-bottom: 35px;
     background-color: #2B4DA5;
     border-radius: 3px;
     padding-top: 15px;
     margin-top: 15px;
+    margin:15px 0 35px;
 }
 
 .inputWdth{
@@ -689,16 +692,28 @@ label{
 .carousel-inner  img{
     height: 366px!important;
     width: 100%;
+    cursor:pointer;
 }
 
 .propaganda-right{
     height: 300px; margin-bottom: 20px;
+    cursor:pointer;
 }
 
 .propaganda-right > img{
     box-shadow: 0 0 1em #DEDEDE;
-    border:solid 1px #AAA;
+    border: solid 1px #DEDEDE;
     width: 100%;
     height: 100%;
-    cursor:pointer;
+}
+
+.propaganda-right > img:hover,.sorryDiv:hover{
+    box-shadow: 0 0 1em #ADADAD;
+}
+
+.sorryDiv{
+    padding: 15px;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 1em #DEDEDE;
+    border: solid 1px #DEDEDE;
 }

@@ -13,7 +13,7 @@
         <link type="text/css" rel="stylesheet" href="resources/css/common.css">
         <script src='https://www.google.com/recaptcha/api.js'></script>
     </head>
-    <body>
+    <body style="overflow-x: hidden;">
         <div class="alertsTop hideAll" ng-controller="AlertController" >
             <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
         </div>
