@@ -33,6 +33,7 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
         }
         $scope.selectedUser = user;
     }
+    
     $scope.sendMailToUser = function(event,user)
     {
         event.stopPropagation();
@@ -60,6 +61,21 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
         });
     };
     
+    $scope.setDropdownsAndExecuteQuery = function(nombreCategoria){
+        $scope.selectedCategoria = $scope.categorias.filter(function(elem){return elem.categoriaNombre === nombreCategoria;})[0];
+        $scope.depSelected = $scope.departamentosList.filter(function(elem){return elem.nombreDepartamento === "Montevideo";})[0];
+        CommonService.getRequest('api/users'+'/'+$scope.selectedCategoria.categoriaId+'/'+$scope.depSelected.idDepartamento).then(function(response){
+            $scope.users = [];
+            var users = response.data;
+            var length  = users.length;
+            while(length--){
+                $scope.markerPropCreation(users[length]);
+            }
+            
+            $scope.users = users;
+        });
+    }
+    
     $scope.markerPropCreation = function(obj)
     {
         if(obj.latitude === undefined || obj.longitude === undefined){
@@ -70,5 +86,7 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
             obj.markers = [{lat:obj.latitude,long:obj.longitude}];
         }
     }
+    
+    
     
 }]);
