@@ -1,4 +1,17 @@
 <!--<div class="row propagandaMargins" ng-controller="TopPropagandaController" ng-include="template.topPropaganda"></div>-->
+<div class="row propagandaMargins">
+    <div class="col-xs-12">
+    <carousel interval="myInterval">
+        <slide ng-repeat="slide in slides" active="slide.active">
+            <img ng-src="{{slide.image}}" ng-click="setDropdownsAndExecuteQuery('Ingenieros en Sistemas')" style="margin:auto;">
+            <div class="carousel-caption">
+                <h4>Slide {{$index}}</h4>
+                <p>{{slide.text}}</p>
+            </div>
+        </slide>
+    </carousel>
+</div> 
+</div>
 <div class="row">
     <div class="container">
         <div class="row middleSearch">

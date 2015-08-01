@@ -61,6 +61,20 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
         });
     };
     
+    $scope.myInterval = 3000;
+        var slides = $scope.slides = [];
+        $scope.addSlide = function (url) {
+            slides.push({
+                image: url,
+                text: ['More', 'Extra', 'Lots of'][slides.length % 3] + ' ' +
+                        ['Cats', 'Kittys', 'Felines'][slides.length % 3]
+            });
+        };
+//        for (var i = 0; i < 4; i++) {
+            $scope.addSlide('./resources/img/dentista.jpg');
+            $scope.addSlide('./resources/img/profesionales.jpg');
+            $scope.addSlide('./resources/img/contador.jpg');
+    
     $scope.setDropdownsAndExecuteQuery = function(nombreCategoria){
         $scope.selectedCategoria = $scope.categorias.filter(function(elem){return elem.categoriaNombre === nombreCategoria;})[0];
         $scope.depSelected = $scope.departamentosList.filter(function(elem){return elem.nombreDepartamento === "Montevideo";})[0];
