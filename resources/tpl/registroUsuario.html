@@ -180,15 +180,15 @@
             </div>
             <div class="row ">
                 <div class="form-group col-xs-12 col-md-4">
-                    <input type="url" name="facebookUrl" class="form-control" title="Clickea en tu perfil de facebook y copia la url del browser" ng-model="user.facebookUrl" placeholder="Enlace de facebook ej: https://www.facebook.com/pages/Profesionales-UY/1623709471210001" >
+                    <input type="url" name="facebookUrl" class="form-control" title="Clickea en tu perfil de facebook y copia la url del browser" ng-model="user.facebookUrl" placeholder="Enlace de Facebook ej: https://www.facebook.com/pages/Profesionales-UY/1623709471210001" >
                     <span ng-show="registerUser.facebookUrl.$touched && registerUser.facebookUrl.$error.url" class="error">URL invalida</span>
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
-                    <input type="url" name="twitterUrl" class="form-control" title="Clickea en tu perfil de twiter y copia la url del browser" ng-model="user.twitterUrl" placeholder="Enlace de twitter" >
+                    <input type="url" name="twitterUrl" class="form-control" title="Clickea en tu perfil de twiter y copia la url del browser" ng-model="user.twitterUrl" placeholder="Enlace de Twitter" >
                     <span ng-show="registerUser.twitterUrl.$touched && registerUser.twitterUrl.$error.url" class="error">URL invalida</span>
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
-                    <input type="url" name="linkedinUrl" class="form-control" title="Clickea en tu perfil de linkedin y copia la url del browser" ng-model="user.linkedinUrl" placeholder="Enlace de linkedin">
+                    <input type="url" name="linkedinUrl" class="form-control" title="Clickea en tu perfil de linkedin y copia la url del browser" ng-model="user.linkedinUrl" placeholder="Enlace de Linkedin">
                     <span ng-show="registerUser.linkedinUrl.$touched && registerUser.linkedinUrl.$error.url" class="error">URL invalida</span>
                 </div>
 
@@ -197,7 +197,7 @@
     </div>
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title">Ubicacion en mapa</h3>
+            <h3 class="panel-title">Ubicación en mapa</h3>
         </div>
         <div class="panel-body">
             <div class="row">
@@ -258,12 +258,19 @@
                     <label>Formas de Pago</label>
                 </div>
                 <div class="form-group col-xs-12 col-md-6">
-                    <div class="btn-group">
-                        <label class="btn btn-default" ng-model="user.formaDePago.contado" btn-checkbox>Contado</label>
-                        <label class="btn btn-default" ng-model="user.formaDePago.debito" btn-checkbox>Debito</label>
-                        <label class="btn btn-default" ng-model="user.formaDePago.credito" btn-checkbox>Credito</label>
-                        <label class="btn btn-default" ng-model="user.formaDePago.otras" btn-checkbox>Otras</label>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-4">
+                            <div class="btn-group">
+                                <label class="btn btn-default" ng-model="user.formaDePago.contado" btn-checkbox>Contado</label>
+                                <label class="btn btn-default" ng-model="user.formaDePago.debito" btn-checkbox>Débito</label>
+                                <label class="btn btn-default" ng-model="user.formaDePago.credito" btn-checkbox>Crédito</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-5">
+                            <input type="text" class="form-control" ng-model="user.formaDePago.otras" placeholder="Otras" maxlength="30" >
+                        </div>
                     </div>
+                    
                 </div>
             </div>
             <div class="row">

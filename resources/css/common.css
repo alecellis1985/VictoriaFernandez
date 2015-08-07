@@ -265,7 +265,7 @@ header >nav{
 
 .propagandaMargins
 {
-    margin: 68px 0 8px;
+    margin: 0px 0 8px;
     width: 110%;
     left: -5%;
     position: relative;
@@ -523,7 +523,6 @@ p
 }
 
 .planes>.panel-body>.row>div:first-child>span>.fa{
-    color: #949494;
     font-size: 42px;
 }
 
@@ -713,7 +712,32 @@ label{
 
 .sorryDiv{
     padding: 15px;
+    margin: 0 15px;
     background-color: #FFFFFF;
     box-shadow: 0 0 1em #DEDEDE;
     border: solid 1px #DEDEDE;
 }
+
+.fa-home{
+    padding-right: 10px;
+}
+.planes>.panel-body>.row>div:first-child>span>.fa-certificate{
+    color: #E8D000;
+}
+.planes>.panel-body>.row>div:first-child>span>.fa-usd{
+    color: #006727;
+}
+
+.planes>.panel-body>.row>div:first-child>span>.fa-envelope-o{
+    color: #9A5304;
+}
+
+.planes>.panel-body>.row>div:first-child>span>.fa-pencil-square-o{
+    color: #A29100;
+}
+    
+.planes>.panel-body>.row>div:first-child>span>.fa-phone{
+    color: #9E0000;
+}
+
+    

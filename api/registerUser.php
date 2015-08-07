@@ -186,7 +186,7 @@ function insertNewUser($conn, $user) {
                     $paramsPagos[1] = array("contado", $user['formaDePago']['contado'], "int", 1);
                     $paramsPagos[2] = array("debito", $user['formaDePago']['debito'], "int", 1);
                     $paramsPagos[3] = array("credito", $user['formaDePago']['credito'], "int", 1);
-                    $paramsPagos[4] = array("otras", $user['formaDePago']['otras'], "int", 1);
+                    $paramsPagos[4] = array("otras", $user['formaDePago']['otras'], "string", 30);
 
                     if ($conn->consulta($sqlPagos, $paramsPagos)) {
                         $sqlDias = "INSERT INTO `diasatencion`(`idUser`,`lunes`,`martes`,`miercoles`,`jueves`,`viernes`,`sabado`,`domingo`, `horaComienzo`, `horaFin`) 
@@ -302,8 +302,8 @@ function updateUser($conn, $user) {
                             $paramsPagos[1] = array("contado", $user['formaDePago']['contado'], "int", 1);
                             $paramsPagos[2] = array("debito", $user['formaDePago']['debito'], "int", 1);
                             $paramsPagos[3] = array("credito", $user['formaDePago']['credito'], "int", 1);
-                            $paramsPagos[4] = array("otras", $user['formaDePago']['otras'], "int", 1);
-
+                            $paramsPagos[4] = array("otras", $user['formaDePago']['otras'], "string", 30);
+                            
                             if ($conn->consulta($sqlPagos, $paramsPagos)) {
                                 $conn->closeCursor();
 
@@ -411,7 +411,7 @@ function getArrayFromRequest($request) {
             "contado" => $formaDePago->contado ? 1 : 0,
             "credito" => $formaDePago->credito ? 1 : 0,
             "debito" => $formaDePago->debito ? 1 : 0,
-            "otras" => $formaDePago->otras ? 1 : 0,
+            "otras" => $formaDePago->otras,
         ),
         "descServiceLong" => is_null($request->post('descServiceLong')) ? "" : $request->post('descServiceLong'),
         "username" => is_null($request->post('username')) ? "" : $request->post('username'),

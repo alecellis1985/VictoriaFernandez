@@ -159,7 +159,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                 contado: false,
                 debito: false,
                 credito: false,
-                otras: false
+                otras: ''
             }
         };
 
@@ -322,7 +322,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             if (newUser)
                 CommonService.postRequestWithFile('api/agregar_usuario', data, imgFile).then(function (result) {
                     if (result.data.success) {
-                        $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Has sido registrado con exito'});
+                        $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Felicitaciones, ya sos parte de profesionales.uy'});
                         $location.path('/index.html');
                     }
                     else

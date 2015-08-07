@@ -201,7 +201,7 @@ CREATE TABLE `formasdepago` (
   `contado` tinyint(1) NOT NULL,
   `debito` tinyint(1) NOT NULL,
   `credito` tinyint(1) NOT NULL,
-  `otras` tinyint(1) NOT NULL,
+  `otras` varchar(30) NOT NULL,
   PRIMARY KEY  (`idformasDePago`),
   KEY `formasdepago_users_idx` (`idUser`),
   CONSTRAINT `formasdepago_users` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`)
