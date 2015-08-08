@@ -12,18 +12,22 @@
 <div class="row" ng-hide="registro.mostrarRegistro">
     <div class="row">
         <div class="container registroProf">
-            <div class="row">
-                <div class="col-xs-12 col-md-12 col-sm-12">
-                    <div class="col-xs-12 col-md-8 col-sm-8 registerTitle">
-                        <h1>Haga crecer su negocio con Profesionales.uy!</h1>
-                        <h3>¿Qué le ofrecemos?</h3>
-                        <p>Un completo anuncio donde le van a ver miles de personas y empresas interesados en sus servicios.<br />
-                            Una plataforma de comunicación y marketing de referencia en el sector de profesionales online.<br />
-                            Un completo equipo de profesionales a su servicio que va hacer crecer su negocio.</p>
-                    </div>
+            <div class="row specialRow">
+                <div class="col-xs-12 col-md-12 col-sm-12 registerTitle">
+                    <h1>Haga crecer su negocio con Profesionales.uy!</h1>
+                    <h3>¿Qué le ofrecemos?</h3>
+                    <p>
+                        <i class="fa fa-check-circle-o"></i>Un completo anuncio donde le van a ver miles de personas y empresas interesados en sus servicios.<br />
+                        <i class="fa fa-check-circle-o"></i>Una plataforma de comunicación y marketing de referencia en el sector de profesionales online.<br />
+                        <i class="fa fa-check-circle-o"></i>Un completo equipo de profesionales a su servicio que va hacer crecer su negocio.
+                    </p>
+                    
+                    
+                    <button class="btn btn-primary" ng-click="showPlan(0)"><i class="glyphicon glyphicon-education"></i> Profesional</button>
+                    <button class="btn btn-primary" ng-click="showPlan(1)"><i class="glyphicon glyphicon-briefcase"></i> Empresas</button>
                 </div>
             </div>
-            <div class="row" style="margin-top:15px;">
+            <!-- <div class="row" style="margin-top:15px;">
                 <div class="col-xs-12 col-md-6 col-sm-6">
                     <div class="col-xs-12 col-md-12 col-sm-12 card" ng-class="{
                             'true'
@@ -47,7 +51,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <planes-details selected-plan-fn="showRegistration(e,tipo,duracion,categoria)" selected-plan="selectedPlan" elem-colapsed="isCollapsed" available-plans="profesionalesAvailablePlans"></planes-details>
         </div>  
     </div>

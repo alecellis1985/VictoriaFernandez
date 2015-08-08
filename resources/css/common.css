@@ -647,12 +647,33 @@ label{
 }
 .registerTitle
 {
-    background-color: #324C8C;
-    color:white;
-    box-shadow: 0 0 1em #324C8C;
-/*    margin-bottom: 17px;*/
-    border-radius: 5px;
+    color: #1B1B1B;
+    height: 350px;
+    background-image: url("../img/contador.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
 }
+
+.registerTitle > h1{
+    font-weight: bold;
+}
+
+.registerTitle > p{
+    
+    font-size: 17px;
+}
+
+.registerTitle > p > i{
+   padding-right: 10px;
+   color: #515451;
+   font-size: 24px;
+}
+
+.registerTitle .glyphicon-education,.registerTitle .glyphicon-briefcase{
+    color:#FFFFFF;
+}
+
 
 .user-detail-icons .fa{
     width: 22px;
@@ -740,4 +761,8 @@ label{
     color: #9E0000;
 }
 
-    
+.specialRow{
+    margin-right: -32px;
+    margin-left: -32px;
+}    
+
