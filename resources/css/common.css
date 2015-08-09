@@ -779,7 +779,9 @@ label{
     padding: 18px 23px;
     border-radius: 2px;
 }
-
+.xs-margin-left{
+    margin-left: 15px;
+}
 .specialRow .superH1{
     color: #FFFFFF;
     margin-top: 0px;
@@ -794,6 +796,9 @@ label{
 
 .sm-margin-top{
     margin-top: 17px;
+}
+.md-margin-top{
+    margin-top: 20px;
 }
 .sub-Header-a{
     color: #9d9d9d;
