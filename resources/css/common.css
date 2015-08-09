@@ -6,11 +6,6 @@ h2{
     color: #5b616a;
 }
 
-/*.navbar-fixed-top
-{
-    background: #2B4DA5;
-    border-bottom: 2px solid #20429D;
-}*/
 header >nav{
     background: #2B4DA5;
     border-bottom: 2px solid #20429D;
@@ -629,7 +624,7 @@ mark{
 
 .profLogoImg{
     height: 51px;
-    margin-top: 17px;
+    padding-left: 15px;
 }
 label{
       color: #5b616a;
@@ -795,4 +790,21 @@ label{
     border-radius: 3px;
     padding:15px;
     text-align: center;
+}
+
+.sm-margin-top{
+    margin-top: 17px;
+}
+.sub-Header-a{
+    color: #9d9d9d;
+    display: block;
+    padding: 10px 15px;
+    line-height: 20px;
+    font-size: 14px;
+    text-decoration: none;
+}
+.sub-Header-a:hover{
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
 }
