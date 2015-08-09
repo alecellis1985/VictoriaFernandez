@@ -648,7 +648,7 @@ label{
 .registerTitle
 {
     color: #1B1B1B;
-    height: 350px;
+    height: 380px;
     background-image: url("../img/contador.jpg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -668,6 +668,7 @@ label{
     margin-bottom: 10px;
     margin-top: 10px;
     border-radius: 3px;
+    padding-left: 40px;
 }
 
 .registerTitle .special-white-bg > p{
