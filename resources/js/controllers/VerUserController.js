@@ -55,14 +55,13 @@ Professionals.controller('VerUserController', ['$scope', '$location', 'departame
             var categoriaId = parseInt(userData.data.user.categoria);
             $scope.selectedCategoria = $scope.categorias.sort(sortById("categoriaId"))[categoriaId];
             $scope.user.selectedCategoriaText = $scope.selectedCategoria.categoriaNombre;
-
             var departamentoId = parseInt(userData.data.user.departamento);
             $scope.depSelected = $scope.departamentosList.sort(sortById("idDepartamento"))[departamentoId];
             $scope.user.selectedDepartamentoText = $scope.depSelected.nombreDepartamento;
 
             if ($scope.depSelected.nombreDepartamento.toLowerCase() === "montevideo") {
-                var barrioId = parseInt(userData.data.user.barrio);
-                $scope.selectedBarrio = $scope.barrios.sort(sortById("barrioId"))[barrioId];
+                var barrioId = userData.data.user.barrio;
+                $scope.selectedBarrio = $scope.barrios.filter(function(elem){return elem.barrioId === barrioId;})[0];
                 $scope.user.selectedBarrioText = $scope.selectedBarrio.barrioNombre;
             }
 

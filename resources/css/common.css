@@ -6,11 +6,6 @@ h2{
     color: #5b616a;
 }
 
-/*.navbar-fixed-top
-{
-    background: #2B4DA5;
-    border-bottom: 2px solid #20429D;
-}*/
 header >nav{
     background: #2B4DA5;
     border-bottom: 2px solid #20429D;
@@ -629,7 +624,7 @@ mark{
 
 .profLogoImg{
     height: 51px;
-    margin-top: 17px;
+    padding-left: 15px;
 }
 label{
       color: #5b616a;
@@ -648,23 +643,35 @@ label{
 .registerTitle
 {
     color: #1B1B1B;
-    height: 350px;
+    height: 380px;
     background-image: url("../img/contador.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
+    margin-bottom: 20px;
+    padding-left: 20%;
 }
 
-.registerTitle > h1{
+.registerTitle .special-white-bg > h1{
     font-weight: bold;
+    margin-top: 0;
 }
 
-.registerTitle > p{
+.special-white-bg{
+    background-color: rgba(255, 255, 255, 0.38);
+    padding: 7px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border-radius: 3px;
+    padding-left: 40px;
+}
+
+.registerTitle .special-white-bg > p{
     
     font-size: 17px;
 }
 
-.registerTitle > p > i{
+.registerTitle .special-white-bg > p > i{
    padding-right: 10px;
    color: #515451;
    font-size: 24px;
@@ -766,3 +773,44 @@ label{
     margin-left: -32px;
 }    
 
+.specialRow button{
+    font-size: 20px;
+    line-height: 20px;
+    padding: 18px 23px;
+    border-radius: 2px;
+}
+
+.specialRow .superH1{
+    color: #FFFFFF;
+    margin-top: 0px;
+}
+
+.specialRow .niceBackground{
+    background-color: rgba(0, 0, 0, 0.23);
+    border-radius: 3px;
+    padding:15px;
+    text-align: center;
+}
+
+.sm-margin-top{
+    margin-top: 17px;
+}
+.sub-Header-a{
+    color: #9d9d9d;
+    display: block;
+    padding: 10px 15px;
+    line-height: 20px;
+    font-size: 14px;
+    text-decoration: none;
+}
+.sub-Header-a:hover{
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.volver-header{
+    position: absolute;
+    top: 2px;
+    right: 2px;
+}
