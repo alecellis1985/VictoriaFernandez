@@ -13,12 +13,19 @@ Professionals.controller('AlertController', ['$scope', '$routeParams', '$http', 
         });
 
         $scope.addAlert = function (alertElem) {
+            if(alertElem.type === 'danger'){
+                $scope.alerts.forEach(function(alert,index){
+                    debugger;
+                    if(alert.type === 'danger')
+                        $scope.closeAlert(index);
+                });
+            }
             $scope.alerts.push(alertElem);
             var alertIndex = $scope.alerts.length - 1;
             $timeout(function () {
                 //NEED TO ADD THIS BECAUSE angular 1.3 adds to the element an ng hide
                 $scope.closeAlert(alertIndex);
-            }, 3000);
+            }, 5000);
         };
 
         $scope.closeAlert = function (index) {
