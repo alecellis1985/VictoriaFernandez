@@ -808,3 +808,9 @@ label{
     font-weight: bold;
     text-decoration: none;
 }
+
+.volver-header{
+    position: absolute;
+    top: 2px;
+    right: 2px;
+}
