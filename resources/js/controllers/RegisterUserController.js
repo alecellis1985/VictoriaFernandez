@@ -229,6 +229,8 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             $scope.markers = userData.data.markers;
 
             $scope.dropDownCheck();
+            
+            $scope.registro.empresa = parseInt(userData.data.user.plan) > 6;
 
         };
 
