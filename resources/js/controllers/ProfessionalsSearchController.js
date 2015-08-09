@@ -49,7 +49,7 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
         {
             e.preventDefault();
             $scope.depSelected = departamento;
-            CommonService.getRequest('api/users' + '/' + $scope.selectedCategoria.categoriaId + '/' + $scope.depSelected.idDepartamento).then(function (data) {
+            CommonService.getRequest('api/users' + '/' + $scope.selectedCategoria.categoriaId + '/' + $scope.depSelected.idDepartamento + '/' + "null").then(function (data) {
                 $scope.users = [];
                 var users = data.data;
                 var length = users.length;
@@ -86,7 +86,7 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
             $scope.depSelected = $scope.departamentosList.filter(function (elem) {
                 return elem.nombreDepartamento === "Montevideo";
             })[0];
-            CommonService.getRequest('api/users' + '/' + $scope.selectedCategoria.categoriaId + '/' + $scope.depSelected.idDepartamento).then(function (response) {
+            CommonService.getRequest('api/users' + '/' + $scope.selectedCategoria.categoriaId + '/' + $scope.depSelected.idDepartamento + '/' + "null").then(function (response) {
                 $scope.users = [];
                 var users = response.data;
                 var length = users.length;
@@ -96,7 +96,7 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
 
                 $scope.users = users;
             });
-        }
+        };
 
         $scope.markerPropCreation = function (obj)
         {
@@ -107,8 +107,23 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
             {
                 obj.markers = [{lat: obj.latitude, long: obj.longitude}];
             }
-        }
+        };
 
+        $scope.buscarProf = function () {
+            if ($scope.buscoProf === "")
+                return;
+            
+            CommonService.getRequest('api/users' + '/' + $scope.selectedCategoria.categoriaId + '/' + $scope.depSelected.idDepartamento + '/' + $scope.buscoProf).then(function (response) {
+                $scope.users = [];
+                var users = response.data;
+                var length = users.length;
+                while (length--) {
+                    $scope.markerPropCreation(users[length]);
+                }
+
+                $scope.users = users;
+            });
+        };
 
 
     }]);
