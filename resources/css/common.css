@@ -653,18 +653,29 @@ label{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
+    margin-bottom: 20px;
+    padding-left: 20%;
 }
 
-.registerTitle > h1{
+.registerTitle .special-white-bg > h1{
     font-weight: bold;
+    margin-top: 0;
 }
 
-.registerTitle > p{
+.special-white-bg{
+    background-color: rgba(255, 255, 255, 0.38);
+    padding: 7px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border-radius: 3px;
+}
+
+.registerTitle .special-white-bg > p{
     
     font-size: 17px;
 }
 
-.registerTitle > p > i{
+.registerTitle .special-white-bg > p > i{
    padding-right: 10px;
    color: #515451;
    font-size: 24px;
@@ -766,3 +777,21 @@ label{
     margin-left: -32px;
 }    
 
+.specialRow button{
+    font-size: 20px;
+    line-height: 20px;
+    padding: 18px 23px;
+    border-radius: 2px;
+}
+
+.specialRow .superH1{
+    color: #FFFFFF;
+    margin-top: 0px;
+}
+
+.specialRow .niceBackground{
+    background-color: rgba(0, 0, 0, 0.23);
+    border-radius: 3px;
+    padding:15px;
+    text-align: center;
+}
