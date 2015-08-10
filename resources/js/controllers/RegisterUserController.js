@@ -216,7 +216,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             formasDePago.contado = parseInt(userData.data.formasDePago.contado) === 1;
             formasDePago.debito = parseInt(userData.data.formasDePago.debito) === 1;
             formasDePago.credito = parseInt(userData.data.formasDePago.credito) === 1;
-            formasDePago.otras = parseInt(userData.data.formasDePago.otras) === 1;
+            formasDePago.otras = userData.data.formasDePago.otras;
 
             $scope.user.diasAtencion = diasAtencion;
             $scope.user.formaDePago = formasDePago;
@@ -248,7 +248,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         } else {
             $scope.fillEditUserCamps();
         }
-
+        goToTop();
         
         $scope.checkTime = function () {
             if ($scope.user.horaFin <= $scope.user.horaComienzo) {

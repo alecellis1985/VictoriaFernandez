@@ -110,17 +110,17 @@ Professionals.config(['$routeProvider', '$httpProvider', function ($routeProvide
     }]);
 
 Professionals.factory('imageUrl', function () {
-  
-  var url = '';
-  
-  return {
-    set : function (newUrl) {
-      url = newUrl;
-    },
-    get : function () {
-      return url;
+
+    var url = '';
+
+    return {
+        set: function (newUrl) {
+            url = newUrl;
+        },
+        get: function () {
+            return url;
+        }
     }
-  }
 })
 
 Professionals.run(['$rootScope', '$http', '$location', '$timeout', '$filter', 'Helper',
@@ -150,3 +150,8 @@ Professionals.run(['$rootScope', '$http', '$location', '$timeout', '$filter', 'H
 //        });
 
     }]);
+
+function goToTop() {
+    $('html,body').scrollTop(0);
+}
+

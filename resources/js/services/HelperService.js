@@ -455,8 +455,8 @@ Professionals.factory('Helper', ['$rootScope', '$q', '$http', function ($rootSco
             if (formasDePago.credito) {
                 textResult += (textResult === "" ? "Credito" : ", Credito");
             }
-            if (formasDePago.otras) {
-                textResult += (textResult === "" ? "Otras" : ", Otras");
+            if (formasDePago.otras !== "") {
+                textResult += (textResult === "" ? formasDePago.otras : ", " + formasDePago.otras);
             }
 
             return textResult;
