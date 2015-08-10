@@ -17,7 +17,7 @@
         <!--<form ng-submit="buscarProf(buscarProf.$valid)" name="buscarProf" style="padding-top: 10px" method="post" novalidate>-->
         <div class="row middleSearch">
             <div class="form-group col-xs-12 col-md-3">
-                <dropdown-Filter selected-Elem="selectedCategoria" name-Prop="categoriaNombre" elements-Arr="categorias" placeholder-Filter="Filtro de categorias"></dropdown-Filter>                
+                <dropdown-Filter selected-Elem="selectedCategoria" selected-Element-Fn="selectCategoria" name-Prop="categoriaNombre" elements-Arr="categorias" placeholder-Filter="Filtro de categorias"></dropdown-Filter>                
             </div>      
             <div class="form-group col-xs-12 col-md-3">
                 <dropdown-Filter selected-Elem="depSelected" selected-Element-Fn="selectDepartamento" name-Prop="nombreDepartamento" elements-Arr="departamentosList" placeholder-Filter="Filtro de departamentos"></dropdown-Filter>  
