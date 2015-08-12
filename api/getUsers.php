@@ -10,14 +10,6 @@ function getUsers($categoria, $departamento, $nombreProf) {
     }
 
     if ($conn->conectar()) {
-        //$sql = "select * FROM users WHERE categoria = :categoria and departamento = :departamento and IsAdmin = 0 and IsActive = 1 ORDER BY nombre";
-        //DONT EXPOSE private data to all users
-//        $sql = "SELECT u.idUser,u.nombre,u.apellido,u.email,u.telefono,u.celular,u.direccion,u.telefonoEmp,u.departamento,u.categoria,u.barrio,u.sitioWeb,u.imagenUrl,u.facebookUrl,u.twitterUrl,u.linkedinUrl,u.descService,u.servicioOfrecido1,u.servicioOfrecido2,u.servicioOfrecido3,u.servicioOfrecido4,u.servicioOfrecido5,u.servicioOfrecido6,u.descServiceLong, "
-//                . "m.*,fp.*,da.* "
-//                . "FROM users u, mapa m, formasdepago fp, diasatencion da WHERE "
-//                . "concat(concat(u.nombre,' '),u.apellido) like '%" . $nombreProf . "%' and "
-//                . "u.idUser = m.IdUser and u.idUser = fp.idUser and u.idUser = da.idUser and "
-//                . "(categoria = :categoria OR :categoria = -1) and (departamento = :departamento OR :departamento = -1) and IsAdmin = 0 and IsActive = 1 ORDER BY nombre";
 
         $sql = "SELECT u.idUser,u.nombre,u.apellido,u.email,u.telefono,u.celular,u.direccion,u.telefonoEmp," .
                 "u.departamento,u.categoria,u.barrio,u.sitioWeb,u.imagenUrl,u.facebookUrl,u.twitterUrl," .

@@ -19,9 +19,6 @@ session_cache_limiter(false);
 session_start();
 $app = new Slim();
 
-//SESSION
-//$app->add(new SessionCookie(array('secret' => 'myappsecret')));
-
 $app->get('/users', 'getAllUsers');
 $app->get('/users/loggedUser', 'isUserLogged');
 $app->post('/sendMail', 'sendEmail');
@@ -43,13 +40,3 @@ $app->post('/edit-user-pwd', 'editUserPwd');
 $app->post('/check-email', 'checkEmail');
 
 $app->run();
-
-//function getConnection() {
-//    $dbhost = "localhost";
-//    $dbuser = "root";
-//    $dbpass = "oso2203";
-//    $dbname = "angular_tutorial";
-//    $dbConnection = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
-//    $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//    return $dbConnection;
-//}

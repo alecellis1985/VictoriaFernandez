@@ -145,6 +145,8 @@ function registerUser() {
     }
 }
 
+
+//TODO: Refactor into shorter method. 
 function insertNewUser($conn, $user) {
     $response = null;
     if ($conn->conectar()) {
