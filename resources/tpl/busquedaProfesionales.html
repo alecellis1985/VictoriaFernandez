@@ -1,22 +1,23 @@
 <!--<div class="row propagandaMargins" ng-controller="TopPropagandaController" ng-include="template.topPropaganda"></div>-->
 <div class="row propagandaMargins">
     <div class="col-xs-12">
-    <carousel interval="myInterval">
-        <slide ng-repeat="slide in slides" active="slide.active">
-            <img ng-src="{{slide.image}}"  alt="{{slide.text}}" ng-click="setDropdownsAndExecuteQuery(slide.categoria)" style="margin:auto;">
-            <div class="carousel-caption">
-                <h3>{{slide.text}}</h3>
-                <p>{{slide.subText}}</p>
-            </div>
-        </slide>
-    </carousel>
-</div> 
+        <carousel interval="myInterval">
+            <slide ng-repeat="slide in slides" active="slide.active">
+                <img ng-src="{{slide.image}}"  alt="{{slide.text}}" ng-click="setDropdownsAndExecuteQuery(slide.categoria)" style="margin:auto;">
+                <div class="carousel-caption">
+                    <h3>{{slide.text}}</h3>
+                    <p>{{slide.subText}}</p>
+                </div>
+            </slide>
+        </carousel>
+    </div> 
 </div>
 <div class="row">
     <div class="container">
+        <!--<form ng-submit="buscarProf(buscarProf.$valid)" name="buscarProf" style="padding-top: 10px" method="post" novalidate>-->
         <div class="row middleSearch">
             <div class="form-group col-xs-12 col-md-3">
-                <dropdown-Filter selected-Elem="selectedCategoria" name-Prop="categoriaNombre" elements-Arr="categorias" placeholder-Filter="Filtro de categorias"></dropdown-Filter>                
+                <dropdown-Filter selected-Elem="selectedCategoria" selected-Element-Fn="selectCategoria" name-Prop="categoriaNombre" elements-Arr="categorias" placeholder-Filter="Filtro de categorias"></dropdown-Filter>                
             </div>      
             <div class="form-group col-xs-12 col-md-3">
                 <dropdown-Filter selected-Elem="depSelected" selected-Element-Fn="selectDepartamento" name-Prop="nombreDepartamento" elements-Arr="departamentosList" placeholder-Filter="Filtro de departamentos"></dropdown-Filter>  
@@ -27,12 +28,13 @@
             <div class="form-group col-xs-12 col-md-3">
                 <div class="input-group col-xs-12 col-md-12 inputWdth"> 
                     <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                        <button class="btn btn-default" type="button" ng-click="buscarProf()"><i class="glyphicon glyphicon-search"></i></button>
                     </span>
-                    <input type="text" class="form-control" ng-model="buscoProf" placeholder="Buscar...">
+                    <input type="text" class="form-control" ng-model="buscoProf" ng-enter="buscarProf()" placeholder="Buscar...">
                 </div>
             </div>
         </div>
+        <!--</form>-->
         <div class="panel panel-primary " ng-if="selectedList === 1">
             <div class="panel-heading">
                 <h3 class="panel-title">Usuarios</h3>
@@ -97,7 +99,7 @@
                                         <p ng-bind="user.descService" style='text-transform: capitalize;'></p>
                                     </div>
                                     <div class="row">
-                                       <i class="fa fa-phone-square" title="Telefono"></i>
+                                        <i class="fa fa-phone-square" title="Telefono"></i>
                                         <span ng-bind="user.telefono"></span>
                                     </div>
                                     <div class="row">

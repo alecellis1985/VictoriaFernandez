@@ -18,39 +18,36 @@ Professionals.directive('imageUpload', function () {
                 if (imgExtension === "JPEG" || imgExtension === "JPG" || imgExtension === "PNG") {
                     return true;
                 }
-                // it is invalid
+
                 return false;
             };
         }
     };
 });
 
-Professionals.directive('username', function ($q, $timeout, $http) {
+Professionals.directive('username', function ($q, $http) {
     return {
         require: 'ngModel',
         link: function (scope, elm, attrs, ctrl) {
             ctrl.$asyncValidators.username = function (modelValue, viewValue) {
 
                 if (ctrl.$isEmpty(modelValue)) {
-                    // consider empty model valid
                     return $q.when();
                 }
 
                 var def = $q.defer();
 
-                if (scope.currentUsername == modelValue)
+                if (scope.currentUsername === modelValue)
                     return def.resolve();
 
                 $http.post('api/check-username', {'userName': modelValue}, {headers: {'Content-Type': 'application/json;charset=utf-8'}})
-                        .success(function (data, status, headers, cfg) {
+                        .success(function (data) {
                             if (data.success && data.data.isUnique)
-                                // c.$setValidity('unique', data.isUnique);
                                 def.resolve();
                             else
-                                //c.$setValidity('unique', false);
                                 def.reject();
                         }).error(function (data, status, headers, cfg) {
-                    //c.$setValidity('unique', false);
+
                     def.reject();
                 });
 
@@ -68,25 +65,21 @@ Professionals.directive('emailUnique', function ($q, $timeout, $http) {
             ctrl.$asyncValidators.emailUnique = function (modelValue, viewValue) {
 
                 if (ctrl.$isEmpty(modelValue)) {
-                    // consider empty model valid
                     return $q.when();
                 }
 
                 var def = $q.defer();
 
-                if (scope.currentEmail == modelValue)
+                if (scope.currentEmail === modelValue)
                     return def.resolve();
 
                 $http.post('api/check-email', {'email': modelValue}, {headers: {'Content-Type': 'application/json;charset=utf-8'}})
                         .success(function (data, status, headers, cfg) {
                             if (data.success && data.data.isUnique)
-                                // c.$setValidity('unique', data.isUnique);
                                 def.resolve();
                             else
-                                //c.$setValidity('unique', false);
                                 def.reject();
                         }).error(function (data, status, headers, cfg) {
-                    //c.$setValidity('unique', false);
                     def.reject();
                 });
 
@@ -106,7 +99,7 @@ Professionals.directive("compareTo", function () {
             otherModelValue: "=compareTo"
         },
         link: function (scope, element, attributes, ngModel) {
-            
+
             ngModel.$validators.compareTo = function (modelValue) {
                 return modelValue === scope.otherModelValue;
             };

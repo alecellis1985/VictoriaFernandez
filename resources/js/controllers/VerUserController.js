@@ -44,7 +44,7 @@ Professionals.controller('VerUserController', ['$scope', '$location', 'departame
                 contado: false,
                 debito: false,
                 credito: false,
-                otras: false
+                otras: ''
             }
         };
 
@@ -78,7 +78,7 @@ Professionals.controller('VerUserController', ['$scope', '$location', 'departame
             formasDePago.contado = parseInt(userData.data.formasDePago.contado) === 1;
             formasDePago.debito = parseInt(userData.data.formasDePago.debito) === 1;
             formasDePago.credito = parseInt(userData.data.formasDePago.credito) === 1;
-            formasDePago.otras = parseInt(userData.data.formasDePago.otras) === 1;
+            formasDePago.otras = userData.data.formasDePago.otras;
 
             $scope.user.diasAtencion = diasAtencion;
             $scope.user.formaDePago = formasDePago;
@@ -94,8 +94,11 @@ Professionals.controller('VerUserController', ['$scope', '$location', 'departame
             imageUrl.set(userData.data.user.imagenUrl);
             $scope.imageUrl = imageUrl;
             $scope.markers = userData.data.markers;
-
+            
+        
         };
+        
+        
 
         function sortById(propertyName) {
             return function (a, b) {
@@ -106,7 +109,8 @@ Professionals.controller('VerUserController', ['$scope', '$location', 'departame
         }
         ;
 
-        $scope.fillEditUserCamps();
+        $scope.fillEditUserCamps();        
+        goToTop();
 
         $scope.editUserData = function (e) {
             e.preventDefault();

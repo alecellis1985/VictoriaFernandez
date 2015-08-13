@@ -1,33 +1,41 @@
 <?php
 
 //THIS function is called from the main search page
-function getUsers($categoria, $departamento) {
+function getUsers($categoria, $departamento, $nombreProf) {
     $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
     $response = null;
-    //if (!$_SESSION('IsAdmin')) {
-     //   $response = MessageHandler::getSuccessResponse("", Array());
-    //} else {
-        if ($conn->conectar()) {
-            //$sql = "select * FROM users WHERE categoria = :categoria and departamento = :departamento and IsAdmin = 0 and IsActive = 1 ORDER BY nombre";
-            //DONT EXPOSE private data to all users
-            $sql = "SELECT u.idUser,u.nombre,u.apellido,u.email,u.telefono,u.celular,u.direccion,u.telefonoEmp,u.departamento,u.categoria,u.barrio,u.sitioWeb,u.imagenUrl,u.facebookUrl,u.twitterUrl,u.linkedinUrl,u.descService,u.servicioOfrecido1,u.servicioOfrecido2,u.servicioOfrecido3,u.servicioOfrecido4,u.servicioOfrecido5,u.servicioOfrecido6,u.descServiceLong, "
-                    . "m.*,fp.*,da.* "
-                    . "FROM users u, mapa m, formasdepago fp, diasatencion da WHERE "
-                    . "u.idUser = m.IdUser and u.idUser = fp.idUser and u.idUser = da.idUser and "
-                    . "categoria = :categoria and departamento = :departamento and IsAdmin = 0 and IsActive = 1 ORDER BY nombre";
-            $params = array();
-            $params[0] = array("departamento", (int) $departamento, "int", 5);
-            $params[1] = array("categoria", (int) $categoria, "int", 5);
-            if ($conn->consulta($sql, $params)) {
-                $users = $conn->restantesRegistros();
-                
-                
-                $response = MessageHandler::getSuccessResponse("", $users);
-                
-            } else {
-                $response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
-            }
+
+    if ($nombreProf === "null") {
+        $nombreProf = "";
+    }
+
+    if ($conn->conectar()) {
+
+        $sql = "SELECT u.idUser,u.nombre,u.apellido,u.email,u.telefono,u.celular,u.direccion,u.telefonoEmp," .
+                "u.departamento,u.categoria,u.barrio,u.sitioWeb,u.imagenUrl,u.facebookUrl,u.twitterUrl," .
+                "u.linkedinUrl,u.descService,u.servicioOfrecido1,u.servicioOfrecido2,u.servicioOfrecido3," .
+                "u.servicioOfrecido4,u.servicioOfrecido5,u.servicioOfrecido6,u.descServiceLong," .
+                "m.*,fp.*,da.* FROM " .
+                "users u left join mapa m on u.idUser = m.IdUser " .
+                "left join formasdepago fp on u.idUser = fp.idUser " .
+                "left join diasatencion da on u.idUser = da.idUser " .
+                "WHERE concat(concat(u.nombre,' '),u.apellido) like '%" . $nombreProf . "%' " .
+                "and (categoria = :categoria OR " . $categoria . " = -1) and " .
+                "(departamento = :departamento OR " . $departamento . " = -1) " .
+                "and IsAdmin = 0 and IsActive = 1 ORDER BY nombre";
+
+        $params = array();
+        $params[0] = array("departamento", (int) $departamento, "int", 5);
+        $params[1] = array("categoria", (int) $categoria, "int", 5);
+        if ($conn->consulta($sql, $params)) {
+            $users = $conn->restantesRegistros();
+
+
+            $response = MessageHandler::getSuccessResponse("", $users);
+        } else {
+            $response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
         }
+    }
     //}
     if ($response == null) {
         header('HTTP/1.1 400 Bad Request');
@@ -144,7 +152,7 @@ function getMarkersFormat($markers) {
         $newMarker = array("lat" => $marker->latitude, "long" => $marker->longitude);
         array_push($result, $newMarker);
     }
-    
+
     return $result;
 }
 

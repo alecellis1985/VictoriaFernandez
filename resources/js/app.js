@@ -1,6 +1,6 @@
 'use strict';
 
-var Professionals = angular.module('Professionals', ['ngRoute', 'angularFileUpload', 'ui.bootstrap', 'noCAPTCHA']);//, 'ngSanitize'
+var Professionals = angular.module('Professionals', ['ngRoute', 'angularFileUpload', 'ui.bootstrap', 'noCAPTCHA']);
 
 Professionals.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
 
@@ -84,7 +84,6 @@ Professionals.config(['$routeProvider', '$httpProvider', function ($routeProvide
 
         $routeProvider.when('/quienessomos', {
             templateUrl: 'resources/tpl/quienessomos.html'
-//        controller: 'ContactoController'
         });
 
         $routeProvider.when('/administrar-users', {
@@ -110,18 +109,18 @@ Professionals.config(['$routeProvider', '$httpProvider', function ($routeProvide
     }]);
 
 Professionals.factory('imageUrl', function () {
-  
-  var url = '';
-  
-  return {
-    set : function (newUrl) {
-      url = newUrl;
-    },
-    get : function () {
-      return url;
-    }
-  }
-})
+
+    var url = '';
+
+    return {
+        set: function (newUrl) {
+            url = newUrl;
+        },
+        get: function () {
+            return url;
+        }
+    };
+});
 
 Professionals.run(['$rootScope', '$http', '$location', '$timeout', '$filter', 'Helper',
     function ($rootScope, $http, $location, $timeout, $filter, Helper) {
@@ -150,3 +149,8 @@ Professionals.run(['$rootScope', '$http', '$location', '$timeout', '$filter', 'H
 //        });
 
     }]);
+
+function goToTop() {
+    $('html,body').scrollTop(0);
+}
+

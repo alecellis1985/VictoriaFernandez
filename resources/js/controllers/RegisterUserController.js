@@ -1,20 +1,21 @@
 'use strict';
 
-Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$rootScope', '$location', '$upload',
+Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$location',
     'CommonService', 'departamentosList', 'categoriasList', 'barriosList', 'planes', 'Helper', 'userData', 'newUser',
-    function ($scope, $routeParams, $rootScope, $location, $upload, CommonService, departamentosList, categoriasList,
+    function ($scope, $rootScope, $location, CommonService, departamentosList, categoriasList,
             barriosList, planes, Helper, userData, newUser) {
+
         //FOR UPLOAD FILE (IMG)
         $scope.$watch('files', function () {
             //perform img validation 
             $scope.validateImg($scope.files);
         });
+
         $scope.planes = planes;
         $scope.newUser = newUser;
         $scope.isCollapsed = newUser;
         $scope.editMode = newUser;
 
-        //cambiar por tipo: {basico:{},premium:{} }; para que en la bd quede bien
         $scope.profesionalesAvailablePlans = {
             0: {//Profesional
                 Basico: {
@@ -72,7 +73,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                 $scope.selectedPlan.nombre = plan === 0 ? 'Planes Profesionales' : 'Planes Empresariales'
                 $scope.isCollapsed = false;
             }
-        }
+        };
 
 
 
@@ -88,11 +89,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                     error = 'File size cannot exceed 2 MB';
                 }
 
-                if (error === undefined)
-                {
-                    //$rootScope.$broadcast('alert-event', { type: 'success', msg: 'FILE OK!' });
-                }
-                else
+                if (error !== undefined)
                 {
                     $rootScope.$broadcast('alert-event', {type: 'danger', msg: error});
                 }
@@ -118,7 +115,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
         //Con $scope.selectedPlan.categoria tengo que valor de plan eligio
         //Con $scope.selectedPlan.tipo se si es 0 o 1 o sea profesional o empresa
         $scope.showRegistration = function (e, tipo, duracion, categoria) {
-            window.scrollTo(0, 0);
+            goToTop();
             e.preventDefault();
             $scope.userPlan = $scope.getPlan($scope.convertIntToPlanType(tipo), categoria, duracion);
             if ($scope.userPlan.length > 0)
@@ -173,10 +170,11 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                             && parseInt($scope.selectedBarrio.barrioId) < 0);
         };
 
+        // TODO: Remove. ONLY FOR TEST
         $scope.fillNewUserCamps = function ()
         {
-            $scope.user.nombre = "Bin" + Helper.randomString(2);
-            $scope.user.apellido = "Laden" + Helper.randomString(2);
+            $scope.user.nombre = "John" + Helper.randomString(2);
+            $scope.user.apellido = "Who" + Helper.randomString(2);
             $scope.user.username = Helper.randomString(7);
             $scope.user.password = "asdasd";
             $scope.user.passwordConfirm = "asdasd";
@@ -216,7 +214,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             formasDePago.contado = parseInt(userData.data.formasDePago.contado) === 1;
             formasDePago.debito = parseInt(userData.data.formasDePago.debito) === 1;
             formasDePago.credito = parseInt(userData.data.formasDePago.credito) === 1;
-            formasDePago.otras = parseInt(userData.data.formasDePago.otras) === 1;
+            formasDePago.otras = userData.data.formasDePago.otras;
 
             $scope.user.diasAtencion = diasAtencion;
             $scope.user.formaDePago = formasDePago;
@@ -225,11 +223,11 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             $scope.user.horaFin = Helper.timeFromString(userData.data.diasAtencion.horaFin);
 
             $scope.IdPlan = $scope.user.plan;
-            
+
             $scope.markers = userData.data.markers;
 
             $scope.dropDownCheck();
-            
+
             $scope.registro.empresa = parseInt(userData.data.user.plan) > 6;
 
         };
@@ -242,14 +240,15 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             };
         }
 
+        //TODO: Remove. To Test only
         if (newUser) {
             $scope.fillNewUserCamps();
             $scope.markers = [];
         } else {
             $scope.fillEditUserCamps();
         }
+        goToTop();
 
-        
         $scope.checkTime = function () {
             if ($scope.user.horaFin <= $scope.user.horaComienzo) {
                 $scope.user.horaFin = new Date($scope.user.horaComienzo.getTime() + 10 * 60000);
@@ -279,7 +278,6 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
             //Need to map the marker position to latitude longitude to save in the db
             var markersArr = $scope.markers.map(function (obj) {
                 return {
-                    //SEEMS PROPERTIES NOW ARE DIFFRNT
                     'latitude': obj.position.G.toString(),
                     'longitude': obj.position.K.toString()
                 };
@@ -318,9 +316,11 @@ Professionals.controller('RegisterUserController', ['$scope', '$routeParams', '$
                 'horaFin': Helper.stringTime($scope.user.horaFin),
                 'markers': markersArr
             };
+
             var imgFile = null;
             if (!(typeof $scope.files === 'undefined') && !($scope.files === null))
                 imgFile = $scope.files[0];
+
             if (newUser)
                 CommonService.postRequestWithFile('api/agregar_usuario', data, imgFile).then(function (result) {
                     if (result.data.success) {

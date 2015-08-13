@@ -174,19 +174,19 @@ Professionals.directive('dropdownFilter', function () {
                 e.preventDefault();
                 $scope.selectedElem = elem;
             };
-            
+
             function removeAccents(value) {
                 return value
-                    .replace(/á/g, 'a')            
-                    .replace(/é/g, 'e')
-                    .replace(/í/g, 'i')
-                    .replace(/ó/g, 'o')
-                    .replace(/ú/g, 'u');
+                        .replace(/á/g, 'a')
+                        .replace(/é/g, 'e')
+                        .replace(/í/g, 'i')
+                        .replace(/ó/g, 'o')
+                        .replace(/ú/g, 'u');
             }
 
-            $scope.ignoreAccents = function(item) {               
+            $scope.ignoreAccents = function (item) {
                 if (!$scope.dropdownFilter)
-                    return true;       
+                    return true;
                 var text = removeAccents(item[$scope.nameProp].toLowerCase());
                 var search = removeAccents($scope.dropdownFilter.toLowerCase());
                 return text.indexOf(search) > -1;
@@ -231,20 +231,20 @@ Professionals.directive('dropdownWValidation', function ($timeout) {
 
             function removeAccents(value) {
                 return value
-                    .replace(/á/g, 'a')            
-                    .replace(/é/g, 'e')
-                    .replace(/í/g, 'i')
-                    .replace(/ó/g, 'o')
-                    .replace(/ú/g, 'u');
+                        .replace(/á/g, 'a')
+                        .replace(/é/g, 'e')
+                        .replace(/í/g, 'i')
+                        .replace(/ó/g, 'o')
+                        .replace(/ú/g, 'u');
             }
 
-            $scope.ignoreAccents = function(item) {               
+            $scope.ignoreAccents = function (item) {
                 if (!$scope.dropdownFilter)
-                    return true;       
+                    return true;
                 var text = removeAccents(item[$scope.nameProp].toLowerCase());
                 var search = removeAccents($scope.dropdownFilter.toLowerCase());
                 return text.indexOf(search) > -1;
-            };    
+            };
         }
     };
 });
@@ -274,4 +274,18 @@ Professionals.directive('resize', function ($window) {
             scope.$apply();
         });
     }
+});
+
+Professionals.directive('ngEnter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if (event.which === 13) {
+                scope.$apply(function () {
+                    scope.$eval(attrs.ngEnter);
+                });
+
+                event.preventDefault();
+            }
+        });
+    };
 });

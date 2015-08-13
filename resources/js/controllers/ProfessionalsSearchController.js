@@ -49,7 +49,24 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
         {
             e.preventDefault();
             $scope.depSelected = departamento;
-            CommonService.getRequest('api/users' + '/' + $scope.selectedCategoria.categoriaId + '/' + $scope.depSelected.idDepartamento).then(function (data) {
+            if($scope.selectedCategoria.categoriaId === -1)
+                return;            
+            
+            getUsers("null");
+        };
+        
+        $scope.selectCategoria = function (e, categoria)
+        {
+            e.preventDefault();
+            $scope.selectedCategoria = categoria;
+            if($scope.depSelected.idDepartamento === -1)
+                return;
+            
+            getUsers("null");
+        };
+        
+        function getUsers(profName){
+            CommonService.getRequest('api/users' + '/' + $scope.selectedCategoria.categoriaId + '/' + $scope.depSelected.idDepartamento + '/' + profName).then(function (data) {
                 $scope.users = [];
                 var users = data.data;
                 var length = users.length;
@@ -61,7 +78,8 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
 
                 $scope.users = users;
             });
-        };
+        }
+        
 
         $scope.myInterval = 4000;
         var slides = $scope.slides = [];
@@ -120,8 +138,14 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
             {
                 obj.markers = [{lat: obj.latitude, long: obj.longitude}];
             }
-        }
+        };
 
+        $scope.buscarProf = function () {
+            if ($scope.buscoProf === "")
+                return;
+                        
+            getUsers($scope.buscoProf);
+        };
 
 
     }]);

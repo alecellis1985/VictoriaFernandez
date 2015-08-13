@@ -19,9 +19,6 @@ session_cache_limiter(false);
 session_start();
 $app = new Slim();
 
-//SESSION
-//$app->add(new SessionCookie(array('secret' => 'myappsecret')));
-
 $app->get('/users', 'getAllUsers');
 $app->get('/users/loggedUser', 'isUserLogged');
 $app->post('/sendMail', 'sendEmail');
@@ -31,7 +28,7 @@ $app->get('/categorias', 'getCategorias');
 $app->get('/barrios', 'getBarrios');
 $app->post('/login-user', 'loginUser');
 $app->post('/logout-user', 'logoutUser');
-$app->get('/users/:categoria/:departamento', 'getUsers');
+$app->get('/users/:categoria/:departamento/:nombreProf', 'getUsers');
 $app->post('/agregar_usuario', 'registerUser');
 $app->post('/editar_usuario', 'editUser');
 $app->post('/check-username', 'checkUsername');
@@ -43,13 +40,3 @@ $app->post('/edit-user-pwd', 'editUserPwd');
 $app->post('/check-email', 'checkEmail');
 
 $app->run();
-
-//function getConnection() {
-//    $dbhost = "localhost";
-//    $dbuser = "root";
-//    $dbpass = "oso2203";
-//    $dbname = "angular_tutorial";
-//    $dbConnection = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
-//    $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//    return $dbConnection;
-//}
