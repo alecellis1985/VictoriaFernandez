@@ -106,7 +106,8 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
             $scope.depSelected = $scope.departamentosList.filter(function (elem) {
                 return elem.nombreDepartamento === "Montevideo";
             })[0];
-            CommonService.getRequest('api/users' + '/' + $scope.selectedCategoria.categoriaId + '/' + $scope.depSelected.idDepartamento).then(function (response) {
+            getUsers("null");
+            /*CommonService.getRequest('api/users' + '/' + $scope.selectedCategoria.categoriaId + '/' + $scope.depSelected.idDepartamento).then(function (response) {
                 $scope.users = [];
                 var users = response.data;
                 var length = users.length;
@@ -117,7 +118,7 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
                 }
 
                 $scope.users = users;
-            });
+            });*/
         }
         
         $scope.totalItems = 0;
