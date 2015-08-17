@@ -30,7 +30,7 @@
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="button" ng-click="buscarProf()"><i class="glyphicon glyphicon-search"></i></button>
                     </span>
-                    <input type="text" class="form-control" ng-model="buscoProf" ng-enter="buscarProf()" placeholder="Buscar...">
+                    <input type="text" class="form-control" ng-model="buscoProf" ng-keyup="cancel($event)" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }" placeholder="Buscar...">
                 </div>
             </div>
         </div>

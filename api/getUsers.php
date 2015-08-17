@@ -1,12 +1,24 @@
 <?php
 
 //THIS function is called from the main search page
-function getUsers($categoria, $departamento, $nombreProf) {
+function getUsers($categoria, $departamento, $nombreProf = null) {
     $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
     $response = null;
 
-    if ($nombreProf === "null") {
+    /*if ($nombreProf === "null") {
         $nombreProf = "";
+    }*/
+    
+    $addNombreProfToQuery = "";
+    if (isset($nombreProf) && $nombreProf != '') {
+        // variable set, not empty string, not falsy
+        //$addNombreProfToQuery = " concat(concat(u.nombre,' '),u.apellido) like '%:nombreProf%' and ";
+        
+        //$addNombreProfToQuery = "CONCAT(u.nombre,' ',u.apellido) like %:nombreProf% and ";
+        
+        $addNombreProfToQuery = "concat_ws(' ',u.nombre,u.apellido) like \'%:nombreProf%\' "; //:nombreProf
+                
+        //$addNombreProfToQuery = "u.apellido like :nombreProf and ";
     }
 
     if ($conn->conectar()) {
@@ -19,14 +31,21 @@ function getUsers($categoria, $departamento, $nombreProf) {
                 "users u left join mapa m on u.idUser = m.IdUser " .
                 "left join formasdepago fp on u.idUser = fp.idUser " .
                 "left join diasatencion da on u.idUser = da.idUser " .
-                "WHERE concat(concat(u.nombre,' '),u.apellido) like '%" . $nombreProf . "%' " .
-                "and (categoria = :categoria OR " . $categoria . " = -1) and " .
-                "(departamento = :departamento OR " . $departamento . " = -1) " .
-                "and IsAdmin = 0 and IsActive = 1 ORDER BY nombre";
+                "WHERE " . $addNombreProfToQuery .
+                " (categoria = :categoria OR :categoria = -1) and " .
+                "(departamento = :departamento OR :departamento = -1) " .
+                " and IsAdmin = 0 and IsActive = 1 ORDER BY nombre";
+        
 
         $params = array();
         $params[0] = array("departamento", (int) $departamento, "int", 5);
         $params[1] = array("categoria", (int) $categoria, "int", 5);
+        
+        //if (isset($nombreProf) && $nombreProf != '') {
+            // variable set, not empty string, not falsy
+            $params[2] = array("nombreProf", $nombreProf, "string", 25);
+        //}
+        
         if ($conn->consulta($sql, $params)) {
             $users = $conn->restantesRegistros();
 
