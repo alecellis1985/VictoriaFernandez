@@ -9,6 +9,6 @@ define("USUARIO", "root");
 //define("CLAVE", "oso2203");
 
 //    Deeploi settin
-   // define("USUARIO", "hawkman");
-  //  define("CLAVE", "zung2aban3alun4_A2n12ga");
+    //define("USUARIO", "hawkman");
+    //define("CLAVE", "zung2aban3alun4_A2n12ga");
    

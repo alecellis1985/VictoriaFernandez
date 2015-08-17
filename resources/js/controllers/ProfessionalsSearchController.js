@@ -70,6 +70,8 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
                 $scope.users = [];
                 var users = data.data;
                 var length = users.length;
+                $scope.totalItems = length;
+                $scope.currentPage = 1;
                 while (length--) {
                     $scope.markerPropCreation(users[length]);
                 }
@@ -104,10 +106,29 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
             $scope.depSelected = $scope.departamentosList.filter(function (elem) {
                 return elem.nombreDepartamento === "Montevideo";
             })[0];
-            
-            
             getUsers("null");
+            /*CommonService.getRequest('api/users' + '/' + $scope.selectedCategoria.categoriaId + '/' + $scope.depSelected.idDepartamento).then(function (response) {
+                $scope.users = [];
+                var users = response.data;
+                var length = users.length;
+                $scope.totalItems = length;
+                $scope.currentPage = 1;
+                while (length--) {
+                    $scope.markerPropCreation(users[length]);
+                }
+
+                $scope.users = users;
+            });*/
+        }
+        
+        $scope.totalItems = 0;
+        $scope.currentPage = 1;
+        $scope.maxSize = 6;
+        
+        $scope.setPage = function (pageNo) {
+          $scope.currentPage = pageNo;
         };
+        
 
         $scope.markerPropCreation = function (obj)
         {
