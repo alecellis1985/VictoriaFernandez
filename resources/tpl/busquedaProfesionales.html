@@ -80,7 +80,7 @@
                     <div class="sorryDiv" ng-if="users.length < 1">
                         <h4>Lo sentimos, no hay resultados para esta busqueda</h4>
                     </div>
-                    <div class="col-xs-12 col-sm-6" ng-repeat="user in users| filter:buscoProf">
+                    <div class="col-xs-12 col-sm-6" ng-repeat="user in users| filter:buscoProf track by user.idUser">
                         <div class="col-xs-12 col-sm-12 col-md-12 card" ng-click="showUserInfo(user)">
                             <div class="row principalCard">
                                 <div class="col-xs-4 col-md-4 col-sm-4">

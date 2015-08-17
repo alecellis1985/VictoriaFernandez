@@ -13,7 +13,8 @@ function getUsers($categoria, $departamento, $nombreProf = null) {
     if (isset($nombreProf) && $nombreProf != '') {
         // variable set, not empty string, not falsy
         $nombreProf = mysql_real_escape_string($nombreProf);        
-        $addNombreProfToQuery = "concat_ws(' ',u.nombre,u.apellido) like '%".$nombreProf."%' and "; 
+        //$addNombreProfToQuery = "concat_ws(' ',u.nombre,u.apellido) like '%".$nombreProf."%' and "; 
+        $addNombreProfToQuery = "concat_ws(' ',u.nombre,u.apellido) like concat('%', :nombreProf, '%') and ";        
     }
 
     if ($conn->conectar()) {
@@ -36,7 +37,10 @@ function getUsers($categoria, $departamento, $nombreProf = null) {
         $params = array();
         $params[0] = array("departamento", (int) $departamento, "int", 5);
         $params[1] = array("categoria", (int) $categoria, "int", 5);
-        
+        if (isset($nombreProf) && $nombreProf != '') {
+            // variable set, not empty string, not falsy
+            $params[2] = array("nombreProf", $nombreProf, "string", 25);
+        }
         if ($conn->consulta($sql, $params)) {
             $users = $conn->restantesRegistros();
 
