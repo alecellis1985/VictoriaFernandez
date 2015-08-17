@@ -54,11 +54,9 @@ function updateUserPwd($conn, $userPwd) {
 }
 
 function editImg() {
-    $request = Slim::getInstance()->request();
-
-    //$user = getArrayFromRequest($request);
     $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
     $userName = $_SESSION['usuario'];
+
     //Save File
     //TODO: Validate format and size
     if (validateFileToUpload()) {
@@ -131,12 +129,14 @@ function registerUser() {
     //TODO: Validate format and size
     if (validateFileToUpload()) {
         $filenameAndExt = explode(".", $_FILES['file']['name']);
-        $destination = '../uploaded/' . md5($filenameAndExt[0]) . "_" . md5($user['username']) . "." . $filenameAndExt[1];
+        $fileNewUrl = getNewFileUrl($filenameAndExt[0], $filenameAndExt[1], $user['username']);
+        $destination = '../uploaded/' . $fileNewUrl;
+        
         if (move_uploaded_file($_FILES['file']['tmp_name'], $destination)) {
-            $user['imagenUrl'] = md5($filenameAndExt[0]) . "_" . md5($user['username']) . "." . $filenameAndExt[1];
+            $user['imagenUrl'] = $fileNewUrl;
             echo insertNewUser($conn, $user);
         } else {
-            echo MessageHandler::getErrorResponse("Img error.");
+            echo MessageHandler::getErrorResponse("Error uploading image.");
         }
     } else {
         //TODO: Return and show message : Img failed to upload
@@ -145,6 +145,9 @@ function registerUser() {
     }
 }
 
+function getNewFileUrl($fileName, $fileExt, $username) {
+    return md5($fileName) . "_" . md5($username) . "." . $fileExt;
+}
 
 //TODO: Refactor into shorter method. 
 function insertNewUser($conn, $user) {
@@ -291,7 +294,6 @@ function updateUser($conn, $user) {
                         }
                     }
                     if (!$error) {
-                        //TODO: Remove previous payment methods
 
                         $sqlDeletePago = "DELETE FROM formasdepago WHERE idUser = " . $userId;
                         if ($conn->consulta($sqlDeletePago)) {
@@ -305,7 +307,7 @@ function updateUser($conn, $user) {
                             $paramsPagos[2] = array("debito", $user['formaDePago']['debito'], "int", 1);
                             $paramsPagos[3] = array("credito", $user['formaDePago']['credito'], "int", 1);
                             $paramsPagos[4] = array("otras", $user['formaDePago']['otras'], "string", 30);
-                            
+
                             if ($conn->consulta($sqlPagos, $paramsPagos)) {
                                 $conn->closeCursor();
 
