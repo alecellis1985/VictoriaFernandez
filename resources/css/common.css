@@ -819,3 +819,17 @@ label{
     top: 2px;
     right: 2px;
 }
+
+
+
+@media (max-width:490px)
+{
+    .profLogoImg{
+        height: 38px;
+    }
+    .sub-Header-a{
+        padding-left: 5px;
+        padding-right: 5px;
+        font-size: 13px;
+    }
+}
