@@ -1,24 +1,14 @@
 'use strict';
 
 Professionals.controller('ProfessionalsSearchController', ['$scope', '$routeParams', '$http', '$rootScope', '$location', 'CommonService', 'departamentosList', 'categoriasList', 'barriosList', function ($scope, $routeParams, $http, $rootScope, $location, CommonService, departamentosList, categoriasList, barriosList) {
-
         $scope.categorias = categoriasList.data;
         $scope.categorias.unshift({categoriaNombre: "Seleccione Categoria", categoriaId: -1});
         $scope.selectedCategoria = $scope.categorias[0];
-
         $scope.barrios = barriosList.data;
         $scope.barrios.unshift({barrioNombre: "Seleccione Barrio", id: -1});
         $scope.selectedBarrio = $scope.barrios[0];
-
+        $scope.usersViewList = [];
         $scope.isCollapsed = true;
-
-        $scope.selectedList = 2;
-
-        $scope.setListType = function (num)
-        {
-            $scope.selectedList = num;
-        }
-
         $scope.selectedUser = null;
 
         $scope.showUserInfo = function (user)
@@ -61,7 +51,6 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
             $scope.selectedCategoria = categoria;
             if($scope.depSelected.idDepartamento === -1)
                 return;
-            
             getUsers();
         };
         
@@ -84,7 +73,16 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
                     $scope.markerPropCreation(users[length]);
                 }
                 $scope.users = users;
+                $scope.pageChanged();
             });
+        }
+        
+        
+        
+        $scope.pageChanged = function(){
+            var startIndex = ($scope.currentPage - 1)*6;
+            var endIndex = startIndex + 6;
+            $scope.usersViewList = $scope.users.slice(startIndex,endIndex);
         }
 
         $scope.myInterval = 4000;

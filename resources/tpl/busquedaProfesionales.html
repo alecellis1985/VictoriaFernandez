@@ -14,7 +14,6 @@
 </div>
 <div class="row">
     <div class="container">
-        <!--<form ng-submit="buscarProf(buscarProf.$valid)" name="buscarProf" style="padding-top: 10px" method="post" novalidate>-->
         <div class="row middleSearch">
             <div class="form-group col-xs-12 col-md-3">
                 <dropdown-Filter selected-Elem="selectedCategoria" selected-Element-Fn="selectCategoria" name-Prop="categoriaNombre" elements-Arr="categorias" placeholder-Filter="Filtro de categorias"></dropdown-Filter>                
@@ -34,59 +33,20 @@
                 </div>
             </div>
         </div>
-        <!--</form>-->
-        <div class="panel panel-primary " ng-if="selectedList === 1">
-            <div class="panel-heading">
-                <h3 class="panel-title">Usuarios</h3>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Usuario</th>
-                                <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th>Email</th>
-                                <th>Telefono</th>
-                                <th>Celular</th>
-                                <th>Direccion</th>
-                                <th>departamento</th>
-                                <th>categoria</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="user in users| filter:buscoProf">
-                                <td>{{user.username}}</td>
-                                <td>{{user.nombre}}</td>
-                                <td>{{user.apellido}}</td>
-                                <td>{{user.email}}</td>
-                                <td>{{user.telefono}}</td>
-                                <!-- TODO ADD IMG user.imagenUrl-->
-                                <td>{{user.celular}}</td>
-                                <td>{{user.direccion}}</td>
-                                <td>{{user.departamento}}</td>
-                                <td>{{user.categoria}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
         <div class="row">
             <div class="col-xs-8">
                 <user-Details selected-User="selectedUser" elem-Colapsed="isCollapsed"></user-Details>
-                <div class="row busquedaprofList" ng-show="selectedList === 2">
+                <div class="row busquedaprofList">
                     <div class="sorryDiv" ng-if="users.length < 1">
                         <h4>Lo sentimos, no hay resultados para esta busqueda</h4>
                     </div>
-                    <div class="col-xs-12 col-sm-6" ng-repeat="user in users| filter:buscoProf track by user.idUser">
+                    <div class="col-xs-12 col-sm-6" ng-repeat="user in usersViewList">
                         <div class="col-xs-12 col-sm-12 col-md-12 card" ng-click="showUserInfo(user)">
                             <div class="row principalCard">
                                 <div class="col-xs-4 col-md-4 col-sm-4">
                                     <div class='row'>
                                         <div class="col-xs-12 col-md-12 col-sm-12" style="height:200px; margin-bottom: 10px;">
-                                            <img class="img-responsive img-rounded" ng-if="user.imagenUrl !== ''" ng-src="{{'uploaded/' + user.imagenUrl}}" alt="{{user.nombre + ' ' + user.apellido}}"> <!--$location.absUrl().split('#')[0] + -->
+                                            <img class="img-responsive img-rounded" ng-if="user.imagenUrl !== ''" ng-src="{{'uploaded/' + user.imagenUrl}}" alt="{{user.nombre + ' ' + user.apellido}}">
                                             <i ng-if="user.imagenUrl === ''" class="img-responsive fa fa-user"></i>
                                         </div>                                
                                     </div>
@@ -113,6 +73,7 @@
                                     <prof-a-custom href-Link="user.facebookUrl" icon="fa fa-facebook-official" icon-Title="Facebook"></prof-a-custom>
                                     <prof-a-custom href-Link="user.twitterUrl" icon="fa fa-twitter-square" icon-Title="Twitter"></prof-a-custom>
                                     <prof-a-custom href-Link="user.linkedinUrl" icon="fa fa-linkedin-square" icon-Title="Linkedin"></prof-a-custom>
+                                    <a href="mailto:{{user.email}}" title="Contact Me"></a>
                                     <button type="submit" class="btn btn-primary pull-right" title="Contactar me" ng-click='sendMailToUser($event, user)'>
                                         <i class="glyphicon glyphicon-envelope"></i>
                                     </button>
@@ -122,7 +83,7 @@
                     </div>
                     <div class='row'>
                         <div class='col-xs-8'>
-                            <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></pagination>
+                            <pagination total-items="totalItems" ng-model="currentPage" items-per-page="6" ng-change="pageChanged()"></pagination>
                         </div> 
                         <div class='col-xs-4'>
                             <pre>Página: <span ng-bind='currentPage'></span> Total Profesionales: <span ng-bind="totalItems"></span></pre>

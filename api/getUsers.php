@@ -5,10 +5,6 @@ function getUsers($categoria, $departamento, $nombreProf = null) {
     $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
     $response = null;
 
-    /*if ($nombreProf === "null") {
-        $nombreProf = "";
-    }*/
-    
     $addNombreProfToQuery = "";
     if (isset($nombreProf) && $nombreProf != '') {
         // variable set, not empty string, not falsy
