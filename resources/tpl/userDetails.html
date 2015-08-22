@@ -49,9 +49,9 @@
                         <prof-a-custom href-Link="selectedUser.facebookUrl" icon="fa fa-facebook-official" icon-Title="Facebook"></prof-a-custom>
                         <prof-a-custom href-Link="selectedUser.twitterUrl" icon="fa fa-twitter-square" icon-Title="Twitter"></prof-a-custom>
                         <prof-a-custom href-Link="selectedUser.linkedinUrl" icon="fa fa-linkedin-square" icon-Title="Linkedin"></prof-a-custom>
-                        <button type="submit" class="btn btn-primary pull-right" title="Enviar mail" ng-click='sendMailToUser($event,selectedUser)'>
+                        <a href="mailto:{{user.email}}" class="btn btn-primary pull-right" title="Enviar mail">
                             <i class="glyphicon glyphicon-envelope"></i>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

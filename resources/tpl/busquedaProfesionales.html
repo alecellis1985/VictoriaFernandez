@@ -73,21 +73,20 @@
                                     <prof-a-custom href-Link="user.facebookUrl" icon="fa fa-facebook-official" icon-Title="Facebook"></prof-a-custom>
                                     <prof-a-custom href-Link="user.twitterUrl" icon="fa fa-twitter-square" icon-Title="Twitter"></prof-a-custom>
                                     <prof-a-custom href-Link="user.linkedinUrl" icon="fa fa-linkedin-square" icon-Title="Linkedin"></prof-a-custom>
-                                    <a href="mailto:{{user.email}}" title="Contact Me"></a>
-                                    <button type="submit" class="btn btn-primary pull-right" title="Contactar me" ng-click='sendMailToUser($event, user)'>
+                                    <a href="mailto:{{user.email}}" class="btn btn-primary pull-right" title="Enviar mail">
                                         <i class="glyphicon glyphicon-envelope"></i>
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class='row'>
-                        <div class='col-xs-8'>
+                    <div class='row' ng-show="totalItems > 0">
+                        <div class='col-xs-12'>
                             <pagination total-items="totalItems" ng-model="currentPage" items-per-page="6" ng-change="pageChanged()"></pagination>
                         </div> 
-                        <div class='col-xs-4'>
+                        <!--<div class='col-xs-4'>
                             <pre>Página: <span ng-bind='currentPage'></span> Total Profesionales: <span ng-bind="totalItems"></span></pre>
-                        </div>
+                        </div>-->
                     </div>
                     
                 </div>

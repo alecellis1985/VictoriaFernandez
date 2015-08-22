@@ -746,7 +746,7 @@ label{
     border: solid 1px #DEDEDE;
 }
 
-.fa-home{
+.navbar-header .fa-home{
     padding-right: 10px;
 }
 .planes>.panel-body>.row>div:first-child>span>.fa-certificate{
@@ -792,6 +792,7 @@ label{
     border-radius: 3px;
     padding:15px;
     text-align: center;
+    margin-left: 12%;
 }
 
 .sm-margin-top{
@@ -832,4 +833,8 @@ label{
         padding-right: 5px;
         font-size: 13px;
     }
+}
+
+.tab-pane>div{
+    padding:10px;
 }
