@@ -193,7 +193,12 @@
                 </div>
             </div>
 
-            <map-Set-Markers ng-if="registro.mostrarRegistro" markers-Arr="markers"></map-Set-Markers>
+            <div class="row" ng-if="renderMap">
+                <div class="col-xs-12 col-md-12 col-sm-12"> 
+                    <map-Set-Markers  markers-Arr="markers"></map-Set-Markers>
+                </div>
+            </div>
+            
         </div>
     </div>
     <div class="panel panel-primary">

@@ -1,9 +1,9 @@
 'use strict';
 
 Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$location',
-    'CommonService', 'departamentosList', 'categoriasList', 'barriosList', 'planes', 'Helper', 'userData', 'newUser',
+    'CommonService', 'departamentosList', 'categoriasList', 'barriosList', 'planes', 'Helper', 'userData', 'newUser','$timeout',
     function ($scope, $rootScope, $location, CommonService, departamentosList, categoriasList,
-            barriosList, planes, Helper, userData, newUser) {
+            barriosList, planes, Helper, userData, newUser, $timeout) {
 
         //FOR UPLOAD FILE (IMG)
         $scope.$watch('files', function () {
@@ -15,6 +15,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
         $scope.newUser = newUser;
         $scope.isCollapsed = newUser;
         $scope.editMode = newUser;
+        $scope.renderMap = false;
 
         $scope.profesionalesAvailablePlans = {
             0: {//Profesional
@@ -61,7 +62,6 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
 
         $scope.showPlan = function (plan)
         {
-
             if ($scope.selectedPlan.tipo === plan)
             {
                 $scope.isCollapsed = true;
@@ -125,6 +125,17 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
             $scope.registro.mostrarRegistro = true;
             $scope.registro.empresa = $scope.selectedPlan.tipo === 1;
         };
+        
+        $scope.$watch('registro.mostrarRegistro',function(newVal){
+            if(newVal !== null &&  newVal !== undefined && newVal){
+                $timeout(function(){
+                    $scope.renderMap = true;
+                },1000);
+            }
+            else{
+                $scope.renderMap = false;
+            }
+        });        
 
         $scope.barrios = barriosList.data;
         $scope.barrios.unshift({barrioNombre: "Seleccione Barrio", barrioId: -1});
@@ -341,4 +352,8 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
                 });
 
         };
+        
+        $scope.$on("$destroy", function() {
+            $scope.renderMap = false;
+        });
     }]);

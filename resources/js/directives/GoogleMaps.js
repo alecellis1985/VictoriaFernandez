@@ -84,7 +84,7 @@ Professionals.directive('mapSetMarkers', function () {
 //        template:'<div class="GoogleMap col-xs-12 col-md-12 col-sm-12"></div>',
         link: function ($scope, element, attr) {
             //Default is montevideo
-            $scope.mapOptions = $scope.mapOptions || {
+            $scope.mapOptions = {
                 zoom: 13,
                 center: new google.maps.LatLng(-34.8746349, -56.1472729),
                 mapTypeId: google.maps.MapTypeId.TERRAIN
@@ -100,7 +100,7 @@ Professionals.directive('mapSetMarkers', function () {
             };
 
             $scope.map = new google.maps.Map(element.find('.GoogleMap')[0], $scope.mapOptions);
-
+            
             google.maps.event.addListener($scope.map, 'click', function (event) {
                 if ($scope.markerOn) {
                     $scope.markerOn = false;
@@ -119,7 +119,6 @@ Professionals.directive('mapSetMarkers', function () {
                 google.maps.event.addListener(marker, 'click', markerClick);
 
                 $scope.markersArr.push(marker);
-
             };
 
             $scope.loadMarker = function (info, position) {
@@ -129,9 +128,7 @@ Professionals.directive('mapSetMarkers', function () {
                 });
 
                 google.maps.event.addListener(marker, 'click', markerClick);
-
                 $scope.markersArr[position] = marker;
-
             };
 
             function markerClick() {
@@ -139,7 +136,6 @@ Professionals.directive('mapSetMarkers', function () {
                 infoWindow.open($scope.map, this);
                 $scope.selectedMarker = this;
             }
-
 
             $scope.openInfoWindow = function (e, selectedMarker) {
                 e.preventDefault();
@@ -166,7 +162,6 @@ Professionals.directive('mapSetMarkers', function () {
                 $scope.markersArr = $.grep($scope.markersArr, function (value) {
                     return value !== toDelete;
                 });
-
             }
 
             if ($scope.markersArr !== undefined)
@@ -175,7 +170,6 @@ Professionals.directive('mapSetMarkers', function () {
                 for (var i = 0; i < length; i++) {
                     $scope.loadMarker($scope.markersArr[i], i);
                 }
-
             }
         }
     };
