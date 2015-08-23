@@ -293,7 +293,9 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
                     'longitude': obj.position.K.toString()
                 };
             });
-
+            
+            var markers = JSON.stringify(markersArr);
+            
             var data = {
                 'nombre': $scope.user.nombre,
                 'apellido': $scope.user.apellido,
@@ -324,8 +326,8 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
                 'formaDePago': $scope.user.formaDePago,
                 'diasAtencion': $scope.user.diasAtencion,
                 'horaComienzo': Helper.stringTime($scope.user.horaComienzo),
-                'horaFin': Helper.stringTime($scope.user.horaFin),
-                'markers': markersArr
+                'horaFin': Helper.stringTime($scope.user.horaFin),                
+                'markers': markers
             };
 
             var imgFile = null;
