@@ -48,6 +48,7 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
         };
         
         function getUsers(){
+            $scope.isCollapsed = true;
             var url = 'api/users' + '/' + $scope.selectedCategoria.categoriaId +
                     '/' + $scope.depSelected.idDepartamento + (($scope.buscoProf !== undefined && $scope.buscoProf !== '') ?('/' + $scope.buscoProf):'');
             CommonService.getRequest(url).then(function (data) {
