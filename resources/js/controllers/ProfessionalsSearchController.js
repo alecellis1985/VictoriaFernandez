@@ -34,8 +34,7 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
             e.preventDefault();
             $scope.depSelected = departamento;
             if($scope.selectedCategoria.categoriaId === -1)
-                return;            
-            
+                return;       
             getUsers();
         };
         
@@ -70,8 +69,6 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
                 $scope.pageChanged();
             });
         }
-        
-        
         
         $scope.pageChanged = function(){
             var startIndex = ($scope.currentPage - 1)*6;
@@ -114,11 +111,10 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
         $scope.setPage = function (pageNo) {
           $scope.currentPage = pageNo;
         };
-        
 
         $scope.markerPropCreation = function (obj)
         {
-            if (obj.latitude === undefined || obj.longitude === undefined) {
+            if (obj.longitude === null || obj.latitude === null || obj.latitude === undefined || obj.longitude === undefined) {
                 obj.markers = [];
             }
             else
@@ -132,6 +128,5 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
                 getUsers();
             }
         });
-
 
     }]);

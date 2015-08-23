@@ -1,6 +1,5 @@
 <!--<label ng-bind="selectedUser.markers"></label>-->
-<div ng-if="selectedUser !== undefined">
-    <map-Load-Markers  locations="selectedUser.markers" map-options=""></map-Load-Markers>
+<div ng-if="renderMap">
+    <map-Load-Markers  locations="userMarkers"></map-Load-Markers>
 </div>
 
-<!--<map-Set-Markers ng-if="selectedUser !== undefined" markers-Arr="selectedUser.markers"></map-Set-Markers>-->

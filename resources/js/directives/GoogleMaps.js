@@ -10,7 +10,7 @@ Professionals.directive('mapLoadMarkers', function () {
     return {
         restrict: 'E',
         scope: {
-            mapOptions: '=',
+            //mapOptions: '=',
             locations: '='
         },
         template: '<div class="row">' +
@@ -20,7 +20,8 @@ Professionals.directive('mapLoadMarkers', function () {
                 '</div>',
         link: function ($scope, element, attr) {
             //default is montevideo
-            $scope.mapOptions = $scope.mapOptions || {
+            //$scope.mapOptions = $scope.mapOptions || {
+            $scope.mapOptions = {  
                 zoom: 13,
                 center: new google.maps.LatLng(-34.8746349, -56.1472729),
                 mapTypeId: google.maps.MapTypeId.TERRAIN

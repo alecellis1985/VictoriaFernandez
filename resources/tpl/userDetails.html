@@ -1,58 +1,58 @@
 <div class="panel panel-primary user-details"  collapse="elemColapsed">
-           <div class="panel-heading">
-                <h3 class="panel-title">{{selectedUser.nombre}} {{selectedUser.apellido}}</h3>
-                <button  type="button" class="close" ng-click="elemColapsed = true" style="position: relative;top: -18px;">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-xs-3 col-md-2 col-sm-3">
-                        <div class='row'>
-                            <div class="col-xs-12 col-md-12 col-sm-12">
-                                <img class="img-responsive img-rounded" ng-if="selectedUser.imagenUrl !== ''" ng-src="{{'uploaded/' +  selectedUser.imagenUrl}}">
-                                <i ng-if="selectedUser.imagenUrl === '' || selectedUser.imagenUrl === undefined" class="img-responsive fa fa-user"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-9 col-md-10 col-sm-3 user-detail-icons">
-                        <div class="row">
-                            <label>Descripción Del Servicio</label>
-                            <p ng-bind="selectedUser.descService" style='text-transform: capitalize;'></p>
-                        </div>
-                        <div class="row">
-                            <i class="fa fa-phone-square" title="Telefono"></i>
-                            <span ng-bind="selectedUser.telefono"></span>
-                        </div>
-                        <div class="row">
-                            <i class="fa fa-mobile" title="Celular"></i>
-                            <span ng-bind="selectedUser.celular"></span>
-                        </div>
-                        <div class="row">
-                            <i class="fa fa-home"></i>
-                            <span ng-bind="selectedUser.direccion"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class='row marginRow'>
-                    <div class="col-xs-12 col-md-12 col-sm-12" ng-if="!elemColapsed">
-                        <tabset>
-                            <tab ng-repeat="tab in tabs" heading="{{tab.title}}" ng-click="tabSelected(tab)" active="tab.active" disabled="tab.disabled">
-                                <!--{{tab.content}}-->
-                                <div ng-include="tab.content"></div>
-                            </tab>
-                        </tabset>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group big-fa col-xs-12">
-                        <prof-a-custom href-Link="selectedUser.facebookUrl" icon="fa fa-facebook-official" icon-Title="Facebook"></prof-a-custom>
-                        <prof-a-custom href-Link="selectedUser.twitterUrl" icon="fa fa-twitter-square" icon-Title="Twitter"></prof-a-custom>
-                        <prof-a-custom href-Link="selectedUser.linkedinUrl" icon="fa fa-linkedin-square" icon-Title="Linkedin"></prof-a-custom>
-                        <a href="mailto:{{user.email}}" class="btn btn-primary pull-right" title="Enviar mail">
-                            <i class="glyphicon glyphicon-envelope"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="panel-heading">
+         <h3 class="panel-title">{{selectedUser.nombre}} {{selectedUser.apellido}}</h3>
+         <button  type="button" class="close" ng-click="elemColapsed = true" style="position: relative;top: -18px;">
+             <span aria-hidden="true">×</span>
+         </button>
+     </div>
+     <div class="panel-body">
+         <div class="row">
+             <div class="col-xs-3 col-md-2 col-sm-3">
+                 <div class='row'>
+                     <div class="col-xs-12 col-md-12 col-sm-12">
+                         <img class="img-responsive img-rounded" ng-if="selectedUser.imagenUrl !== ''" ng-src="{{'uploaded/' +  selectedUser.imagenUrl}}">
+                         <i ng-if="selectedUser.imagenUrl === '' || selectedUser.imagenUrl === undefined" class="img-responsive fa fa-user"></i>
+                     </div>
+                 </div>
+             </div>
+             <div class="col-xs-9 col-md-10 col-sm-3 user-detail-icons">
+                 <div class="row">
+                     <label>Descripción Del Servicio</label>
+                     <p ng-bind="selectedUser.descService" style='text-transform: capitalize;'></p>
+                 </div>
+                 <div class="row">
+                     <i class="fa fa-phone-square" title="Telefono"></i>
+                     <span ng-bind="selectedUser.telefono"></span>
+                 </div>
+                 <div class="row">
+                     <i class="fa fa-mobile" title="Celular"></i>
+                     <span ng-bind="selectedUser.celular"></span>
+                 </div>
+                 <div class="row">
+                     <i class="fa fa-home"></i>
+                     <span ng-bind="selectedUser.direccion"></span>
+                 </div>
+             </div>
+         </div>
+         <div class='row marginRow'>
+             <div class="col-xs-12 col-md-12 col-sm-12" ng-show="!elemColapsed">
+                 <tabset>
+                     <tab ng-repeat="tab in tabs" heading="{{tab.title}}" ng-click="tabSelected(tab)" active="tab.active" disabled="tab.disabled">
+                         <!--{{tab.content}}-->
+                         <div ng-include="tab.content"></div>
+                     </tab>
+                 </tabset>
+             </div>
+         </div>
+         <div class="row">
+             <div class="form-group big-fa col-xs-12">
+                 <prof-a-custom href-Link="selectedUser.facebookUrl" icon="fa fa-facebook-official" icon-Title="Facebook"></prof-a-custom>
+                 <prof-a-custom href-Link="selectedUser.twitterUrl" icon="fa fa-twitter-square" icon-Title="Twitter"></prof-a-custom>
+                 <prof-a-custom href-Link="selectedUser.linkedinUrl" icon="fa fa-linkedin-square" icon-Title="Linkedin"></prof-a-custom>
+                 <a href="mailto:{{user.email}}" class="btn btn-primary pull-right" title="Enviar mail">
+                     <i class="glyphicon glyphicon-envelope"></i>
+                 </a>
+             </div>
+         </div>
+     </div>
+ </div>
