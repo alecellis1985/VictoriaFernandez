@@ -148,19 +148,23 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
             if(elem.id === "1"){
                 $scope.showBarrios = true;
             }            
+            $scope.dropdownsValid = $scope.dropDownCheck();
         }
         $scope.montevideoDeSelected = function(elem){
             if(elem.id === "1"){
                 $scope.showBarrios = false;
             }
+            $scope.dropdownsValid = $scope.dropDownCheck();
         }
         
         $scope.selectAllDeps = function(){
             $scope.showBarrios = true;
+            $scope.dropdownsValid = $scope.dropDownCheck();
         }
         
         $scope.removeAllDeps = function(){
             $scope.showBarrios = false;
+            $scope.dropdownsValid = $scope.dropDownCheck();
         }
         
         $scope.DepartamentosEvents = {
@@ -174,6 +178,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
             if(newVal === 0){
                 $scope.showBarrios = false;
             }
+            $scope.dropdownsValid = $scope.dropDownCheck();
         });
         
         $scope.categoriasTexts = $.extend({},$scope.defaultDropdownTexts,{buttonDefaultText:'Seleccione Categorias'});
@@ -221,13 +226,9 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
         //TODO NEED THIS VALIDATION, PUT DROPDWON VALID IN FALSE AND VALIDATE
         $scope.dropdownsValid = false;
         $scope.dropDownCheck = function () {
-            //TODO CHECK .length of all 3 arrays to see if they are valid or not
-            /*$scope.dropdownsValid = Helper.isUndefinedOrNull($scope.selectedCategoria.categoriaId) ||
-                    Helper.isUndefinedOrNull($scope.depSelected.idDepartamento) ||
-                    parseInt($scope.selectedCategoria.categoriaId) < 0 ||
-                    parseInt($scope.depSelected.idDepartamento) < 0 ||
-                    ($scope.depSelected.nombreDepartamento === 'Montevideo' && Helper.isUndefinedOrNull($scope.selectedCategoria.categoriaId)
-                            && parseInt($scope.selectedBarrio.barrioId) < 0);*/
+            return $scope.selectedDepartamentos.length >0 
+                    && $scope.selectedCategorias.length > 0 
+                    && ($scope.showBarrios ? $scope.selectedBarrios > 0 : true);
         };
 
         // TODO: Remove. ONLY FOR TEST
@@ -332,7 +333,8 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
 
         $scope.registrarUsuario = function (isValid)
         {
-            if (!isValid || $scope.dropdownsValid) {
+            $scope.dropdownsValid = $scope.dropDownCheck();
+            if (!isValid || !$scope.dropdownsValid) {
                 $rootScope.$broadcast('alert-event', {type: 'danger', msg: "Verifique que todos los campos esten correctamente completados!"});
                 return;
             }

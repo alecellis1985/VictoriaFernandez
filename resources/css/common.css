@@ -616,6 +616,10 @@ mark{
     color: red;
 }
 
+.multiselect-parent .requiredAst{
+    right: -13px;
+}
+
 .user-details .fa-home,.card .fa-home
 {
     font-size: 22px;
