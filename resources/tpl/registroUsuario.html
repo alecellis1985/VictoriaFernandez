@@ -129,13 +129,18 @@
         <div class="panel-body">
             <div class="row">
                 <div class="form-group col-xs-12 col-md-3">
-                    <dropdown-w-validation check-fn="checkCategoria(elem)" error-msg="Seleccione una categoria" post-Selection-Fn="dropDownCheck()" selected-Elem="selectedCategoria" name-Prop="categoriaNombre" elements-Arr="categorias" placeholder-Filter="Filtro de categorias"></dropdown-w-validation>
+                    <!--<dropdown-w-validation check-fn="checkCategoria(elem)" error-msg="Seleccione una categoria" post-Selection-Fn="dropDownCheck()" selected-Elem="selectedCategoria" name-Prop="categoriaNombre" elements-Arr="categorias" placeholder-Filter="Filtro de categorias"></dropdown-w-validation>-->
+                    <div ng-dropdown-multiselect="" checkboxes="true" translation-texts="categoriasTexts" options="categorias" extra-settings="categoriaSettings"  selected-model="selectedCategorias"></div>
                 </div>
                 <div class="form-group col-xs-12 col-md-3">
-                    <dropdown-w-validation check-fn="checkDepto(elem)" error-msg="Seleccione un departamento" post-Selection-Fn="dropDownCheck()" selected-Elem="depSelected" name-Prop="nombreDepartamento" elements-Arr="departamentosList" placeholder-Filter="Filtro de departamentos"></dropdown-w-validation> 
+                    
+                    <div ng-dropdown-multiselect="" checkboxes="true" translation-texts="departamentosTexts" events="DepartamentosEvents" options="departamentosList" extra-settings="departamentosSettings"  selected-model="selectedDepartamentos"></div>
+                      
+                    <!--<dropdown-w-validation check-fn="checkDepto(elem)" error-msg="Seleccione un departamento" post-Selection-Fn="dropDownCheck()" selected-Elem="depSelected" name-Prop="nombreDepartamento" elements-Arr="departamentosList" placeholder-Filter="Filtro de departamentos"></dropdown-w-validation>--> 
                 </div>
-                <div class="form-group col-xs-12 col-md-3" ng-show="depSelected.nombreDepartamento === 'Montevideo'">
-                    <dropdown-w-validation check-fn="checkBarrio(elem)" error-msg="Seleccione un barrio de Mdeo" post-Selection-Fn="dropDownCheck()" selected-Elem="selectedBarrio" name-Prop="barrioNombre" elements-Arr="barrios" placeholder-Filter="Filtro de barrios"></dropdown-w-validation>                     
+                <div class="form-group col-xs-12 col-md-3" ng-show="showBarrios">                    
+                    <div ng-dropdown-multiselect="" checkboxes="true" translation-texts="barriosTexts" options="barrios" extra-settings="barriosSettings"  selected-model="selectedBarrios"></div>
+                    <!--<dropdown-w-validation check-fn="checkBarrio(elem)" error-msg="Seleccione un barrio de Mdeo" post-Selection-Fn="dropDownCheck()" selected-Elem="selectedBarrio" name-Prop="barrioNombre" elements-Arr="barrios" placeholder-Filter="Filtro de barrios"></dropdown-w-validation>-->
                 </div>
                 <div class="form-group col-xs-12 col-md-3">
                     <!--<span class="requiredAst">*</span>-->
@@ -298,8 +303,10 @@
     </div>
     <div>
         <div class="form-group col-md-12">
-            <button type="submit" class="btn btn-primary pull-right" title="[]" ng-disabled="registerUser.$invalid || dropdownsValid" ng-show="newUser">Registrarme</button>
-            <button type="submit" class="btn btn-primary pull-right" title="[]" ng-disabled="registerUser.$invalid || dropdownsValid" ng-hide="newUser">Guardar cambios</button>
+            
+            <span class="obligatoryPopup" ng-show="registerUser.$invalid || !dropdownsValid" popover="Por favor ingrese todos los campos que contienen *" popover-trigger="mouseenter"></span>
+            <button type="submit" class="btn btn-primary pull-right"  ng-disabled="registerUser.$invalid || !dropdownsValid" ng-show="newUser">Registrarme</button>
+            <button type="submit" class="btn btn-primary pull-right"  ng-disabled="registerUser.$invalid || !dropdownsValid" ng-hide="newUser">Guardar cambios</button>
             <button class="btn btn-default pull-right" style="margin-right: 15px;" ng-click="goBackRegistration($event)"><i class="fa fa-reply"></i></button>
         </div>
     </div>

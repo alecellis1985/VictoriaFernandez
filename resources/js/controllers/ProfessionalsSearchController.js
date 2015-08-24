@@ -63,10 +63,12 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
                 var length = users.length;
                 $scope.totalItems = length;
                 $scope.currentPage = 1;
-                while (length--) {
-                    $scope.markerPropCreation(users[length]);
-                }
                 $scope.users = users;
+                $scope.users.map(function(elem){
+                    if(elem.markers !== null || elem.markers !== undefined){
+                        elem.markers = $.parseJSON(elem.markers);
+                    }
+                });
                 $scope.pageChanged();
             });
         }
@@ -111,17 +113,6 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
         
         $scope.setPage = function (pageNo) {
           $scope.currentPage = pageNo;
-        };
-
-        $scope.markerPropCreation = function (obj)
-        {
-            if (obj.longitude === null || obj.latitude === null || obj.latitude === undefined || obj.longitude === undefined) {
-                obj.markers = [];
-            }
-            else
-            {
-                obj.markers = [{lat: obj.latitude, long: obj.longitude}];
-            }
         };
         
         $scope.$watch('buscoProf', function (newval, oldval) {

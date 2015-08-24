@@ -249,31 +249,6 @@ INSERT INTO `plan` VALUES (9, 'Empresarial', 'Basico', 3840, 'Semestral');
 INSERT INTO `plan` VALUES (10, 'Empresarial', 'Basico', 5760, 'Anual');
 INSERT INTO `plan` VALUES (11, 'Empresarial', 'Premium', 5760, 'Semestral');
 INSERT INTO `plan` VALUES (12, 'Empresarial', 'Premium', 8640, 'Anual');
---
--- Table structure for table `mapa`
---
-
-DROP TABLE IF EXISTS `mapa`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `mapa` (
-  `IdMapa` int(11) NOT NULL auto_increment,
-  `IdUser` int(11) NOT NULL,
-  `latitude` varchar(30) NOT NULL,
-  `longitude` varchar(30) NOT NULL,
-  PRIMARY KEY  (`IdMapa`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `mapa`
---
-
-LOCK TABLES `mapa` WRITE;
-/*!40000 ALTER TABLE `mapa` DISABLE KEYS */;
-INSERT INTO `mapa` VALUES (10,10,'-34.88719824359768','-56.13764762878418'),(11,10,'-34.88226973385945','-56.165971755981445'),(12,10,'-34.89564642972746','-56.16442680358887');
-/*!40000 ALTER TABLE `mapa` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `users`
@@ -310,6 +285,7 @@ CREATE TABLE `users` (
   `descServiceLong` varchar(1000) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
+  `markers` varchar(1000) DEFAULT NULL,
   PRIMARY KEY  (`idUser`),
   UNIQUE KEY `username` (`username`),
   KEY `users_barrios_idx` (`barrio`),
@@ -354,11 +330,13 @@ INSERT INTO  `profesionales`.`users` (
 `descServiceLong` ,
 `username` ,
 `password`,
+`markers`,
 `IsAdmin`,
 `IsActive`
+
 )
 VALUES (
-NULL ,  'Alec',  'Ellis',  'alecellis1985@hotmail.com',  '26013794',  '098635923',  'm.tajes 7530',  '26013794',  '2',  '1', NULL ,  '5',  '',  '',  'https://www.facebook.com/alec.ellis.714', NULL , NULL ,  'construccion de paginas web',  'SEO',  'OPTIMIZATION', NULL , NULL , NULL , NULL ,  'database performance optimization', 'Alec10' , MD5(  'turtleman1' ),1,1
+NULL ,  'Alec',  'Ellis',  'alecellis1985@hotmail.com',  '26013794',  '098635923',  'm.tajes 7530',  '26013794',  '2',  '1', NULL ,  '5',  '',  '',  'https://www.facebook.com/alec.ellis.714', NULL , NULL ,  'construccion de paginas web',  'SEO',  'OPTIMIZATION', NULL , NULL , NULL , NULL ,  'database performance optimization', 'Alec10' , MD5(  'turtleman1' ),null,1,1
 );
 --
 -- Dumping data for table `users`

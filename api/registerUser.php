@@ -157,32 +157,15 @@ function insertNewUser($conn, $user) {
             $conn->beginTransaction();
             $sql = "INSERT INTO users (nombre, apellido, email, telefono, celular, direccion, telefonoEmp, "
                     . "departamento, categoria,barrio, plan ,sitioWeb, imagenUrl, facebookUrl, twitterUrl, linkedinUrl, descService, servicioOfrecido1,"
-                    . " servicioOfrecido2, servicioOfrecido3, servicioOfrecido4, servicioOfrecido5, servicioOfrecido6, descServiceLong, username, password) "
+                    . " servicioOfrecido2, servicioOfrecido3, servicioOfrecido4, servicioOfrecido5, servicioOfrecido6, descServiceLong, username, password,markers) "
                     . "VALUES (:nombre, :apellido, :email, :telefono, :celular, :direccion, :telefonoEmp, :departamento,"
                     . " :categoria,:barrio,:plan, :sitioWeb, :imagenUrl, :facebookUrl, :twitterUrl, :linkedinUrl, :descService, :servicioOfrecido1,"
-                    . " :servicioOfrecido2, :servicioOfrecido3, :servicioOfrecido4, :servicioOfrecido5, :servicioOfrecido6,:descServiceLong, :username, :password)";
+                    . " :servicioOfrecido2, :servicioOfrecido3, :servicioOfrecido4, :servicioOfrecido5, :servicioOfrecido6,:descServiceLong, :username, :password,:markers)";
             $params = setUserParams($user, false);
-
             if ($conn->consulta($sql, $params)) {
                 $user['id'] = $conn->ultimoIdInsert();
                 $conn->closeCursor();
                 $error = false;
-                $userMarkers = json_decode($user['markers']);
-                $sqlMap = "INSERT INTO mapa VALUES (NULL, " . $user['id'] . ", :latitude, :longitude) ";
-                for ($i = 0; $i < count($userMarkers); $i++) {
-                    $paramsInsertMap = array();
-                    $latitude = $userMarkers[$i]->latitude;
-                    $longitude = $userMarkers[$i]->longitude;
-                    $paramsInsertMap[0] = array("latitude", $latitude, "string", 30);
-                    $paramsInsertMap[1] = array("longitude", $longitude, "string", 30);
-
-                    if ($conn->consulta($sqlMap, $paramsInsertMap)) {
-                        $conn->closeCursor();
-                    } else {
-                        //tirar error
-                        $error = true;
-                    }
-                }
                 if (!$error) {
                     $sqlPagos = "INSERT INTO `formasdepago` (`idUser`,`contado`,`debito`,`credito`,`otras`) 
                                 VALUES(:idUser , :contado , :debito, :credito, :otras)";
@@ -264,7 +247,7 @@ function updateUser($conn, $user) {
                     . " twitterUrl = :twitterUrl, linkedinUrl = :linkedinUrl, descService = :descService, servicioOfrecido1 = :servicioOfrecido1,"
                     . " servicioOfrecido2 = :servicioOfrecido2, servicioOfrecido3 = :servicioOfrecido3, servicioOfrecido4 = :servicioOfrecido4,"
                     . " servicioOfrecido5 = :servicioOfrecido5, servicioOfrecido6 = :servicioOfrecido6, descServiceLong = :descServiceLong,"
-                    . " username = :username"
+                    . " username = :username,markers = :markers"
                     . " WHERE username = '" . $_SESSION['usuario'] . "'";
 
             $params = setUserParams($user, true);
@@ -272,80 +255,55 @@ function updateUser($conn, $user) {
                 $conn->closeCursor();
                 $userId = $_SESSION['idUser'];
                 $error = false;
-                //Remove previous markers
-                $sqlDeleteMarkers = "DELETE FROM mapa WHERE IdUser = " . $userId;
-                if ($conn->consulta($sqlDeleteMarkers)) {
+                $sqlDeletePago = "DELETE FROM formasdepago WHERE idUser = " . $userId;
+                if ($conn->consulta($sqlDeletePago)) {
                     $conn->closeCursor();
+                    $sqlPagos = "INSERT INTO `formasdepago` (`idUser`,`contado`,`debito`,`credito`,`otras`) 
+                        VALUES(:idUser , :contado , :debito, :credito, :otras)";
+                    $paramsPagos = array();
+                    $paramsPagos[0] = array("idUser", $userId, "int", 11);
+                    $paramsPagos[1] = array("contado", $user['formaDePago']['contado'], "int", 1);
+                    $paramsPagos[2] = array("debito", $user['formaDePago']['debito'], "int", 1);
+                    $paramsPagos[3] = array("credito", $user['formaDePago']['credito'], "int", 1);
+                    $paramsPagos[4] = array("otras", $user['formaDePago']['otras'], "string", 30);
 
-                    $userMarkers = json_decode($user['markers']);
-                    $sqlMap = "INSERT INTO mapa VALUES (NULL, " . $userId . ", :latitude, :longitude) ";
-                    for ($i = 0; $i < count($userMarkers); $i++) {
-                        $paramsInsertMap = array();
-                        $latitude = $userMarkers[$i]->latitude;
-                        $longitude = $userMarkers[$i]->longitude;
-                        $paramsInsertMap[0] = array("latitude", $latitude, "string", 30);
-                        $paramsInsertMap[1] = array("longitude", $longitude, "string", 30);
+                    if ($conn->consulta($sqlPagos, $paramsPagos)) {
+                        $conn->closeCursor();
 
-                        if ($conn->consulta($sqlMap, $paramsInsertMap)) {
-                            $conn->closeCursor();
-                        } else {
-                            //tirar error
-                            $error = true;
-                        }
-                    }
-                    if (!$error) {
-
-                        $sqlDeletePago = "DELETE FROM formasdepago WHERE idUser = " . $userId;
-                        if ($conn->consulta($sqlDeletePago)) {
+                        $sqlDeleteDias = "DELETE FROM diasatencion WHERE idUser = " . $userId;
+                        if ($conn->consulta($sqlDeleteDias)) {
                             $conn->closeCursor();
 
-                            $sqlPagos = "INSERT INTO `formasdepago` (`idUser`,`contado`,`debito`,`credito`,`otras`) 
-                                VALUES(:idUser , :contado , :debito, :credito, :otras)";
-                            $paramsPagos = array();
-                            $paramsPagos[0] = array("idUser", $userId, "int", 11);
-                            $paramsPagos[1] = array("contado", $user['formaDePago']['contado'], "int", 1);
-                            $paramsPagos[2] = array("debito", $user['formaDePago']['debito'], "int", 1);
-                            $paramsPagos[3] = array("credito", $user['formaDePago']['credito'], "int", 1);
-                            $paramsPagos[4] = array("otras", $user['formaDePago']['otras'], "string", 30);
+                            //TODO: Remove previous open days and hours
+                            $sqlDias = "INSERT INTO `diasatencion`(`idUser`,`lunes`,`martes`,`miercoles`,`jueves`,`viernes`,`sabado`,`domingo`, `horaComienzo`, `horaFin`) 
+                            VALUES (:idUser, :lunes, :martes, :miercoles, :jueves, :viernes, :sabado, :domingo, :horaComienzo, :horaFin)";
+                            $paramsDias = array();
+                            $paramsDias[0] = array("idUser", $userId, "int", 11);
+                            $paramsDias[1] = array("lunes", $user['diasAtencion']['lunes'], "int", 1);
+                            $paramsDias[2] = array("martes", $user['diasAtencion']['martes'], "int", 1);
+                            $paramsDias[3] = array("miercoles", $user['diasAtencion']['miercoles'], "int", 1);
+                            $paramsDias[4] = array("jueves", $user['diasAtencion']['jueves'], "int", 1);
+                            $paramsDias[5] = array("viernes", $user['diasAtencion']['viernes'], "int", 1);
+                            $paramsDias[6] = array("sabado", $user['diasAtencion']['sabado'], "int", 1);
+                            $paramsDias[7] = array("domingo", $user['diasAtencion']['domingo'], "int", 1);
+                            $paramsDias[8] = array("horaComienzo", $user['horaComienzo'], "string", 20);
+                            $paramsDias[9] = array("horaFin", $user['horaFin'], "string", 20);
 
-                            if ($conn->consulta($sqlPagos, $paramsPagos)) {
+                            if ($conn->consulta($sqlDias, $paramsDias)) {
                                 $conn->closeCursor();
-
-                                $sqlDeleteDias = "DELETE FROM diasatencion WHERE idUser = " . $userId;
-                                if ($conn->consulta($sqlDeleteDias)) {
-                                    $conn->closeCursor();
-
-                                    //TODO: Remove previous open days and hours
-                                    $sqlDias = "INSERT INTO `diasatencion`(`idUser`,`lunes`,`martes`,`miercoles`,`jueves`,`viernes`,`sabado`,`domingo`, `horaComienzo`, `horaFin`) 
-                                    VALUES (:idUser, :lunes, :martes, :miercoles, :jueves, :viernes, :sabado, :domingo, :horaComienzo, :horaFin)";
-                                    $paramsDias = array();
-                                    $paramsDias[0] = array("idUser", $userId, "int", 11);
-                                    $paramsDias[1] = array("lunes", $user['diasAtencion']['lunes'], "int", 1);
-                                    $paramsDias[2] = array("martes", $user['diasAtencion']['martes'], "int", 1);
-                                    $paramsDias[3] = array("miercoles", $user['diasAtencion']['miercoles'], "int", 1);
-                                    $paramsDias[4] = array("jueves", $user['diasAtencion']['jueves'], "int", 1);
-                                    $paramsDias[5] = array("viernes", $user['diasAtencion']['viernes'], "int", 1);
-                                    $paramsDias[6] = array("sabado", $user['diasAtencion']['sabado'], "int", 1);
-                                    $paramsDias[7] = array("domingo", $user['diasAtencion']['domingo'], "int", 1);
-                                    $paramsDias[8] = array("horaComienzo", $user['horaComienzo'], "string", 20);
-                                    $paramsDias[9] = array("horaFin", $user['horaFin'], "string", 20);
-
-                                    if ($conn->consulta($sqlDias, $paramsDias)) {
-                                        $conn->closeCursor();
-                                    } else {
-                                        $error = true;
-                                    }
-                                } else {
-                                    $error = true;
-                                }
                             } else {
-                                //tirar error
                                 $error = true;
                             }
                         } else {
                             $error = true;
                         }
+                    } else {
+                        //tirar error
+                        $error = true;
                     }
+                } else {
+                    $error = true;
+                }
 
                     if (!$error) {
                         $conn->commitTransaction();
@@ -353,9 +311,6 @@ function updateUser($conn, $user) {
                     } else {
                         $response = MessageHandler::getErrorResponse("Mi puto error.");
                     }
-                } else {
-                    echo MessageHandler::getErrorResponse("Error al borrar markers previos");
-                }
             } else {
                 echo MessageHandler::getErrorResponse("Primer consulta error.Edit");
             }
@@ -525,5 +480,6 @@ function setUserParams($user, $forEdit) {
         $params[24] = array("imagenUrl", $user['imagenUrl'], "string", 100);
         $params[25] = array("password", md5($user['password']), "string", 100);
     }
+    $params[26] = array("markers", $user['markers'], "string", 1000);
     return $params;
 }

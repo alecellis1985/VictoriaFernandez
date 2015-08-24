@@ -6,9 +6,7 @@ function getUsers($categoria, $departamento, $nombreProf = null) {
     $response = null;
 
     $addNombreProfToQuery = "";
-    if (isset($nombreProf) && $nombreProf != '') {
-        // variable set, not empty string, not falsy
-        //$nombreProf = mysql_real_escape_string($nombreProf);
+    if (isset($nombreProf) && $nombreProf != '') {     
         //$addNombreProfToQuery = "concat_ws(' ',u.nombre,u.apellido) like '%".$nombreProf."%' and "; 
         $addNombreProfToQuery = "concat_ws(' ',u.nombre,u.apellido) like concat('%', :nombreProf, '%') and ";
     }
@@ -19,10 +17,9 @@ function getUsers($categoria, $departamento, $nombreProf = null) {
         $sql = "SELECT u.idUser,u.nombre,u.apellido,u.email,u.telefono,u.celular,u.direccion,u.telefonoEmp," .
                 "u.sitioWeb,u.imagenUrl,u.facebookUrl,u.twitterUrl," .
                 "u.linkedinUrl,u.descService,u.servicioOfrecido1,u.servicioOfrecido2,u.servicioOfrecido3," .
-                "u.servicioOfrecido4,u.servicioOfrecido5,u.servicioOfrecido6,u.descServiceLong," .
-                "m.*,fp.*,da.* FROM " .
-                "users u left join mapa m on u.idUser = m.IdUser " .
-                "left join formasdepago fp on u.idUser = fp.idUser " .
+                "u.servicioOfrecido4,u.servicioOfrecido5,u.servicioOfrecido6,u.descServiceLong,u.markers," .
+                "fp.*,da.* FROM " .
+                "users u left join formasdepago fp on u.idUser = fp.idUser " .
                 "left join diasatencion da on u.idUser = da.idUser " .
                 "join localidad_user du on u.idUser = du.idUser AND (du.localidadId = :departamento OR :departamento2 = -1 )" .
                 "join categoria_usuario cu on u.idUser = cu.idUser AND (cu.idCategoria = :categoria OR :categoria2 = -1) " .
@@ -41,8 +38,6 @@ function getUsers($categoria, $departamento, $nombreProf = null) {
         }
         if ($conn->consulta($sql, $params)) {
             $users = $conn->restantesRegistros();
-
-
             $response = MessageHandler::getSuccessResponse("", $users);
         } else {
             $response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
@@ -118,7 +113,6 @@ function getLoggedUser() {
                 $formasDePago = $conn->restantesRegistros();
                 $formaDePagoUser = $formasDePago[0];
                 $userData['formasDePago'] = $formaDePagoUser;
-
                 $sqlDiasAtencion = "select * from diasatencion where idUser = :userId";
                 $paramsDiasAtencion = array();
                 $paramsDiasAtencion[0] = array("userId", $currentUser->idUser, "int", 11);
@@ -126,19 +120,7 @@ function getLoggedUser() {
                     $diasAtencion = $conn->restantesRegistros();
                     $diasAtencionUser = $diasAtencion[0];
                     $userData['diasAtencion'] = $diasAtencionUser;
-
-                    $sqlMarkers = "select * from mapa where IdUser = :userId";
-                    $paramsMarkers = array();
-                    $paramsMarkers[0] = array("userId", $currentUser->idUser, "int", 11);
-
-                    if ($conn->consulta($sqlMarkers, $paramsMarkers)) {
-                        $markers = $conn->restantesRegistros();
-                        $userData['markers'] = getMarkersFormat($markers);
-
-                        $response = MessageHandler::getSuccessResponse("", $userData);
-                    } else {
-                        $response = MessageHandler::getErrorResponse("Error con la consulta!");
-                    }
+                    $response = MessageHandler::getSuccessResponse("", $userData);
                 } else {
                     $response = MessageHandler::getErrorResponse("Error con la consulta!");
                 }

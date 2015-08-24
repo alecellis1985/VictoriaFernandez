@@ -36,7 +36,7 @@ Professionals.directive('mapLoadMarkers', function () {
             $scope.createMarker = function (info) {
                 var marker = new google.maps.Marker({
                     map: $scope.map,
-                    position: new google.maps.LatLng(info.lat, info.long),
+                    position: new google.maps.LatLng(info.latitude, info.longitude),
                     title: info.city
                 });
 //                marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
