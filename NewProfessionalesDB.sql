@@ -1,4 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `profesionales` /*!40100 DEFAULT CHARACTER SET utf8 */;
+DROP DATABASE IF EXISTS `profesionales`;
+CREATE DATABASE `profesionales` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `profesionales`;
 -- MySQL dump 10.13  Distrib 5.5.44, for debian-linux-gnu (x86_64)
 --

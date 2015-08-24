@@ -8,34 +8,36 @@ function getUsers($categoria, $departamento, $nombreProf = null) {
     $addNombreProfToQuery = "";
     if (isset($nombreProf) && $nombreProf != '') {
         // variable set, not empty string, not falsy
-        $nombreProf = mysql_real_escape_string($nombreProf);        
+        //$nombreProf = mysql_real_escape_string($nombreProf);
         //$addNombreProfToQuery = "concat_ws(' ',u.nombre,u.apellido) like '%".$nombreProf."%' and "; 
-        $addNombreProfToQuery = "concat_ws(' ',u.nombre,u.apellido) like concat('%', :nombreProf, '%') and ";        
+        $addNombreProfToQuery = "concat_ws(' ',u.nombre,u.apellido) like concat('%', :nombreProf, '%') and ";
     }
 
     if ($conn->conectar()) {
-
+        
+        //New query EXCEPT MONTEVIDEO
         $sql = "SELECT u.idUser,u.nombre,u.apellido,u.email,u.telefono,u.celular,u.direccion,u.telefonoEmp," .
-                "u.departamento,u.categoria,u.barrio,u.sitioWeb,u.imagenUrl,u.facebookUrl,u.twitterUrl," .
+                "u.sitioWeb,u.imagenUrl,u.facebookUrl,u.twitterUrl," .
                 "u.linkedinUrl,u.descService,u.servicioOfrecido1,u.servicioOfrecido2,u.servicioOfrecido3," .
                 "u.servicioOfrecido4,u.servicioOfrecido5,u.servicioOfrecido6,u.descServiceLong," .
                 "m.*,fp.*,da.* FROM " .
                 "users u left join mapa m on u.idUser = m.IdUser " .
                 "left join formasdepago fp on u.idUser = fp.idUser " .
                 "left join diasatencion da on u.idUser = da.idUser " .
-                "WHERE " . $addNombreProfToQuery .
-                " (categoria = :categoria OR :categoria = -1) and " .
-                "(departamento = :departamento OR :departamento = -1) " .
-                " and IsAdmin = 0 and IsActive = 1 ORDER BY nombre";
-        //var_dump($sql);
-        //die();
+                "join localidad_user du on u.idUser = du.idUser AND (du.localidadId = :departamento OR :departamento2 = -1 )" .
+                "join categoria_usuario cu on u.idUser = cu.idUser AND (cu.idCategoria = :categoria OR :categoria2 = -1) " .
+                " WHERE " . $addNombreProfToQuery .
+                " IsAdmin = 0 and IsActive = 1 ORDER BY nombre";
 
         $params = array();
-        $params[0] = array("departamento", (int) $departamento, "int", 5);
-        $params[1] = array("categoria", (int) $categoria, "int", 5);
+        $params[0] = array("departamento", (int) $departamento, "int");
+        $params[1] = array("categoria", (int) $categoria, "int");
+        $params[2] = array("departamento2", (int) $departamento, "int");
+        $params[3] = array("categoria2", (int) $categoria, "int");
+        
         if (isset($nombreProf) && $nombreProf != '') {
             // variable set, not empty string, not falsy
-            $params[2] = array("nombreProf", $nombreProf, "string", 25);
+            $params[4] = array("nombreProf", $nombreProf, "string", 25);
         }
         if ($conn->consulta($sql, $params)) {
             $users = $conn->restantesRegistros();

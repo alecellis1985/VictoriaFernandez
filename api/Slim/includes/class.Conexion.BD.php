@@ -135,6 +135,7 @@ class ConexionBD {
             $this->sentencia = null;
             $this->ultimoError = "{" . date("d/m/Y H:i:s") . "} " . $e->getMessage();
             $retorno = false;
+            var_dump($e->getMessage());
         }
         return $retorno;
     }
