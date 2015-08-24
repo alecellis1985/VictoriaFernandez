@@ -6,9 +6,7 @@ function getUsers($categoria, $departamento, $nombreProf = null) {
     $response = null;
 
     $addNombreProfToQuery = "";
-    if (isset($nombreProf) && $nombreProf != '') {
-        // variable set, not empty string, not falsy
-        $nombreProf = mysql_real_escape_string($nombreProf);        
+    if (isset($nombreProf) && $nombreProf != '') {     
         //$addNombreProfToQuery = "concat_ws(' ',u.nombre,u.apellido) like '%".$nombreProf."%' and "; 
         $addNombreProfToQuery = "concat_ws(' ',u.nombre,u.apellido) like concat('%', :nombreProf, '%') and ";        
     }
@@ -38,8 +36,6 @@ function getUsers($categoria, $departamento, $nombreProf = null) {
         }
         if ($conn->consulta($sql, $params)) {
             $users = $conn->restantesRegistros();
-
-
             $response = MessageHandler::getSuccessResponse("", $users);
         } else {
             $response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
