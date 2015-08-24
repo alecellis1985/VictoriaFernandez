@@ -63,7 +63,8 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
                 var length = users.length;
                 $scope.totalItems = length;
                 $scope.currentPage = 1;
-                $scope.users = users.map(function(elem){
+                $scope.users = users;
+                $scope.users.map(function(elem){
                     if(elem.markers !== null || elem.markers !== undefined){
                         elem.markers = $.parseJSON(elem.markers);
                     }

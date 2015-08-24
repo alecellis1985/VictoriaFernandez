@@ -16,7 +16,7 @@ function getUsers($categoria, $departamento, $nombreProf = null) {
         $sql = "SELECT u.idUser,u.nombre,u.apellido,u.email,u.telefono,u.celular,u.direccion,u.telefonoEmp," .
                 "u.departamento,u.categoria,u.barrio,u.sitioWeb,u.imagenUrl,u.facebookUrl,u.twitterUrl," .
                 "u.linkedinUrl,u.descService,u.servicioOfrecido1,u.servicioOfrecido2,u.servicioOfrecido3," .
-                "u.servicioOfrecido4,u.servicioOfrecido5,u.servicioOfrecido6,u.descServiceLong,u.markers" .
+                "u.servicioOfrecido4,u.servicioOfrecido5,u.servicioOfrecido6,u.descServiceLong,u.markers," .
                 "fp.*,da.* FROM " .
                 "users u left join formasdepago fp on u.idUser = fp.idUser " .
                 "left join diasatencion da on u.idUser = da.idUser " .
