@@ -136,16 +136,63 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
                 $scope.renderMap = false;
             }
         });        
-
-        $scope.barrios = barriosList.data;
-        $scope.barrios.unshift({barrioNombre: "Seleccione Barrio", barrioId: -1});
-        $scope.selectedBarrio = $scope.barrios[0];
+        
+        $scope.defaultDropdownTexts = {
+            checkAll:'Seleccionar Todos',
+            uncheckAll:'Remover Todos',
+            dynamicButtonTextSuffix:'Seleccionados'
+        }
+        
+        $scope.showBarrios = false;
+        $scope.montevideoSelected = function(elem){
+            if(elem.id === "1"){
+                $scope.showBarrios = true;
+            }            
+        }
+        $scope.montevideoDeSelected = function(elem){
+            if(elem.id === "1"){
+                $scope.showBarrios = false;
+            }
+        }
+        
+        $scope.selectAllDeps = function(){
+            $scope.showBarrios = true;
+        }
+        
+        $scope.removeAllDeps = function(){
+            $scope.showBarrios = false;
+        }
+        
+        $scope.DepartamentosEvents = {
+            onItemSelect:$scope.montevideoSelected,
+            onItemDeselect:$scope.montevideoDeSelected,
+            onSelectAll:$scope.selectAllDeps
+        }
+        
+        //Hack to remove barrios dropdown because 'onDeselectAll  event is not working
+        $scope.$watch('selectedDepartamentos.length',function(newVal){
+            if(newVal === 0){
+                $scope.showBarrios = false;
+            }
+        });
+        
+        $scope.categoriasTexts = $.extend({},$scope.defaultDropdownTexts,{buttonDefaultText:'Seleccione Categorias'});
+        $scope.categoriaSettings = {displayProp: 'categoriaNombre', idProp: 'categoriaId'};
         $scope.categorias = categoriasList.data;
-        $scope.categorias.unshift({categoriaNombre: "Seleccione Categoria", categoriaId: -1});
-        $scope.selectedCategoria = $scope.categorias[0];
+        $scope.selectedCategorias = [];
+        //$scope.selectedCategoria = $scope.categorias[0];
+        
+        $scope.barriosTexts = $.extend({},$scope.defaultDropdownTexts,{buttonDefaultText:'Seleccione Barrios'});
+        $scope.barriosSettings = {displayProp: 'barrioNombre', idProp: 'barrioId'};
+        $scope.barrios = barriosList.data;
+        $scope.selectedBarrios = [];
+        //$scope.selectedBarrio = $scope.barrios[0];
+        
+        $scope.departamentosTexts = $.extend({},$scope.defaultDropdownTexts,{buttonDefaultText:'Seleccione Departamentos'});
+        $scope.departamentosSettings = {displayProp: 'nombreDepartamento', idProp: 'idDepartamento'};
         $scope.departamentosList = departamentosList.data;
-        $scope.departamentosList.unshift({nombreDepartamento: "Seleccione Departamento", idDepartamento: -1});
-        $scope.depSelected = $scope.departamentosList[0];
+        $scope.selectedDepartamentos = [];
+        //$scope.depSelected = $scope.departamentosList[0];
 
         var initHour = new Date();
         initHour.setHours(8);
@@ -171,14 +218,16 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
             }
         };
 
-        $scope.dropdownsValid = true;
+        //TODO NEED THIS VALIDATION, PUT DROPDWON VALID IN FALSE AND VALIDATE
+        $scope.dropdownsValid = false;
         $scope.dropDownCheck = function () {
-            $scope.dropdownsValid = Helper.isUndefinedOrNull($scope.selectedCategoria.categoriaId) ||
+            //TODO CHECK .length of all 3 arrays to see if they are valid or not
+            /*$scope.dropdownsValid = Helper.isUndefinedOrNull($scope.selectedCategoria.categoriaId) ||
                     Helper.isUndefinedOrNull($scope.depSelected.idDepartamento) ||
                     parseInt($scope.selectedCategoria.categoriaId) < 0 ||
                     parseInt($scope.depSelected.idDepartamento) < 0 ||
                     ($scope.depSelected.nombreDepartamento === 'Montevideo' && Helper.isUndefinedOrNull($scope.selectedCategoria.categoriaId)
-                            && parseInt($scope.selectedBarrio.barrioId) < 0);
+                            && parseInt($scope.selectedBarrio.barrioId) < 0);*/
         };
 
         // TODO: Remove. ONLY FOR TEST
@@ -197,6 +246,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
         };
 
         $scope.fillEditUserCamps = function () {
+            //TODO FILL THE EDIT USER CAMPS WITH DROPDOWNS
             $scope.user = userData.data.user;
             $scope.user.passwordConfirm = userData.data.user.password;
             $scope.currentUsername = userData.data.user.username;
@@ -295,7 +345,6 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
             });
             
             var markers = JSON.stringify(markersArr);
-            
             var data = {
                 'nombre': $scope.user.nombre,
                 'apellido': $scope.user.apellido,
@@ -306,9 +355,9 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
                 'celular': $scope.user.celular,
                 'direccion': $scope.user.direccion,
                 'telefonoEmp': $scope.user.telefonoEmp,
-                'departamento': parseInt($scope.depSelected.idDepartamento),
-                'categoria': parseInt($scope.selectedCategoria.categoriaId),
-                'barrio': $scope.selectedBarrio.barrioId === -1 ? null : parseInt($scope.selectedBarrio.barrioId),
+                'departamento': $scope.selectedDepartamentos,
+                'categoria':$scope.selectedCategorias,
+                'barrio': $scope.selectedBarrios,
                 'sitioWeb': $scope.user.sitioWeb,
                 'plan': parseInt($scope.IdPlan),
                 'imagen': $scope.user.imagen,
