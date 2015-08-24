@@ -304,7 +304,8 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
 
         //TODO: Remove. To Test only
         if (newUser) {
-            $scope.fillNewUserCamps();
+            //No new camp filled
+            //$scope.fillNewUserCamps();
             $scope.markers = [];
         } else {
             $scope.fillEditUserCamps();

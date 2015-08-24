@@ -303,6 +303,8 @@
     </div>
     <div>
         <div class="form-group col-md-12">
+            
+            <span class="obligatoryPopup" ng-show="registerUser.$invalid || !dropdownsValid" popover="Por favor ingrese todos los campos que contienen *" popover-trigger="mouseenter"></span>
             <button type="submit" class="btn btn-primary pull-right"  ng-disabled="registerUser.$invalid || !dropdownsValid" ng-show="newUser">Registrarme</button>
             <button type="submit" class="btn btn-primary pull-right"  ng-disabled="registerUser.$invalid || !dropdownsValid" ng-hide="newUser">Guardar cambios</button>
             <button class="btn btn-default pull-right" style="margin-right: 15px;" ng-click="goBackRegistration($event)"><i class="fa fa-reply"></i></button>

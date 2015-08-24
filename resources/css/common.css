@@ -842,3 +842,12 @@ label{
 .tab-pane>div{
     padding:10px;
 }
+
+.obligatoryPopup{
+    position: absolute;
+    z-index: 123;
+    top: 0;
+    right: 15px;
+    width: 106px;
+    height: 35px;
+}
