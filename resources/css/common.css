@@ -753,7 +753,7 @@ label{
 .navbar-header .fa-home{
     padding-right: 10px;
 }
-.planes>.panel-body>.row>div:first-child>span>.fa-certificate{
+.planes>.panel-body>.row>div:first-child>span>.fa-certificate,.planTypes section .fa-certificate{
     color: #E8D000;
 }
 .planes>.panel-body>.row>div:first-child>span>.fa-usd{
@@ -850,4 +850,44 @@ label{
     right: 15px;
     width: 106px;
     height: 35px;
+}
+
+.planTypes{
+    /*border-top: 10px solid #008a32;*/
+    border-top: 10px solid #2B4DA5;
+    margin-bottom: 15px;
+    background-color: #fff;
+    -webkit-box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.1);
+}
+.planTypes h1{
+    text-align: center;
+    color: #000000;
+    font-weight: bold;
+}
+
+.planTypes button{
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.planTypes section h3.blue{
+    color: #2B4DA5;
+    font-weight: bold;
+}
+
+.planTypes section{
+    text-align: center;
+    border-top: 2px solid #e1e1e1;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.planTypes section h3.orange{
+    font-weight: 700;
+    color: #ef6c0f;
 }
