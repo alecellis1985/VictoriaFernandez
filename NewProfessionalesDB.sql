@@ -91,7 +91,7 @@ CREATE TABLE `categorias` (
 
 LOCK TABLES `categorias` WRITE;
 /*!40000 ALTER TABLE `categorias` DISABLE KEYS */;
-INSERT INTO `categorias` VALUES (1,'Abogados'),(3,'Administradores de Propiedades'),(2,'Agentes Inmobiliarios'),(4,'Arquitectos'),(5,'Biólogos'),(6,'Bioquímicos y Químicos'),(7,'Contadores'),(8,'Corredores de Bolsa'),(9,'Corredores de Seguros'),(10,'Despachantes de Aduana'),(13,'Diseñadores de Indumentaria'),(12,'Diseñadores de Interiores y Decoradores'),(11,'Diseñadores Gráficos y Web'),(14,'Diseñadores Industriales'),(15,'Escribanos'),(16,'Inegenieros Agrimensores'),(17,'Ingenieros Agrónomos'),(18,'Ingenieros Civiles'),(19,'Ingenieros Eléctricos'),(20,'Ingenieros en Sistemas'),(21,'Ingenieros Industriales - Mecánicos'),(22,'Licenciados en Administración'),(24,'Licenciados En Comercio Exterior'),(23,'Licenciados en Comunicación'),(25,'Licenciados en Economía'),(26,'Licenciados en Fisioterapia'),(27,'Licenciados en Fonoaudiología'),(28,'Licenciados en Marketing'),(29,'Licenciados en Nutrición'),(31,'Licenciados en Psicomotricidad'),(30,'Licenciados en Publicidad'),(32,'Licenciados en Sistemas'),(33,'Licenciados en Turismo'),(34,'Médicos Alergistas'),(35,'Médicos Cardiólogos'),(36,'Médicos Cirujanos'),(40,'Médicos Cirujanos Plásticos'),(37,'Médicos Clínicos'),(38,'Médicos Deportólogos'),(39,'Médicos Dermatólogos'),(41,'Médicos Especialistas en Fertilidad'),(42,'Médicos Fisiatras'),(43,'Médicos Gastroenterólogos'),(44,'Médicos Neurólogos'),(45,'Médicos Oftalmólogos'),(46,'Médicos Radiólogos'),(47,'Odontólogos'),(51,'Profesores de Chino'),(49,'Profesores de Español'),(48,'Profesores de Inglés'),(50,'Profesores de Portugués'),(52,'Psicólogos'),(53,'Psicopedagogos'),(54,'Rematadores'),(55,'Técnicos Prevensionistas'),(56,'Traductores'),(57,'Veterinarios');
+INSERT INTO `categorias` VALUES (1,'Abogados'),(3,'Administradores de Propiedades'),(2,'Agentes Inmobiliarios'),(4,'Arquitectos'),(5,'Biólogos'),(6,'Bioquímicos y Químicos'),(7,'Contadores'),(8,'Corredores de Bolsa'),(9,'Corredores de Seguros'),(10,'Despachantes de Aduana'),(13,'Diseñadores de Indumentaria'),(12,'Diseñadores de Interiores y Decoradores'),(11,'Diseñadores Gráficos y Web'),(14,'Diseñadores Industriales'),(15,'Escribanos'),(16,'Inegenieros Agrimensores'),(17,'Ingenieros Agrónomos'),(18,'Ingenieros Civiles'),(19,'Ingenieros Eléctricos'),(20,'Ingenieros en Sistemas'),(21,'Ingenieros Industriales - Mecánicos'),(22,'Licenciados en Administración'),(24,'Licenciados En Comercio Exterior'),(23,'Licenciados en Comunicación'),(25,'Licenciados en Economía'),(26,'Licenciados en Fisioterapia'),(27,'Licenciados en Fonoaudiología'),(28,'Licenciados en Marketing'),(29,'Licenciados en Nutrición'),(31,'Licenciados en Psicomotricidad'),(30,'Licenciados en Publicidad'),(32,'Licenciados en Sistemas'),(33,'Licenciados en Turismo'),(34,'Médicos Alergistas'),(35,'Médicos Cardiólogos'),(36,'Médicos Cirujanos'),(40,'Médicos Cirujanos Plásticos'),(37,'Médicos Clínicos'),(38,'Médicos Deportólogos'),(39,'Médicos Dermatólogos'),(41,'Médicos Especialistas en Fertilidad'),(42,'Médicos Fisiatras'),(43,'Médicos Gastroenterólogos'),(44,'Médicos Neurólogos'),(45,'Médicos Oftalmólogos'),(46,'Médicos Radiólogos'),(47,'Odontólogos'),(51,'Profesores de Chino'),(49,'Profesores de Español'),(48,'Profesores de Inglés'),(50,'Profesores de Portugués'),(52,'Psicólogos'),(53,'Psicopedagogos'),(54,'Rematadores'),(55,'Técnicos Prevensionistas'),(56,'Traductores'),(57,'Veterinarios'),(58,'Analistas programadores');
 /*!40000 ALTER TABLE `categorias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -251,7 +251,7 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `telefono` varchar(100) NOT NULL,
   `celular` varchar(100) NOT NULL,
-  `direccion` varchar(100) DEFAULT NULL,
+  `direccion` varchar(2000) DEFAULT NULL,
   `telefonoEmp` varchar(100) NOT NULL,
   `plan` int(3) NOT NULL,
   `sitioWeb` varchar(100) NOT NULL,
@@ -271,7 +271,7 @@ CREATE TABLE `users` (
   `password` varchar(100) NOT NULL,
   `IsAdmin` tinyint(1) NOT NULL DEFAULT '0',
   `IsActive` tinyint(1) NOT NULL DEFAULT '1',
-  `markers` varchar(1000) DEFAULT NULL,
+  `markers` varchar(2000) DEFAULT NULL,
   PRIMARY KEY (`idUser`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `username` (`username`),

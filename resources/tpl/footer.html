@@ -1,4 +1,3 @@
-
 <div class='container'>
     <div class='row'>
         <i class="fa fa-arrow-circle-up pull-right" scroll-To-Top></i>
@@ -10,8 +9,8 @@
             <h3>Acceso</h3>
             <ul class='list-unstyled'>
                 <li ng-show="$root.user === undefined"><a href='#registro-usuario'>Registrarse</a></li>
-                <li ng-show="$root.user === undefined"><a ng-click="ingresarClk($event)" href="">Ingresar</a></li>
-                <li ng-show="$root.user !== undefined"><a ng-click="salirClk($event)" href="">Salir</a></li>
+                <li ng-show="$root.user === undefined"><trigger-Click text="Ingresar" selector="#profIngresar"></trigger-Click></li>
+                <li ng-show="$root.user !== undefined"><trigger-Click text="Salir" selector="#profSalir"></trigger-Click></li>
             </ul>
         </div>
         <div class='col-sm-4 col-md-4 col-xs-12'>

@@ -457,7 +457,7 @@ function setUserParams($user, $forEdit) {
     $params[2] = array("email", $user['email'], "string", 50);
     $params[3] = array("telefono", $user['telefono'], "string", 50);
     $params[4] = array("celular", $user['celular'], "string", 50);
-    $params[5] = array("direccion", $user['direccion'], "string", 50);
+    $params[5] = array("direccion", $user['direccion'], "string", 2000);
     $params[6] = array("telefonoEmp", $user['telefonoEmp'], "string", 50);
 //    $params[7] = array("departamento", (int) $user['departamento'][0]["id"], "int", 5);
 //    $params[8] = array("categoria", (int) $user['categoria'][0]["id"], "int", 5);
@@ -476,7 +476,7 @@ function setUserParams($user, $forEdit) {
     $params[21] = array("servicioOfrecido6", $user['servicioOfrecido6'], "string", 20);
     $params[9] = array("descServiceLong", $user['descServiceLong'], "string", 1000);
     $params[8] = array("username", $user['username'], "string", 50);
-    $params[7] = array("markers", $user['markers'], "string", 1000);
+    $params[7] = array("markers", $user['markers'], "string", 2000);
     if (!$forEdit) {
         $params[22] = array("imagenUrl", $user['imagenUrl'], "string", 100);
         $params[23] = array("password", md5($user['password']), "string", 100);

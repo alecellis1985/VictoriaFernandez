@@ -1,7 +1,10 @@
 body {
     padding-top: 70px;
+    font-family:'Intro Cond Black Free';
+    font-weight: bold;
     color: #888888;
 }
+
 h2{
     color: #5b616a;
 }
@@ -9,6 +12,7 @@ h2{
 header >nav{
     background: #2B4DA5;
     border-bottom: 2px solid #20429D;
+    font-family:'Intro Cond Black Free';
 }
 
 .navbar-fixed-top .navbar-header > a,.navbar-inverse .navbar-nav>li>a
@@ -521,6 +525,8 @@ p
     font-size: 42px;
 }
 
+
+
 .planes> .panel-body > .row>div:first-child>span,
 .planes> .panel-body > .row:not(:first-child) > div:nth-child(3)>span,
 .planes> .panel-body > .row:not(:first-child) > div:nth-child(4)>span{
@@ -837,6 +843,28 @@ label{
         padding-right: 5px;
         font-size: 13px;
     }
+    .planes>.panel-body>.row>div:first-child>span>.fa{
+        font-size: 28px;
+    }
+    .registerTitle{
+        padding-left: 0;
+        height: 445px;
+    }
+    .specialRow .niceBackground{
+        margin-left: 0;
+    }
+    
+    .specialRow h1{
+        font-size: 27px;
+    }
+    .specialRow h3{
+        font-size: 20px;
+        margin-top: 0px;
+    }
+    .specialRow p,.specialRow .fa {
+        font-size: 13px;
+    }
+        
 }
 
 .tab-pane>div{
@@ -875,7 +903,7 @@ label{
     font-size: 16px;
 }
 
-.planTypes section h3.blue{
+.planTypes section h2.blue{
     color: #2B4DA5;
     font-weight: bold;
 }
@@ -890,4 +918,40 @@ label{
 .planTypes section h3.orange{
     font-weight: 700;
     color: #ef6c0f;
+}
+
+.planes h2{
+    margin-top:0;
+}
+.direccion{
+    cursor:pointer;
+    padding-left: 15px;
+    float: left;
+    padding-top: 4px;
+}
+.direccion .fa-plus{
+    font-size: 24px;
+    padding-right: 5px;
+    color: #24900B;
+}
+.direccion:hover label,.direccion:hover .fa-plus{
+    color: #105401;
+}
+.direccion label{
+    cursor:pointer;
+    font-size: 20px;
+    color: #24900B;
+}
+
+.fa-minus-square-o{
+    position: absolute;
+    top: 9px;
+    right: 21px;
+    font-size: 18px;
+    color: #D41616;
+    font-weight: bold;
+    cursor:pointer;
+}
+.fa-minus-square-o:hover{
+    color: #860000;
 }

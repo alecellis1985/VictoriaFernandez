@@ -357,10 +357,6 @@ Professionals.factory('Helper', ['$rootScope', '$q', '$http', function ($rootSco
             return obj === null || obj === undefined;
         }
 
-        helper.isIeBrowser = function () {
-            return navigator.userAgent.indexOf("MSIE") != -1 || !!document.documentMode == true;
-        }
-
         helper.Message = function (level, msg) {
             $rootScope.$broadcast('event:alertMessage', {'level': level, 'message': msg});
         }
