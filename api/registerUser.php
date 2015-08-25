@@ -156,10 +156,10 @@ function insertNewUser($conn, $user) {
         try {
             $conn->beginTransaction();
             $sql = "INSERT INTO users (nombre, apellido, email, telefono, celular, direccion, telefonoEmp, "
-                    . "departamento, categoria,barrio, plan ,sitioWeb, imagenUrl, facebookUrl, twitterUrl, linkedinUrl, descService, servicioOfrecido1,"
+                    . "plan ,sitioWeb, imagenUrl, facebookUrl, twitterUrl, linkedinUrl, descService, servicioOfrecido1,"
                     . " servicioOfrecido2, servicioOfrecido3, servicioOfrecido4, servicioOfrecido5, servicioOfrecido6, descServiceLong, username, password,markers) "
-                    . "VALUES (:nombre, :apellido, :email, :telefono, :celular, :direccion, :telefonoEmp, :departamento,"
-                    . " :categoria,:barrio,:plan, :sitioWeb, :imagenUrl, :facebookUrl, :twitterUrl, :linkedinUrl, :descService, :servicioOfrecido1,"
+                    . "VALUES (:nombre, :apellido, :email, :telefono, :celular, :direccion, :telefonoEmp, "
+                    . " :plan, :sitioWeb, :imagenUrl, :facebookUrl, :twitterUrl, :linkedinUrl, :descService, :servicioOfrecido1,"
                     . " :servicioOfrecido2, :servicioOfrecido3, :servicioOfrecido4, :servicioOfrecido5, :servicioOfrecido6,:descServiceLong, :username, :password,:markers)";
             $params = setUserParams($user, false);
             if ($conn->consulta($sql, $params)) {
@@ -459,9 +459,9 @@ function setUserParams($user, $forEdit) {
     $params[4] = array("celular", $user['celular'], "string", 50);
     $params[5] = array("direccion", $user['direccion'], "string", 50);
     $params[6] = array("telefonoEmp", $user['telefonoEmp'], "string", 50);
-    $params[7] = array("departamento", (int) $user['departamento'], "int", 5);
-    $params[8] = array("categoria", (int) $user['categoria'], "int", 5);
-    $params[9] = $user['barrio'] == NULL ? array("barrio", null, "null") : array("barrio", (int) $user['barrio'], "int", 5);
+//    $params[7] = array("departamento", (int) $user['departamento'][0]["id"], "int", 5);
+//    $params[8] = array("categoria", (int) $user['categoria'][0]["id"], "int", 5);
+//    $params[9] = $user['barrio'] == NULL ? array("barrio", null, "null") : array("barrio", (int) $user['barrio'], "int", 5);
     $params[10] = array("plan", (int) $user['plan'], "int", 5);
     $params[11] = array("sitioWeb", $user['sitioWeb'], "string", 50);
     $params[12] = array("facebookUrl", $user['facebookUrl'], "string", 250);
@@ -474,12 +474,12 @@ function setUserParams($user, $forEdit) {
     $params[19] = array("servicioOfrecido4", $user['servicioOfrecido4'], "string", 20);
     $params[20] = array("servicioOfrecido5", $user['servicioOfrecido5'], "string", 20);
     $params[21] = array("servicioOfrecido6", $user['servicioOfrecido6'], "string", 20);
-    $params[22] = array("descServiceLong", $user['descServiceLong'], "string", 1000);
-    $params[23] = array("username", $user['username'], "string", 50);
+    $params[9] = array("descServiceLong", $user['descServiceLong'], "string", 1000);
+    $params[8] = array("username", $user['username'], "string", 50);
+    $params[7] = array("markers", $user['markers'], "string", 1000);
     if (!$forEdit) {
-        $params[24] = array("imagenUrl", $user['imagenUrl'], "string", 100);
-        $params[25] = array("password", md5($user['password']), "string", 100);
+        $params[22] = array("imagenUrl", $user['imagenUrl'], "string", 100);
+        $params[23] = array("password", md5($user['password']), "string", 100);
     }
-    $params[26] = array("markers", $user['markers'], "string", 1000);
     return $params;
 }
