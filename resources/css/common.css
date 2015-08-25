@@ -521,6 +521,8 @@ p
     font-size: 42px;
 }
 
+
+
 .planes> .panel-body > .row>div:first-child>span,
 .planes> .panel-body > .row:not(:first-child) > div:nth-child(3)>span,
 .planes> .panel-body > .row:not(:first-child) > div:nth-child(4)>span{
@@ -837,6 +839,28 @@ label{
         padding-right: 5px;
         font-size: 13px;
     }
+    .planes>.panel-body>.row>div:first-child>span>.fa{
+        font-size: 28px;
+    }
+    .registerTitle{
+        padding-left: 0;
+        height: 445px;
+    }
+    .specialRow .niceBackground{
+        margin-left: 0;
+    }
+    
+    .specialRow h1{
+        font-size: 27px;
+    }
+    .specialRow h3{
+        font-size: 20px;
+        margin-top: 0px;
+    }
+    .specialRow p,.specialRow .fa {
+        font-size: 13px;
+    }
+        
 }
 
 .tab-pane>div{
@@ -875,7 +899,7 @@ label{
     font-size: 16px;
 }
 
-.planTypes section h3.blue{
+.planTypes section h2.blue{
     color: #2B4DA5;
     font-weight: bold;
 }
@@ -890,4 +914,8 @@ label{
 .planTypes section h3.orange{
     font-weight: 700;
     color: #ef6c0f;
+}
+
+.planes h2{
+    margin-top:0;
 }

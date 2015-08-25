@@ -226,9 +226,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
         //TODO NEED THIS VALIDATION, PUT DROPDWON VALID IN FALSE AND VALIDATE
         $scope.dropdownsValid = false;
         $scope.dropDownCheck = function () {
-            return $scope.selectedDepartamentos.length >0 
-                    && $scope.selectedCategorias.length > 0 
-                    && ($scope.showBarrios ? $scope.selectedBarrios > 0 : true);
+            return ($scope.selectedDepartamentos.length > 0 && $scope.selectedCategorias.length > 0);
         };
 
         // TODO: Remove. ONLY FOR TEST

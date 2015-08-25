@@ -36,7 +36,7 @@ function logUser($conn, $userLogin) {
             if (!$error) {
                 $response = MessageHandler::getSuccessResponse("Successfully logged in!", $user);
             } else {
-                $response = MessageHandler::getErrorResponse("Logueo erroneo, verifique nombre de usuario y/o contraseña y vuelva a intentarlo");
+                $response = MessageHandler::getErrorResponse("El nombre de usuario y/o contraseña son inválidos, intente nuevamente.");
             }
         } else {
             echo MessageHandler::getErrorResponse("Primer consulta error.");

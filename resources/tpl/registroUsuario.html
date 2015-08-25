@@ -23,7 +23,7 @@
                         </p>
                     </div>
                     <div class="niceBackground col-xs-12 col-sm-8 col-md-6">
-                        <h3 class="superH1">Registro Gratis Por 3 Meses!</h3>
+                        <h1 class="superH1">Registro Gratis Por 3 Meses!</h1>
                         <button class="btn btn-primary" ng-click="showPlan(0)"><i class="glyphicon glyphicon-education"></i> Profesional</button>
                         <button class="btn btn-primary" ng-click="showPlan(1)"><i class="glyphicon glyphicon-briefcase"></i> Empresas</button>
                     </div>
@@ -88,6 +88,7 @@
                     <span ng-show="registerUser.passwordConfirm.$touched && registerUser.passwordConfirm.$error.compareTo" class="error">Contraseñas no coinciden.</span>
                 </div>
                 <div class="form-group col-xs-10 col-md-3">
+                    <span class="requiredAst">*</span>
                     <input type="email" class="form-control" name="email" ng-model="user.email" maxlength="60" placeholder="Email" required
                            email-unique ng-model-options="{ debounce: 500 }">
                     <span ng-show="registerUser.email.$touched && registerUser.email.$error.required" class="error">Email es requerido.</span>
@@ -97,7 +98,6 @@
                     <span ng-show="registerUser.email.$error.emailUnique && registerUser.email.$touched" class="error">
                         Email en uso
                     </span>
-
                 </div>
                 <div class="form-group">
                     <span class="requiredAst">*</span>
@@ -144,7 +144,7 @@
                 </div>
                 <div class="form-group col-xs-12 col-md-3">
                     <!--<span class="requiredAst">*</span>-->
-                    <input type="text" name="direccion" class="form-control" ng-model="user.direccion" maxlength="100" placeholder="Direccion" required>
+                    <input type="text" name="direccion" class="form-control" ng-model="user.direccion" maxlength="100" placeholder="Direccion">
                     <!--<span ng-show="registerUser.direccion.$touched && registerUser.direccion.$error.required" class="error">Direccion es requerido</span>-->
                 </div>
             </div>
