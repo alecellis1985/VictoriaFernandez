@@ -16,6 +16,25 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
         $scope.isCollapsed = newUser;
         $scope.editMode = newUser;
         $scope.renderMap = false;
+        $scope.direcciones = [];
+        
+        $scope.addDireccion = function(){
+            $scope.direcciones.push(new Direccion());
+        }
+        
+        function Direccion(){
+            this.val = '';
+        }
+        
+        $scope.removeDireccion = function(direccion){
+            var direccionesLength = $scope.direcciones.length;
+            while(direccionesLength--){
+                if($scope.direcciones[direccionesLength].$$hashKey === direccion.$$hashKey){
+                    $scope.direcciones.splice(direccionesLength,1);
+                    direccionesLength = 0;
+                }
+            }
+        }
 
         $scope.profesionalesAvailablePlans = {
             0: {//Profesional
@@ -223,6 +242,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
             }
         };
 
+        
         //TODO NEED THIS VALIDATION, PUT DROPDWON VALID IN FALSE AND VALIDATE
         $scope.dropdownsValid = false;
         $scope.dropDownCheck = function () {
@@ -246,7 +266,10 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
 
         $scope.fillEditUserCamps = function () {
             //TODO FILL THE EDIT USER CAMPS WITH DROPDOWNS
+            //TODO Check if direccion is working
+            
             $scope.user = userData.data.user;
+            $scope.direcciones = $.parseJSON($scope.user.direccion);
             $scope.user.passwordConfirm = userData.data.user.password;
             $scope.currentUsername = userData.data.user.username;
             $scope.currentEmail = userData.data.user.email;
@@ -305,6 +328,8 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
             //No new camp filled
             //$scope.fillNewUserCamps();
             $scope.markers = [];
+            //Add first input
+            $scope.addDireccion();
         } else {
             $scope.fillEditUserCamps();
         }
@@ -354,7 +379,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
                 'email': $scope.user.email,
                 'telefono': $scope.user.telefono,
                 'celular': $scope.user.celular,
-                'direccion': $scope.user.direccion,
+                'direccion': JSON.stringify($scope.direcciones),
                 'telefonoEmp': $scope.user.telefonoEmp,
                 'departamento': $scope.selectedDepartamentos,
                 'categoria':$scope.selectedCategorias,

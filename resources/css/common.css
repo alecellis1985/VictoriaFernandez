@@ -919,3 +919,35 @@ label{
 .planes h2{
     margin-top:0;
 }
+.direccion{
+    cursor:pointer;
+    padding-left: 15px;
+    float: left;
+    padding-top: 4px;
+}
+.direccion .fa-plus{
+    font-size: 24px;
+    padding-right: 5px;
+    color: #24900B;
+}
+.direccion:hover label,.direccion:hover .fa-plus{
+    color: #105401;
+}
+.direccion label{
+    cursor:pointer;
+    font-size: 20px;
+    color: #24900B;
+}
+
+.fa-minus-square-o{
+    position: absolute;
+    top: 9px;
+    right: 21px;
+    font-size: 18px;
+    color: #D41616;
+    font-weight: bold;
+    cursor:pointer;
+}
+.fa-minus-square-o:hover{
+    color: #860000;
+}

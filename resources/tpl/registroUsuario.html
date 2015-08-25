@@ -142,16 +142,11 @@
                     <div ng-dropdown-multiselect="" checkboxes="true" translation-texts="barriosTexts" options="barrios" extra-settings="barriosSettings"  selected-model="selectedBarrios"></div>
                     <!--<dropdown-w-validation check-fn="checkBarrio(elem)" error-msg="Seleccione un barrio de Mdeo" post-Selection-Fn="dropDownCheck()" selected-Elem="selectedBarrio" name-Prop="barrioNombre" elements-Arr="barrios" placeholder-Filter="Filtro de barrios"></dropdown-w-validation>-->
                 </div>
-                <div class="form-group col-xs-12 col-md-3">
-                    <!--<span class="requiredAst">*</span>-->
-                    <input type="text" name="direccion" class="form-control" ng-model="user.direccion" maxlength="100" placeholder="Direccion">
-                    <!--<span ng-show="registerUser.direccion.$touched && registerUser.direccion.$error.required" class="error">Direccion es requerido</span>-->
-                </div>
             </div>
             <div class="row ">
                 <div class="form-group col-xs-12 col-md-4">
                     <span class="requiredAst">*</span>
-                    <input type="text" name="telefonoEmp" class="form-control" ng-model="user.telefonoEmp" maxlength="25" placeholder="Telefono Empresa" required ng-pattern="/^[0-9]+$/">
+                    <input type="text" name="telefonoEmp" class="form-control" ng-model="user.telefonoEmp" maxlength="25" placeholder="Teléfono Empresa" required ng-pattern="/^[0-9]+$/">
                     <span ng-show="registerUser.telefonoEmp.$touched && registerUser.telefonoEmp.$error.required" class="error">Teléfono es requerido</span>
                     <span ng-show="registerUser.telefonoEmp.$touched && !registerUser.telefonoEmp.$error.required && registerUser.telefonoEmp.$error.pattern" class="error">Teléfono inválido</span>
                 </div>
@@ -183,7 +178,12 @@
                     <input type="url" name="linkedinUrl" class="form-control" title="Clickea en tu perfil de linkedin y copia la url del browser" ng-model="user.linkedinUrl" placeholder="Enlace de Linkedin">
                     <span ng-show="registerUser.linkedinUrl.$touched && registerUser.linkedinUrl.$error.url" class="error">URL inválida</span>
                 </div>
-
+            </div>
+            <div class="row ">
+                <div class="form-group col-xs-12 col-md-3" ng-repeat="direccion in direcciones">                    
+                    <input type="text" name="direccion" class="form-control" ng-model="direccion.val" maxlength="50" placeholder="Dirección"><i class="fa fa-minus-square-o" ng-click="removeDireccion(direccion)" title="Borrar Dirección"></i>
+                </div>
+                <div class="direccion" ng-click="addDireccion()" ng-hide="direcciones.length > 9"><i class="fa fa-plus"></i><label>Agregar dirección</label></div>
             </div>
         </div>
     </div>
