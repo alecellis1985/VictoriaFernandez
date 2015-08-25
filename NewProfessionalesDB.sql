@@ -1,9 +1,8 @@
-DROP DATABASE IF EXISTS `profesionales`;
-CREATE DATABASE `profesionales` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE  IF NOT EXISTS `profesionales` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `profesionales`;
 -- MySQL dump 10.13  Distrib 5.5.44, for debian-linux-gnu (x86_64)
 --
--- Host: 127.0.0.1    Database: profesionales
+-- Host: 127.0.0.1    Database: profesionales2
 -- ------------------------------------------------------
 -- Server version	5.5.44-0ubuntu0.14.04.1
 
@@ -67,6 +66,7 @@ CREATE TABLE `categoria_usuario` (
 
 LOCK TABLES `categoria_usuario` WRITE;
 /*!40000 ALTER TABLE `categoria_usuario` DISABLE KEYS */;
+INSERT INTO `categoria_usuario` VALUES (1,1),(1,2),(1,3);
 /*!40000 ALTER TABLE `categoria_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,32 +93,6 @@ LOCK TABLES `categorias` WRITE;
 /*!40000 ALTER TABLE `categorias` DISABLE KEYS */;
 INSERT INTO `categorias` VALUES (1,'Abogados'),(3,'Administradores de Propiedades'),(2,'Agentes Inmobiliarios'),(4,'Arquitectos'),(5,'Biólogos'),(6,'Bioquímicos y Químicos'),(7,'Contadores'),(8,'Corredores de Bolsa'),(9,'Corredores de Seguros'),(10,'Despachantes de Aduana'),(13,'Diseñadores de Indumentaria'),(12,'Diseñadores de Interiores y Decoradores'),(11,'Diseñadores Gráficos y Web'),(14,'Diseñadores Industriales'),(15,'Escribanos'),(16,'Inegenieros Agrimensores'),(17,'Ingenieros Agrónomos'),(18,'Ingenieros Civiles'),(19,'Ingenieros Eléctricos'),(20,'Ingenieros en Sistemas'),(21,'Ingenieros Industriales - Mecánicos'),(22,'Licenciados en Administración'),(24,'Licenciados En Comercio Exterior'),(23,'Licenciados en Comunicación'),(25,'Licenciados en Economía'),(26,'Licenciados en Fisioterapia'),(27,'Licenciados en Fonoaudiología'),(28,'Licenciados en Marketing'),(29,'Licenciados en Nutrición'),(31,'Licenciados en Psicomotricidad'),(30,'Licenciados en Publicidad'),(32,'Licenciados en Sistemas'),(33,'Licenciados en Turismo'),(34,'Médicos Alergistas'),(35,'Médicos Cardiólogos'),(36,'Médicos Cirujanos'),(40,'Médicos Cirujanos Plásticos'),(37,'Médicos Clínicos'),(38,'Médicos Deportólogos'),(39,'Médicos Dermatólogos'),(41,'Médicos Especialistas en Fertilidad'),(42,'Médicos Fisiatras'),(43,'Médicos Gastroenterólogos'),(44,'Médicos Neurólogos'),(45,'Médicos Oftalmólogos'),(46,'Médicos Radiólogos'),(47,'Odontólogos'),(51,'Profesores de Chino'),(49,'Profesores de Español'),(48,'Profesores de Inglés'),(50,'Profesores de Portugués'),(52,'Psicólogos'),(53,'Psicopedagogos'),(54,'Rematadores'),(55,'Técnicos Prevensionistas'),(56,'Traductores'),(57,'Veterinarios');
 /*!40000 ALTER TABLE `categorias` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `departamento_user`
---
-
-DROP TABLE IF EXISTS `departamento_user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `departamento_user` (
-  `idUser` int(11) NOT NULL,
-  `idBarrio` int(11) NOT NULL,
-  PRIMARY KEY (`idUser`,`idBarrio`),
-  KEY `fk_deptoBarrio_idx` (`idBarrio`),
-  CONSTRAINT `fk_userId` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`),
-  CONSTRAINT `fk_barrio` FOREIGN KEY (`idBarrio`) REFERENCES `barrios` (`barrioId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `departamento_user`
---
-
-LOCK TABLES `departamento_user` WRITE;
-/*!40000 ALTER TABLE `departamento_user` DISABLE KEYS */;
-/*!40000 ALTER TABLE `departamento_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -212,29 +186,28 @@ INSERT INTO `formasdepago` VALUES (3,3,1,1,0,'dawdaw'),(8,2,1,1,0,'queso');
 UNLOCK TABLES;
 
 --
--- Table structure for table `mapa`
+-- Table structure for table `localidad_user`
 --
 
-DROP TABLE IF EXISTS `mapa`;
+DROP TABLE IF EXISTS `localidad_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `mapa` (
-  `IdMapa` int(11) NOT NULL AUTO_INCREMENT,
-  `IdUser` int(11) NOT NULL,
-  `latitude` varchar(30) NOT NULL,
-  `longitude` varchar(30) NOT NULL,
-  PRIMARY KEY (`IdMapa`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+CREATE TABLE `localidad_user` (
+  `idUser` int(11) NOT NULL,
+  `idLocalidad` int(11) NOT NULL,
+  PRIMARY KEY (`idUser`,`idLocalidad`),
+  KEY `fk_deptoBarrio_idx` (`idLocalidad`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `mapa`
+-- Dumping data for table `localidad_user`
 --
 
-LOCK TABLES `mapa` WRITE;
-/*!40000 ALTER TABLE `mapa` DISABLE KEYS */;
-INSERT INTO `mapa` VALUES (10,10,'-34.88719824359768','-56.13764762878418'),(11,10,'-34.88226973385945','-56.165971755981445'),(12,10,'-34.89564642972746','-56.16442680358887'),(18,2,'-34.892548862348036','-56.15618705749512');
-/*!40000 ALTER TABLE `mapa` ENABLE KEYS */;
+LOCK TABLES `localidad_user` WRITE;
+/*!40000 ALTER TABLE `localidad_user` DISABLE KEYS */;
+INSERT INTO `localidad_user` VALUES (1,82),(2,82),(3,82),(1,93);
+/*!40000 ALTER TABLE `localidad_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -298,6 +271,7 @@ CREATE TABLE `users` (
   `password` varchar(100) NOT NULL,
   `IsAdmin` tinyint(1) NOT NULL DEFAULT '0',
   `IsActive` tinyint(1) NOT NULL DEFAULT '1',
+  `markers` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`idUser`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `username` (`username`),
@@ -312,7 +286,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Alec','Ellis','alecellis1985@hotmail.com','26013794','098635923','m.tajes 7530','26013794',5,'','','https://www.facebook.com/alec.ellis.714',NULL,NULL,'construccion de paginas web','SEO','OPTIMIZATION',NULL,NULL,NULL,NULL,'database performance optimization','Alec10','1e280ae7584758f2efd35319690db75b',1,1),(2,'PruebaNombre','PruebaApellido','prueba@gmail.com','00000000000','0000000000000000000','prueba 1111','11111111111',1,'http://www.prueba.com','793b899a4f8fdf8109b9b0e71aa0f28e_3f1b7ccad63d40a7b4c27dda225bf941.YTS','http://www.pruebaFB.com','http://www.pruebaTW.com','http://www.pruebaLNK.com','Desc Prueba 1','pureba clave 1','pureba clave 2','pureba clave 3','pureba clave 4','pureba clave 5','pureba clave 6','detalles prueba','prueba1','3f1b7ccad63d40a7b4c27dda225bf941',0,1),(3,'empresaprueba','LadenON','empresaprueba1@gmail.com','26013794','098635923','empresaprueba1 dir','000000000001',7,'http://www.empresaprueba1.com','793b899a4f8fdf8109b9b0e71aa0f28e_a0408dd3baa0f0861abb80e7f48db196.YTS','http://www.empresaprueba1fb.com','http://www.empresaprueba1tw.com','http://www.empresaprueba1lnk.com','desc http://www.empresaprueba1.com','clar empr1','clar empr2','clar empr3','clar empr4','clar empr5','clar empr6','desc clar empr1','empresaprueba1','a0408dd3baa0f0861abb80e7f48db196',0,1);
+INSERT INTO `users` VALUES (1,'Alec','Ellis','alecellis1985@hotmail.com','26013794','098635923','m.tajes 7530','26013794',5,'','','https://www.facebook.com/alec.ellis.714',NULL,NULL,'construccion de paginas web','SEO','OPTIMIZATION',NULL,NULL,NULL,NULL,'database performance optimization','Alec10','1e280ae7584758f2efd35319690db75b',1,1,NULL),(2,'PruebaNombre','PruebaApellido','prueba@gmail.com','00000000000','0000000000000000000','prueba 1111','11111111111',1,'http://www.prueba.com','793b899a4f8fdf8109b9b0e71aa0f28e_3f1b7ccad63d40a7b4c27dda225bf941.YTS','http://www.pruebaFB.com','http://www.pruebaTW.com','http://www.pruebaLNK.com','Desc Prueba 1','pureba clave 1','pureba clave 2','pureba clave 3','pureba clave 4','pureba clave 5','pureba clave 6','detalles prueba','prueba1','3f1b7ccad63d40a7b4c27dda225bf941',0,1,NULL),(3,'empresaprueba','LadenON','empresaprueba1@gmail.com','26013794','098635923','empresaprueba1 dir','000000000001',7,'http://www.empresaprueba1.com','793b899a4f8fdf8109b9b0e71aa0f28e_a0408dd3baa0f0861abb80e7f48db196.YTS','http://www.empresaprueba1fb.com','http://www.empresaprueba1tw.com','http://www.empresaprueba1lnk.com','desc http://www.empresaprueba1.com','clar empr1','clar empr2','clar empr3','clar empr4','clar empr5','clar empr6','desc clar empr1','empresaprueba1','a0408dd3baa0f0861abb80e7f48db196',0,1,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -325,4 +299,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-23  1:29:42
+-- Dump completed on 2015-08-24 21:19:16

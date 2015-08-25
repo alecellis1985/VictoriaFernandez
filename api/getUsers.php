@@ -6,39 +6,63 @@ function getUsers($categoria, $departamento, $nombreProf = null) {
     $response = null;
 
     $addNombreProfToQuery = "";
-    if (isset($nombreProf) && $nombreProf != '') {     
+    if (isset($nombreProf) && $nombreProf != '') {
         //$addNombreProfToQuery = "concat_ws(' ',u.nombre,u.apellido) like '%".$nombreProf."%' and "; 
         $addNombreProfToQuery = "concat_ws(' ',u.nombre,u.apellido) like concat('%', :nombreProf, '%') and ";
     }
 
     if ($conn->conectar()) {
-        
-        //New query EXCEPT MONTEVIDEO
-        $sql = "SELECT u.idUser,u.nombre,u.apellido,u.email,u.telefono,u.celular,u.direccion,u.telefonoEmp," .
-                "u.sitioWeb,u.imagenUrl,u.facebookUrl,u.twitterUrl," .
-                "u.linkedinUrl,u.descService,u.servicioOfrecido1,u.servicioOfrecido2,u.servicioOfrecido3," .
-                "u.servicioOfrecido4,u.servicioOfrecido5,u.servicioOfrecido6,u.descServiceLong,u.markers," .
-                "fp.*,da.* FROM " .
-                "users u left join formasdepago fp on u.idUser = fp.idUser " .
-                "left join diasatencion da on u.idUser = da.idUser " .
-                "join localidad_user du on u.idUser = du.idUser AND (du.localidadId = :departamento OR :departamento2 = -1 )" .
-                "join categoria_usuario cu on u.idUser = cu.idUser AND (cu.idCategoria = :categoria OR :categoria2 = -1) " .
-                " WHERE " . $addNombreProfToQuery .
-                " IsAdmin = 0 and IsActive = 1 ORDER BY nombre";
+        $localidadId = -1;
 
-        $params = array();
-        $params[0] = array("departamento", (int) $departamento, "int");
-        $params[1] = array("categoria", (int) $categoria, "int");
-        $params[2] = array("departamento2", (int) $departamento, "int");
-        $params[3] = array("categoria2", (int) $categoria, "int");
-        
-        if (isset($nombreProf) && $nombreProf != '') {
-            // variable set, not empty string, not falsy
-            $params[4] = array("nombreProf", $nombreProf, "string", 25);
+        //New query EXCEPT MONTEVIDEO
+        if ((int) $departamento === 1) {
+            $sqlGetLocId = "SELECT barrioId FROM barrios b JOIN departamentos d ON b.departamentoId = d.idDepartamento " .
+                    "WHERE b.departamentoId = :deptoId";
+
+            $paramsLoc = array();
+            $paramsLoc[0] = array("deptoId", (int) $departamento, "int");
+        } else {
+            $sqlGetLocId = "SELECT barrioId FROM barrios b JOIN departamentos d ON b.departamentoId = d.idDepartamento " .
+                    "WHERE b.departamentoId = :deptoId";
+
+            $paramsLoc = array();
+            $paramsLoc[0] = array("deptoId", (int) $departamento, "int");
         }
-        if ($conn->consulta($sql, $params)) {
-            $users = $conn->restantesRegistros();
-            $response = MessageHandler::getSuccessResponse("", $users);
+
+        if ($conn->consulta($sqlGetLocId, $paramsLoc)) {
+            $localidades = $conn->restantesRegistros();
+            if (isset($localidades[0]))
+                $localidadId = $localidades[0]->barrioId;
+
+
+            $sql = "SELECT u.idUser,u.nombre,u.apellido,u.email,u.telefono,u.celular,u.direccion,u.telefonoEmp," .
+                    "u.sitioWeb,u.imagenUrl,u.facebookUrl,u.twitterUrl," .
+                    "u.linkedinUrl,u.descService,u.servicioOfrecido1,u.servicioOfrecido2,u.servicioOfrecido3," .
+                    "u.servicioOfrecido4,u.servicioOfrecido5,u.servicioOfrecido6,u.descServiceLong,u.markers," .
+                    "fp.*,da.* FROM " .
+                    "users u left join formasdepago fp on u.idUser = fp.idUser " .
+                    "left join diasatencion da on u.idUser = da.idUser " .
+                    "join localidad_user du on u.idUser = du.idUser AND (du.idLocalidad = :departamento OR :departamento2 = -1 ) " .
+                    "join categoria_usuario cu on u.idUser = cu.idUser AND (cu.idCategoria = :categoria OR :categoria2 = -1) " .
+                    " WHERE " . $addNombreProfToQuery .
+                    " IsAdmin = 0 and IsActive = 1 ORDER BY nombre";
+
+            $params = array();
+            $params[0] = array("departamento", (int) $localidadId, "int");
+            $params[1] = array("categoria", (int) $categoria, "int");
+            $params[2] = array("departamento2", (int) $localidadId, "int");
+            $params[3] = array("categoria2", (int) $categoria, "int");
+
+            if (isset($nombreProf) && $nombreProf != '') {
+                // variable set, not empty string, not falsy
+                $params[4] = array("nombreProf", $nombreProf, "string", 25);
+            }
+            if ($conn->consulta($sql, $params)) {
+                $users = $conn->restantesRegistros();
+                $response = MessageHandler::getSuccessResponse("", $users);
+            } else {
+                $response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
+            }
         } else {
             $response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
         }

@@ -4,6 +4,7 @@ function getDepartamentos() {
     $response = null;
     if ($conn->conectar()) {
         $sql = "SELECT * FROM departamentos ORDER BY nombreDepartamento"; 
+        //$sql = "SELECT * FROM barrios b JOIN departamentos d ON b.departamentoId = d.idDepartamento";
         if ($conn->consulta($sql)) {
             $depto = $conn->restantesRegistros(); 
             $response = MessageHandler::getSuccessResponse("",$depto);
