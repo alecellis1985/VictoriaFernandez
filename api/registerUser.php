@@ -131,7 +131,7 @@ function registerUser() {
         $filenameAndExt = explode(".", $_FILES['file']['name']);
         $fileNewUrl = getNewFileUrl($filenameAndExt[0], $filenameAndExt[1], $user['username']);
         $destination = '../uploaded/' . $fileNewUrl;
-        
+
         if (move_uploaded_file($_FILES['file']['tmp_name'], $destination)) {
             $user['imagenUrl'] = $fileNewUrl;
             echo insertNewUser($conn, $user);
@@ -193,6 +193,53 @@ function insertNewUser($conn, $user) {
 
                         if ($conn->consulta($sqlDias, $paramsDias)) {
                             $conn->closeCursor();
+
+                            //TODO: Save catgs and deptos.
+
+                            $matches = array();
+                            $categorias = $user['categoria'];
+                            preg_match_all('!\d+!', $categorias, $matches);
+
+                            foreach ($matches[0] as $categoria) {
+                                $sqlInsertCat = "INSERT INTO categoria_usuario VALUES (:idCategoria, :idUser)";
+
+                                $paramsInsertCat = array();
+                                $paramsInsertCat[0] = array("idCategoria", (int) $categoria, "int");
+                                $paramsInsertCat[1] = array("idUser", (int) $user["id"], "int");
+
+                                if (!$conn->consulta($sqlInsertCat, $paramsInsertCat)) {
+                                    $error = true;
+                                }
+                            }
+
+                            $matches = array();
+                            $departamentos = $user['departamento'];
+                            preg_match_all('!\d+!', $departamentos, $matches);
+
+                            foreach ($matches[0] as $departamento) {
+                                $sqlGetLocId = "SELECT barrioId FROM departamentos d join barrios b on d.idDepartamento = b.departamentoId where d.idDepartamento = :idDepartamento";
+
+                                $paramsGetLoc = array();
+                                $paramsGetLoc[0] = array("idDepartamento", (int) $departamento, "int");
+
+                                if (!$conn->consulta($sqlGetLocId, $paramsGetLoc)) {
+                                    $error = true;
+                                } else {
+                                    $localidades = $conn->restantesRegistros();
+                                    if (isset($localidades[0]))
+                                        $localidadId = $localidades[0]->barrioId;
+
+                                    $sqlInsertDpto = "INSERT INTO localidad_user VALUES (:idUser, :idLocalidad)";
+
+                                    $paramsInsertDpto = array();
+                                    $paramsInsertDpto[0] = array("idLocalidad", (int) $localidadId, "int");
+                                    $paramsInsertDpto[1] = array("idUser", (int) $user["id"], "int");
+
+                                    if (!$conn->consulta($sqlInsertDpto, $paramsInsertDpto)) {
+                                        $error = true;
+                                    }
+                                }
+                            }
                         } else {
                             $error = true;
                         }
@@ -212,6 +259,7 @@ function insertNewUser($conn, $user) {
                 echo MessageHandler::getErrorResponse("Primer consulta error.");
             }
         } catch (Exception $exc) {
+            var_dump($exc->getMessage());
             $response = null;
             $conn->rollbackTransaction();
         }
@@ -305,12 +353,12 @@ function updateUser($conn, $user) {
                     $error = true;
                 }
 
-                    if (!$error) {
-                        $conn->commitTransaction();
-                        $response = MessageHandler::getSuccessResponse("Cambios guardados exitosamente!", $user);
-                    } else {
-                        $response = MessageHandler::getErrorResponse("Mi puto error.");
-                    }
+                if (!$error) {
+                    $conn->commitTransaction();
+                    $response = MessageHandler::getSuccessResponse("Cambios guardados exitosamente!", $user);
+                } else {
+                    $response = MessageHandler::getErrorResponse("Mi puto error.");
+                }
             } else {
                 echo MessageHandler::getErrorResponse("Primer consulta error.Edit");
             }
@@ -333,6 +381,7 @@ function getArrayFromRequest($request) {
     $diasAtencion = json_decode($request->post("diasAtencion"));
     // var_dump($diasAtencion);
     $formaDePago = json_decode($request->post("formaDePago"));
+
     return array(
         "id" => is_null($request->post('id')) ? "" : $request->post('id'),
         "nombre" => is_null($request->post('nombre')) ? "" : $request->post('nombre'),
@@ -459,9 +508,9 @@ function setUserParams($user, $forEdit) {
     $params[4] = array("celular", $user['celular'], "string", 50);
     $params[5] = array("direccion", $user['direccion'], "string", 50);
     $params[6] = array("telefonoEmp", $user['telefonoEmp'], "string", 50);
-//    $params[7] = array("departamento", (int) $user['departamento'][0]["id"], "int", 5);
-//    $params[8] = array("categoria", (int) $user['categoria'][0]["id"], "int", 5);
-//    $params[9] = $user['barrio'] == NULL ? array("barrio", null, "null") : array("barrio", (int) $user['barrio'], "int", 5);
+    $params[7] = array("markers", $user['markers'], "string", 1000);
+    $params[8] = array("username", $user['username'], "string", 50);
+    $params[9] = array("descServiceLong", $user['descServiceLong'], "string", 1000);
     $params[10] = array("plan", (int) $user['plan'], "int", 5);
     $params[11] = array("sitioWeb", $user['sitioWeb'], "string", 50);
     $params[12] = array("facebookUrl", $user['facebookUrl'], "string", 250);
@@ -474,9 +523,6 @@ function setUserParams($user, $forEdit) {
     $params[19] = array("servicioOfrecido4", $user['servicioOfrecido4'], "string", 20);
     $params[20] = array("servicioOfrecido5", $user['servicioOfrecido5'], "string", 20);
     $params[21] = array("servicioOfrecido6", $user['servicioOfrecido6'], "string", 20);
-    $params[9] = array("descServiceLong", $user['descServiceLong'], "string", 1000);
-    $params[8] = array("username", $user['username'], "string", 50);
-    $params[7] = array("markers", $user['markers'], "string", 1000);
     if (!$forEdit) {
         $params[22] = array("imagenUrl", $user['imagenUrl'], "string", 100);
         $params[23] = array("password", md5($user['password']), "string", 100);
