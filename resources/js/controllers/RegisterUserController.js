@@ -17,20 +17,20 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
         $scope.editMode = newUser;
         $scope.renderMap = false;
         $scope.direcciones = [];
-        
-        $scope.addDireccion = function(){
+
+        $scope.addDireccion = function () {
             $scope.direcciones.push(new Direccion());
         }
-        
-        function Direccion(){
+
+        function Direccion() {
             this.val = '';
         }
-        
-        $scope.removeDireccion = function(direccion){
+
+        $scope.removeDireccion = function (direccion) {
             var direccionesLength = $scope.direcciones.length;
-            while(direccionesLength--){
-                if($scope.direcciones[direccionesLength].$$hashKey === direccion.$$hashKey){
-                    $scope.direcciones.splice(direccionesLength,1);
+            while (direccionesLength--) {
+                if ($scope.direcciones[direccionesLength].$$hashKey === direccion.$$hashKey) {
+                    $scope.direcciones.splice(direccionesLength, 1);
                     direccionesLength = 0;
                 }
             }
@@ -242,7 +242,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
             }
         };
 
-        
+
         //TODO NEED THIS VALIDATION, PUT DROPDWON VALID IN FALSE AND VALIDATE
         $scope.dropdownsValid = false;
         $scope.dropDownCheck = function () {
@@ -267,21 +267,35 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
         $scope.fillEditUserCamps = function () {
             //TODO FILL THE EDIT USER CAMPS WITH DROPDOWNS
             //TODO Check if direccion is working
-            
+
             $scope.user = userData.data.user;
-            $scope.direcciones = $.parseJSON($scope.user.direccion);
-            $scope.user.passwordConfirm = userData.data.user.password;
+            $scope.direcciones = userData.data.direcciones;
+            //Workaroudn a la validation del password.
+//            $scope.user.password = "XXXXXX";
+//            $scope.user.passwordConfirm = "XXXXXX";
+            //
             $scope.currentUsername = userData.data.user.username;
             $scope.currentEmail = userData.data.user.email;
-            var categoriaId = parseInt(userData.data.user.categoria);
-            $scope.selectedCategoria = $scope.categorias.sort(sortById("categoriaId"))[categoriaId];
 
-            var departamentoId = parseInt(userData.data.user.departamento);
-            $scope.depSelected = $scope.departamentosList.sort(sortById("idDepartamento"))[departamentoId];
+            $.each(userData.data.categorias, function (index, element) {
+                $scope.selectedCategorias.push({id: element.categoriaId});
+            });
 
-            if ($scope.depSelected.nombreDepartamento.toLowerCase() === "montevideo") {
-                var barrioId = parseInt(userData.data.user.barrio);
-                $scope.selectedBarrio = $scope.barrios.sort(sortById("barrioId"))[barrioId];
+            var mvdeoSelected = false;
+            $.each(userData.data.departamentos, function (index, element) {
+                if ($.inArray({id: element.idDepartamento}, $scope.depSelected) === -1)
+                    $scope.selectedDepartamentos.push({id: element.idDepartamento});
+
+                if (element.nombreDepartamento.toLowerCase() === "montevideo")
+                    mvdeoSelected = true;
+            });
+
+            if (mvdeoSelected) {
+                $scope.showBarrios = true;
+                $.each(userData.data.departamentos, function (index, element) {
+                    if (element.barrioNombre.toLowerCase() !== "default")
+                        $scope.selectedBarrios.push({id: element.barrioId});
+                });
 
             }
             var diasAtencion = {};
@@ -373,7 +387,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
             var markers = JSON.stringify(markersArr);
             var categorias = {};
             var i;
-            for(i = 0; i< $scope.selectedCategorias.length; i++){
+            for (i = 0; i < $scope.selectedCategorias.length; i++) {
                 $.extend(categorias, {id: $scope.selectedCategorias[i]});
             }
 //            var categoriasArr = $scope.selectedCategorias.map(function (obj) {

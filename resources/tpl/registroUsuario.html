@@ -31,7 +31,7 @@
 
                 </div>
             </div>
-            
+
             <planes-details selected-plan-fn="showRegistration(e,tipo,duracion,categoria)" selected-plan="selectedPlan" elem-colapsed="isCollapsed" available-plans="profesionalesAvailablePlans"></planes-details>
         </div>  
     </div>
@@ -73,14 +73,14 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-xs-12 col-md-4" ng-show="newUser">
+                <div class="form-group col-xs-12 col-md-4" ng-if="newUser">
                     <span class="requiredAst">*</span>
                     <input type="password" class="form-control" name="password" ng-model="user.password" maxlength="20" placeholder="Contraseña" 
                            required ng-minlength=6>
                     <span ng-show="registerUser.password.$error.minlength" class="error">La contraseña debe ser de al menos 6 caracteres.</span>
                     <span ng-show="registerUser.password.$touched && registerUser.password.$error.required" class="error">Contraseña es requerida.</span>
                 </div>
-                <div class="form-group col-xs-12 col-md-4" ng-show="newUser">
+                <div class="form-group col-xs-12 col-md-4" ng-if="newUser">
                     <span class="requiredAst">*</span>
                     <input type="password" class="form-control" name="passwordConfirm" ng-model="user.passwordConfirm" maxlength="20" placeholder="Confirmar Contraseña" 
                            required ng-minlength=6 ng-model-options="{ updateOn: 'blur' }" compare-to="registerUser.password.$viewValue">
@@ -133,9 +133,9 @@
                     <div ng-dropdown-multiselect="" checkboxes="true" translation-texts="categoriasTexts" options="categorias" extra-settings="categoriaSettings"  selected-model="selectedCategorias"></div>
                 </div>
                 <div class="form-group col-xs-12 col-md-3">
-                    
+
                     <div ng-dropdown-multiselect="" checkboxes="true" translation-texts="departamentosTexts" events="DepartamentosEvents" options="departamentosList" extra-settings="departamentosSettings"  selected-model="selectedDepartamentos"></div>
-                      
+
                     <!--<dropdown-w-validation check-fn="checkDepto(elem)" error-msg="Seleccione un departamento" post-Selection-Fn="dropDownCheck()" selected-Elem="depSelected" name-Prop="nombreDepartamento" elements-Arr="departamentosList" placeholder-Filter="Filtro de departamentos"></dropdown-w-validation>--> 
                 </div>
                 <div class="form-group col-xs-12 col-md-3" ng-show="showBarrios">                    
@@ -203,7 +203,7 @@
                     <map-Set-Markers  markers-Arr="markers"></map-Set-Markers>
                 </div>
             </div>
-            
+
         </div>
     </div>
     <div class="panel panel-primary">
@@ -303,11 +303,12 @@
     </div>
     <div>
         <div class="form-group col-md-12">
-            
+
             <span class="obligatoryPopup" ng-show="registerUser.$invalid || !dropdownsValid" popover="Por favor ingrese todos los campos que contienen *" popover-trigger="mouseenter"></span>
             <button type="submit" class="btn btn-primary pull-right"  ng-disabled="registerUser.$invalid || !dropdownsValid" ng-show="newUser">Registrarme</button>
             <button type="submit" class="btn btn-primary pull-right"  ng-disabled="registerUser.$invalid || !dropdownsValid" ng-hide="newUser">Guardar cambios</button>
             <button class="btn btn-default pull-right" style="margin-right: 15px;" ng-click="goBackRegistration($event)"><i class="fa fa-reply"></i></button>
         </div>
     </div>
+
 </form>
