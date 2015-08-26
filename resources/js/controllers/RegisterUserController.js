@@ -270,10 +270,6 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
 
             $scope.user = userData.data.user;
             $scope.direcciones = userData.data.direcciones;
-            //Workaroudn a la validation del password.
-//            $scope.user.password = "XXXXXX";
-//            $scope.user.passwordConfirm = "XXXXXX";
-            //
             $scope.currentUsername = userData.data.user.username;
             $scope.currentEmail = userData.data.user.email;
 
@@ -321,7 +317,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
 
             $scope.IdPlan = $scope.user.plan;
 
-            $scope.markers = userData.data.markers;
+            $scope.markers = $.parseJSON(userData.data.user.markers);
 
             $scope.dropDownCheck();
 
