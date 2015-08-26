@@ -128,6 +128,7 @@ function getLoggedUser() {
             $users = $conn->restantesRegistros();
             $currentUser = $users[0];
             $userData['user'] = $currentUser;
+            $userData['direcciones'] = json_decode($currentUser->direccion);
             $_SESSION['IsAdmin'] = $currentUser->IsAdmin == 1;
             $currentUser->IsAdmin = $currentUser->IsAdmin == 1;
             $sqlFormasDePago = "select * from formasdepago where idUser = :userId";

@@ -65,9 +65,20 @@ Professionals.controller('VerUserController', ['$scope', '$location', 'departame
                 if (resultText !== "")
                     resultText += ", ";
                 if (parseInt(element.idDepartamento) === 1) {
-                    resultText += element.barrioNombre + "(" + element.nombreDepartamento + ")";
-                }
-                resultText += element.nombreDepartamento + " ";
+                    resultText += element.barrioNombre + " (" + element.nombreDepartamento + ")";
+                } else
+                    resultText += element.nombreDepartamento + " ";
+            });
+
+            return resultText;
+        }
+        
+        function direccionText(direcciones){
+            var resultText = "";
+            $.each(direcciones, function (index, element) {
+                if (resultText !== "")
+                    resultText += ", ";
+                resultText += element.val + " ";
             });
 
             return resultText;
@@ -75,15 +86,10 @@ Professionals.controller('VerUserController', ['$scope', '$location', 'departame
 
         $scope.fillEditUserCamps = function () {
             $scope.user = userData.data.user;
+            $scope.user.direccion = direccionText(userData.data.direcciones);
             $scope.user.passwordConfirm = userData.data.user.password;
             $scope.currentUsername = userData.data.user.username;
-            debugger;
-//            var categoriaId = parseInt(userData.data.user.categoria);
-//            $scope.selectedCategoria = $scope.categorias.sort(sortById("categoriaId"))[categoriaId];
-//            $scope.user.selectedCategoriaText = $scope.selectedCategoria.categoriaNombre;
             $scope.user.selectedCategoriaText = selectedCategoriasText(userData.data.categorias);
-//            var departamentoId = parseInt(userData.data.user.departamento);
-//            $scope.depSelected = $scope.departamentosList.sort(sortById("idDepartamento"))[departamentoId];
             $scope.user.selectedDepartamentoText = selectedDeptosText(userData.data.departamentos);
 
             if ($scope.depSelected.nombreDepartamento.toLowerCase() === "montevideo") {

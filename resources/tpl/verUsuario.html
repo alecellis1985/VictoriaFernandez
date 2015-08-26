@@ -65,24 +65,20 @@
         </div>
         <div class="panel-body">
             <div class="row">
-                <div class="form-group col-xs-12 col-md-4">
-                    <label for="categoria">Categoria</label>
-                    <p id="categoria" class="form-group-inline">{{user.selectedCategoriaText}}</p>
+                <div class="form-group col-xs-12 col-md-6">
+                    <label for="categoria">Categoria(s)</label>
+                    <p id="categoria" style="display: inline-block;">{{user.selectedCategoriaText}}</p>
                 </div>
-                <div class="form-group col-xs-12 col-md-4">
-                    <label for="departamento">Departamento</label>
-                    <p id="departamento" class="form-group-inline">{{user.selectedDepartamentoText}}</p>
-                </div>
-                <div class="form-group col-xs-12 col-md-4" ng-show="depSelected.nombreDepartamento === 'Montevideo'">
-                    <label for="barrio">Barrio</label>
-                    <p id="barrio" class="form-group-inline">{{user.selectedBarrioText}}</p>
+                <div class="form-group col-xs-12 col-md-6">
+                    <label for="departamento">Departamento(s)</label>
+                    <p id="departamento" style="display: inline-block;">{{user.selectedDepartamentoText}}</p>
                 </div>
 
             </div>
             <div class="row ">
                 <div class="form-group col-xs-12 col-md-4">
-                    <label for="direccion">Direccion</label>
-                    <p id="direccion" class="form-group-inline">{{user.direccion}}</p>
+                    <label for="direccion">Direccion(es)</label>
+                    <p id="direccion" style="display: inline-block;">{{user.direccion}}</p>
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
                     <label for="telefonoEmp">Telefono Empresa</label>
