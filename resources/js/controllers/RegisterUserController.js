@@ -1,7 +1,7 @@
 'use strict';
 
 Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$location',
-    'CommonService', 'departamentosList', 'categoriasList', 'barriosList', 'planes', 'Helper', 'userData', 'newUser','$timeout',
+    'CommonService', 'departamentosList', 'categoriasList', 'barriosList', 'planes', 'Helper', 'userData', 'newUser', '$timeout',
     function ($scope, $rootScope, $location, CommonService, departamentosList, categoriasList,
             barriosList, planes, Helper, userData, newUser, $timeout) {
 
@@ -144,75 +144,75 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
             $scope.registro.mostrarRegistro = true;
             $scope.registro.empresa = $scope.selectedPlan.tipo === 1;
         };
-        
-        $scope.$watch('registro.mostrarRegistro',function(newVal){
-            if(newVal !== null &&  newVal !== undefined && newVal){
-                $timeout(function(){
+
+        $scope.$watch('registro.mostrarRegistro', function (newVal) {
+            if (newVal !== null && newVal !== undefined && newVal) {
+                $timeout(function () {
                     $scope.renderMap = true;
-                },1000);
+                }, 1000);
             }
-            else{
+            else {
                 $scope.renderMap = false;
             }
-        });        
-        
+        });
+
         $scope.defaultDropdownTexts = {
-            checkAll:'Seleccionar Todos',
-            uncheckAll:'Remover Todos',
-            dynamicButtonTextSuffix:'Seleccionados'
+            checkAll: 'Seleccionar Todos',
+            uncheckAll: 'Remover Todos',
+            dynamicButtonTextSuffix: 'Seleccionados'
         }
-        
+
         $scope.showBarrios = false;
-        $scope.montevideoSelected = function(elem){
-            if(elem.id === "1"){
+        $scope.montevideoSelected = function (elem) {
+            if (elem.id === "1") {
                 $scope.showBarrios = true;
-            }            
+            }
             $scope.dropdownsValid = $scope.dropDownCheck();
         }
-        $scope.montevideoDeSelected = function(elem){
-            if(elem.id === "1"){
+        $scope.montevideoDeSelected = function (elem) {
+            if (elem.id === "1") {
                 $scope.showBarrios = false;
             }
             $scope.dropdownsValid = $scope.dropDownCheck();
         }
-        
-        $scope.selectAllDeps = function(){
+
+        $scope.selectAllDeps = function () {
             $scope.showBarrios = true;
             $scope.dropdownsValid = $scope.dropDownCheck();
         }
-        
-        $scope.removeAllDeps = function(){
+
+        $scope.removeAllDeps = function () {
             $scope.showBarrios = false;
             $scope.dropdownsValid = $scope.dropDownCheck();
         }
-        
+
         $scope.DepartamentosEvents = {
-            onItemSelect:$scope.montevideoSelected,
-            onItemDeselect:$scope.montevideoDeSelected,
-            onSelectAll:$scope.selectAllDeps
+            onItemSelect: $scope.montevideoSelected,
+            onItemDeselect: $scope.montevideoDeSelected,
+            onSelectAll: $scope.selectAllDeps
         }
-        
+
         //Hack to remove barrios dropdown because 'onDeselectAll  event is not working
-        $scope.$watch('selectedDepartamentos.length',function(newVal){
-            if(newVal === 0){
+        $scope.$watch('selectedDepartamentos.length', function (newVal) {
+            if (newVal === 0) {
                 $scope.showBarrios = false;
             }
             $scope.dropdownsValid = $scope.dropDownCheck();
         });
-        
-        $scope.categoriasTexts = $.extend({},$scope.defaultDropdownTexts,{buttonDefaultText:'Seleccione Categorias'});
+
+        $scope.categoriasTexts = $.extend({}, $scope.defaultDropdownTexts, {buttonDefaultText: 'Seleccione Categorias'});
         $scope.categoriaSettings = {displayProp: 'categoriaNombre', idProp: 'categoriaId'};
         $scope.categorias = categoriasList.data;
         $scope.selectedCategorias = [];
         //$scope.selectedCategoria = $scope.categorias[0];
-        
-        $scope.barriosTexts = $.extend({},$scope.defaultDropdownTexts,{buttonDefaultText:'Seleccione Barrios'});
+
+        $scope.barriosTexts = $.extend({}, $scope.defaultDropdownTexts, {buttonDefaultText: 'Seleccione Barrios'});
         $scope.barriosSettings = {displayProp: 'barrioNombre', idProp: 'barrioId'};
         $scope.barrios = barriosList.data;
         $scope.selectedBarrios = [];
         //$scope.selectedBarrio = $scope.barrios[0];
-        
-        $scope.departamentosTexts = $.extend({},$scope.defaultDropdownTexts,{buttonDefaultText:'Seleccione Departamentos'});
+
+        $scope.departamentosTexts = $.extend({}, $scope.defaultDropdownTexts, {buttonDefaultText: 'Seleccione Departamentos'});
         $scope.departamentosSettings = {displayProp: 'nombreDepartamento', idProp: 'idDepartamento'};
         $scope.departamentosList = departamentosList.data;
         $scope.selectedDepartamentos = [];
@@ -369,8 +369,19 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
                     'longitude': obj.position.K.toString()
                 };
             });
-            
+
             var markers = JSON.stringify(markersArr);
+            var categorias = {};
+            var i;
+            for(i = 0; i< $scope.selectedCategorias.length; i++){
+                $.extend(categorias, {id: $scope.selectedCategorias[i]});
+            }
+//            var categoriasArr = $scope.selectedCategorias.map(function (obj) {
+//                return {
+//                    'id': obj.id
+//                };
+//            });
+
             var data = {
                 'nombre': $scope.user.nombre,
                 'apellido': $scope.user.apellido,
@@ -382,7 +393,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
                 'direccion': JSON.stringify($scope.direcciones),
                 'telefonoEmp': $scope.user.telefonoEmp,
                 'departamento': $scope.selectedDepartamentos,
-                'categoria':$scope.selectedCategorias,
+                'categoria': $scope.selectedCategorias,
                 'barrio': $scope.selectedBarrios,
                 'sitioWeb': $scope.user.sitioWeb,
                 'plan': parseInt($scope.IdPlan),
@@ -401,7 +412,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
                 'formaDePago': $scope.user.formaDePago,
                 'diasAtencion': $scope.user.diasAtencion,
                 'horaComienzo': Helper.stringTime($scope.user.horaComienzo),
-                'horaFin': Helper.stringTime($scope.user.horaFin),                
+                'horaFin': Helper.stringTime($scope.user.horaFin),
                 'markers': markers
             };
 
@@ -429,8 +440,8 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
                 });
 
         };
-        
-        $scope.$on("$destroy", function() {
+
+        $scope.$on("$destroy", function () {
             $scope.renderMap = false;
         });
     }]);
