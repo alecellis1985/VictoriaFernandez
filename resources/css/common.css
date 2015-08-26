@@ -955,3 +955,7 @@ label{
 .fa-minus-square-o:hover{
     color: #860000;
 }
+
+.footer li{
+    cursor:pointer;
+}
