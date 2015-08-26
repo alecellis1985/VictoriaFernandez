@@ -68,6 +68,9 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
                     if(elem.markers !== null || elem.markers !== undefined){
                         elem.markers = $.parseJSON(elem.markers);
                     }
+                    if(elem.direccion !== null || elem.direccion !== undefined){
+                        elem.direccion = $.parseJSON(elem.direccion);
+                    }
                 });
                 $scope.pageChanged();
             });

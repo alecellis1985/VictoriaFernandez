@@ -289,3 +289,22 @@ Professionals.directive('ngEnter', function () {
         });
     };
 });
+
+Professionals.directive('triggerClick', ['$timeout',function ($timeout) {
+    return {
+        restrict: 'E',
+        template: '<span ng-click="clickAction()">{{text}}</span>',
+        scope: {
+            selector:'@',
+            text:'@'
+        },
+        replace:true,
+        link: function ($scope, elem, attr) {
+            $scope.clickAction = function(){
+                $timeout(function() {
+                    angular.element($scope.selector).trigger('click');
+                 }, 100);
+            }
+        }
+    };
+}]);
