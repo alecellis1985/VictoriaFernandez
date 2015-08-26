@@ -144,7 +144,41 @@ function getLoggedUser() {
                     $diasAtencion = $conn->restantesRegistros();
                     $diasAtencionUser = $diasAtencion[0];
                     $userData['diasAtencion'] = $diasAtencionUser;
-                    $response = MessageHandler::getSuccessResponse("", $userData);
+
+                    //Get categorias and departamentos
+
+                    $sqlGetDeptos = "Select b.barrioId, b.barrioNombre, d.idDepartamento, " .
+                            " d.nombreDepartamento from localidad_user lu " .
+                            " join barrios b on b.barrioId = lu.idLocalidad " .
+                            " join departamentos d on b.departamentoId = d.idDepartamento " .
+                            " where idUser = :userId";
+
+                    $paramsGetDeptos = array();
+                    $paramsGetDeptos[0] = array("userId", $currentUser->idUser, "int", 11);
+
+                    if ($conn->consulta($sqlGetDeptos, $paramsGetDeptos)) {
+                        $departamentos = $conn->restantesRegistros();
+                        $userData['departamentos'] = $departamentos;
+
+                        $sqlGetCats = "select c.* from categoria_usuario cu " .
+                                " join categorias c on cu.idCategoria = c.categoriaId " .
+                                " where idUser = :userId";
+
+                        $paramsGetCats = array();
+                        $paramsGetCats[0] = array("userId", $currentUser->idUser, "int", 11);
+
+                        if ($conn->consulta($sqlGetCats, $paramsGetCats)) {
+                            $categorias = $conn->restantesRegistros();
+                            $userData['categorias'] = $categorias;
+                            
+                            //var_dump($userData);
+                            $response = MessageHandler::getSuccessResponse("", $userData);
+                        } else {
+                            $response = MessageHandler::getErrorResponse("Error con la consulta!");
+                        }
+                    } else {
+                        $response = MessageHandler::getErrorResponse("Error con la consulta!");
+                    }
                 } else {
                     $response = MessageHandler::getErrorResponse("Error con la consulta!");
                 }

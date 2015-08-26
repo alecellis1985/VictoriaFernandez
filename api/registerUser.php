@@ -194,8 +194,6 @@ function insertNewUser($conn, $user) {
                         if ($conn->consulta($sqlDias, $paramsDias)) {
                             $conn->closeCursor();
 
-                            //TODO: Save catgs and deptos.
-
                             $matches = array();
                             $categorias = $user['categoria'];
                             preg_match_all('!\d+!', $categorias, $matches);
@@ -290,8 +288,8 @@ function updateUser($conn, $user) {
             $conn->beginTransaction();
 
             $sql = "UPDATE users SET nombre = :nombre, apellido = :apellido, email = :email, telefono = :telefono, celular = :celular,"
-                    . " direccion = :direccion, telefonoEmp = :telefonoEmp, departamento = :departamento, categoria = :categoria,"
-                    . " barrio = :barrio, plan = :plan ,sitioWeb = :sitioWeb, facebookUrl = :facebookUrl,"
+                    . " direccion = :direccion, telefonoEmp = :telefonoEmp, "
+                    . " plan = :plan ,sitioWeb = :sitioWeb, facebookUrl = :facebookUrl,"
                     . " twitterUrl = :twitterUrl, linkedinUrl = :linkedinUrl, descService = :descService, servicioOfrecido1 = :servicioOfrecido1,"
                     . " servicioOfrecido2 = :servicioOfrecido2, servicioOfrecido3 = :servicioOfrecido3, servicioOfrecido4 = :servicioOfrecido4,"
                     . " servicioOfrecido5 = :servicioOfrecido5, servicioOfrecido6 = :servicioOfrecido6, descServiceLong = :descServiceLong,"
@@ -322,7 +320,6 @@ function updateUser($conn, $user) {
                         if ($conn->consulta($sqlDeleteDias)) {
                             $conn->closeCursor();
 
-                            //TODO: Remove previous open days and hours
                             $sqlDias = "INSERT INTO `diasatencion`(`idUser`,`lunes`,`martes`,`miercoles`,`jueves`,`viernes`,`sabado`,`domingo`, `horaComienzo`, `horaFin`) 
                             VALUES (:idUser, :lunes, :martes, :miercoles, :jueves, :viernes, :sabado, :domingo, :horaComienzo, :horaFin)";
                             $paramsDias = array();
@@ -339,6 +336,64 @@ function updateUser($conn, $user) {
 
                             if ($conn->consulta($sqlDias, $paramsDias)) {
                                 $conn->closeCursor();
+
+                                $sqlDeleteLoc = "DELETE FROM localidad_user WHERE idUser = " . $userId;
+                                if ($conn->consulta($sqlDeleteLoc)) {
+                                    $conn->closeCursor();
+
+                                    $matches = array();
+                                    $departamentos = $user['departamento'];
+                                    preg_match_all('!\d+!', $departamentos, $matches);
+
+                                    foreach ($matches[0] as $departamento) {
+                                        $sqlGetLocId = "SELECT barrioId FROM departamentos d join barrios b on d.idDepartamento = b.departamentoId where d.idDepartamento = :idDepartamento";
+
+                                        $paramsGetLoc = array();
+                                        $paramsGetLoc[0] = array("idDepartamento", (int) $departamento, "int");
+
+                                        if (!$conn->consulta($sqlGetLocId, $paramsGetLoc)) {
+                                            $error = true;
+                                        } else {
+                                            $localidades = $conn->restantesRegistros();
+                                            if (isset($localidades[0]))
+                                                $localidadId = $localidades[0]->barrioId;
+
+                                            $sqlInsertDpto = "INSERT INTO localidad_user VALUES (:idUser, :idLocalidad)";
+
+                                            $paramsInsertDpto = array();
+                                            $paramsInsertDpto[0] = array("idLocalidad", (int) $localidadId, "int");
+                                            $paramsInsertDpto[1] = array("idUser", (int) $userId, "int");
+
+                                            if (!$conn->consulta($sqlInsertDpto, $paramsInsertDpto)) {
+                                                $error = true;
+                                            }
+                                        }
+                                    }
+
+                                    if (!$error) {
+
+                                        $sqlDeleteCat = "DELETE FROM categoria_usuario WHERE idUser = " . $userId;
+                                        if ($conn->consulta($sqlDeleteCat)) {
+                                            $conn->closeCursor();
+
+                                            $matches = array();
+                                            $categorias = $user['categoria'];
+                                            preg_match_all('!\d+!', $categorias, $matches);
+
+                                            foreach ($matches[0] as $categoria) {
+                                                $sqlInsertCat = "INSERT INTO categoria_usuario VALUES (:idCategoria, :idUser)";
+
+                                                $paramsInsertCat = array();
+                                                $paramsInsertCat[0] = array("idCategoria", (int) $categoria, "int");
+                                                $paramsInsertCat[1] = array("idUser", (int) $userId, "int");
+
+                                                if (!$conn->consulta($sqlInsertCat, $paramsInsertCat)) {
+                                                    $error = true;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             } else {
                                 $error = true;
                             }

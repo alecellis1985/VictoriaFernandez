@@ -48,20 +48,49 @@ Professionals.controller('VerUserController', ['$scope', '$location', 'departame
             }
         };
 
+        function selectedCategoriasText(selectedCategorias) {
+            var resultText = "";
+            $.each(selectedCategorias, function (index, element) {
+                if (resultText !== "")
+                    resultText += ", ";
+                resultText += element.categoriaNombre + " ";
+            });
+
+            return resultText;
+        }
+
+        function selectedDeptosText(selectedDepartamentos) {
+            var resultText = "";
+            $.each(selectedDepartamentos, function (index, element) {
+                if (resultText !== "")
+                    resultText += ", ";
+                if (parseInt(element.idDepartamento) === 1) {
+                    resultText += element.barrioNombre + "(" + element.nombreDepartamento + ")";
+                }
+                resultText += element.nombreDepartamento + " ";
+            });
+
+            return resultText;
+        }
+
         $scope.fillEditUserCamps = function () {
             $scope.user = userData.data.user;
             $scope.user.passwordConfirm = userData.data.user.password;
             $scope.currentUsername = userData.data.user.username;
-            var categoriaId = parseInt(userData.data.user.categoria);
-            $scope.selectedCategoria = $scope.categorias.sort(sortById("categoriaId"))[categoriaId];
-            $scope.user.selectedCategoriaText = $scope.selectedCategoria.categoriaNombre;
-            var departamentoId = parseInt(userData.data.user.departamento);
-            $scope.depSelected = $scope.departamentosList.sort(sortById("idDepartamento"))[departamentoId];
-            $scope.user.selectedDepartamentoText = $scope.depSelected.nombreDepartamento;
+            debugger;
+//            var categoriaId = parseInt(userData.data.user.categoria);
+//            $scope.selectedCategoria = $scope.categorias.sort(sortById("categoriaId"))[categoriaId];
+//            $scope.user.selectedCategoriaText = $scope.selectedCategoria.categoriaNombre;
+            $scope.user.selectedCategoriaText = selectedCategoriasText(userData.data.categorias);
+//            var departamentoId = parseInt(userData.data.user.departamento);
+//            $scope.depSelected = $scope.departamentosList.sort(sortById("idDepartamento"))[departamentoId];
+            $scope.user.selectedDepartamentoText = selectedDeptosText(userData.data.departamentos);
 
             if ($scope.depSelected.nombreDepartamento.toLowerCase() === "montevideo") {
                 var barrioId = userData.data.user.barrio;
-                $scope.selectedBarrio = $scope.barrios.filter(function(elem){return elem.barrioId === barrioId;})[0];
+                $scope.selectedBarrio = $scope.barrios.filter(function (elem) {
+                    return elem.barrioId === barrioId;
+                })[0];
                 $scope.user.selectedBarrioText = $scope.selectedBarrio.barrioNombre;
             }
 
@@ -94,11 +123,11 @@ Professionals.controller('VerUserController', ['$scope', '$location', 'departame
             imageUrl.set(userData.data.user.imagenUrl);
             $scope.imageUrl = imageUrl;
             $scope.markers = userData.data.markers;
-            
-        
+
+
         };
-        
-        
+
+
 
         function sortById(propertyName) {
             return function (a, b) {
@@ -109,7 +138,7 @@ Professionals.controller('VerUserController', ['$scope', '$location', 'departame
         }
         ;
 
-        $scope.fillEditUserCamps();        
+        $scope.fillEditUserCamps();
         goToTop();
 
         $scope.editUserData = function (e) {
