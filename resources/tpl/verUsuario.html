@@ -23,31 +23,30 @@
     <div class="panel-body personalData">
         <div class="row ">
             <div class="form-group col-xs-12 col-md-4">
-                <label for="nombre">Nombre</label>
-                <p id="nombre" class="form-group-inline">{{user.nombre}}</p>
+                <label>Nombre</label><br />
+                <p>{{user.nombre}}</p>
             </div>
             <div class="form-group col-xs-12 col-md-4" ng-hide="registro.empresa">
-                <label for="apellido">Apellido</label>
-                <p id="apellido" class="form-group-inline">{{user.apellido}}</p>
+                <label>Apellido</label><br />
+                <p>{{user.apellido}}</p>
             </div>
             <div class="form-group col-xs-10 col-md-3">
-                <label for="username">Nombre de Usuario</label>
-                <p id="username" class="form-group-inline">{{user.username}}   
-                </p>
+                <label>Nombre de Usuario</label><br />
+                <p>{{user.username}}</p>
             </div>
         </div>
         <div class="row">            
             <div class="form-group col-xs-12 col-md-4">
-                <label for="email">Email</label>
-                <p id="email" class="form-group-inline">{{user.email}}</p>
+                <label>Email</label><br />
+                <p>{{user.email}}</p>
             </div>  
             <div class="form-group col-xs-12 col-md-4" ng-hide="registro.empresa">
-                <label for="telefono">Telefono</label>
-                <p id="telefono" class="form-group-inline">{{user.telefono}}</p>
+                <label>Telefono</label><br />
+                <p>{{user.telefono}}</p>
             </div>
             <div class="form-group col-xs-12 col-md-4" ng-hide="registro.empresa">
-                <label for="celular">Celular</label>
-                <p id="celular" class="form-group-inline">{{user.celular}}</p>
+                <label>Celular</label><br />
+                <p>{{user.celular}}</p>
             </div>
         </div>
         <div class="row">
@@ -65,45 +64,47 @@
         </div>
         <div class="panel-body">
             <div class="row">
-                <div class="form-group col-xs-12 col-md-6">
-                    <label for="categoria">Categoria(s)</label>
-                    <p id="categoria" style="display: inline-block;">{{user.selectedCategoriaText}}</p>
+                <div class="form-group col-xs-12 col-md-4">
+                    <label >Categoria(s)</label><br />
+                    <p>{{user.selectedCategoriaText}}</p>
                 </div>
-                <div class="form-group col-xs-12 col-md-6">
-                    <label for="departamento">Departamento(s)</label>
-                    <p id="departamento" style="display: inline-block;">{{user.selectedDepartamentoText}}</p>
+                <div class="form-group col-xs-12 col-md-4">
+                    <label >Departamento(s)</label><br />
+                    <p>{{user.selectedDepartamentoText}}</p>
                 </div>
 
             </div>
             <div class="row ">
                 <div class="form-group col-xs-12 col-md-4">
-                    <label for="direccion">Direccion(es)</label>
-                    <p id="direccion" style="display: inline-block;">{{user.direccion}}</p>
+                    <label>Direccion(es)</label><br />
+                    <p>{{user.direccion}}</p>
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
-                    <label for="telefonoEmp">Telefono Empresa</label>
-                    <p id="telefonoEmp" class="form-group-inline">{{user.telefonoEmp}}</p>
+                    <label>Telefono Empresa</label><br />
+                    <p >{{user.telefonoEmp}}</p>
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
-                    <label for="sitioWeb">Sitio Web</label>
-                    <p id="sitioWeb" class="form-group-inline">{{user.sitioWeb}}</p>
+                    <label>Sitio Web</label><br />
+                    <p>{{user.sitioWeb}}</p>
                 </div>       
 
             </div>
             <div class="row ">
-                <div class="form-group col-xs-12 col-md-4">
-                    <label for="facebookUrl">Facebook</label>
-                    <p id="facebookUrl" class="form-group-inline">{{user.facebookUrl}}</p>
+                <div class="form-group col-xs-12 col-md-12">
+                    <h4>Redes Sociales Links</h4>
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
-                    <label for="twitterUrl">Twitter</label>
-                    <p id="twitterUrl" class="form-group-inline">{{user.twitterUrl}}</p>
+                    <label >Facebook</label><br />
+                    <p>{{user.facebookUrl}}</p>
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
-                    <label for="linkedinUrl">LinkedIn</label>
-                    <p id="linkedinUrl" class="form-group-inline">{{user.linkedinUrl}}</p>
+                    <label >Twitter</label><br />
+                    <p>{{user.twitterUrl}}</p>
                 </div>
-
+                <div class="form-group col-xs-12 col-md-4">
+                    <label >LinkedIn</label><br />
+                    <p>{{user.linkedinUrl}}</p>
+                </div>
             </div>
         </div>
     </div>
