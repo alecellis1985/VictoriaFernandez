@@ -21,7 +21,15 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
         $scope.addDireccion = function () {
             $scope.direcciones.push(new Direccion());
         }
-
+        
+        $scope.removeDireccionesVacias = function(){
+            var length = $scope.direcciones.length;
+            while(length--){
+                if($scope.direcciones[length].val == '')
+                    $scope.direcciones.pop();
+            }
+        }
+        
         function Direccion() {
             this.val = '';
         }
@@ -39,26 +47,26 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
         $scope.profesionalesAvailablePlans = {
             0: {//Profesional
                 Basico: {
-                    Mensual: 500,
-                    Semestral: 2400,
-                    Anual: 3600
+                    Mensual: 490,
+                    Semestral: 2352,
+                    Anual: 3528
                 },
                 Premium: {
-                    Mensual: 900,
-                    Semestral: 4320,
-                    Anual: 6480
+                    Mensual: 890,
+                    Semestral: 4272,
+                    Anual: 6408
                 }
             },
             1: {//Empresarial
                 Basico: {
-                    Mensual: 800,
-                    Semestral: 3840,
-                    Anual: 5760
+                    Mensual: 790,
+                    Semestral: 3792,
+                    Anual: 5688
                 },
                 Premium: {
-                    Mensual: 1200,
-                    Semestral: 5760,
-                    Anual: 8640
+                    Mensual: 1190,
+                    Semestral: 5712,
+                    Anual: 8568
                 }
             }
         };
@@ -164,14 +172,15 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
 
         $scope.showBarrios = false;
         $scope.montevideoSelected = function (elem) {
-            if (elem.id === "1") {
+            if (elem.id === 1) {
                 $scope.showBarrios = true;
             }
             $scope.dropdownsValid = $scope.dropDownCheck();
         }
         $scope.montevideoDeSelected = function (elem) {
-            if (elem.id === "1") {
+            if (elem.id === 1) {
                 $scope.showBarrios = false;
+                $scope.selectedBarrios = [];
             }
             $scope.dropdownsValid = $scope.dropDownCheck();
         }
@@ -379,19 +388,16 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
                     'longitude': obj.position.K.toString()
                 };
             });
-
             var markers = JSON.stringify(markersArr);
+            
             var categorias = {};
             var i;
             for (i = 0; i < $scope.selectedCategorias.length; i++) {
                 $.extend(categorias, {id: $scope.selectedCategorias[i]});
             }
-//            var categoriasArr = $scope.selectedCategorias.map(function (obj) {
-//                return {
-//                    'id': obj.id
-//                };
-//            });
 
+            $scope.removeDireccionesVacias();
+            
             var data = {
                 'nombre': $scope.user.nombre,
                 'apellido': $scope.user.apellido,
@@ -400,7 +406,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
                 'email': $scope.user.email,
                 'telefono': $scope.user.telefono,
                 'celular': $scope.user.celular,
-                'direccion': JSON.stringify($scope.direcciones),
+                'direccion': $scope.direcciones.length>0?JSON.stringify($scope.direcciones):null,
                 'telefonoEmp': $scope.user.telefonoEmp,
                 'departamento': $scope.selectedDepartamentos,
                 'categoria': $scope.selectedCategorias,

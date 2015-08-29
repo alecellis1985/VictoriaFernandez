@@ -64,7 +64,7 @@
                                         <i class="fa fa-phone-square" title="Telefono"></i>
                                         <span ng-bind="user.telefono"></span>
                                     </div>
-                                    <div class="row">
+                                    <div class="row" ng-if="user.direccion && user.direccion.length>0">
                                         <i class="fa fa-home"></i>
                                         <span ng-repeat="dir in user.direccion">{{dir.val}}<span ng-if="$index<user.direccion.length-1">,&nbsp;</span></span>
                                     </div>

@@ -110,12 +110,12 @@
             <div class="row ">
                 <div class="form-group col-xs-12 col-md-4" ng-hide="registro.empresa">
                     <span class="requiredAst">*</span>
-                    <input type="text" class="form-control" name="telefono" ng-model="user.telefono" maxlength="25" placeholder="Telefono" ng-required="!registro.empresa" ng-pattern="/^[0-9]+$/">
+                    <input type="text" class="form-control" name="telefono" ng-model="user.telefono" maxlength="25" placeholder="Telefono" ng-required="!registro.empresa" ng-pattern="/^[0-9+]+$/">
                     <span ng-show="registerUser.telefono.$touched && registerUser.telefono.$error.required" class="error">Telefono es requerido.</span>
                     <span ng-show="registerUser.telefono.$touched && !registerUser.telefono.$error.required && registerUser.telefono.$error.pattern" class="error">Telefono inválido.</span>
                 </div>
                 <div class="form-group col-xs-12 col-md-4" ng-hide="registro.empresa">
-                    <input type="text" class="form-control" name="celular" ng-model="user.celular" maxlength="25" placeholder="Celular" ng-pattern="/^[0-9]+$/">
+                    <input type="text" class="form-control" name="celular" ng-model="user.celular" maxlength="25" placeholder="Celular" ng-pattern="/^[0-9+]+$/">
                     <span ng-show="registerUser.celular.$touched && registerUser.celular.$error.pattern" class="error">Telefono inválido.</span>
                 </div>
 
@@ -128,25 +128,21 @@
         </div>
         <div class="panel-body">
             <div class="row">
-                <div class="form-group col-xs-12 col-md-3">
-                    <!--<dropdown-w-validation check-fn="checkCategoria(elem)" error-msg="Seleccione una categoria" post-Selection-Fn="dropDownCheck()" selected-Elem="selectedCategoria" name-Prop="categoriaNombre" elements-Arr="categorias" placeholder-Filter="Filtro de categorias"></dropdown-w-validation>-->
+                <div class="form-group col-xs-12 col-md-3">                    
                     <div ng-dropdown-multiselect="" checkboxes="true" translation-texts="categoriasTexts" options="categorias" extra-settings="categoriaSettings"  selected-model="selectedCategorias"></div>
                 </div>
                 <div class="form-group col-xs-12 col-md-3">
 
                     <div ng-dropdown-multiselect="" checkboxes="true" translation-texts="departamentosTexts" events="DepartamentosEvents" options="departamentosList" extra-settings="departamentosSettings"  selected-model="selectedDepartamentos"></div>
-
-                    <!--<dropdown-w-validation check-fn="checkDepto(elem)" error-msg="Seleccione un departamento" post-Selection-Fn="dropDownCheck()" selected-Elem="depSelected" name-Prop="nombreDepartamento" elements-Arr="departamentosList" placeholder-Filter="Filtro de departamentos"></dropdown-w-validation>--> 
                 </div>
                 <div class="form-group col-xs-12 col-md-3" ng-show="showBarrios">                    
-                    <div ng-dropdown-multiselect="" checkboxes="true" translation-texts="barriosTexts" options="barrios" extra-settings="barriosSettings"  selected-model="selectedBarrios"></div>
-                    <!--<dropdown-w-validation check-fn="checkBarrio(elem)" error-msg="Seleccione un barrio de Mdeo" post-Selection-Fn="dropDownCheck()" selected-Elem="selectedBarrio" name-Prop="barrioNombre" elements-Arr="barrios" placeholder-Filter="Filtro de barrios"></dropdown-w-validation>-->
+                    <div ng-dropdown-multiselect="" checkboxes="true" translation-texts="barriosTexts" options="barrios" extra-settings="barriosSettings"  selected-model="selectedBarrios"></div>                    
                 </div>
             </div>
             <div class="row ">
                 <div class="form-group col-xs-12 col-md-4">
                     <span class="requiredAst">*</span>
-                    <input type="text" name="telefonoEmp" class="form-control" ng-model="user.telefonoEmp" maxlength="25" placeholder="Teléfono Empresa" required ng-pattern="/^[0-9]+$/">
+                    <input type="text" name="telefonoEmp" class="form-control" ng-model="user.telefonoEmp" maxlength="25" placeholder="Teléfono Empresa" required ng-pattern="/^[0-9+]+$/">
                     <span ng-show="registerUser.telefonoEmp.$touched && registerUser.telefonoEmp.$error.required" class="error">Teléfono es requerido</span>
                     <span ng-show="registerUser.telefonoEmp.$touched && !registerUser.telefonoEmp.$error.required && registerUser.telefonoEmp.$error.pattern" class="error">Teléfono inválido</span>
                 </div>

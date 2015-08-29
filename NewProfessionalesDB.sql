@@ -233,7 +233,19 @@ CREATE TABLE `plan` (
 
 LOCK TABLES `plan` WRITE;
 /*!40000 ALTER TABLE `plan` DISABLE KEYS */;
-INSERT INTO `plan` VALUES (1,'Profesional','Basico',500,'Mensual'),(2,'Profesional','Premium',900,'Mensual'),(3,'Profesional','Basico',2400,'Semestral'),(4,'Profesional','Basico',3600,'Anual'),(5,'Profesional','Premium',4320,'Semestral'),(6,'Profesional','Premium',6480,'Anual'),(7,'Empresarial','Basico',800,'Mensual'),(8,'Empresarial','Premium',1200,'Mensual'),(9,'Empresarial','Basico',3840,'Semestral'),(10,'Empresarial','Basico',5760,'Anual'),(11,'Empresarial','Premium',5760,'Semestral'),(12,'Empresarial','Premium',8640,'Anual');
+INSERT INTO `plan` VALUES 
+(1,'Profesional','Basico',490,'Mensual'),
+(2,'Profesional','Premium',890,'Mensual'),
+(3,'Profesional','Basico',2352,'Semestral'),
+(4,'Profesional','Basico',3528,'Anual'),
+(5,'Profesional','Premium',4272,'Semestral'),
+(6,'Profesional','Premium',6408,'Anual'),
+(7,'Empresarial','Basico',790,'Mensual'),
+(8,'Empresarial','Premium',1190,'Mensual'),
+(9,'Empresarial','Basico',3792,'Semestral'),
+(10,'Empresarial','Basico',5688,'Anual'),
+(11,'Empresarial','Premium',5712,'Semestral'),
+(12,'Empresarial','Premium',8568,'Anual');
 /*!40000 ALTER TABLE `plan` ENABLE KEYS */;
 UNLOCK TABLES;
 

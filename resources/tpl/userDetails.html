@@ -20,17 +20,17 @@
                      <label>Descripción Del Servicio</label>
                      <p ng-bind="selectedUser.descService" style='text-transform: capitalize;'></p>
                  </div>
-                 <div class="row">
+                 <div class="row" ng-if="selectedUser.telefono">
                      <i class="fa fa-phone-square" title="Telefono"></i>
                      <span ng-bind="selectedUser.telefono"></span>
                  </div>
-                 <div class="row">
+                 <div class="row" ng-if="selectedUser.celular">
                      <i class="fa fa-mobile" title="Celular"></i>
                      <span ng-bind="selectedUser.celular"></span>
                  </div>
-                 <div class="row">
+                 <div class="row" ng-if="selectedUser.direccion && selectedUser.direccion.length>0">
                      <i class="fa fa-home"></i>
-                     <span ng-repeat="dir in selectedUser.direccion">{{dir.val}}<span ng-if="$index<user.direccion.length-1">,&nbsp;</span></span>                     
+                     <span ng-repeat="dir in selectedUser.direccion">{{dir.val}}<span ng-if="$index < selectedUser.direccion.length-1">,&nbsp;</span></span>                     
                  </div>
              </div>
          </div>
