@@ -4,7 +4,7 @@
 font-family: 'Intro Cond Black Free';
 font-style: normal;
 font-weight: normal;
-src: local('Intro Cond Black Free'), url('Intro Cond Black Free.woff') format('woff');
+src: local('Intro_Cond_Black_Free'), url('Intro_Cond_Black_Free.woff') format('woff');
 }
 
 
@@ -12,5 +12,5 @@ src: local('Intro Cond Black Free'), url('Intro Cond Black Free.woff') format('w
 font-family: 'Intro Cond Light Free';
 font-style: normal;
 font-weight: normal;
-src: local('Intro Cond Light Free'), url('Intro Cond Light Free.woff') format('woff');
+src: local('Intro_Cond_Light_Free'), url('Intro_Cond_Light_Free.woff') format('woff');
 }
