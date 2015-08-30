@@ -256,8 +256,8 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
         $scope.fillEditUserCamps = function () {
             $scope.user = userData.data.user;
             $scope.direcciones = userData.data.direcciones;
-            $scope.currentUsername = userData.data.user.username;
-            $scope.currentEmail = userData.data.user.email;
+            $scope.user.username = userData.data.user.username;
+            $scope.user.email = userData.data.user.email;
 
             $.each(userData.data.categorias, function (index, element) {
                 $scope.selectedCategorias.push({id: element.categoriaId});
