@@ -154,8 +154,8 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
         };
 
         $scope.$watch('registro.mostrarRegistro', function (newVal) {
-            if (newVal !== null && newVal !== undefined && newVal) {
-                $timeout(function () {
+            if (newVal !== null && newVal !== undefined && newVal && (newUser === undefined || newUser === true)) {
+                $timeout(function () {                    
                     $scope.renderMap = true;
                 }, 1000);
             }
@@ -253,25 +253,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
             return ($scope.selectedDepartamentos.length > 0 && $scope.selectedCategorias.length > 0);
         };
 
-        // TODO: Remove. ONLY FOR TEST
-        $scope.fillNewUserCamps = function ()
-        {
-            $scope.user.nombre = "John" + Helper.randomString(2);
-            $scope.user.apellido = "Who" + Helper.randomString(2);
-            $scope.user.username = Helper.randomString(7);
-            $scope.user.password = "asdasd";
-            $scope.user.passwordConfirm = "asdasd";
-            $scope.user.email = "alecellis1985" + Helper.randomString(2) + "@gmail.com";
-            $scope.user.telefono = "26013794";
-            $scope.user.celular = "098635923";
-            $scope.user.direccion = "Maximo tajen 3565";
-            $scope.user.telefonoEmp = "26013794";
-        };
-
         $scope.fillEditUserCamps = function () {
-            //TODO FILL THE EDIT USER CAMPS WITH DROPDOWNS
-            //TODO Check if direccion is working
-
             $scope.user = userData.data.user;
             $scope.direcciones = userData.data.direcciones;
             $scope.currentUsername = userData.data.user.username;
@@ -320,32 +302,28 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
             $scope.IdPlan = $scope.user.plan;
 
             $scope.markers = $.parseJSON(userData.data.user.markers);
-
-            $scope.dropDownCheck();
-
-            $scope.registro.empresa = parseInt(userData.data.user.plan) > 6;
-
+            $scope.dropdownsValid = true;
+            $scope.registro.empresa = userData.data.user.plan> 6;
+            
+            $timeout(function () {                    
+                    $scope.renderMap = true;
+            }, 1000);
         };
-
-        function sortById(propertyName) {
-            return function (a, b) {
-                var aId = parseInt(a[propertyName]);
-                var bId = parseInt(b[propertyName]);
-                return ((aId < bId) ? -1 : ((aId > bId) ? 1 : 0));
-            };
+        
+        $scope.init = function(){
+            if (newUser) {
+                //No new camp filled
+                //$scope.fillNewUserCamps();
+                $scope.markers = [];
+                //Add first input
+                $scope.addDireccion();
+            } else {
+                $scope.fillEditUserCamps();
+            }
+            goToTop();
         }
-
-        //TODO: Remove. To Test only
-        if (newUser) {
-            //No new camp filled
-            //$scope.fillNewUserCamps();
-            $scope.markers = [];
-            //Add first input
-            $scope.addDireccion();
-        } else {
-            $scope.fillEditUserCamps();
-        }
-        goToTop();
+        
+        
 
         $scope.checkCategoria = function (elem) {
             return parseInt(elem.categoriaId) < 0;
@@ -440,7 +418,9 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
                 });
 
         };
-
+        
+        $scope.init();
+        
         $scope.$on("$destroy", function () {
             $scope.renderMap = false;
         });

@@ -22,7 +22,7 @@ Professionals.directive('mapLoadMarkers', function () {
             //default is montevideo
             //$scope.mapOptions = $scope.mapOptions || {
             $scope.mapOptions = {  
-                zoom: 13,
+                zoom: 8,
                 center: new google.maps.LatLng(-34.8746349, -56.1472729),
                 mapTypeId: google.maps.MapTypeId.TERRAIN
             };
