@@ -1,6 +1,6 @@
 body {
     padding-top: 70px;
-    font-family:'Intro Cond Black Free';
+    font-family: 'Open Sans', sans-serif;
     //font-family: 'Intro Cond Light Free';
     font-weight: bold;
     color: #888888;
@@ -13,7 +13,7 @@ h2{
 header >nav{
     background: #2B4DA5;
     border-bottom: 2px solid #20429D;
-    font-family:'Intro Cond Black Free,Arial';
+    font-family: 'Open Sans', sans-serif;
     //font-family: 'Intro Cond Light Free';
 }
 

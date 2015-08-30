@@ -137,8 +137,7 @@ CREATE TABLE `diasatencion` (
   `viernes` tinyint(1) NOT NULL,
   `sabado` tinyint(1) NOT NULL,
   `domingo` tinyint(1) NOT NULL,
-  `horaComienzo` time NOT NULL,
-  `horaFin` time NOT NULL,
+  `horario` varchar(1000) NULL,
   PRIMARY KEY (`iddiasAtencion`),
   KEY `diasatencion_users_idx` (`idUser`),
   CONSTRAINT `diasatencion_users` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -151,7 +150,7 @@ CREATE TABLE `diasatencion` (
 
 LOCK TABLES `diasatencion` WRITE;
 /*!40000 ALTER TABLE `diasatencion` DISABLE KEYS */;
-INSERT INTO `diasatencion` VALUES (3,3,0,0,1,1,1,1,0,'08:00:00','14:00:00'),(8,2,0,0,1,1,1,1,0,'08:00:00','12:00:00');
+INSERT INTO `diasatencion` VALUES (3,3,0,0,1,1,1,1,0,'De 8 a 14'),(8,2,0,0,1,1,1,1,0,'De 8 a 14');
 /*!40000 ALTER TABLE `diasatencion` ENABLE KEYS */;
 UNLOCK TABLES;
 

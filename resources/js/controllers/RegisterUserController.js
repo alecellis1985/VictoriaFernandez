@@ -227,13 +227,8 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
         $scope.selectedDepartamentos = [];
         //$scope.depSelected = $scope.departamentosList[0];
 
-        var initHour = new Date();
-        initHour.setHours(8);
-        initHour.setMinutes(0);
-
         $scope.user = {
-            horaComienzo: initHour,
-            horaFin: initHour,
+            horario: '',
             diasAtencion: {
                 lunes: false,
                 martes: false,
@@ -321,9 +316,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
             $scope.user.diasAtencion = diasAtencion;
             $scope.user.formaDePago = formasDePago;
 
-            $scope.user.horaComienzo = Helper.timeFromString(userData.data.diasAtencion.horaComienzo);
-            $scope.user.horaFin = Helper.timeFromString(userData.data.diasAtencion.horaFin);
-
+            $scope.user.horario = userData.data.diasAtencion.horario;
             $scope.IdPlan = $scope.user.plan;
 
             $scope.markers = $.parseJSON(userData.data.user.markers);
@@ -353,14 +346,6 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
             $scope.fillEditUserCamps();
         }
         goToTop();
-
-        $scope.checkTime = function () {
-            if ($scope.user.horaFin <= $scope.user.horaComienzo) {
-                $scope.user.horaFin = new Date($scope.user.horaComienzo.getTime() + 10 * 60000);
-            }
-        };
-
-
 
         $scope.checkCategoria = function (elem) {
             return parseInt(elem.categoriaId) < 0;
@@ -427,8 +412,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
                 'descServiceLong': $scope.user.descServiceLong,
                 'formaDePago': $scope.user.formaDePago,
                 'diasAtencion': $scope.user.diasAtencion,
-                'horaComienzo': Helper.stringTime($scope.user.horaComienzo),
-                'horaFin': Helper.stringTime($scope.user.horaFin),
+                'horario': $scope.user.horario,
                 'markers': markers
             };
 

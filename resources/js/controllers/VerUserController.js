@@ -29,8 +29,7 @@ Professionals.controller('VerUserController', ['$scope', '$location', 'departame
         initHour.setMinutes(0);
 
         $scope.user = {
-            horaComienzo: initHour,
-            horaFin: initHour,
+            horario: '',
             diasAtencion: {
                 lunes: false,
                 martes: false,
@@ -121,10 +120,7 @@ Professionals.controller('VerUserController', ['$scope', '$location', 'departame
             $scope.user.formasDePagoText = Helper.getFormasDePagoText(formasDePago);
             $scope.user.diasAtencionText = Helper.getDiasAtencionText(diasAtencion);
 
-            $scope.user.horaComienzo = Helper.timeFromString(userData.data.diasAtencion.horaComienzo);
-            $scope.user.horaFin = Helper.timeFromString(userData.data.diasAtencion.horaFin);
-            $scope.user.horarioAtencionText = Helper.getHorarioAtencionText(userData.data.diasAtencion.horaComienzo, userData.data.diasAtencion.horaFin);
-
+            $scope.user.horario = userData.data.diasAtencion.horario;
             $scope.IdPlan = $scope.user.plan;
             imageUrl.set(userData.data.user.imagenUrl);
             $scope.imageUrl = imageUrl;

@@ -177,8 +177,8 @@ function insertNewUser($conn, $user) {
                     $paramsPagos[4] = array("otras", $user['formaDePago']['otras'], "string", 30);
 
                     if ($conn->consulta($sqlPagos, $paramsPagos)) {
-                        $sqlDias = "INSERT INTO `diasatencion`(`idUser`,`lunes`,`martes`,`miercoles`,`jueves`,`viernes`,`sabado`,`domingo`, `horaComienzo`, `horaFin`) 
-                                    VALUES (:idUser, :lunes, :martes, :miercoles, :jueves, :viernes, :sabado, :domingo, :horaComienzo, :horaFin)";
+                        $sqlDias = "INSERT INTO `diasatencion`(`idUser`,`lunes`,`martes`,`miercoles`,`jueves`,`viernes`,`sabado`,`domingo`, `horario`) 
+                                    VALUES (:idUser, :lunes, :martes, :miercoles, :jueves, :viernes, :sabado, :domingo, :horario)";
                         $paramsDias = array();
                         $paramsDias[0] = array("idUser", $user['id'], "int", 11);
                         $paramsDias[1] = array("lunes", $user['diasAtencion']['lunes'], "int", 1);
@@ -188,8 +188,7 @@ function insertNewUser($conn, $user) {
                         $paramsDias[5] = array("viernes", $user['diasAtencion']['viernes'], "int", 1);
                         $paramsDias[6] = array("sabado", $user['diasAtencion']['sabado'], "int", 1);
                         $paramsDias[7] = array("domingo", $user['diasAtencion']['domingo'], "int", 1);
-                        $paramsDias[8] = array("horaComienzo", $user['horaComienzo'], "string", 20);
-                        $paramsDias[9] = array("horaFin", $user['horaFin'], "string", 20);
+                        $paramsDias[8] = array("horario", $user['horario'], "string", 1000);
 
                         if ($conn->consulta($sqlDias, $paramsDias)) {
                             $conn->closeCursor();
@@ -320,8 +319,8 @@ function updateUser($conn, $user) {
                         if ($conn->consulta($sqlDeleteDias)) {
                             $conn->closeCursor();
 
-                            $sqlDias = "INSERT INTO `diasatencion`(`idUser`,`lunes`,`martes`,`miercoles`,`jueves`,`viernes`,`sabado`,`domingo`, `horaComienzo`, `horaFin`) 
-                            VALUES (:idUser, :lunes, :martes, :miercoles, :jueves, :viernes, :sabado, :domingo, :horaComienzo, :horaFin)";
+                            $sqlDias = "INSERT INTO `diasatencion`(`idUser`,`lunes`,`martes`,`miercoles`,`jueves`,`viernes`,`sabado`,`domingo`, `horario`) 
+                            VALUES (:idUser, :lunes, :martes, :miercoles, :jueves, :viernes, :sabado, :domingo, :horario)";
                             $paramsDias = array();
                             $paramsDias[0] = array("idUser", $userId, "int", 11);
                             $paramsDias[1] = array("lunes", $user['diasAtencion']['lunes'], "int", 1);
@@ -331,8 +330,7 @@ function updateUser($conn, $user) {
                             $paramsDias[5] = array("viernes", $user['diasAtencion']['viernes'], "int", 1);
                             $paramsDias[6] = array("sabado", $user['diasAtencion']['sabado'], "int", 1);
                             $paramsDias[7] = array("domingo", $user['diasAtencion']['domingo'], "int", 1);
-                            $paramsDias[8] = array("horaComienzo", $user['horaComienzo'], "string", 20);
-                            $paramsDias[9] = array("horaFin", $user['horaFin'], "string", 20);
+                            $paramsDias[8] = array("horario", $user['horario'], "string", 1000);
 
                             if ($conn->consulta($sqlDias, $paramsDias)) {
                                 $conn->closeCursor();
@@ -480,8 +478,7 @@ function getArrayFromRequest($request) {
         "username" => is_null($request->post('username')) ? "" : $request->post('username'),
         "password" => is_null($request->post('password')) ? "" : $request->post('password'),
         "markers" => $request->post('markers'),
-        "horaComienzo" => is_null($request->post('horaComienzo')) ? "" : $request->post('horaComienzo'),
-        "horaFin" => is_null($request->post('horaFin')) ? "" : $request->post('horaFin')
+        "horario" => is_null($request->post('horario')) ? "" : $request->post('horario')
     );
 }
 
