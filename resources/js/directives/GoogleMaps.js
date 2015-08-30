@@ -85,7 +85,7 @@ Professionals.directive('mapSetMarkers', function () {
         link: function ($scope, element, attr) {
             //Default is montevideo
             $scope.mapOptions = {
-                zoom: 13,
+                zoom: 8,
                 center: new google.maps.LatLng(-34.8746349, -56.1472729),
                 mapTypeId: google.maps.MapTypeId.TERRAIN
             };
@@ -124,7 +124,7 @@ Professionals.directive('mapSetMarkers', function () {
             $scope.loadMarker = function (info, position) {
                 var marker = new google.maps.Marker({
                     map: $scope.map,
-                    position: new google.maps.LatLng(info.lat, info.long)
+                    position: new google.maps.LatLng(info.latitude, info.longitude)
                 });
 
                 google.maps.event.addListener(marker, 'click', markerClick);
