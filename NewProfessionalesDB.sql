@@ -145,16 +145,6 @@ CREATE TABLE `diasatencion` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `diasatencion`
---
-
-LOCK TABLES `diasatencion` WRITE;
-/*!40000 ALTER TABLE `diasatencion` DISABLE KEYS */;
-INSERT INTO `diasatencion` VALUES (3,3,0,0,1,1,1,1,0,'De 8 a 14'),(8,2,0,0,1,1,1,1,0,'De 8 a 14');
-/*!40000 ALTER TABLE `diasatencion` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `formasdepago`
 --
 
@@ -173,16 +163,6 @@ CREATE TABLE `formasdepago` (
   CONSTRAINT `formasdepago_users` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `formasdepago`
---
-
-LOCK TABLES `formasdepago` WRITE;
-/*!40000 ALTER TABLE `formasdepago` DISABLE KEYS */;
-INSERT INTO `formasdepago` VALUES (3,3,1,1,0,'dawdaw'),(8,2,1,1,0,'queso');
-/*!40000 ALTER TABLE `formasdepago` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `localidad_user`
@@ -297,7 +277,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Alec','Ellis','alecellis1985@hotmail.com','26013794','098635923','m.tajes 7530','26013794',5,'','','https://www.facebook.com/alec.ellis.714',NULL,NULL,'construccion de paginas web','SEO','OPTIMIZATION',NULL,NULL,NULL,NULL,'database performance optimization','Alec10','1e280ae7584758f2efd35319690db75b',1,1,NULL),(2,'PruebaNombre','PruebaApellido','prueba@gmail.com','00000000000','0000000000000000000','prueba 1111','11111111111',1,'http://www.prueba.com','793b899a4f8fdf8109b9b0e71aa0f28e_3f1b7ccad63d40a7b4c27dda225bf941.YTS','http://www.pruebaFB.com','http://www.pruebaTW.com','http://www.pruebaLNK.com','Desc Prueba 1','pureba clave 1','pureba clave 2','pureba clave 3','pureba clave 4','pureba clave 5','pureba clave 6','detalles prueba','prueba1','3f1b7ccad63d40a7b4c27dda225bf941',0,1,NULL),(3,'empresaprueba','LadenON','empresaprueba1@gmail.com','26013794','098635923','empresaprueba1 dir','000000000001',7,'http://www.empresaprueba1.com','793b899a4f8fdf8109b9b0e71aa0f28e_a0408dd3baa0f0861abb80e7f48db196.YTS','http://www.empresaprueba1fb.com','http://www.empresaprueba1tw.com','http://www.empresaprueba1lnk.com','desc http://www.empresaprueba1.com','clar empr1','clar empr2','clar empr3','clar empr4','clar empr5','clar empr6','desc clar empr1','empresaprueba1','a0408dd3baa0f0861abb80e7f48db196',0,1,NULL);
+INSERT INTO `users` VALUES (1,'Alec','Ellis','alecellis1985@hotmail.com','26013794','098635923',NULL,'26013794',5,'','','https://www.facebook.com/alec.ellis.714',NULL,NULL,'construccion de paginas web','SEO','OPTIMIZATION',NULL,NULL,NULL,NULL,'database performance optimization','Alec10','1e280ae7584758f2efd35319690db75b',1,1,NULL)
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
