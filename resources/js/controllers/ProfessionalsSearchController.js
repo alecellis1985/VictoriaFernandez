@@ -35,6 +35,8 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
             $scope.depSelected = departamento;
             if($scope.selectedCategoria.categoriaId === -1)
                 return;       
+            if(departamento.idDepartamento === -1 && ($scope.buscoProf === undefined || $scope.buscoProf.trim() === ''))
+                return;
             getUsers();
         };
         

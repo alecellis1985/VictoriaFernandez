@@ -45,8 +45,8 @@ function getUsers($categoria, $departamento, $nombreProf = null) {
                     "join localidad_user du on u.idUser = du.idUser AND (du.idLocalidad = :departamento OR :departamento2 = -1 ) " .
                     "join categoria_usuario cu on u.idUser = cu.idUser AND (cu.idCategoria = :categoria OR :categoria2 = -1) " .
                     " WHERE " . $addNombreProfToQuery .
-                    " IsAdmin = 0 and IsActive = 1 ORDER BY nombre";
-
+                    " IsAdmin = 0 and IsActive = 1  group by u.idUser ORDER BY nombre";
+            
             $params = array();
             $params[0] = array("departamento", (int) $localidadId, "int");
             $params[1] = array("categoria", (int) $categoria, "int");
