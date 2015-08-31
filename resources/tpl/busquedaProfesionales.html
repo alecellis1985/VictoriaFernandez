@@ -48,9 +48,14 @@
                                 <div class="col-xs-4 col-md-4 col-sm-4">
                                     <div class='row'>
                                         <div class="col-xs-12 col-md-12 col-sm-12" style="height:200px; margin-bottom: 10px;">
-                                            <img class="img-responsive img-rounded" ng-if="user.imagenUrl !== ''" ng-src="{{'uploaded/' + user.imagenUrl}}" alt="{{user.nombre + ' ' + user.apellido}}">
-                                            <i ng-if="user.imagenUrl === ''" class="img-responsive fa fa-user"></i>
-                                        </div>                                
+                                            <fancy-img ng-if="user.imagenUrl !== undefined && user.imagenUrl !== ''" background-url="{{user.imagenUrl}}" ></fancy-img>
+                                            <!--<img class="img-responsive img-rounded" ng-if="user.imagenUrl !== ''" ng-src="{{'uploaded/' + user.imagenUrl}}" alt="{{user.nombre + ' ' + user.apellido}}">
+                                            <i ng-if="user.imagenUrl === ''" class="img-responsive fa fa-user"></i>-->
+                                        </div>   
+                                        
+                                        
+                                        
+                                        
                                     </div>
                                 </div>
                                 <div class="col-xs-8 col-md-8 col-sm-8">

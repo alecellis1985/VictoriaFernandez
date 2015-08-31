@@ -961,3 +961,13 @@ label{
 .footer li{
     cursor:pointer;
 }
+
+.backgroundImg{
+    height:150px;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    border-radius: 6px;
+    margin-top: 8px;
+}

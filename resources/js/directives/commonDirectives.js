@@ -308,3 +308,18 @@ Professionals.directive('triggerClick', ['$timeout',function ($timeout) {
         }
     };
 }]);
+
+Professionals.directive('fancyImg', ['$timeout',function ($timeout) {
+    return {
+        restrict: 'E',
+        template: '<div class="backgroundImg"></div>',
+        scope: {
+            backgroundUrl:'@',
+        },
+        replace:true,
+        link: function ($scope, elem, attr) {
+            $scope.Url = 'url(\'uploaded/'+  $scope.backgroundUrl+'\')';
+            elem.css('background-image',$scope.Url);
+        }
+    };
+}]);
