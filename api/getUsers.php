@@ -34,7 +34,6 @@ function getUsers($categoria, $departamento, $nombreProf = null) {
             if (isset($localidades[0]))
                 $localidadId = $localidades[0]->barrioId;
 
-
             $sql = "SELECT u.idUser,u.nombre,u.apellido,u.email,u.telefono,u.celular,u.direccion,u.telefonoEmp," .
                     "u.sitioWeb,u.imagenUrl,u.facebookUrl,u.twitterUrl," .
                     "u.linkedinUrl,u.descService,u.servicioOfrecido1,u.servicioOfrecido2,u.servicioOfrecido3," .

@@ -212,10 +212,9 @@ header >nav{
     color: #007bb6;
 }
 
-.fa-facebook-official,.fa-twitter-square,.fa-linkedin-square, .big-fa>a>.fa,.fa-arrow-circle-up
+.fa-facebook-official,.fa-twitter-square,.fa-linkedin-square, .big-fa>a>.fa
 {
     font-size: 31px;
-
 }
 
 .card .fa-facebook-official:hover,.card .fa-twitter-square:hover,.card .fa-linkedin-square:hover
@@ -402,29 +401,27 @@ header >nav{
     margin-bottom: 15px;
 }
 
-.carousel-control:hover,.fa-arrow-circle-up
+.carousel-control:hover,.fa-arrow-up
 {
     cursor:pointer;
 }
 
-/*.fa-arrow-circle-up
-{
-  position: relative;
-  top: -60px;
-  right: 0px;
-  color: #c00;
-}*/
-.fa-arrow-circle-up
+.fa-arrow-up
 {
     position: fixed;
     top: 60%;
     right: 0px;
-    color: #20429D;
+    background-color: #20429D;
+    color:#FFFFFF;
+    border-radius: 3px;
+    padding: 3px;
+    margin-right: 0px;
+    font-size: 25px;
 }
 
-.fa-arrow-circle-up:hover
+.fa-arrow-up:hover
 {
-    color:#B60000
+    background-color:#B60000
 }
 
 /*@media (min-width:768px)
