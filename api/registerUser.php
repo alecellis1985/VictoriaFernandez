@@ -157,10 +157,10 @@ function insertNewUser($conn, $user) {
             $conn->beginTransaction();
             $sql = "INSERT INTO users (nombre, apellido, email, telefono, celular, direccion, telefonoEmp, "
                     . "plan ,sitioWeb, imagenUrl, facebookUrl, twitterUrl, linkedinUrl, descService, servicioOfrecido1,"
-                    . " servicioOfrecido2, servicioOfrecido3, servicioOfrecido4, servicioOfrecido5, servicioOfrecido6, descServiceLong, username, password,markers) "
+                    . " servicioOfrecido2, servicioOfrecido3, servicioOfrecido4, servicioOfrecido5, servicioOfrecido6, descServiceLong, username, password,markers,cardcolor) "
                     . "VALUES (:nombre, :apellido, :email, :telefono, :celular, :direccion, :telefonoEmp, "
                     . " :plan, :sitioWeb, :imagenUrl, :facebookUrl, :twitterUrl, :linkedinUrl, :descService, :servicioOfrecido1,"
-                    . " :servicioOfrecido2, :servicioOfrecido3, :servicioOfrecido4, :servicioOfrecido5, :servicioOfrecido6,:descServiceLong, :username, :password,:markers)";
+                    . " :servicioOfrecido2, :servicioOfrecido3, :servicioOfrecido4, :servicioOfrecido5, :servicioOfrecido6,:descServiceLong, :username, :password,:markers,:cardcolor)";
             $params = setUserParams($user, false);
             if ($conn->consulta($sql, $params)) {
                 $user['id'] = $conn->ultimoIdInsert();
@@ -292,7 +292,7 @@ function updateUser($conn, $user) {
                     . " twitterUrl = :twitterUrl, linkedinUrl = :linkedinUrl, descService = :descService, servicioOfrecido1 = :servicioOfrecido1,"
                     . " servicioOfrecido2 = :servicioOfrecido2, servicioOfrecido3 = :servicioOfrecido3, servicioOfrecido4 = :servicioOfrecido4,"
                     . " servicioOfrecido5 = :servicioOfrecido5, servicioOfrecido6 = :servicioOfrecido6, descServiceLong = :descServiceLong,"
-                    . " username = :username,markers = :markers"
+                    . " username = :username,markers = :markers, cardcolor = :cardcolor"
                     . " WHERE username = '" . $_SESSION['usuario'] . "'";
 
             $params = setUserParams($user, true);
@@ -459,6 +459,7 @@ function getArrayFromRequest($request) {
         "servicioOfrecido4" => is_null($request->post('servicioOfrecido4')) ? "" : $request->post('servicioOfrecido4'),
         "servicioOfrecido5" => is_null($request->post('servicioOfrecido5')) ? "" : $request->post('servicioOfrecido5'),
         "servicioOfrecido6" => is_null($request->post('servicioOfrecido6')) ? "" : $request->post('servicioOfrecido6'),
+        "cardcolor" => is_null($request->post('cardcolor')) ? NULL : $request->post('cardcolor'),
         "diasAtencion" => array(
             "lunes" => $diasAtencion->lunes ? 1 : 0,
             "martes" => $diasAtencion->martes ? 1 : 0,
@@ -579,5 +580,6 @@ function setUserParams($user, $forEdit) {
         $params[22] = array("imagenUrl", $user['imagenUrl'], "string", 100);
         $params[23] = array("password", md5($user['password']), "string", 100);
     }
+    $params[24] = array("cardcolor", $user['cardcolor'], "string", 60);
     return $params;
 }

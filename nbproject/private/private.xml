@@ -5,9 +5,13 @@
         <group>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/js/directives/RegisterUserValidations.js</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/ProfessionalsSearchController.js</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/footer.html</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/registroUsuario.html</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/directives/commonDirectives.js</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/js/app.js</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/js/directives/GoogleMaps.js</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/api/getUsers.php</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/resources/css/common.css</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/verUsuario.html</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/VerUserController.js</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/RegisterUserController.js</file>

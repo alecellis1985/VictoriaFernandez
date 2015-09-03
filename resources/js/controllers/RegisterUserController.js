@@ -4,11 +4,20 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
     'CommonService', 'departamentosList', 'categoriasList', 'barriosList', 'planes', 'Helper', 'userData', 'newUser', '$timeout',
     function ($scope, $rootScope, $location, CommonService, departamentosList, categoriasList,
             barriosList, planes, Helper, userData, newUser, $timeout) {
-
+        
         //FOR UPLOAD FILE (IMG)
-        $scope.$watch('files', function () {
+        $scope.$watch('files', function (newval,oldval) {
             //perform img validation 
-            $scope.validateImg($scope.files);
+            if(newval !== undefined && newval !== null && newval.length>0){
+                $scope.validateImg($scope.files);
+                $scope.user.cardcolor = undefined;
+            }
+        });
+        
+        $scope.$watch('user.cardcolor',function(newval){
+            if(newval !== undefined && newval !== null){
+                $scope.files = [];
+            }
         });
 
         $scope.planes = planes;
@@ -217,7 +226,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
 
         $scope.barriosTexts = $.extend({}, $scope.defaultDropdownTexts, {buttonDefaultText: 'Seleccione Barrios'});
         $scope.barriosSettings = {displayProp: 'barrioNombre', idProp: 'barrioId'};
-        $scope.barrios = barriosList.data;
+        $scope.barrios = $.grep(barriosList.data,function(elem){return elem.barrioId < 82;});;
         $scope.selectedBarrios = [];
         //$scope.selectedBarrio = $scope.barrios[0];
 
@@ -228,6 +237,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
         //$scope.depSelected = $scope.departamentosList[0];
 
         $scope.user = {
+            cardcolor:undefined,
             horario: '',
             diasAtencion: {
                 lunes: false,
@@ -381,6 +391,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
                 'twitterUrl': $scope.user.twitterUrl,
                 'linkedinUrl': $scope.user.linkedinUrl,
                 'descService': $scope.user.descService,
+                'cardcolor':$scope.user.cardcolor,
                 'servicioOfrecido1': $scope.user.servicioOfrecido1,
                 'servicioOfrecido2': $scope.user.servicioOfrecido2,
                 'servicioOfrecido3': $scope.user.servicioOfrecido3,

@@ -736,14 +736,19 @@ label{
     cursor:pointer;
 }
 
-.propaganda-right > img{
+.propaganda-right > div:first-child{
     box-shadow: 0 0 1em #DEDEDE;
     border: solid 1px #DEDEDE;
     width: 100%;
     height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    border-radius: 6px;
+    margin-top: 8px;
 }
 
-.propaganda-right > img:hover,.sorryDiv:hover{
+.propaganda-right > div:first-child:hover,.sorryDiv:hover{
     box-shadow: 0 0 1em #ADADAD;
 }
 
@@ -961,10 +966,39 @@ label{
 
 .backgroundImg{
     height:150px;
-    width: 100%;
+    /*width: 100%;*/
+    width: 130px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
     border-radius: 6px;
     margin-top: 8px;
 }
+
+.cardColor{
+    height: 150px;
+    width:130px;
+    position:relative;
+    border-radius: 6px;
+    margin-top: 8px;
+}
+
+.nice-h6,.nice-h7{
+    position:absolute;
+    top: 10px;
+    left: 5px;
+    width: 120px;
+    height: 35px;
+    color: white;
+    text-align: center;
+}
+.nice-h7{
+    top: 55px;
+}
+
+@media (max-width: 768px){
+    .container {
+        width: 90%;
+    }
+}
+

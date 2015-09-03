@@ -49,12 +49,22 @@
                 <p>{{user.celular}}</p>
             </div>
         </div>
-        <div class="row">
-            <div class="col-xs-3 col-md-2 col-sm-3">
-                <img class="img-responsive img-rounded" ng-if="imageUrl.get() !== ''" ng-src="{{'uploaded/' + imageUrl.get()}}">
-                <i ng-if="imageUrl.get() === '' || imageUrl.get() === undefined" class="img-responsive fa fa-user"></i>
-                <br>
+        <div class="row">            
+            <div class="form-group col-xs-12 col-md-4">
                 <button class="btn btn-primary pull-left" ng-click="editUserImg($event)"><i class="fa fa-pencil"></i> Cambiar Imagen</button>
+            </div>  
+        </div>
+        <div class="row">
+                <div class="col-xs-3 col-sm-3 col-md-2" style="margin-bottom: 10px;">                
+                <fancy-img ng-if="imageUrl.get() !== undefined && imageUrl.get() !== ''" background-url="{{imageUrl.get()}}" ></fancy-img>
+                <div class="cardColor" ng-style="{'background-color':user.cardcolor}" ng-if="user.plan < 7 && user.cardcolor && (imageUrl.get() === undefined || imageUrl.get() === '')">
+                    <h3 class="nice-h6" style='text-transform: uppercase;' ng-fi-text ng-fi-text-html="{{ user.nombre | limitTo:1 }}{{ user.apellido | limitTo:1 }}"></h3>
+                    <h3 class="nice-h7" ng-fi-text="Profesional"></h3>
+                </div>
+                <div class="cardColor" ng-style="{'background-color':user.cardcolor}" ng-if="user.plan > 6 && user.cardcolor && (imageUrl.get() === undefined || imageUrl.get() === '')">
+                    <h3 class="nice-h6" ng-fi-text ng-fi-text-html="{{ user.nombre }}"></h3>
+                    <h3 class="nice-h7" ng-fi-text="Categoria"></h3>
+                </div>
             </div>
         </div>
     </div>

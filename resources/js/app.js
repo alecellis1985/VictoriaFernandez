@@ -1,6 +1,6 @@
 'use strict';
 
-var Professionals = angular.module('Professionals', ['ngRoute', 'angularFileUpload', 'ui.bootstrap', 'noCAPTCHA','angularjs-dropdown-multiselect']);
+var Professionals = angular.module('Professionals', ['ngRoute', 'angularFileUpload', 'ui.bootstrap', 'noCAPTCHA','angularjs-dropdown-multiselect','ng-fi-text']);
 
 Professionals.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
 

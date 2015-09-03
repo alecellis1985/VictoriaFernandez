@@ -11,7 +11,7 @@ Professionals.controller('VerUserController', ['$scope', '$location', 'departame
 
         $scope.registro = {
             mostrarRegistro: !false,
-            empresa: userData.plan > 6
+            empresa: userData.data.user.plan > 6
         };
 
         $scope.barrios = barriosList.data;
