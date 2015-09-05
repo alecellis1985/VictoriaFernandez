@@ -40,6 +40,10 @@
                      <i class="fa fa-home"></i>
                      <span ng-repeat="dir in selectedUser.direccion">{{dir.val}}<span ng-if="$index < selectedUser.direccion.length-1">,&nbsp;</span></span>                     
                  </div>
+                 <div class="row" ng-if="selectedUser.sitioWeb">
+                     <i class="fa fa-globe" title="Url sito Web"></i>
+                     <span ng-bind="selectedUser.sitioWeb"></span>
+                 </div>
              </div>
          </div>
          <div class='row marginRow'>

@@ -1018,3 +1018,8 @@ label{
     width: 100%;
     position: relative;
 }
+
+.fa-globe{
+    font-size: 20px;
+    color: #9E9B9B;
+}
