@@ -44,7 +44,7 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
         {
             e.preventDefault();
             $scope.selectedCategoria = categoria;
-            if($scope.depSelected.idDepartamento === -1)
+            if($scope.depSelected.idDepartamento === -1 || $scope.selectedCategoria.categoriaId === -1)
                 return;
             getUsers();
         };
@@ -94,13 +94,11 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
                 categoria: categoria
             });
         };
-//        for (var i = 0; i < 4; i++) {
-        //$scope.addSlide('./resources/img/dentista.jpg',"Buscas un dentista?","Encuentra al profesional que estás buscando","Odontólogos");
-        $scope.addSlide('./resources/img/profesionalesSearch.jpg', "¿Buscas un dentista?", "Encuentra al profesional que estás buscando", "Odontólogos");
-        //$scope.addSlide('./resources/img/profesionales.jpg', "¿Buscas profesionales?", "Encuentra al profesional que estás buscando", "Escribanos");
+        
+        $scope.addSlide('./resources/img/handshake.jpg', "¿Buscas un profesional?", "Encuentra al profesional que estás buscando", "Arquitectos")
+        $scope.addSlide('./resources/img/profesionalesSearch.jpg', "¿Buscas un escribano?", "Encuentra al profesional que estás buscando", "Escribanos");
         $scope.addSlide('./resources/img/contador.jpg', "¿Buscas un contador?", "Encuentra al profesional que estás buscando", "Contadores");
-        //$scope.addSlide('./resources/img/ColegiosProfesionales.jpg', "¿Buscas un contador?", "Encuentra al profesional que estás buscando", "Contadores");
-        $scope.addSlide('./resources/img/ColegiosProfesionales2.jpg', "¿Buscas un contador?", "Encuentra al profesional que estás buscando", "Contadores")
+        
 
         $scope.setDropdownsAndExecuteQuery = function (nombreCategoria) {
             $scope.selectedCategoria = $scope.categorias.filter(function (elem) {
