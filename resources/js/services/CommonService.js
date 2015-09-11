@@ -1,4 +1,4 @@
-Professionals.factory('CommonService', function ($http, $q, $upload) {
+Professionals.factory('CommonService',['$http','$q','$upload', function ($http, $q, $upload) {
     var commonService = {};
 
     commonService.getRequest = function (requestUrl, params, canceller) {
@@ -37,6 +37,14 @@ Professionals.factory('CommonService', function ($http, $q, $upload) {
         });
         return deferred.promise();
     };
+    
+    commonService.postUrlEncoded = function (requestUrl, params) {
+        var deferred = $.Deferred();
+        $http.post(requestUrl, params, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).success(function (data) {
+            deferred.resolve(data);
+        });
+        return deferred.promise();
+    };
 
     commonService.postRequestWithFile = function (requestUrl, params, file) {
         return $upload.upload({
@@ -47,6 +55,6 @@ Professionals.factory('CommonService', function ($http, $q, $upload) {
     };
 
     return commonService;
-});
+}]);
 
 

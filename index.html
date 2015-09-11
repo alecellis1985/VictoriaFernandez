@@ -14,7 +14,7 @@
         <link type="text/css" rel="stylesheet" href="resources/css/bootstrap.min.css">
         <link type="text/css" rel='stylesheet' href="resources/css/font-awesome.min.css">
         <link type="text/css" rel="stylesheet" href="resources/css/main.css">
-        <link type="text/css" rel="stylesheet" href="resources/css/common.css?v=1.1">        
+        <link type="text/css" rel="stylesheet" href="resources/css/common.css?v=1.1.2">        
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:700' rel='stylesheet' type='text/css'>
         <script src='https://www.google.com/recaptcha/api.js'></script>
     </head>
@@ -40,59 +40,57 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-resource.min.js"></script>-->
         <!--<script type="text/javascript" src="resources/js/libs/jquery.js"></script>-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script id="jqueryCheck">
-            function insertAfter(newNode, referenceNode) {
-                referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-            }
-
-            if (!window.jQuery)
-            {
-                var script = document.createElement('script');
-                script.type = "text/javascript";
-                script.src = "resources/js/libs/jquery.js";
-                insertAfter(script, document.getElementById('jqueryCheck'));
-            }
-        </script>
+        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCJrNyu7609huK8yNPwF5jxkeyiinAiqhc"></script>
         <!--<script type="text/javascript" src="resources/js/libs/bootstrap.min.js"></script>-->
 
-        <script type="text/javascript" src="resources/js/libs/angular.min.js"></script>        
-
-
+        <script type="text/javascript" src="resources/js/libs/angular.min.js"></script> 
 
         <!-- https://angular-ui.github.io/bootstrap/  EJEMPLOS -->
 
-        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        
         <script type="text/javascript" src="resources/js/libs/ui-bootstrap-tpls-0.12.1.min.js"></script>
-        <script type="text/javascript" src="resources/js/libs/angular-no-captcha.js"></script>
         <script type="text/javascript" src="resources/js/libs/route.min.js"></script>
         <script type="text/javascript" src="resources/js/libs/plugins.js"></script>
-        <script type="text/javascript" src ="resources/js/app.js?v=1.1"></script>
-        <script type="text/javascript" src="resources/js/services/CommonService.js?v=1.1"></script>    
-        <script type="text/javascript" src="resources/js/services/HelperService.js"></script>
-        <script type="text/javascript" src="resources/js/directives/commonDirectives.js?v=1.1"></script>
-        <script type="text/javascript" src="resources/js/directives/Planes.js"></script>
-        <script type="text/javascript" src="resources/js/directives/GoogleMaps.js"></script>
-        <script type="text/javascript" src="resources/js/directives/UserDetailsDirective.js?v=1.1"></script>
-        <script type="text/javascript" src="resources/js/directives/RegisterUserValidations.js"></script>
-        <script type="text/javascript" src="resources/js/controllers/UsersController.js"></script>
-        <script type="text/javascript" src="resources/js/controllers/HeaderController.js"></script>
-        <script type="text/javascript" src="resources/js/controllers/AlertController.js"></script>
-        <script type="text/javascript" src="resources/js/controllers/HomeController.js?v=1.1"></script>
-        <script type="text/javascript" src="resources/js/filters/profesionalesFilters.js"></script>
-        <script type="text/javascript" src="resources/js/controllers/FooterController.js"></script>
-        <script type="text/javascript" src="resources/js/controllers/LoginController.js"></script>
-        <script type="text/javascript" src="resources/js/controllers/ContactoController.js"></script>
-        <script type="text/javascript" src="resources/js/controllers/TopPropagandaController.js"></script>
-        <script type="text/javascript" src="resources/js/controllers/ProfessionalsSearchController.js?v=1.1"></script>
-        <script type="text/javascript" src="resources/js/controllers/RegisterUserController.js?v=1.1"></script>       
-        <script type="text/javascript" src="resources/js/controllers/VerUserController.js?v=1.1"></script>    
-        <script type="text/javascript" src="resources/js/controllers/EditImgController.js"></script>    
-        <script type="text/javascript" src="resources/js/controllers/EditPwdController.js"></script> 
+        <script type="text/javascript" src ="resources/js/app.js?v=1.1.2"></script>
+        <script type="text/javascript" src="resources/js/services/CommonService.js?v=1.1.2"></script>    
+        <script type="text/javascript" src="resources/js/services/HelperService.js?v=1.1.2"></script>
+        
+        
+        <script type="text/javascript" src="resources/js/filters/profesionalesFilters.js?v=1.1.2"></script>
+        
         <script type="text/javascript" src="resources/js/libs/lodash.min.js"></script>
         <script type="text/javascript" src="resources/js/libs/angularjs-dropdown-multiselect.min.js"></script>
         <script type="text/javascript" src="resources/js/libs/ng-fi-text.min.js"></script>
         <!-- FOR FILE UPLOAD -->
         <script type="text/javascript" src="resources/js/libs/angular-file-upload.min.js"></script>
+        
+        
+        <script type="text/javascript" src="resources/js/directives/directives.min.js?v=1.1.4"></script>
+        <script type="text/javascript" src="resources/js/controllers/Controllers.min.js?v=1.1.2"></script>
+        
+        <!--  
+        <script type="text/javascript" src="resources/js/directives/commonDirectives.js?v=1.1.4"></script>
+        <script type="text/javascript" src="resources/js/directives/Planes.js?v=1.1.4"></script>
+        <script type="text/javascript" src="resources/js/directives/GoogleMaps.js?v=1.1.4"></script>
+        <script type="text/javascript" src="resources/js/directives/UserDetailsDirective.js?v=1.1.4"></script>
+        <script type="text/javascript" src="resources/js/directives/RegisterUserValidations.js?v=1.1.4"></script>
+        -->
+        
+        <!--        
+        <script type="text/javascript" src="resources/js/controllers/UsersController.js?v=1.1.2"></script>
+        <script type="text/javascript" src="resources/js/controllers/HeaderController.js?v=1.1.2"></script>
+        <script type="text/javascript" src="resources/js/controllers/AlertController.js?v=1.1.2"></script>
+        <script type="text/javascript" src="resources/js/controllers/HomeController.js?v=1.1.2"></script>
+        <script type="text/javascript" src="resources/js/controllers/FooterController.js?v=1.1.2"></script>
+        <script type="text/javascript" src="resources/js/controllers/LoginController.js?v=1.1.2"></script>
+        <script type="text/javascript" src="resources/js/controllers/ContactoController.js?v=1.1.2"></script>
+        <script type="text/javascript" src="resources/js/controllers/TopPropagandaController.js?v=1.1.2"></script>
+        <script type="text/javascript" src="resources/js/controllers/ProfessionalsSearchController.js?v=1.1.2"></script>
+        <script type="text/javascript" src="resources/js/controllers/RegisterUserController.js?v=1.1.2"></script>       
+        <script type="text/javascript" src="resources/js/controllers/VerUserController.js?v=1.1.2"></script>    
+        <script type="text/javascript" src="resources/js/controllers/EditImgController.js?v=1.1.2"></script>    
+        <script type="text/javascript" src="resources/js/controllers/EditPwdController.js?v=1.1.2"></script>--> 
+        
     </body>
 </html>

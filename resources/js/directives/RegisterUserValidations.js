@@ -25,7 +25,7 @@ Professionals.directive('imageUpload', function () {
     };
 });
 
-Professionals.directive('username', function ($q, $http) {
+Professionals.directive('username', ['$q','$http',function ($q, $http) {
     return {
         require: 'ngModel',
         link: function (scope, elm, attrs, ctrl) {
@@ -56,9 +56,9 @@ Professionals.directive('username', function ($q, $http) {
             };
         }
     };
-});
+}]);
 
-Professionals.directive('emailUnique', function ($q, $timeout, $http) {
+Professionals.directive('emailUnique',['$q', '$timeout', '$http', function ($q, $timeout, $http) {
     return {
         require: 'ngModel',
         link: function (scope, elm, attrs, ctrl) {
@@ -88,7 +88,7 @@ Professionals.directive('emailUnique', function ($q, $timeout, $http) {
             };
         }
     };
-});
+}]);
 
 
 //Compares 2 fields and validates that are equal

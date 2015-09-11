@@ -14,8 +14,6 @@
                         <th>Telefono</th>
                         <th>Celular</th>
                         <th>Direccion</th>
-                        <th>Departamento</th>
-                        <th>Categoria</th>
                         <th>Estado</th>
                     </tr>
                 </thead>
@@ -33,9 +31,7 @@
                         <td>{{user.telefono}}</td>
                         <!-- TODO ADD IMG user.imagenUrl-->
                         <td>{{user.celular}}</td>
-                        <td>{{user.direccion}}</td>
-                        <td>{{user.departamento}}</td>
-                        <td>{{user.categoria}}</td>
+                        <td><span ng-repeat="dir in user.direccion">{{dir.val}}<span ng-if="$index<user.direccion.length-1">,&nbsp;</span></span></td>
                         <td ng-if="user.IsActive != 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Activar</button></td>
                         <td ng-if="user.IsActive == 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Desactivar</button></td>
                     </tr>

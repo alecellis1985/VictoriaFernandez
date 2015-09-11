@@ -485,59 +485,72 @@ function getArrayFromRequest($request) {
 
 function checkUsername() {
     $request = Slim::getInstance()->request();
-
     $userName = json_decode($request->getBody())->userName;
-    $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
-    $response = null;
-    if ($conn->conectar()) {
-        $sql = "SELECT 1 FROM users WHERE username = :userName";
-        $params = array();
-        $params[0] = array("userName", $userName, "string", 50);
+    if(isset($_SESSION['usuario']) && !empty($_SESSION['usuario']) && $userName == $_SESSION['usuario'])
+    {
+        echo MessageHandler::getSuccessResponse("Consulta exitosa", array("isUnique" => true));
+    }
+    else
+    {
+        $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
+        $response = null;
+        if ($conn->conectar()) {
+            $sql = "SELECT 1 FROM users WHERE username = :userName";
+            $params = array();
+            $params[0] = array("userName", $userName, "string", 50);
 
-        if ($conn->consulta($sql, $params)) {
-            if ($conn->cantidadRegistros() == 0)
-                $response = MessageHandler::getSuccessResponse("Consulta exitosa", array("isUnique" => true));
-            else
-                $response = MessageHandler::getSuccessResponse("Consulta exitosa", array("isUnique" => false));
+            if ($conn->consulta($sql, $params)) {
+                if ($conn->cantidadRegistros() == 0)
+                    $response = MessageHandler::getSuccessResponse("Consulta exitosa", array("isUnique" => true));
+                else
+                    $response = MessageHandler::getSuccessResponse("Consulta exitosa", array("isUnique" => false));
+            } else {
+                $response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
+            }
+        }
+        if ($response == null) {
+            header('HTTP/1.1 400 Bad Request');
+            echo MessageHandler::getDBErrorResponse();
         } else {
-            $response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
+            $conn->desconectar();
+            echo $response;
         }
     }
-    if ($response == null) {
-        header('HTTP/1.1 400 Bad Request');
-        echo MessageHandler::getDBErrorResponse();
-    } else {
-        $conn->desconectar();
-        echo $response;
-    }
+    
+    
 }
 
 function checkEmail() {
     $request = Slim::getInstance()->request();
-
     $email = json_decode($request->getBody())->email;
-    $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
-    $response = null;
-    if ($conn->conectar()) {
-        $sql = "SELECT 1 FROM users WHERE email = :email";
-        $params = array();
-        $params[0] = array("email", $email, "string", 100);
-
-        if ($conn->consulta($sql, $params)) {
-            if ($conn->cantidadRegistros() == 0)
-                $response = MessageHandler::getSuccessResponse("Consulta exitosa", array("isUnique" => true));
-            else
-                $response = MessageHandler::getSuccessResponse("Consulta exitosa", array("isUnique" => false));
-        } else {
-            $response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
-        }
+    if(isset($_SESSION['email']) && !empty($_SESSION['email']) && $email == $_SESSION['email'])
+    {
+        echo MessageHandler::getSuccessResponse("Consulta exitosa", array("isUnique" => true));
     }
-    if ($response == null) {
-        header('HTTP/1.1 400 Bad Request');
-        echo MessageHandler::getDBErrorResponse();
-    } else {
-        $conn->desconectar();
-        echo $response;
+    else{
+        $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
+        $response = null;
+        if ($conn->conectar()) {
+            $sql = "SELECT 1 FROM users WHERE email = :email";
+            $params = array();
+            $params[0] = array("email", $email, "string", 100);
+
+            if ($conn->consulta($sql, $params)) {
+                if ($conn->cantidadRegistros() == 0)
+                    $response = MessageHandler::getSuccessResponse("Consulta exitosa", array("isUnique" => true));
+                else
+                    $response = MessageHandler::getSuccessResponse("Consulta exitosa", array("isUnique" => false));
+            } else {
+                $response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
+            }
+        }
+        if ($response == null) {
+            header('HTTP/1.1 400 Bad Request');
+            echo MessageHandler::getDBErrorResponse();
+        } else {
+            $conn->desconectar();
+            echo $response;
+        }
     }
 }
 

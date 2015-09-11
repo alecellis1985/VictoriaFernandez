@@ -24,9 +24,13 @@ function logUser($conn, $userLogin) {
                 $_SESSION['usuario'] = $user->username;
                 $_SESSION['idUser'] = $user->idUser;
                 $_SESSION['password'] = $user->password;
+                $_SESSION['email'] = $user->email;
                 //TODO: Agregar campo isAdmin para el administrador
                 $_SESSION['IsAdmin'] = $user->IsAdmin == 1;
                 setcookie('usuario', $user->username);
+                if($user->IsAdmin == 1){
+                    $user->IsAdmin = true;
+                }
                 $error = false;
             } else {
                 $_SESSION['ingreso'] = false;
@@ -39,7 +43,7 @@ function logUser($conn, $userLogin) {
                 $response = MessageHandler::getErrorResponse("El nombre de usuario y/o contraseña son inválidos, intente nuevamente.");
             }
         } else {
-            echo MessageHandler::getErrorResponse("Primer consulta error.");
+            echo MessageHandler::getErrorResponse("Error en el login, vuelva a intentar más tarde.");
         }
     }
     if ($response == null) {
@@ -65,6 +69,8 @@ function logoutUser() {
     $_SESSION['IsAdmin'] = false;
     unset($_SESSION['usuario']);
     unset($_SESSION['password']);
+    unset($_SESSION['idUser']);    
+    unset($_SESSION['email']);
     
     if (isset($_COOKIE['usuario'])) {
         unset($_COOKIE['usuario']);

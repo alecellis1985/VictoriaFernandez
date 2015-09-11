@@ -22,6 +22,7 @@ $app = new Slim();
 $app->get('/users', 'getAllUsers');
 $app->get('/users/loggedUser', 'isUserLogged');
 $app->post('/sendMail', 'sendEmail');
+$app->post('/recoverPassword', 'recoverUserPassword');
 $app->get('/userPlans', 'getPlanes');
 $app->get('/departamentos', 'getDepartamentos');
 $app->get('/categorias', 'getCategorias');

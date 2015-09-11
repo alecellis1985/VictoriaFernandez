@@ -36,7 +36,7 @@
         </div>  
     </div>
 </div>
-<form ng-submit="registrarUsuario(registerUser.$valid)" name="registerUser" style="padding-top: 10px" ng-show="registro.mostrarRegistro" 
+<form ng-submit="registrarUsuario()" name="registerUser" style="padding-top: 10px" ng-show="registro.mostrarRegistro" 
       method="post" novalidate>
     
     <div class="panel panel-primary">
@@ -81,7 +81,6 @@
                 
             </div>
             <div class="row">
-                
                 <div class="form-group col-xs-12 col-md-4" ng-if="newUser">
                     <span class="requiredAst">*</span>
                     <input type="password" class="form-control" name="password" ng-model="user.password" maxlength="20" placeholder="Contraseña" 
@@ -121,15 +120,14 @@
             <div class="row ">
                 <div class="form-group col-xs-12 col-md-4" ng-hide="registro.empresa">
                     <span class="requiredAst">*</span>
-                    <input type="text" class="form-control" name="telefono" ng-model="user.telefono" maxlength="25" placeholder="Telefono" ng-required="!registro.empresa" ng-pattern="/^[0-9+]+$/">
-                    <span ng-show="registerUser.telefono.$touched && registerUser.telefono.$error.required" class="error">Telefono es requerido.</span>
-                    <span ng-show="registerUser.telefono.$touched && !registerUser.telefono.$error.required && registerUser.telefono.$error.pattern" class="error">Telefono inválido.</span>
+                    <input type="text" class="form-control" name="telefono" ng-model="user.telefono" maxlength="25" placeholder="Teléfono" ng-required="!registro.empresa" ng-pattern="/^[0-9+]+$/">
+                    <span ng-show="registerUser.telefono.$touched && registerUser.telefono.$error.required" class="error">Teléfono es requerido.</span>
+                    <span ng-show="registerUser.telefono.$touched && !registerUser.telefono.$error.required && registerUser.telefono.$error.pattern" class="error">Teléfono inválido.</span>
                 </div>
                 <div class="form-group col-xs-12 col-md-4" ng-hide="registro.empresa">
                     <input type="text" class="form-control" name="celular" ng-model="user.celular" maxlength="25" placeholder="Celular" ng-pattern="/^[0-9+]+$/">
-                    <span ng-show="registerUser.celular.$touched && registerUser.celular.$error.pattern" class="error">Telefono inválido.</span>
+                    <span ng-show="registerUser.celular.$touched && registerUser.celular.$error.pattern" class="error">Teléfono inválido.</span>
                 </div>
-
             </div>
             
         </div>
@@ -161,7 +159,7 @@
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
                     <input type="url" name="sitioWeb" class="form-control" ng-model="user.sitioWeb" maxlength="250" placeholder="Sitio Web">
-                    <span ng-show="registerUser.sitioWeb.$touched && registerUser.sitioWeb.$error.url" class="error">URL inválida</span>
+                    <span ng-show="registerUser.sitioWeb.$touched && registerUser.sitioWeb.$error.url" class="error">URL inválida, no olvide incluir el prefijo https:// o http://</span>
                 </div>
             </div>
             
@@ -175,7 +173,7 @@
             </div>
             </div>
             <div class="row ">
-                <div class="form-group col-xs-6 col-md-4" ng-show="newUser">
+                <div class="form-group col-xs-6 col-md-4" ng-if="newUser">
                     <input id="uploadFile" name="imageUpload" class="form-control" style="display: inline-block; width: 85%" 
                            placeholder="Foto o Logo de 130px x 150px" disabled="disabled" ng-model="files[0].name"/>
                     <div class="fileUpload btn btn-primary">
@@ -184,32 +182,33 @@
                     </div>
                 </div>
                 <div class="form-group col-xs-6 col-md-4">
-                    <label style="padding-right: 10px;"><input type="radio" name="cardcolor" ng-model="user.cardcolor" value="#A21E2C" ng-click="myStyle={'background-color':'#A21E2C'}">Bordo</label>
-                    <label style="padding-right: 10px;"><input type="radio" name="cardcolor" ng-model="user.cardcolor" value="#28A44C" ng-click="myStyle={'background-color':'#28A44C'}">Verde</label>
-                    <label><input type="radio" name="cardcolor" ng-model="user.cardcolor" value="#3F4C54" ng-click="myStyle={'background-color':'#3F4C54'}">Gris</label>
-                    
-                    <div class="cardColor" ng-style="myStyle" ng-if="registro.empresa && user.cardcolor">
-                        <h3 class="nice-h6" ng-fi-text ng-fi-text-html="{{ user.nombre }}"></h3>
-                        <h3 class="nice-h7" ng-fi-text="Profesión"></h3>
-                    </div>
-                    <div class="cardColor" ng-style="myStyle" ng-if="!registro.empresa && user.cardcolor">
-                        <h3 class="nice-h6" ng-fi-text ng-fi-text-html="{{ user.nombre | limitTo:1 }}{{ user.apellido | limitTo:1 }}"></h3>
-                        <h3 class="nice-h7" ng-fi-text="Profesión"></h3>
+                    <div ng-if="user.imagenUrl === undefined || user.imagenUrl === null">
+                        <label style="padding-right: 10px;"><input type="radio" name="cardcolor" ng-model="user.cardcolor" value="#A21E2C" ng-click="myStyle={'background-color':'#A21E2C'}">Bordó</label>
+                        <label style="padding-right: 10px;"><input type="radio" name="cardcolor" ng-model="user.cardcolor" value="#28A44C" ng-click="myStyle={'background-color':'#28A44C'}">Verde</label>
+                        <label><input type="radio" name="cardcolor" ng-model="user.cardcolor" value="#3F4C54" ng-click="myStyle={'background-color':'#3F4C54'}">Gris</label>
+                        <div class="cardColor" ng-style="myStyle" ng-if="registro.empresa && user.cardcolor">
+                            <h3 class="nice-h6" ng-fi-text ng-fi-text-html="{{ user.nombre }}"></h3>
+                            <h3 class="nice-h7" ng-fi-text="Profesión"></h3>
+                        </div>
+                        <div class="cardColor" ng-style="myStyle" ng-if="!registro.empresa && user.cardcolor">
+                            <h3 class="nice-h6" ng-fi-text ng-fi-text-html="{{ user.nombre | limitTo:1 }}{{ user.apellido | limitTo:1 }}"></h3>
+                            <h3 class="nice-h7" ng-fi-text="Profesión"></h3>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="row ">
                 <div class="form-group col-xs-12 col-md-4">
                     <input type="url" name="facebookUrl"  class="form-control" title="Clickea en tu perfil de facebook y copia la url del browser" ng-model="user.facebookUrl" placeholder="Enlace de Facebook ej: https://www.facebook.com/pages/Profesionales-UY/1623709471210001" >
-                    <span ng-show="registerUser.facebookUrl.$touched && registerUser.facebookUrl.$error.url" class="error">URL inválida No olvide incluir el prefijo https:// o http://</span>
+                    <span ng-show="registerUser.facebookUrl.$touched && registerUser.facebookUrl.$error.url" class="error">URL inválid, no olvide incluir el prefijo https:// o http://</span>
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
                     <input type="url" name="twitterUrl" class="form-control" title="Clickea en tu perfil de twiter y copia la url del browser" ng-model="user.twitterUrl" placeholder="Enlace de Twitter" >
-                    <span ng-show="registerUser.twitterUrl.$touched && registerUser.twitterUrl.$error.url" class="error">URL inválida No olvide incluir el prefijo https:// o http://</span>
+                    <span ng-show="registerUser.twitterUrl.$touched && registerUser.twitterUrl.$error.url" class="error">URL inválid, no olvide incluir el prefijo https:// o http://</span>
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
                     <input type="url" name="linkedinUrl" class="form-control" title="Clickea en tu perfil de linkedin y copia la url del browser" ng-model="user.linkedinUrl" placeholder="Enlace de Linkedin">
-                    <span ng-show="registerUser.linkedinUrl.$touched && registerUser.linkedinUrl.$error.url" class="error">URL inválida No olvide incluir el prefijo https:// o http://</span>
+                    <span ng-show="registerUser.linkedinUrl.$touched && registerUser.linkedinUrl.$error.url" class="error">URL inválid, no olvide incluir el prefijo https:// o http://</span>
                 </div>
             </div>
             <div class="row ">
@@ -307,7 +306,7 @@
             </div>
             <div class="row">
                 <div class="form-group col-xs-12 col-md-2"> 
-                    <label>Dias de atención</label>
+                    <label>Días de atención</label>
                 </div>
                 <div class="form-group col-xs-12 col-md-6">
                     <div class="btn-group">
@@ -331,15 +330,11 @@
             </div>
         </div>
     </div>
-    
     <div>
         <div class="form-group col-md-12">
-
-            <span class="obligatoryPopup" ng-show="registerUser.$invalid || !dropdownsValid" popover="Por favor ingrese todos los campos que contienen *" popover-trigger="mouseenter"></span>
-            <button type="submit" class="btn btn-primary pull-right"  ng-disabled="registerUser.$invalid || !dropdownsValid" ng-show="newUser">Registrarme</button>
-            <button type="submit" class="btn btn-primary pull-right"  ng-disabled="registerUser.$invalid || !dropdownsValid" ng-hide="newUser">Guardar cambios</button>
+            <button type="submit" class="btn btn-primary pull-right"   ng-show="newUser">Registrarme</button>
+            <button type="submit" class="btn btn-primary pull-right"   ng-hide="newUser">Guardar cambios</button>
             <button class="btn btn-default pull-right" style="margin-right: 15px;" ng-click="goBackRegistration($event)"><i class="fa fa-reply"></i></button>
         </div>
     </div>
-
 </form>

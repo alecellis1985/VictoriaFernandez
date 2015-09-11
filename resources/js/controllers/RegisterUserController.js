@@ -266,8 +266,6 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
         $scope.fillEditUserCamps = function () {
             $scope.user = userData.data.user;
             $scope.direcciones = userData.data.direcciones;
-            $scope.user.username = userData.data.user.username;
-            $scope.user.email = userData.data.user.email;
 
             $.each(userData.data.categorias, function (index, element) {
                 $scope.selectedCategorias.push({id: element.categoriaId});
@@ -347,10 +345,10 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
             return $scope.depSelected.nombreDepartamento === 'Montevideo' && parseInt(elem.barrioId) < 0;
         };
 
-        $scope.registrarUsuario = function (isValid)
+        $scope.registrarUsuario = function ()
         {
             $scope.dropdownsValid = $scope.dropDownCheck();
-            if (!isValid || !$scope.dropdownsValid) {
+            if (!$scope.registerUser.$valid || !$scope.dropdownsValid) {
                 $rootScope.$broadcast('alert-event', {type: 'danger', msg: "Verifique que todos los campos esten correctamente completados!"});
                 return;
             }

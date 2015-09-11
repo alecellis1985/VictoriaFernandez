@@ -718,6 +718,15 @@ label{
     width: 100%;
 }
 
+.principalCard p{
+    max-height:100px;
+    overflow-y:hidden;
+}
+
+/*.principalCard p:after { 
+    content: 'y...'; position: absolute; bottom: 0; right: 0; 
+}*/
+
 .servOfSpans{
     border: 1px solid #324C8C;
     background-color: #324C8C;
@@ -1022,4 +1031,14 @@ label{
 .fa-globe{
     font-size: 20px;
     color: #9E9B9B;
+}
+
+.over_flow{
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.min_alto{
+    min-height: 205px;
 }

@@ -19,13 +19,19 @@ Professionals.controller('LoginController', ['$scope', '$routeParams', '$http', 
                 'username': $scope.userLogin.username,
                 'password': $scope.userLogin.password
             };
-            CommonService.postJsonRequest('api/login-user', data).then(function (result) {
+            //CommonService.postJsonRequest('api/login-user', data).then(function (result) {
+            CommonService.postUrlEncoded('api/login-user', data).then(function (result) {   
                 if (result.success) {
                     $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Bienvenido ' + result.data.username + ' !'});
-                    result.data.IsAdmin = result.data.IsAdmin === "1" ? true : false;
                     $rootScope.user = result.data;
                     $modalInstance.close(0);
-                    $location.path('/ver-usuario');
+                    if($rootScope.user.IsAdmin){
+                        $location.path('/administrar-users');
+                    }
+                    else
+                    { 
+                        $location.path('/ver-usuario');
+                    }
                 } else
                     $rootScope.$broadcast('alert-event', {type: 'danger', msg: result.msg});
             });

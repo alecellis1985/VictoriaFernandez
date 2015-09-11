@@ -16,7 +16,7 @@
                     <li class="ng-hide" ng-show="$root.user === undefined">
                         <a id="profRegistarse" href="#registro-usuario" >Registrarse</a>
                     </li>
-                    <li class="privateComponent ng-hide" ng-show="$root.user !== undefined">
+                    <li class="privateComponent ng-hide" ng-show="$root.user !== undefined && !$root.user.IsAdmin">
                         <a  href="#ver-usuario">Ver Perfil</a>
                     </li>
                     <li class="ng-hide" ng-show="$root.user === undefined">

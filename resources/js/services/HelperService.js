@@ -82,130 +82,6 @@ Professionals.factory('Helper', ['$rootScope', '$q', '$http', function ($rootSco
             return q.promise;
         };
 
-        //Get a cookie by name
-        helper.getCookie = function (c_name) {
-            var c_value = document.cookie;
-            var c_start = c_value.indexOf(" " + c_name + "=");
-            if (c_start == -1) {
-                c_start = c_value.indexOf(c_name + "=");
-            }
-            if (c_start == -1) {
-                c_value = null;
-            }
-            else {
-                c_start = c_value.indexOf("=", c_start) + 1;
-                var c_end = c_value.indexOf(";", c_start);
-                if (c_end == -1) {
-                    c_end = c_value.length;
-                }
-                c_value = unescape(c_value.substring(c_start, c_end));
-            }
-            return c_value;
-        }
-
-        /**
-         * Insert an element @value into a given array
-         * in the position @value
-         * @arr Array to insert in
-         * @value Int pos and value to insert
-         */
-        helper.updateArray = function (arr, value) {
-            var ind = arr.indexOf(value);
-            if (ind == -1) {
-                arr.push(value);
-            }
-            else {
-                arr.splice(ind, 1);
-            }
-        }
-
-        //Convert a string to Capitalize
-        helper.capitalize = function (name) {
-            var retString = '';
-            var newname = name.split(/(?=[A-Z])/);
-            for (var i = 0; i < newname.length; i++) {
-                retString += ' ' + newname[i];
-            }
-            return retString.replace(/(?:^|\s)\S/g, function (a) {
-                return a.toUpperCase();
-            });
-        };
-
-
-        helper.findCondition = function (arr, filterResults) {
-            var length = arr.length;
-            while (length--) {
-                if (helper.searchValue(arr[length], filterResults)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        helper.searchValue = function (value, array) {
-            var length = array.length;
-            while (length--) {
-                if (helper.checkStringValue(value, array[length])) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        helper.getListIndexById = function (list, id, field) {
-            if (helper.isUndefinedOrNull(list) || helper.isUndefinedOrNull(id)) {
-                return false;
-            }
-            var index = 0,
-                    found = false;
-
-            if (field === undefined) {
-                field = 'Id';
-            }
-
-            while (!found && (index < list.length)) {
-                if (list[index] && list[index][field] == id) {
-                    found = true;
-                }
-                else {
-                    index++;
-                }
-            }
-            return (found) ? index : false;
-        };
-
-        helper.getItemByFieldValue = function (arr, value, field) {
-            if (helper.isUndefinedOrNull(arr) || helper.isUndefinedOrNull(value) || helper.isUndefinedOrNull(field)) {
-                return -1;
-            }
-            var arrLength = arr.length;
-            while (arrLength--) {
-                if (arr[arrLength][field] === value)
-                    return arr[arrLength];
-            }
-            return -1;
-        }
-
-        helper.getListIndexByFields = function (list, field1, value1, field2, value2) {
-            var index = 0,
-                    found = false;
-
-            if (!list) {
-                return false;
-            }
-
-            while (!found && (index < list.length)) {
-                if (list[index] && (list[index][field1] == value1) && (list[index][field2] == value2)) {
-                    found = true;
-                }
-                else {
-                    index++;
-                }
-            }
-            ;
-            return (found) ? index : false;
-        };
-
         helper.setItem = function (configName, value, isUserConfig) {
             isUserConfig = isUserConfig || true;
             if (isUserConfig) {
@@ -223,7 +99,6 @@ Professionals.factory('Helper', ['$rootScope', '$q', '$http', function ($rootSco
         helper.getItem = function (configName, isUserConfig) {
             var deferred = $q.defer();
             isUserConfig = isUserConfig || true;
-            var loadedConfig;
             if (isUserConfig) {
                 helper.getUser(false).then(function () {
                     configName += $rootScope.user.UserId;
@@ -233,7 +108,7 @@ Professionals.factory('Helper', ['$rootScope', '$q', '$http', function ($rootSco
             else {
                 deferred.resolve(localStorage.getItem(configName));
             }
-            ;
+            
             return deferred.promise;
         };
 
@@ -246,112 +121,8 @@ Professionals.factory('Helper', ['$rootScope', '$q', '$http', function ($rootSco
         helper.clearArray = function (arr) {
             while (arr.length > 0) {
                 arr.pop();
-            }
-            ;
+            };
         };
-
-        helper.findParentElement = function (element, tagg) {
-            if (element === null || element === undefined)
-                return null;
-            if (element.nodeName.toLowerCase() === tagg.toLowerCase()) {
-                return element;
-            }
-            else {
-                return helper.findParentElement(element.parentElement, tagg);
-            }
-            ;
-        };
-
-        helper.propertyValueExistInArray = function (property, value, arr) {
-            var arrLength = arr.length;
-            while (arrLength--) {
-                if (arr[arrLength][property] === value) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        helper.deleteByPropertyAndValueInArray = function (property, value, arr) {
-            var arrLength = arr.length;
-            while (arrLength--) {
-                if (arr[arrLength][property] === value) {
-                    arr.splice(arrLength, 1);
-                    return;
-                }
-            }
-        }
-
-        helper.deleteAllIfNotMatch = function (property, value, arr) {
-            var arrLength = arr.length;
-            while (arrLength--) {
-                if (arr[arrLength][property] !== value) {
-                    arr.splice(arrLength, 1);
-                }
-            }
-        }
-
-        helper.inputValidation = function (input, regex) {
-            if (input.value.match(regex) == null) {
-                input.classList.add('mandatory-field', 'errorSearchBox');
-                return false;
-            }
-            ;
-            return true;
-        };
-
-        helper.findParentElement = function (element, tagg) {
-            if (element === null || element === undefined)
-                return null;
-            if (element.nodeName.toLowerCase() == tagg.toLowerCase()) {
-                return element;
-            }
-            else {
-                return helper.findParentElement(element.parentElement, tagg);
-            }
-        }
-
-        helper.sortArray = function (inputArray, sortCriteria, sortByValue) {
-            if (inputArray) {
-                if (inputArray instanceof kendo.data.DataSource) {
-                    inputArray._sort = sortCriteria;
-                }
-                else if (sortCriteria.field) {
-                    inputArray.sort(function (a, b) {
-                        var comparison, aAsString, bAsString;
-
-                        if (sortByValue !== undefined) {
-                            comparison = a - b;
-                        }
-                        else {
-                            aAsString = String(a[sortCriteria.field]);
-                            bAsString = String(b[sortCriteria.field]);
-                            comparison = aAsString.localeCompare(bAsString);
-                        }
-                        ;
-
-                        return comparison;
-                    });
-                    if (sortCriteria.dir == 'desc') {
-                        inputArray.reverse();
-                    }
-                    ;
-                }
-                else {
-                    inputArray.sort();
-                    if (sortCriteria.dir == 'desc') {
-                        inputArray.reverse();
-                    }
-                    ;
-                }
-                ;
-            }
-            ;
-        };
-
-        helper.capitaliseFirstLetter = function (string) {
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        }
 
         helper.isUndefinedOrNull = function (obj) {
             return obj === null || obj === undefined;

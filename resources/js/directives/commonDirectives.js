@@ -38,36 +38,6 @@ Professionals.directive('disableBtn', function () {
     };
 });
 
-// Professionals.directive('enableHref', function () {
-//    return {
-//        restrict: 'A',
-//        link: function ($scope, element, attr) {
-//            $scope.setHref = function(element,href)
-//            {
-//               if(href === '')
-//                {
-//                    element.addClass('notAvailable');
-//                    element.attr('title','No Disponible');
-//                    element.bind('click', function (e) {
-//                        e.stopPropagation();
-//                        e.preventDefault();
-//                    });
-//                }
-//                else
-//                {
-//                    $(element).attr('href',href);
-//                } 
-//            }
-//            $scope.href = attr.enableHref;
-//            $scope.setHref(element,attr.enableHref);
-//            
-//            $scope.$watch('$scope.href',function(prev,next){
-//                $scope.setHref(element,$scope.href);
-//            });
-//        }
-//    };
-// });
-
 Professionals.directive('profACustom', function () {
     return {
         restrict: 'E',
@@ -109,7 +79,7 @@ Professionals.directive('profACustom', function () {
 
 
 
-Professionals.directive('scrollToTop', function ($document) {
+Professionals.directive('scrollToTop',['$document', function ($document) {
     return {
         restrict: 'A',
         link: function (scope, elm, attrs) {
@@ -146,7 +116,7 @@ Professionals.directive('scrollToTop', function ($document) {
             });
         }
     };
-});
+}]);
 
 Professionals.directive('dropdownFilter', function () {
     return {
@@ -158,7 +128,7 @@ Professionals.directive('dropdownFilter', function () {
             nameProp: '@',
             idProp: '@',
             elementsArr: '=',
-            selectedElementFn: '=',
+            selectedElementFn: '='
         },
         replace: true,
         link: function ($scope, elem, attr) {
@@ -195,7 +165,7 @@ Professionals.directive('dropdownFilter', function () {
     };
 });
 
-Professionals.directive('dropdownWValidation', function ($timeout) {
+Professionals.directive('dropdownWValidation',['$timeout', function ($timeout) {
     return {
         restrict: 'E',
         templateUrl: 'resources/tpl/dropdownWValidation.html',
@@ -247,9 +217,9 @@ Professionals.directive('dropdownWValidation', function ($timeout) {
             };
         }
     };
-});
+}]);
 
-Professionals.directive('resize', function ($window) {
+Professionals.directive('resize', ['$window',function ($window) {
     return function (scope, element, attrs) {
         var w = angular.element($window);
         scope.getWindowDimensions = function () {
@@ -263,7 +233,7 @@ Professionals.directive('resize', function ($window) {
                 var footerHeight = $('.footer').height();
                 //
                 return {
-                    'min-height': (newValue.h - attrs.resizeHeight - footerHeight) + 'px',
+                    'min-height': (newValue.h - attrs.resizeHeight - footerHeight) + 'px'
                     //'width': (newValue.w - 100) + 'px'
                     //width could work if you ant responsive width
                 };
@@ -274,7 +244,7 @@ Professionals.directive('resize', function ($window) {
             scope.$apply();
         });
     }
-});
+}]);
 
 Professionals.directive('ngEnter', function () {
     return function (scope, element, attrs) {
@@ -314,7 +284,7 @@ Professionals.directive('fancyImg', ['$timeout',function ($timeout) {
         restrict: 'E',
         template: '<div class="backgroundImg"></div>',
         scope: {
-            backgroundUrl:'@',
+            backgroundUrl:'@'
         },
         replace:true,
         link: function ($scope, elem, attr) {

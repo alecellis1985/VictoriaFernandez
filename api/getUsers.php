@@ -78,23 +78,29 @@ function getUsers($categoria, $departamento, $nombreProf = null) {
 
 //Function to get users 
 function getAllUsers() {
-    $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
     $response = null;
-    if ($conn->conectar()) {
-        $sql = "SELECT * FROM users where IsAdmin = 0 ORDER BY nombre";
-        if ($conn->consulta($sql)) {
-            $users = $conn->restantesRegistros();
-            $response = MessageHandler::getSuccessResponse("", $users);
+    if(isset($_SESSION['IsAdmin']) && !empty($_SESSION['IsAdmin']) && $_SESSION['IsAdmin']){
+        $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
+        if ($conn->conectar()) {
+            $sql = "SELECT * FROM users where IsAdmin = 0 ORDER BY nombre";
+            if ($conn->consulta($sql)) {
+                $users = $conn->restantesRegistros();
+                $response = MessageHandler::getSuccessResponse("", $users);
+            } else {
+                $response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
+            }
+        }
+        if ($response == null) {
+            header('HTTP/1.1 400 Bad Request');
+            echo MessageHandler::getDBErrorResponse();
         } else {
-            $response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
+            $conn->desconectar();
+            echo $response;
         }
     }
-    if ($response == null) {
-        header('HTTP/1.1 400 Bad Request');
+    else{
+        header('HTTP/1.1 401 Not Authorized');
         echo MessageHandler::getDBErrorResponse();
-    } else {
-        $conn->desconectar();
-        echo $response;
     }
 }
 
@@ -128,51 +134,60 @@ function getLoggedUser() {
             $currentUser = $users[0];
             $userData['user'] = $currentUser;
             $userData['direcciones'] = json_decode($currentUser->direccion);
+            $userData['IsAdmin'] = $currentUser->IsAdmin == 1;
             $_SESSION['IsAdmin'] = $currentUser->IsAdmin == 1;
+            
             $currentUser->IsAdmin = $currentUser->IsAdmin == 1;
-            $sqlFormasDePago = "select * from formasdepago where idUser = :userId";
-            $paramsFormasDePago = array();
-            $paramsFormasDePago[0] = array("userId", $currentUser->idUser, "int", 11);
-            if ($conn->consulta($sqlFormasDePago, $paramsFormasDePago)) {
-                $formasDePago = $conn->restantesRegistros();
-                $formaDePagoUser = $formasDePago[0];
-                $userData['formasDePago'] = $formaDePagoUser;
-                $sqlDiasAtencion = "select * from diasatencion where idUser = :userId";
-                $paramsDiasAtencion = array();
-                $paramsDiasAtencion[0] = array("userId", $currentUser->idUser, "int", 11);
-                if ($conn->consulta($sqlDiasAtencion, $paramsDiasAtencion)) {
-                    $diasAtencion = $conn->restantesRegistros();
-                    $diasAtencionUser = $diasAtencion[0];
-                    $userData['diasAtencion'] = $diasAtencionUser;
+            if($currentUser->IsAdmin)
+            {
+                $response = MessageHandler::getSuccessResponse("Hellow Admin", $userData);
+            }else{
+                $sqlFormasDePago = "select * from formasdepago where idUser = :userId";
+                $paramsFormasDePago = array();
+                $paramsFormasDePago[0] = array("userId", $currentUser->idUser, "int", 11);
+                if ($conn->consulta($sqlFormasDePago, $paramsFormasDePago)) {
+                    $formasDePago = $conn->restantesRegistros();
+                    $formaDePagoUser = $formasDePago[0];
+                    $userData['formasDePago'] = $formaDePagoUser;
+                    $sqlDiasAtencion = "select * from diasatencion where idUser = :userId";
+                    $paramsDiasAtencion = array();
+                    $paramsDiasAtencion[0] = array("userId", $currentUser->idUser, "int", 11);
+                    if ($conn->consulta($sqlDiasAtencion, $paramsDiasAtencion)) {
+                        $diasAtencion = $conn->restantesRegistros();
+                        $diasAtencionUser = $diasAtencion[0];
+                        $userData['diasAtencion'] = $diasAtencionUser;
 
-                    //Get categorias and departamentos
+                        //Get categorias and departamentos
 
-                    $sqlGetDeptos = "Select b.barrioId, b.barrioNombre, d.idDepartamento, " .
-                            " d.nombreDepartamento from localidad_user lu " .
-                            " join barrios b on b.barrioId = lu.idLocalidad " .
-                            " join departamentos d on b.departamentoId = d.idDepartamento " .
-                            " where idUser = :userId";
-
-                    $paramsGetDeptos = array();
-                    $paramsGetDeptos[0] = array("userId", $currentUser->idUser, "int", 11);
-
-                    if ($conn->consulta($sqlGetDeptos, $paramsGetDeptos)) {
-                        $departamentos = $conn->restantesRegistros();
-                        $userData['departamentos'] = $departamentos;
-
-                        $sqlGetCats = "select c.* from categoria_usuario cu " .
-                                " join categorias c on cu.idCategoria = c.categoriaId " .
+                        $sqlGetDeptos = "Select b.barrioId, b.barrioNombre, d.idDepartamento, " .
+                                " d.nombreDepartamento from localidad_user lu " .
+                                " join barrios b on b.barrioId = lu.idLocalidad " .
+                                " join departamentos d on b.departamentoId = d.idDepartamento " .
                                 " where idUser = :userId";
 
-                        $paramsGetCats = array();
-                        $paramsGetCats[0] = array("userId", $currentUser->idUser, "int", 11);
+                        $paramsGetDeptos = array();
+                        $paramsGetDeptos[0] = array("userId", $currentUser->idUser, "int", 11);
 
-                        if ($conn->consulta($sqlGetCats, $paramsGetCats)) {
-                            $categorias = $conn->restantesRegistros();
-                            $userData['categorias'] = $categorias;
-                            
-                            //var_dump($userData);
-                            $response = MessageHandler::getSuccessResponse("", $userData);
+                        if ($conn->consulta($sqlGetDeptos, $paramsGetDeptos)) {
+                            $departamentos = $conn->restantesRegistros();
+                            $userData['departamentos'] = $departamentos;
+
+                            $sqlGetCats = "select c.* from categoria_usuario cu " .
+                                    " join categorias c on cu.idCategoria = c.categoriaId " .
+                                    " where idUser = :userId";
+
+                            $paramsGetCats = array();
+                            $paramsGetCats[0] = array("userId", $currentUser->idUser, "int", 11);
+
+                            if ($conn->consulta($sqlGetCats, $paramsGetCats)) {
+                                $categorias = $conn->restantesRegistros();
+                                $userData['categorias'] = $categorias;
+
+                                //var_dump($userData);
+                                $response = MessageHandler::getSuccessResponse("", $userData);
+                            } else {
+                                $response = MessageHandler::getErrorResponse("Error con la consulta!");
+                            }
                         } else {
                             $response = MessageHandler::getErrorResponse("Error con la consulta!");
                         }
@@ -182,8 +197,6 @@ function getLoggedUser() {
                 } else {
                     $response = MessageHandler::getErrorResponse("Error con la consulta!");
                 }
-            } else {
-                $response = MessageHandler::getErrorResponse("Error con la consulta!");
             }
         } else {
             $response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");

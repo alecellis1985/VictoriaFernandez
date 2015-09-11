@@ -2,8 +2,7 @@
 
 var Professionals = angular.module('Professionals', ['ngRoute', 'angularFileUpload', 'ui.bootstrap', 'noCAPTCHA','angularjs-dropdown-multiselect','ng-fi-text']);
 
-Professionals.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
-
+Professionals.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/registro-usuario', {
             templateUrl: 'resources/tpl/registroUsuario.html',
             controller: 'RegisterUserController',
@@ -122,32 +121,9 @@ Professionals.factory('imageUrl', function () {
     };
 });
 
-Professionals.run(['$rootScope', '$http', '$location', '$timeout', '$filter', 'Helper',
-    function ($rootScope, $http, $location, $timeout, $filter, Helper) {
+Professionals.run(['Helper', function (Helper) {
         $('.alertsTop').removeClass('hideAll');
-
-        /*Obtain username*/
         Helper.getUser();
-//        /*When change the url, dispach the main loader*/
-//        $rootScope.$on('$locationChangeSuccess', function () {
-//            $rootScope.$broadcast('event:loader', {container: "#loader", sts: true});
-//        });
-//
-//        /*Once the main content is loaded we should close the main loader*/
-//        $rootScope.$on('$viewContentLoaded', function () {
-//            $rootScope.$broadcast('event:loader', {container: "#loader", sts: false});
-//        });
-
-        /**
-         * Dispach main loader
-         * @args JSON Object
-         * @args[container] the element identifier
-         * @args[sts] the final status of the loader
-         */
-//        $rootScope.$on('event:loader', function (envent, args) {
-//            $(args.container).css('display', args.sts ? 'block' : 'none');
-//        });
-
     }]);
 
 function goToTop() {
