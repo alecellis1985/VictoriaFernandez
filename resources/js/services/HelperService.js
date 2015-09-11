@@ -32,16 +32,6 @@ Professionals.factory('Helper', ['$rootScope', '$q', '$http', function ($rootSco
                         /*Once the request is finished, turns the flag to false again*/
                         helper.getUserRequestFlag = false;
                         /*When user is in admin mode, we send an aditional parameter in the header*/
-
-//                    if (user.IsAdminMode) {
-//                        $http.defaults.headers.common.IsAdminMode = true;
-//                    }
-//                    else {
-//                        if ($http.defaults.headers.common.IsAdminMode) {
-//                            delete $http.defaults.headers.common.IsAdminMode;
-//                        }
-//                    }
-
                         /*Once the request is finished, resolves the general promise.*/
                         if (user.success)
                         {
@@ -51,7 +41,6 @@ Professionals.factory('Helper', ['$rootScope', '$q', '$http', function ($rootSco
                         {
                             delete $rootScope.user;
                         }
-
                         helper.resolveUserPromises(user);
                     });
                 }

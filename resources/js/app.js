@@ -1,8 +1,9 @@
 'use strict';
 
-var Professionals = angular.module('Professionals', ['ngRoute', 'angularFileUpload', 'ui.bootstrap', 'noCAPTCHA','angularjs-dropdown-multiselect','ng-fi-text']);
+var Professionals = angular.module('Professionals', ['ngRoute', 'angularFileUpload', 'ui.bootstrap','angularjs-dropdown-multiselect','ng-fi-text']);
 
 Professionals.config(['$routeProvider', function ($routeProvider) {
+
         $routeProvider.when('/registro-usuario', {
             templateUrl: 'resources/tpl/registroUsuario.html',
             controller: 'RegisterUserController',
@@ -121,7 +122,8 @@ Professionals.factory('imageUrl', function () {
     };
 });
 
-Professionals.run(['Helper', function (Helper) {
+Professionals.run(['Helper',
+    function (Helper) {
         $('.alertsTop').removeClass('hideAll');
         Helper.getUser();
     }]);

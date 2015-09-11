@@ -1,4 +1,4 @@
-Professionals.factory('CommonService',['$http','$q','$upload', function ($http, $q, $upload) {
+Professionals.factory('CommonService',['$http', '$q', '$upload',function ($http, $q, $upload) {
     var commonService = {};
 
     commonService.getRequest = function (requestUrl, params, canceller) {
