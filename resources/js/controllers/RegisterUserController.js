@@ -52,6 +52,34 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
                 }
             }
         }
+        
+        $scope.telefonosEmp = [];
+
+        $scope.addTelefonoEmp = function () {
+            $scope.telefonosEmp.push(new TelefonoEmp());
+        }
+        
+        $scope.removeTelefonoEmpVacias = function(){
+            var length = $scope.telefonosEmp.length;
+            while(length--){
+                if($scope.telefonosEmp[length].val == '')
+                    $scope.telefonosEmp.pop();
+            }
+        }
+        
+        function TelefonoEmp() {
+            this.val = '';
+        }
+
+        $scope.removeTelefonoEmp = function (telefono) {
+            var telefonosLength = $scope.telefonosEmp.length;
+            while (telefonosLength--) {
+                if ($scope.telefonosEmp[telefonosLength].$$hashKey === telefono.$$hashKey) {
+                    $scope.telefonosEmp.splice(telefonosLength, 1);
+                    telefonosLength = 0;
+                }
+            }
+        }
 
         $scope.profesionalesAvailablePlans = {
             0: {//Profesional
@@ -264,9 +292,12 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
         };
 
         $scope.fillEditUserCamps = function () {
+            var telsEmp = $.parseJSON(userData.data.user.telefonoEmp);
+            var firstTel = telsEmp.shift();
+            userData.data.user.telefonoEmp = firstTel.val;
+            $scope.telefonosEmp = telsEmp;
             $scope.user = userData.data.user;
             $scope.direcciones = userData.data.direcciones;
-
             $.each(userData.data.categorias, function (index, element) {
                 $scope.selectedCategorias.push({id: element.categoriaId});
             });
@@ -368,7 +399,12 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
             }
 
             $scope.removeDireccionesVacias();
+            $scope.removeTelefonoEmpVacias();
             
+            
+            
+            $scope.telefonosEmp.unshift(new TelefonoEmp());
+            $scope.telefonosEmp[0].val = $scope.user.telefonoEmp;
             var data = {
                 'nombre': $scope.user.nombre,
                 'apellido': $scope.user.apellido,
@@ -378,7 +414,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
                 'telefono': $scope.user.telefono,
                 'celular': $scope.user.celular,
                 'direccion': $scope.direcciones.length>0?JSON.stringify($scope.direcciones):null,
-                'telefonoEmp': $scope.user.telefonoEmp,
+                'telefonoEmp': JSON.stringify($scope.telefonosEmp),
                 'departamento': $scope.selectedDepartamentos,
                 'categoria': $scope.selectedCategorias,
                 'barrio': $scope.selectedBarrios,
@@ -407,7 +443,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
             if (!(typeof $scope.files === 'undefined') && !($scope.files === null))
                 imgFile = $scope.files[0];
 
-            if (newUser)
+            if (newUser){
                 CommonService.postRequestWithFile('api/agregar_usuario', data, imgFile).then(function (result) {
                     if (result.data.success) {
                         $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Felicitaciones, ya sos parte de profesionales.uy'});
@@ -416,7 +452,8 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
                     else
                         $rootScope.$broadcast('alert-event', {type: 'danger', msg: result.data.msg});
                 });
-            else
+            } 
+            else{
                 CommonService.postRequestWithFile('api/editar_usuario', data, imgFile).then(function (result) {
                     if (result.data.success) {
                         $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Datos actualizados!'});
@@ -425,7 +462,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
                     else
                         $rootScope.$broadcast('alert-event', {type: 'danger', msg: result.data.msg});
                 });
-
+            }
         };
         
         $scope.init();

@@ -573,7 +573,7 @@ function setUserParams($user, $forEdit) {
     $params[3] = array("telefono", $user['telefono'], "string", 50);
     $params[4] = array("celular", $user['celular'], "string", 50);
     $params[5] = array("direccion", $user['direccion'], "string", 2000);
-    $params[6] = array("telefonoEmp", $user['telefonoEmp'], "string", 50);
+    $params[6] = array("telefonoEmp", $user['telefonoEmp'], "string", 2000);
     $params[7] = array("markers", $user['markers'], "string", 2000);
     $params[8] = array("username", $user['username'], "string", 50);
     $params[9] = array("descServiceLong", $user['descServiceLong'], "string", 1000);

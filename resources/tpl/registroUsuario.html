@@ -120,12 +120,12 @@
             <div class="row ">
                 <div class="form-group col-xs-12 col-md-4" ng-hide="registro.empresa">
                     <span class="requiredAst">*</span>
-                    <input type="text" class="form-control" name="telefono" ng-model="user.telefono" maxlength="25" placeholder="Teléfono" ng-required="!registro.empresa" ng-pattern="/^[0-9+]+$/">
+                    <input type="text" class="form-control" name="telefono" ng-model="user.telefono" maxlength="25" placeholder="Teléfono +589" ng-required="!registro.empresa" ng-pattern="/^[0-9+]+$/">
                     <span ng-show="registerUser.telefono.$touched && registerUser.telefono.$error.required" class="error">Teléfono es requerido.</span>
                     <span ng-show="registerUser.telefono.$touched && !registerUser.telefono.$error.required && registerUser.telefono.$error.pattern" class="error">Teléfono inválido.</span>
                 </div>
                 <div class="form-group col-xs-12 col-md-4" ng-hide="registro.empresa">
-                    <input type="text" class="form-control" name="celular" ng-model="user.celular" maxlength="25" placeholder="Celular" ng-pattern="/^[0-9+]+$/">
+                    <input type="text" class="form-control" name="celular" ng-model="user.celular" maxlength="25" placeholder="Celular +589" ng-pattern="/^[0-9+]+$/">
                     <span ng-show="registerUser.celular.$touched && registerUser.celular.$error.pattern" class="error">Teléfono inválido.</span>
                 </div>
             </div>
@@ -153,10 +153,17 @@
             <div class="row ">
                 <div class="form-group col-xs-12 col-md-4">
                     <span class="requiredAst">*</span>
-                    <input type="text" name="telefonoEmp" class="form-control" ng-model="user.telefonoEmp" maxlength="25" placeholder="Teléfono Empresa" required ng-pattern="/^[0-9+]+$/">
+                    <input type="text" name="telefonoEmp" class="form-control" ng-model="user.telefonoEmp" maxlength="25" placeholder="Teléfono Empresa +589" required ng-pattern="/^[0-9+]+$/">
                     <span ng-show="registerUser.telefonoEmp.$touched && registerUser.telefonoEmp.$error.required" class="error">Teléfono es requerido</span>
                     <span ng-show="registerUser.telefonoEmp.$touched && !registerUser.telefonoEmp.$error.required && registerUser.telefonoEmp.$error.pattern" class="error">Teléfono inválido</span>
                 </div>
+                
+                <div class="form-group col-xs-12 col-md-3" ng-repeat="tel in telefonosEmp">                    
+                    <input ng-if="telefonosEmp.length > 0" type="text" name="direccion" class="form-control" ng-model="tel.val" maxlength="50" placeholder="Teléfono Empresa +589"><i class="fa fa-minus-square-o" ng-click="removeTelefonoEmp(tel)" title="Borrar Teléfono"></i>
+                </div>
+                <div class="direccion" ng-click="addTelefonoEmp()" ng-hide="telefonosEmp.length > 4"><i class="fa fa-plus"></i><label>Agregar Teléfono</label></div>
+                
+                
                 <div class="form-group col-xs-12 col-md-4">
                     <input type="url" name="sitioWeb" class="form-control" ng-model="user.sitioWeb" maxlength="250" placeholder="Sitio Web">
                     <span ng-show="registerUser.sitioWeb.$touched && registerUser.sitioWeb.$error.url" class="error">URL inválida, no olvide incluir el prefijo https:// o http://</span>
