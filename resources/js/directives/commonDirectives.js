@@ -21,6 +21,23 @@ Professionals.directive('stopAllEvents', function () {
     };
 });
 
+
+Professionals.directive('docoScrollOnClick', function () {
+    var directive = {
+        restrict: 'A',
+        scope: {
+            container: '@',
+            reverse:'='
+        },
+        link: function (scope, element, attrs) {
+            element.on('click', function () {
+                $(scope.container).animate({ scrollTop: scope.reverse ? 0 : element.offset().top }, "slow");
+            });
+        }
+    };
+    return directive;
+});
+
 Professionals.directive('disableBtn', function () {
     return {
         restrict: 'A',

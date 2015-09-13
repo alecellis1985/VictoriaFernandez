@@ -19,7 +19,7 @@ Professionals.controller('ContactoController', ['$scope', '$routeParams', '$http
         } 
         CommonService.postJsonRequest('api/sendMail', $scope.user).then(function (result) {
             if (result.data.success)
-                $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Has sido registrado con exito'});
+                $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Has sido registrado con éxito'});
             else
                 $rootScope.$broadcast('alert-event', {type: 'danger', msg: result.data.msg});
         });

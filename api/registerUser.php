@@ -154,13 +154,13 @@ function insertNewUser($conn, $user) {
     $response = null;
     if ($conn->conectar()) {
         try {
-            $conn->beginTransaction();
+            $conn->beginTransaction();  
             $sql = "INSERT INTO users (nombre, apellido, email, telefono, celular, direccion, telefonoEmp, "
                     . "plan ,sitioWeb, imagenUrl, facebookUrl, twitterUrl, linkedinUrl, descService, servicioOfrecido1,"
-                    . " servicioOfrecido2, servicioOfrecido3, servicioOfrecido4, servicioOfrecido5, servicioOfrecido6, descServiceLong, username, password,markers,cardcolor) "
+                    . " servicioOfrecido2, servicioOfrecido3, servicioOfrecido4, servicioOfrecido5, servicioOfrecido6, descServiceLong, username, password,markers,cardcolor,fecharegistro) "
                     . "VALUES (:nombre, :apellido, :email, :telefono, :celular, :direccion, :telefonoEmp, "
                     . " :plan, :sitioWeb, :imagenUrl, :facebookUrl, :twitterUrl, :linkedinUrl, :descService, :servicioOfrecido1,"
-                    . " :servicioOfrecido2, :servicioOfrecido3, :servicioOfrecido4, :servicioOfrecido5, :servicioOfrecido6,:descServiceLong, :username, :password,:markers,:cardcolor)";
+                    . " :servicioOfrecido2, :servicioOfrecido3, :servicioOfrecido4, :servicioOfrecido5, :servicioOfrecido6,:descServiceLong, :username, :password,:markers,:cardcolor,:fecharegistro)";
             $params = setUserParams($user, false);
             if ($conn->consulta($sql, $params)) {
                 $user['id'] = $conn->ultimoIdInsert();
@@ -285,7 +285,6 @@ function updateUser($conn, $user) {
     if ($conn->conectar()) {
         try {
             $conn->beginTransaction();
-
             $sql = "UPDATE users SET nombre = :nombre, apellido = :apellido, email = :email, telefono = :telefono, celular = :celular,"
                     . " direccion = :direccion, telefonoEmp = :telefonoEmp, "
                     . " plan = :plan ,sitioWeb = :sitioWeb, facebookUrl = :facebookUrl,"
@@ -592,6 +591,9 @@ function setUserParams($user, $forEdit) {
     if (!$forEdit) {
         $params[22] = array("imagenUrl", $user['imagenUrl'], "string", 100);
         $params[23] = array("password", md5($user['password']), "string", 100);
+        $newDate = new DateTime();
+        $formatedDate = $newDate->format('Y-m-d');
+        $params[25] = array("fecharegistro", $formatedDate, "string", 30);
     }
     $params[24] = array("cardcolor", $user['cardcolor'], "string", 60);
     return $params;

@@ -20,7 +20,7 @@ function updateUserState($conn, $user) {
                 $userState = $userFromDb->IsActive == 1 ? 0 : 1;
                 $sqlUpdateUser = "UPDATE users SET IsActive = " . $userState . " where username = '" . $userFromDb->username . "'";
                 if ($conn->consulta($sqlUpdateUser)) {
-                    $response = MessageHandler::getSuccessResponse('El estado del usuario ha sido cambiado con exito!', null);
+                    $response = MessageHandler::getSuccessResponse('El estado del usuario ha sido cambiado con éxito!', null);
                 }
             }
         }

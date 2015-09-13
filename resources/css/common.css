@@ -825,9 +825,11 @@ label{
 .sm-margin-top{
     margin-top: 17px;
 }
+
 .md-margin-top{
     margin-top: 20px;
 }
+
 .sub-Header-a{
     color: #9d9d9d;
     display: block;
@@ -836,6 +838,7 @@ label{
     font-size: 14px;
     text-decoration: none;
 }
+
 .sub-Header-a:hover{
     color: #000000;
     font-weight: bold;
@@ -848,17 +851,10 @@ label{
     right: 2px;
 }
 
-
-
 @media (max-width:490px)
 {
     .profLogoImg{
         height: 38px;
-    }
-    .sub-Header-a{
-        padding-left: 5px;
-        padding-right: 5px;
-        font-size: 13px;
     }
     .planes>.panel-body>.row>div:first-child>span>.fa{
         font-size: 28px;

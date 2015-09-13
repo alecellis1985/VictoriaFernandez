@@ -7,7 +7,6 @@ function getUsers($categoria, $departamento, $nombreProf = null) {
 
     $addNombreProfToQuery = "";
     if (isset($nombreProf) && $nombreProf != '') {
-        //$addNombreProfToQuery = "concat_ws(' ',u.nombre,u.apellido) like '%".$nombreProf."%' and "; 
         $addNombreProfToQuery = "concat_ws(' ',u.nombre,u.apellido) like concat('%', :nombreProf, '%') and ";
     }
 
@@ -82,7 +81,7 @@ function getAllUsers() {
     if(isset($_SESSION['IsAdmin']) && !empty($_SESSION['IsAdmin']) && $_SESSION['IsAdmin']){
         $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
         if ($conn->conectar()) {
-            $sql = "SELECT * FROM users where IsAdmin = 0 ORDER BY nombre";
+            $sql = "SELECT u.username,u.idUser,u.nombre,u.apellido,u.email,u.telefono,u.celular,u.plan,u.telefonoEmp,u.IsActive,u.fecharegistro  FROM users u where IsAdmin = 0 ORDER BY nombre";
             if ($conn->consulta($sql)) {
                 $users = $conn->restantesRegistros();
                 $response = MessageHandler::getSuccessResponse("", $users);

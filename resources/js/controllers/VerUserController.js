@@ -72,20 +72,20 @@ Professionals.controller('VerUserController', ['$scope', '$location', 'departame
             return resultText;
         }
         
-        function direccionText(direcciones){
+        function printArrObjVal(obj){
             var resultText = "";
-            $.each(direcciones, function (index, element) {
+            $.each(obj, function (index, element) {
                 if (resultText !== "")
                     resultText += ", ";
                 resultText += element.val + " ";
             });
-
             return resultText;
         }
 
         $scope.fillEditUserCamps = function () {
             $scope.user = userData.data.user;
-            $scope.user.direccion = direccionText(userData.data.direcciones);
+            $scope.user.direccion = printArrObjVal(userData.data.direcciones);
+            $scope.user.telefonoEmp = printArrObjVal($.parseJSON(userData.data.user.telefonoEmp));
             $scope.user.passwordConfirm = userData.data.user.password;
             $scope.currentUsername = userData.data.user.username;
             $scope.user.selectedCategoriaText = selectedCategoriasText(userData.data.categorias);
