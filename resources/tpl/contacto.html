@@ -33,7 +33,7 @@
             <div class="row">
                 <div class="form-group col-xs-12">
                     <span class="requiredAst">*</span>
-                    <textarea class="form-control " rows="6" name="mensaje" validate-email ng-model="user.mensaje" placeholder="Mensaje" required></textarea>
+                    <textarea class="form-control " rows="6" name="mensaje" validate-email ng-model="user.mensaje" placeholder="Mensaje" required maxlength="2000"></textarea>
                     <span ng-show="emailData.mensaje.$touched && emailData.mensaje.$error.required" class="error">Mensaje es requerido</span>
                 </div>
             </div>
