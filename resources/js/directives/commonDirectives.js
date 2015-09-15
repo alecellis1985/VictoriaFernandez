@@ -22,7 +22,7 @@ Professionals.directive('stopAllEvents', function () {
 });
 
 
-Professionals.directive('docoScrollOnClick', function () {
+Professionals.directive('scrollOnClick', function () {
     var directive = {
         restrict: 'A',
         scope: {

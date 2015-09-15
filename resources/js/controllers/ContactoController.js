@@ -1,7 +1,7 @@
 'use strict';
 
 Professionals.controller('ContactoController', ['$scope', '$routeParams', '$http', '$rootScope', '$location','CommonService', function ($scope, $routeParams, $http, $rootScope, $location,CommonService) {
-
+    goToTop();
     $scope.gRecaptchaResponse = '';
 
     $scope.$watch('gRecaptchaResponse', function (){

@@ -12,7 +12,7 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
         $scope.selectedUser = null;
 
         $scope.showUserInfo = function (user)
-        {
+        {   
             if (user !== $scope.selectedUser)
             {
                 $scope.isCollapsed = false;

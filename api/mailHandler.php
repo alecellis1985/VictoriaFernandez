@@ -18,6 +18,8 @@
     $messageBody = strip_tags($messageBody);
 
     try{
+        var_dump($messageBody);
+        die();
         if(!mail($owner_email, $subject, $messageBody, $headers)){
                 $response = MessageHandler::getErrorResponse("Error al enviar el mail, por favor intente mas tarde.");
         }else{
