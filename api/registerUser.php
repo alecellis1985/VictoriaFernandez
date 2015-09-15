@@ -61,9 +61,10 @@ function editImg() {
     //TODO: Validate format and size
     if (validateFileToUpload()) {
         $filenameAndExt = explode(".", $_FILES['file']['name']);
-        $destination = '../uploaded/' . md5($filenameAndExt[0]) . "_" . md5($userName) . "." . $filenameAndExt[1];
+        $destination = '../uploaded/' . getNewFileUrl($filenameAndExt[0], $filenameAndExt[1], $userName);
+        unlink($destination);
         if (move_uploaded_file($_FILES['file']['tmp_name'], $destination)) {
-            $newImgUrl = md5($filenameAndExt[0]) . "_" . md5($userName) . "." . $filenameAndExt[1];
+            $newImgUrl = getNewFileUrl($filenameAndExt[0], $filenameAndExt[1], $userName);;
             echo updateUserImg($conn, $newImgUrl);
         } else {
             echo MessageHandler::getErrorResponse("Img error.");
@@ -78,10 +79,8 @@ function updateUserImg($conn, $newImgUrl) {
     if ($conn->conectar()) {
         $conn->beginTransaction();
         try {
-
             $sql = "SELECT * FROM users"
                     . " WHERE username = '" . $_SESSION['usuario'] . "'";
-
             if ($conn->consulta($sql)) {
                 $users = $conn->restantesRegistros();
                 $currentUser = $users[0];
@@ -124,14 +123,12 @@ function registerUser() {
 
     $user = getArrayFromRequest($request);
     $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
-
     //Save File
     //TODO: Validate format and size
     if (validateFileToUpload()) {
         $filenameAndExt = explode(".", $_FILES['file']['name']);
         $fileNewUrl = getNewFileUrl($filenameAndExt[0], $filenameAndExt[1], $user['username']);
         $destination = '../uploaded/' . $fileNewUrl;
-
         if (move_uploaded_file($_FILES['file']['tmp_name'], $destination)) {
             $user['imagenUrl'] = $fileNewUrl;
             echo insertNewUser($conn, $user);
@@ -139,14 +136,16 @@ function registerUser() {
             echo MessageHandler::getErrorResponse("Error uploading image.");
         }
     } else {
+        echo MessageHandler::getErrorResponse("Error uploading image.");
         //TODO: Return and show message : Img failed to upload
-        $user['imagenUrl'] = '';
-        echo insertNewUser($conn, $user);
+        /*$user['imagenUrl'] = '';
+        echo insertNewUser($conn, $user);*/
     }
 }
 
 function getNewFileUrl($fileName, $fileExt, $username) {
-    return md5($fileName) . "_" . md5($username) . "." . $fileExt;
+    $name = $fileName . $username;
+    return md5($name) . "." . $fileExt;
 }
 
 //TODO: Refactor into shorter method. 

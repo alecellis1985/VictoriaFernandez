@@ -123,7 +123,7 @@
                     <h3 class="orange"><i class="fa fa-usd"></i>{{availablePlans[selectedPlan.tipo].Basico.Mensual | transformNumber}}</h6>
                     <label style="height: 20px;"></label>
                     <br />
-                    <button class="btn btn-primary" ng-click="selectedPlanFn({e: $event,tipo:selectedPlan.tipo,duracion:'Mensual',categoria:'Basico'})">Seleccionar Plan</button>
+                    <button class="btn btn-primary" ng-click="selectedPlanFn({e: $event,tipo:selectedPlan.tipo,duracion:'Mensual',categoria:'Basico'})">Registrarse</button>
                 </section>
                 <section>
                     <h2 class="blue">Plan Premium 
@@ -132,7 +132,7 @@
                     <h3 class="orange"><i class="fa fa-usd"></i>{{availablePlans[selectedPlan.tipo].Premium.Mensual | transformNumber}}</h6>
                     <label style="height: 20px;"></label>
                     <br />
-                    <button class="btn btn-primary" ng-click="selectedPlanFn({e: $event,tipo:selectedPlan.tipo,duracion:'Mensual',categoria:'Premium'})">Seleccionar Plan</button>
+                    <button class="btn btn-primary" ng-click="selectedPlanFn({e: $event,tipo:selectedPlan.tipo,duracion:'Mensual',categoria:'Premium'})">Registrarse</button>
                 </section>
             </div>
         </div>
@@ -145,7 +145,7 @@
                     <h3 class="orange"><i class="fa fa-usd"></i>{{availablePlans[selectedPlan.tipo].Basico.Semestral | transformNumber}}</h6>
                     <label>precio anterior &nbsp;</label><discount-directive dividendo="availablePlans[selectedPlan.tipo].Basico.Mensual" divisor="availablePlans[selectedPlan.tipo].Basico.Semestral" meses="6"></discount-directive>
                     <br />
-                    <button class="btn btn-primary" ng-click="selectedPlanFn({e: $event,tipo:selectedPlan.tipo,duracion:'Semestral',categoria:'Basico'})">Seleccionar Plan</button>
+                    <button class="btn btn-primary" ng-click="selectedPlanFn({e: $event,tipo:selectedPlan.tipo,duracion:'Semestral',categoria:'Basico'})">Registrarse</button>
                 </section>
                 <section>
                     <h2 class="blue">Plan Premium 
@@ -154,7 +154,7 @@
                     <h3 class="orange"><i class="fa fa-usd"></i>{{availablePlans[selectedPlan.tipo].Premium.Semestral | transformNumber}}</h6>
                     <label>precio anterior &nbsp;</label><discount-directive dividendo="availablePlans[selectedPlan.tipo].Premium.Mensual" divisor="availablePlans[selectedPlan.tipo].Premium.Semestral" meses="6"></discount-directive>
                     <br />
-                    <button class="btn btn-primary" ng-click="selectedPlanFn({e: $event,tipo:selectedPlan.tipo,duracion:'Semestral',categoria:'Premium'})">Seleccionar Plan</button>
+                    <button class="btn btn-primary" ng-click="selectedPlanFn({e: $event,tipo:selectedPlan.tipo,duracion:'Semestral',categoria:'Premium'})">Registrarse</button>
                 </section>
                 </div>
            
@@ -168,7 +168,7 @@
                     <h3 class="orange"><i class="fa fa-usd"></i>{{availablePlans[selectedPlan.tipo].Basico.Anual | transformNumber}}</h6>
                     <label>precio anterior &nbsp;</label><discount-directive dividendo="availablePlans[selectedPlan.tipo].Basico.Mensual" divisor="availablePlans[selectedPlan.tipo].Basico.Anual" meses="12"></discount-directive>
                     <br />
-                    <button class="btn btn-primary" ng-click="selectedPlanFn({e: $event,tipo:selectedPlan.tipo,duracion:'Anual',categoria:'Basico'})">Seleccionar Plan</button>
+                    <button class="btn btn-primary" ng-click="selectedPlanFn({e: $event,tipo:selectedPlan.tipo,duracion:'Anual',categoria:'Basico'})">Registrarse</button>
                 </section>
                 <section>
                     <h2 class="blue">Plan Premium 
@@ -177,7 +177,7 @@
                     <h3 class="orange"><i class="fa fa-usd"></i>{{availablePlans[selectedPlan.tipo].Premium.Anual | transformNumber}}</h6>
                     <label>precio anterior &nbsp;</label><discount-directive dividendo="availablePlans[selectedPlan.tipo].Premium.Mensual" divisor="availablePlans[selectedPlan.tipo].Premium.Anual" meses="12"></discount-directive>
                     <br />
-                    <button class="btn btn-primary" ng-click="selectedPlanFn({e: $event,tipo:selectedPlan.tipo,duracion:'Anual',categoria:'Premium'})">Seleccionar Plan</button>
+                    <button class="btn btn-primary" ng-click="selectedPlanFn({e: $event,tipo:selectedPlan.tipo,duracion:'Anual',categoria:'Premium'})">Registrarse</button>
                 </section>
                 </div>
            

@@ -1,9 +1,9 @@
 'use strict';
 
-Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$location',
-    'CommonService', 'departamentosList', 'categoriasList', 'barriosList', 'planes', '$timeout',
-    function ($scope, $rootScope, $location, CommonService, departamentosList, categoriasList,
-            barriosList, planes,$timeout) {
+Professionals.controller('EditUserController', ['$scope', '$rootScope', '$location','$timeout',
+    'CommonService', 'departamentosList', 'categoriasList', 'barriosList', 'planes', 'userData',
+    function ($scope, $rootScope, $location, $timeout, CommonService, departamentosList, categoriasList,
+            barriosList, planes, userData) {
         
         //FOR UPLOAD FILE (IMG)
         $scope.$watch('files', function (newval,oldval) {
@@ -121,23 +121,6 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
 
         $scope.selectedPlan = {};
 
-        $scope.showPlan = function (plan)
-        {
-            if ($scope.selectedPlan.tipo === plan)
-            {
-                $scope.isCollapsed = true;
-                $scope.selectedPlan = {};
-            }
-            else
-            {
-                $scope.selectedPlan.tipo = plan;
-                $scope.selectedPlan.nombre = plan === 0 ? 'Planes Profesionales' : 'Planes Empresariales'
-                $scope.isCollapsed = false;
-            }
-        };
-
-
-
         $scope.validateImg = function (files) {
             if (files && files.length) {
                 var file = files[0];
@@ -158,14 +141,13 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
         };
 
         $scope.registro = {
-            mostrarRegistro: false,
-            empresa: false
+            mostrarRegistro: true,
+            empresa: userData.plan > 6
         };
 
         $scope.goBackRegistration = function (e) {
             e.preventDefault();
-            $scope.registro.mostrarRegistro = false;
-            $scope.registro.empresa = false;
+            $location.path('/ver-usuario');
         };
 
         /**************** PARA EL REGISTRO MIRAR ESTO **********************************/
@@ -277,16 +259,73 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
             }
         };
 
+
         //TODO NEED THIS VALIDATION, PUT DROPDWON VALID IN FALSE AND VALIDATE
         $scope.dropdownsValid = false;
         $scope.dropDownCheck = function () {
             return ($scope.selectedDepartamentos.length > 0 && $scope.selectedCategorias.length > 0);
         };
+
+        $scope.fillEditUserCamps = function () {
+            var telsEmp = $.parseJSON(userData.data.user.telefonoEmp);
+            var firstTel = telsEmp.shift();
+            userData.data.user.telefonoEmp = firstTel.val;
+            $scope.telefonosEmp = telsEmp;
+            $scope.user = userData.data.user;
+            $scope.direcciones = userData.data.direcciones;
+            $.each(userData.data.categorias, function (index, element) {
+                $scope.selectedCategorias.push({id: element.categoriaId});
+            });
+
+            var mvdeoSelected = false;
+            $.each(userData.data.departamentos, function (index, element) {
+                if ($.inArray({id: element.idDepartamento}, $scope.depSelected) === -1)
+                    $scope.selectedDepartamentos.push({id: element.idDepartamento});
+
+                if (element.nombreDepartamento.toLowerCase() === "montevideo")
+                    mvdeoSelected = true;
+            });
+
+            if (mvdeoSelected) {
+                $scope.showBarrios = true;
+                $.each(userData.data.departamentos, function (index, element) {
+                    if (element.barrioNombre.toLowerCase() !== "default")
+                        $scope.selectedBarrios.push({id: element.barrioId});
+                });
+
+            }
+            var diasAtencion = {};
+            diasAtencion.lunes = parseInt(userData.data.diasAtencion.lunes) === 1;
+            diasAtencion.martes = parseInt(userData.data.diasAtencion.martes) === 1;
+            diasAtencion.miercoles = parseInt(userData.data.diasAtencion.miercoles) === 1;
+            diasAtencion.jueves = parseInt(userData.data.diasAtencion.jueves) === 1;
+            diasAtencion.viernes = parseInt(userData.data.diasAtencion.viernes) === 1;
+            diasAtencion.sabado = parseInt(userData.data.diasAtencion.sabado) === 1;
+            diasAtencion.domingo = parseInt(userData.data.diasAtencion.domingo) === 1;
+
+            var formasDePago = {};
+            formasDePago.contado = parseInt(userData.data.formasDePago.contado) === 1;
+            formasDePago.debito = parseInt(userData.data.formasDePago.debito) === 1;
+            formasDePago.credito = parseInt(userData.data.formasDePago.credito) === 1;
+            formasDePago.otras = userData.data.formasDePago.otras;
+
+            $scope.user.diasAtencion = diasAtencion;
+            $scope.user.formaDePago = formasDePago;
+
+            $scope.user.horario = userData.data.diasAtencion.horario;
+            $scope.IdPlan = $scope.user.plan;
+
+            $scope.markers = $.parseJSON(userData.data.user.markers);
+            $scope.dropdownsValid = true;
+            $scope.registro.empresa = userData.data.user.plan> 6;
+            
+            $timeout(function () {                    
+                    $scope.renderMap = true;
+            }, 1000);
+        };
         
         $scope.init = function(){
-            $scope.markers = [];
-            //Add first input
-            $scope.addDireccion();
+            $scope.fillEditUserCamps();
             goToTop();
         }
         
@@ -370,15 +409,14 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
             if (!(typeof $scope.files === 'undefined') && !($scope.files === null))
                 imgFile = $scope.files[0];
 
-            CommonService.postRequestWithFile('api/agregar_usuario', data, imgFile).then(function (result) {
+            CommonService.postRequestWithFile('api/editar_usuario', data, imgFile).then(function (result) {
                 if (result.data.success) {
-                    $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Felicitaciones, ya sos parte de profesionales.uy'});
-                    $location.path('/index.html');
+                    $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Datos actualizados!'});
+                    $location.path('/ver-usuario');
                 }
                 else
                     $rootScope.$broadcast('alert-event', {type: 'danger', msg: result.data.msg});
             });
-            
         };
         
         $scope.init();
@@ -386,4 +424,4 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
         $scope.$on("$destroy", function () {
             $scope.renderMap = false;
         });
-    }]);
+}]);

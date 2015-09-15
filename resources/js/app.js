@@ -19,19 +19,13 @@ Professionals.config(['$routeProvider', function ($routeProvider) {
                 },
                 planes: function (CommonService) {
                     return CommonService.getRequest('api/userPlans');
-                },
-                userData: function () {
-                    return {};
-                },
-                newUser: function () {
-                    return true;
                 }
             }
         });
 
         $routeProvider.when('/editar-usuario', {
-            templateUrl: 'resources/tpl/registroUsuario.html',
-            controller: 'RegisterUserController',
+            templateUrl: 'resources/tpl/editUser.html',
+            controller: 'EditUserController',
             resolve: {
                 departamentosList: function (CommonService) {
                     return CommonService.getRequest('api/departamentos');
@@ -47,11 +41,7 @@ Professionals.config(['$routeProvider', function ($routeProvider) {
                 },
                 userData: function (CommonService) {
                     return CommonService.getRequest('api/getCurrentUser');
-                },
-                newUser: function () {
-                    return false;
                 }
-
             }
         });
 
