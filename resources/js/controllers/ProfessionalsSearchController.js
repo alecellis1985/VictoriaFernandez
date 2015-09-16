@@ -1,6 +1,6 @@
 'use strict';
 
-Professionals.controller('ProfessionalsSearchController', ['$scope', '$routeParams', '$http', '$rootScope', '$location', 'CommonService', 'departamentosList', 'categoriasList', 'barriosList','premiumUsers',function ($scope, $routeParams, $http, $rootScope, $location, CommonService, departamentosList, categoriasList, barriosList,premiumUsers) {
+Professionals.controller('ProfessionalsSearchController', ['$scope', '$routeParams', '$http', '$rootScope', '$location','$timeout' ,'CommonService', 'departamentosList', 'categoriasList', 'barriosList','premiumUsers',function ($scope, $routeParams, $http, $rootScope, $location,$timeout, CommonService, departamentosList, categoriasList, barriosList,premiumUsers) {
         $scope.categorias = categoriasList.data;
         $scope.categorias.unshift({categoriaNombre: "Seleccione Categoria", categoriaId: -1});
         $scope.selectedCategoria = $scope.categorias[0];
@@ -126,14 +126,12 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
         $scope.addSlide('./resources/img/contador.jpg', "¿Buscas un contador?", "Encuentra al profesional que estás buscando", "Contadores");
         
 
-        $scope.setDropdownsAndExecuteQuery = function (nombreCategoria) {
-            $scope.selectedCategoria = $scope.categorias.filter(function (elem) {
-                return elem.categoriaNombre === nombreCategoria;
-            })[0];
-            $scope.depSelected = $scope.departamentosList.filter(function (elem) {
-                return elem.nombreDepartamento === "Montevideo";
-            })[0];
+        $scope.setDropdownsAndExecuteQuery = function (premiumUser) {
+            $scope.buscoProf = premiumUser.nombre + ' '+ premiumUser.apellido;
             getUsers();
+            $timeout(function(){
+                $('.busquedaprofList .card').trigger('click');
+            },1000);
         }
         
         $scope.totalItems = 0;

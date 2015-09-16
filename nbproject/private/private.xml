@@ -5,10 +5,12 @@
         <group>
             <file>file:/C:/AppServ/www/angular-crud-master/api/registerUser.php</file>
             <file>file:/C:/AppServ/www/angular-crud-master/NewProfessionalesDB.sql</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/ProfessionalsSearchController.js</file>
             <file>file:/C:/AppServ/www/angular-crud-master/index.html</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/js/services/CommonService.js</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/js/app.js</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/userDetails.html</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/busquedaProfesionales.html</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/api/getUsers.php</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/edit.html</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/EditUserController.js</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/planes.html</file>

@@ -310,3 +310,22 @@ Professionals.directive('fancyImg', ['$timeout',function ($timeout) {
         }
     };
 }]);
+
+Professionals.directive('scrollToElemOnClick', ['$timeout',function($timeout) {
+  return {
+    restrict: 'A',
+    scope:{
+        isDivCollapsed:'='
+    },
+    link: function(scope, $elm,attrs) {
+      $elm.on('click', function() {
+          $timeout(function(){
+            if(!scope.isDivCollapsed){
+                var topPos = $(attrs.scrollToElemOnClick).offset().top - 45;
+                $("body").animate({scrollTop: topPos}, "slow");
+            }
+          },100);
+      });
+    }
+  }
+}]);
