@@ -159,9 +159,14 @@ Professionals.directive('mapSetMarkers', function () {
                 var toDelete = $scope.selectedMarker;
                 $scope.selectedMarker.setMap(null);
                 $scope.selectedMarker = null;
-                $scope.markersArr = $.grep($scope.markersArr, function (value) {
-                    return value !== toDelete;
-                });
+                
+                var arrLength = $scope.markersArr.length;
+                while(arrLength--) {
+                    if($scope.markersArr[arrLength] === toDelete){
+                        $scope.markersArr[arrLength].setMap(null);
+                        $scope.markersArr.splice(arrLength,1);
+                    }
+                }
             }
 
             if ($scope.markersArr !== undefined)

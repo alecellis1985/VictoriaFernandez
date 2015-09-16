@@ -5,6 +5,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
     function ($scope, $rootScope, $location, CommonService, departamentosList, categoriasList,
             barriosList, planes,$timeout) {
         
+        $scope.isCollapsed = true;
         //FOR UPLOAD FILE (IMG)
         $scope.$watch('files', function (newval,oldval) {
             //perform img validation 
@@ -314,8 +315,8 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
             //Need to map the marker position to latitude longitude to save in the db
             var markersArr = $scope.markers.map(function (obj) {
                 return {
-                    'latitude': obj.position.G.toString(),
-                    'longitude': obj.position.K.toString()
+                    'latitude': obj.position.H.toString(),
+                    'longitude': obj.position.L.toString()
                 };
             });
             var markers = JSON.stringify(markersArr);

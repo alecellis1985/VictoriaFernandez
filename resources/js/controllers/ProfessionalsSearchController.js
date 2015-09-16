@@ -1,16 +1,39 @@
 'use strict';
 
-Professionals.controller('ProfessionalsSearchController', ['$scope', '$routeParams', '$http', '$rootScope', '$location', 'CommonService', 'departamentosList', 'categoriasList', 'barriosList', function ($scope, $routeParams, $http, $rootScope, $location, CommonService, departamentosList, categoriasList, barriosList) {
+Professionals.controller('ProfessionalsSearchController', ['$scope', '$routeParams', '$http', '$rootScope', '$location', 'CommonService', 'departamentosList', 'categoriasList', 'barriosList','premiumUsers',function ($scope, $routeParams, $http, $rootScope, $location, CommonService, departamentosList, categoriasList, barriosList,premiumUsers) {
         $scope.categorias = categoriasList.data;
         $scope.categorias.unshift({categoriaNombre: "Seleccione Categoria", categoriaId: -1});
         $scope.selectedCategoria = $scope.categorias[0];
-        $scope.barrios = barriosList.data;
+        $scope.barrios = $.grep(barriosList.data,function(elem){return elem.barrioId < 82;});;
         $scope.barrios.unshift({barrioNombre: "Seleccione Barrio", id: -1});
         $scope.selectedBarrio = $scope.barrios[0];
         $scope.usersViewList = [];
         $scope.isCollapsed = true;
         $scope.selectedUser = null;
+        $scope.premiumUsers = premiumUsers.data;
+        $scope.premiumUsers.map(function(elem){
+            if(elem.direccion !== null || elem.direccion !== undefined){
+                elem.direccion = $.parseJSON(elem.direccion);
+            }
+            if(elem.telefonoEmp !== null || elem.telefonoEmp !== undefined){
+                elem.telefonoEmp = $.parseJSON(elem.telefonoEmp);
+            }
+        });
+        
+        $scope.shuffle = function(array) {
+            var tmp, current, top = array.length;
 
+            if(top) while(--top) {
+                current = Math.floor(Math.random() * (top + 1));
+                tmp = array[current];
+                array[current] = array[top];
+                array[top] = tmp;
+            }
+
+            return array;
+        }
+        $scope.shuffle($scope.premiumUsers);
+        
         $scope.showUserInfo = function (user)
         {   
             if (user !== $scope.selectedUser)

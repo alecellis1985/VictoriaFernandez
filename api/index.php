@@ -20,6 +20,7 @@ session_start();
 $app = new Slim();
 
 $app->get('/users', 'getAllUsers');
+$app->get('/getPremiumUsers', 'getPremiumUsers');
 $app->get('/users/loggedUser', 'isUserLogged');
 $app->post('/sendMail', 'sendEmail');
 $app->post('/recoverPassword', 'recoverUserPassword');

@@ -98,13 +98,58 @@
                             <pre>Página: <span ng-bind='currentPage'></span> Total Profesionales: <span ng-bind="totalItems"></span></pre>
                         </div>-->
                     </div>
-                    
                 </div>
-                
-                
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="row" >
+            
+            <div class="col-xs-12 col-sm-6 col-md-4" ng-if="premiumUsers.length > 0">
+                <div class="row" ng-repeat="premiumUser in premiumUsers">
+                    <div class="col-xs-12 card" ng-click="setDropdownsAndExecuteQuery('Veterinarios')">
+                        <div class="row principalCard">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-5">
+                                    <div class='row'>
+                                        <div class="col-xs-12 col-md-12 col-sm-12" style="margin-bottom: 10px;">
+                                            <fancy-img ng-if="premiumUser.imagenUrl !== undefined && premiumUser.imagenUrl !== ''" background-url="{{premiumUser.imagenUrl}}" ></fancy-img>                                            
+                                            <div class="cardColor" ng-style="{'background-color':premiumUser.cardcolor}" ng-if="premiumUser.cardcolor && (premiumUser.imagenUrl === undefined || premiumUser.imagenUrl === '')">
+                                                <h3 class="nice-h6" ng-fi-text ng-fi-text-html="{{ premiumUser.nombre }}"></h3>
+                                                <h3 class="nice-h7" ng-fi-text="{{selectedCategoria.categoriaNombre}}"></h3>
+                                            </div>
+                                        </div>   
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 min_alto">
+                                    <div class="row">
+                                        <h2 ng-bind="premiumUser.nombre + ' ' + premiumUser.apellido"></h2>
+                                    </div>
+                                    <div class="row">
+                                        <p ng-bind="user.descService" style='text-transform: capitalize;'></p>
+                                    </div>
+                                    <div class="row over_flow" ng-if="premiumUser.telefonoEmp && premiumUser.telefonoEmp.length>0">
+                                        <i class="fa fa-phone-square"></i>
+                                        <span ng-repeat="tel in premiumUser.telefonoEmp">{{tel.val}}<span ng-if="$index<premiumUser.telefonoEmp.length-1">,&nbsp;</span></span>
+                                    </div>
+                                    <div class="row over_flow" ng-if="premiumUser.direccion && premiumUser.direccion.length>0">
+                                        <i class="fa fa-home"></i>
+                                        <span ng-repeat="dir in premiumUser.direccion">{{dir.val}}<span ng-if="$index<premiumUser.direccion.length-1">,&nbsp;</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-12">
+                                    <a href="mailto:{{user.email}}" class="btn btn-primary pull-right" title="Enviar mail">
+                                        <i class="glyphicon glyphicon-envelope"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        <!--<fancy-img ng-if="user.imagenUrl !== undefined && user.imagenUrl !== ''" background-url="{{user.imagenUrl}}" ></fancy-img>
+                        <div  style="background-image:url('./resources/img/veterinaria.jpg')" alt="Veterinarios" title="Veterinarios"></div>
+                        <div class="carousel-caption ng-scope">
+                            <h3 class="ng-binding">Encuentra veterinarias cerca de tu hogar</h3>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4" ng-if="premiumUsers.length < 1">
+                <div class="row">
                     <div class="col-xs-12 propaganda-right" ng-click="setDropdownsAndExecuteQuery('Veterinarios')">
                         <fancy-img ng-if="user.imagenUrl !== undefined && user.imagenUrl !== ''" background-url="{{user.imagenUrl}}" ></fancy-img>
                         <div  style="background-image:url('./resources/img/veterinaria.jpg')" alt="Veterinarios" title="Veterinarios"></div>

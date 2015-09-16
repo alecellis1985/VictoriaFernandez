@@ -120,12 +120,13 @@ function updateUserImg($conn, $newImgUrl) {
 
 function registerUser() {
     $request = Slim::getInstance()->request();
-
     $user = getArrayFromRequest($request);
     $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
-    //Save File
-    //TODO: Validate format and size
-    if (validateFileToUpload()) {
+    
+    if(!isset($_FILES['file'])){
+        $user['imagenUrl'] = '';
+        echo insertNewUser($conn, $user);
+    }else if (validateFileToUpload()) {
         $filenameAndExt = explode(".", $_FILES['file']['name']);
         $fileNewUrl = getNewFileUrl($filenameAndExt[0], $filenameAndExt[1], $user['username']);
         $destination = '../uploaded/' . $fileNewUrl;
@@ -154,12 +155,19 @@ function insertNewUser($conn, $user) {
     if ($conn->conectar()) {
         try {
             $conn->beginTransaction();  
+            
+            $premium = array(2,5,6,8,11,12);
+            $isActive = "1";
+            if(in_array(intval($user['plan']),$premium))
+            {
+                $isActive = "0";
+            }
             $sql = "INSERT INTO users (nombre, apellido, email, telefono, celular, direccion, telefonoEmp, "
                     . "plan ,sitioWeb, imagenUrl, facebookUrl, twitterUrl, linkedinUrl, descService, servicioOfrecido1,"
-                    . " servicioOfrecido2, servicioOfrecido3, servicioOfrecido4, servicioOfrecido5, servicioOfrecido6, descServiceLong, username, password,markers,cardcolor,fecharegistro) "
+                    . " servicioOfrecido2, servicioOfrecido3, servicioOfrecido4, servicioOfrecido5, servicioOfrecido6, descServiceLong, username, password,IsActive,markers,cardcolor,fecharegistro) "
                     . "VALUES (:nombre, :apellido, :email, :telefono, :celular, :direccion, :telefonoEmp, "
                     . " :plan, :sitioWeb, :imagenUrl, :facebookUrl, :twitterUrl, :linkedinUrl, :descService, :servicioOfrecido1,"
-                    . " :servicioOfrecido2, :servicioOfrecido3, :servicioOfrecido4, :servicioOfrecido5, :servicioOfrecido6,:descServiceLong, :username, :password,:markers,:cardcolor,:fecharegistro)";
+                    . " :servicioOfrecido2, :servicioOfrecido3, :servicioOfrecido4, :servicioOfrecido5, :servicioOfrecido6,:descServiceLong, :username, :password, ".$isActive ." ,:markers,:cardcolor,:fecharegistro)";
             $params = setUserParams($user, false);
             if ($conn->consulta($sql, $params)) {
                 $user['id'] = $conn->ultimoIdInsert();
@@ -553,10 +561,7 @@ function checkEmail() {
 }
 
 function validateFileToUpload() {
-    if (!isset($_FILES['file']))
-        return false;
     $fileSize = $_FILES['file']['size'];
-
     if ($fileSize > 2000000)
         return false;
 
@@ -581,12 +586,12 @@ function setUserParams($user, $forEdit) {
     $params[13] = array("twitterUrl", $user['twitterUrl'], "string", 250);
     $params[14] = array("linkedinUrl", $user['linkedinUrl'], "string", 250);
     $params[15] = array("descService", $user['descService'], "string", 150);
-    $params[16] = array("servicioOfrecido1", $user['servicioOfrecido1'], "string", 20);
-    $params[17] = array("servicioOfrecido2", $user['servicioOfrecido2'], "string", 20);
-    $params[18] = array("servicioOfrecido3", $user['servicioOfrecido3'], "string", 20);
-    $params[19] = array("servicioOfrecido4", $user['servicioOfrecido4'], "string", 20);
-    $params[20] = array("servicioOfrecido5", $user['servicioOfrecido5'], "string", 20);
-    $params[21] = array("servicioOfrecido6", $user['servicioOfrecido6'], "string", 20);
+    $params[16] = array("servicioOfrecido1", $user['servicioOfrecido1'], "string", 30);
+    $params[17] = array("servicioOfrecido2", $user['servicioOfrecido2'], "string", 30);
+    $params[18] = array("servicioOfrecido3", $user['servicioOfrecido3'], "string", 30);
+    $params[19] = array("servicioOfrecido4", $user['servicioOfrecido4'], "string", 30);
+    $params[20] = array("servicioOfrecido5", $user['servicioOfrecido5'], "string", 30);
+    $params[21] = array("servicioOfrecido6", $user['servicioOfrecido6'], "string", 30);
     if (!$forEdit) {
         $params[22] = array("imagenUrl", $user['imagenUrl'], "string", 100);
         $params[23] = array("password", md5($user['password']), "string", 100);

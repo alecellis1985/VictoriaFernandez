@@ -41,7 +41,7 @@
                 <p>{{user.email}}</p>
             </div>  
             <div class="form-group col-xs-12 col-md-4" ng-hide="registro.empresa">
-                <label>Telefono</label><br />
+                <label>Teléfono</label><br />
                 <p>{{user.telefono}}</p>
             </div>
             <div class="form-group col-xs-12 col-md-4" ng-hide="registro.empresa">
@@ -75,7 +75,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="form-group col-xs-12 col-md-4">
-                    <label >Categoria(s)</label><br />
+                    <label >Categoría(s)</label><br />
                     <p>{{user.selectedCategoriaText}}</p>
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
@@ -86,11 +86,11 @@
             </div>
             <div class="row ">
                 <div class="form-group col-xs-12 col-md-4">
-                    <label>Direccion(es)</label><br />
+                    <label>Direccién(es)</label><br />
                     <p>{{user.direccion}}</p>
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
-                    <label>Telefono Empresa</label><br />
+                    <label>Teléfono Empresa</label><br />
                     <p >{{user.telefonoEmp}}</p>
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
@@ -133,8 +133,8 @@
         <div class="panel-body">
             <div class="row">
                 <div class="form-group col-xs-12">
-                    <label for="descService">Breve Descripcion</label>
-                    <p id="descService" >{{user.descService}}</p>
+                    <label for="descService">Breve Descripción</label>
+                    <textarea id="descService" disabled="disabled" style="width: 100%;height: 125px;">{{user.descService}}</textarea>
                 </div>
             </div> 
             <div class="row">
@@ -174,7 +174,7 @@
             <div class="row">
                 <div class="form-group col-xs-12">
                     <label for="descServiceLong">Descripcion detallada</label>
-                    <p id="descServiceLong" >{{user.descServiceLong}}</p>
+                    <textarea id="descServiceLong" disabled="disabled" style="width: 100%;height: 250px;" ng-bind="user.descServiceLong"></textarea>
                 </div>
             </div>
             <div class="row">

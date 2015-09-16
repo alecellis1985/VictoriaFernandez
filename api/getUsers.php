@@ -75,6 +75,32 @@ function getUsers($categoria, $departamento, $nombreProf = null) {
     }
 }
 
+function getPremiumUsers() {
+    $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
+    $response = null;
+    if ($conn->conectar()) {
+            $sql = "SELECT u.idUser,u.nombre,u.apellido,u.email, u.direccion,u.telefonoEmp," .
+                    "u.sitioWeb,u.imagenUrl," .
+                    "u.cardcolor,u.markers,u.plan " .
+                    "FROM users u WHERE IsAdmin = 0 and IsActive = 1 and plan in (2,5,6,8,11,12)";
+            if ($conn->consulta($sql)) {
+                $users = $conn->restantesRegistros();
+                $response = MessageHandler::getSuccessResponse("", $users);
+            } else {
+                $response = MessageHandler::getErrorResponse("");
+            }
+    } else {
+        $response = MessageHandler::getErrorResponse("");
+    }
+    if ($response == null) {
+        header('HTTP/1.1 400 Bad Request');
+        echo MessageHandler::getDBErrorResponse();
+    } else {
+        $conn->desconectar();
+        echo $response;
+    }
+}
+
 //Function to get users 
 function getAllUsers() {
     $response = null;

@@ -93,6 +93,9 @@ Professionals.config(['$routeProvider', function ($routeProvider) {
                 },
                 barriosList: function (CommonService) {
                     return CommonService.getRequest('api/barrios');
+                },
+                premiumUsers: function (CommonService) {
+                    return CommonService.getRequest('api/getPremiumUsers');
                 }
             }
         });
