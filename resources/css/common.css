@@ -161,6 +161,9 @@ header >nav{
 .card h2
 {
     margin-top: 4px;
+    font-size: 2em;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .card:hover,.cardhover
@@ -1085,11 +1088,12 @@ label{
 .registroProf .user-details .centerText>h4{
     font-size: 1.1em;
 }
-@media (min-width:1370px)
-{
-    /*.registroProf .user-details .centerText{
-        padding: 0 2px;
-    }*/
+
+@media (min-width: 1200px) and (max-width: 1368px) { 
+  .premium .min_alto{
+        text-overflow: ellipsis;
+        padding-left: 30px;
+    }
 }
 
 @media (min-width:1200px)
@@ -1117,4 +1121,5 @@ label{
         padding: 0 2px;
     }
 }
+
 
