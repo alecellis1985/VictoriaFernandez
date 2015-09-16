@@ -128,6 +128,8 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
 
         $scope.setDropdownsAndExecuteQuery = function (premiumUser) {
             $scope.buscoProf = premiumUser.nombre + ' '+ premiumUser.apellido;
+            $scope.selectedCategoria = $scope.categorias[0];          
+            $scope.depSelected = $scope.departamentosList[0];
             getUsers();
             $timeout(function(){
                 $('.busquedaprofList .card').trigger('click');

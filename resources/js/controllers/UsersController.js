@@ -87,6 +87,24 @@ Professionals.controller('UsersController', ['$scope', '$routeParams', '$http', 
                     $rootScope.$broadcast('alert-event', {type: 'danger', msg: result.msg});
             });
         }
+        
+        $scope.deleteUser = function (user) {
+            CommonService.postJsonRequest('api/deleteuser', {'idUser': user.idUser,'imagenUrl':user.imagenUrl}).then(function (result) {
+                if (result.success) {
+                    var length = $scope.users.length;
+                    while(length--){
+                        if($scope.users[length].idUser === user.idUser){
+                            $scope.users.splice(length,1);
+                        }
+                    }
+                    $rootScope.$broadcast('alert-event', {type: 'success', msg: result.msg});
+                } else{
+                    $rootScope.$broadcast('alert-event', {type: 'danger', msg: result.msg});
+                }
+            });
+        }
+        
+        
 
         $scope.init();
 

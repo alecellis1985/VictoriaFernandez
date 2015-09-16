@@ -1,5 +1,72 @@
 <?php
 
+function deleteUser(){
+    $response = null;
+    $request = Slim::getInstance()->request();
+    $user = json_decode($request->getBody());
+    if(isset($_SESSION['IsAdmin']) && !empty($_SESSION['IsAdmin']) && $_SESSION['IsAdmin']){
+        $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
+        $sqldiasatencion = "DELETE FROM diasatencion WHERE idUser = :idUser LIMIT 1";
+        $sqlformasdepago = "DELETE FROM formasdepago WHERE idUser = :idUser LIMIT 1";
+        $sqllocalidad_user = "DELETE FROM localidad_user WHERE idUser = :idUser LIMIT 1";
+        $sqlcategoria_usuario = "DELETE FROM categoria_usuario WHERE idUser = :idUser";
+        $sqlusers = "DELETE FROM users WHERE idUser = :idUser LIMIT 1";
+        
+        $userImgUrl = $user->imagenUrl;
+        $deleteDestination = '../uploaded/' . $userImgUrl;
+        if ($userImgUrl !== '') {
+            unlink($deleteDestination);
+        }
+        
+        $params = array();
+        $params[0] = array("idUser", $user->idUser, "int");
+        $error = false;
+        if ($conn->conectar()) {
+            try {
+                $conn->beginTransaction();
+                if ($conn->consulta($sqlcategoria_usuario,$params)) {
+                        if ($conn->consulta($sqldiasatencion,$params)) {
+                            if ($conn->consulta($sqlformasdepago,$params)) {
+                                if ($conn->consulta($sqllocalidad_user,$params)) {
+                                    if ($conn->consulta($sqlusers,$params)) {
+                                    } else {
+                                       $error = true;
+                                    }
+                                } else {
+                                   $error = true;
+                                }
+                            } else {
+                               $error = true;
+                            }
+                        } else {
+                           $error = true;
+                        }
+                } else {
+                   $error = true;
+                }
+            } catch (Exception $exc) {
+                $response = MessageHandler::getDBErrorResponse("No se ha podido eliminar al usuario, intente más tarde.");;
+                $conn->rollbackTransaction();
+            }
+        }
+        if(!$error){
+            $conn->commitTransaction();
+            $response = MessageHandler::getSuccessResponse("User Deleted",null);
+        }
+        if ($response == null) {
+            header('HTTP/1.1 400 Bad Request');
+            echo MessageHandler::getDBErrorResponse();
+        } else {
+            $conn->desconectar();
+            echo $response;
+        }
+    }
+    else{
+        header('HTTP/1.1 401 Not Authorized');
+        echo MessageHandler::getDBErrorResponse();
+    }
+}
+
 //THIS function is called from the main search page
 function getUsers($categoria, $departamento, $nombreProf = null) {
     $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
@@ -107,7 +174,7 @@ function getAllUsers() {
     if(isset($_SESSION['IsAdmin']) && !empty($_SESSION['IsAdmin']) && $_SESSION['IsAdmin']){
         $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
         if ($conn->conectar()) {
-            $sql = "SELECT u.username,u.idUser,u.nombre,u.apellido,u.email,u.telefono,u.celular,u.plan,u.telefonoEmp,u.IsActive,u.fecharegistro  FROM users u where IsAdmin = 0 ORDER BY nombre";
+            $sql = "SELECT u.username,u.idUser,u.nombre,u.apellido,u.email,u.telefono,u.celular,u.plan,u.telefonoEmp,u.IsActive,u.fecharegistro,u.imagenUrl  FROM users u where IsAdmin = 0 ORDER BY nombre";
             if ($conn->consulta($sql)) {
                 $users = $conn->restantesRegistros();
                 $response = MessageHandler::getSuccessResponse("", $users);

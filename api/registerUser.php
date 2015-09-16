@@ -257,13 +257,13 @@ function insertNewUser($conn, $user) {
                     $conn->commitTransaction();
                     $response = MessageHandler::getSuccessResponse("Se registro exitosamente!", $user);
                 } else {
-                    $response = MessageHandler::getErrorResponse("Mi puto error.");
+                    $conn->rollbackTransaction();
+                    $response = MessageHandler::getErrorResponse("No se ha podido registrar al usuario, intente más tarde.");
                 }
             } else {
                 echo MessageHandler::getErrorResponse("Primer consulta error.");
             }
         } catch (Exception $exc) {
-            var_dump($exc->getMessage());
             $response = null;
             $conn->rollbackTransaction();
         }

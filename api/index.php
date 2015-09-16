@@ -19,6 +19,7 @@ session_cache_limiter(false);
 session_start();
 $app = new Slim();
 
+$app->post('/deleteuser', 'deleteUser');
 $app->get('/users', 'getAllUsers');
 $app->get('/getPremiumUsers', 'getPremiumUsers');
 $app->get('/users/loggedUser', 'isUserLogged');

@@ -18,6 +18,7 @@
                         <th>Plan</th>
                         <th>Registro</th>
                         <th>Estado</th>
+                        <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,6 +38,7 @@
                         <td>{{user.fecharegistro}}</td>
                         <td ng-if="user.IsActive != 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Activar</button></td>
                         <td ng-if="user.IsActive == 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Desactivar</button></td>
+                        <td><button class="btn btn-primary" ng-click="deleteUser(user)">Eliminar</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -61,6 +63,7 @@
                         <th>Plan</th>
                         <th>Registro</th>
                         <th>Estado</th>
+                        <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -80,6 +83,7 @@
                         <td>{{user.fecharegistro}}</td>
                         <td ng-if="user.IsActive != 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Activar</button></td>
                         <td ng-if="user.IsActive == 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Desactivar</button></td>
+                        <td><button class="btn btn-primary" ng-click="deleteUser(user)">Eliminar</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -106,6 +110,7 @@
                         <th>Plan</th>
                         <th>Registro</th>
                         <th>Estado</th>
+                        <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -125,6 +130,7 @@
                         <td>{{user.fecharegistro}}</td>
                         <td ng-if="user.IsActive != 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Activar</button></td>
                         <td ng-if="user.IsActive == 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Desactivar</button></td>
+                        <td><button class="btn btn-primary" ng-click="deleteUser(user)">Eliminar</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -150,6 +156,7 @@
                         <th>Plan</th>
                         <th>Registro</th>
                         <th>Estado</th>
+                        <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -169,6 +176,7 @@
                         <td>{{user.fecharegistro}}</td>
                         <td ng-if="user.IsActive != 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Activar</button></td>
                         <td ng-if="user.IsActive == 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Desactivar</button></td>
+                        <td><button class="btn btn-primary" ng-click="deleteUser(user)">Eliminar</button></td>
                     </tr>
                 </tbody>
             </table>
