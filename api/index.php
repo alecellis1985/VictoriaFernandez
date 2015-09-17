@@ -14,11 +14,14 @@ require_once('getUsers.php');
 require_once('mailHandler.php');
 require_once('planes.php');
 require_once('userState.php');
+require_once('userData.php');
 
 session_cache_limiter(false);
 session_start();
 $app = new Slim();
 
+
+$app->post('/sumarVisita', 'updateVisits');
 $app->post('/deleteuser', 'deleteUser');
 $app->get('/users', 'getAllUsers');
 $app->get('/getPremiumUsers', 'getPremiumUsers');

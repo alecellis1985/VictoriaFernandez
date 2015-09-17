@@ -272,7 +272,12 @@ Professionals.controller('EditUserController', ['$scope', '$rootScope', '$locati
             userData.data.user.telefonoEmp = firstTel.val;
             $scope.telefonosEmp = telsEmp;
             $scope.user = userData.data.user;
-            $scope.direcciones = userData.data.direcciones;
+            if(userData.data.direcciones === null){
+                $scope.addDireccion();
+            }
+            else{
+                $scope.direcciones = userData.data.direcciones;
+            }
             $.each(userData.data.categorias, function (index, element) {
                 $scope.selectedCategorias.push({id: element.categoriaId});
             });

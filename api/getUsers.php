@@ -150,9 +150,24 @@ function getPremiumUsers() {
                     "u.sitioWeb,u.imagenUrl," .
                     "u.cardcolor,u.markers,u.plan " .
                     "FROM users u WHERE IsAdmin = 0 and IsActive = 1 and plan in (2,5,6,8,11,12)";
+            $retArr = array();
             if ($conn->consulta($sql)) {
                 $users = $conn->restantesRegistros();
-                $response = MessageHandler::getSuccessResponse("", $users);
+                $retArr[0] = $users;
+                if(count($users)>0){
+                    $usersIds = "";
+                    foreach ($users as $user) {
+                        $usersIds = $usersIds . "," . $user->idUser;
+                    }
+                    $usersIds = substr($usersIds, 1);
+                    $sqlCategorias = "SELECT u.idUser, ca.categoriaNombre FROM categorias ca, categoria_usuario cu,users u "
+                            . "WHERE ca.categoriaId = cu.idCategoria and cu.idUser = u.idUser and u.idUser in (".$usersIds .")";
+                    if ($conn->consulta($sqlCategorias)) {
+                        $usersCategorias = $conn->restantesRegistros();
+                        $retArr[1] = $usersCategorias;
+                    }
+                }
+                $response = MessageHandler::getSuccessResponse("", $retArr);
             } else {
                 $response = MessageHandler::getErrorResponse("");
             }

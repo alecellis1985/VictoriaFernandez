@@ -53,10 +53,7 @@ Professionals.controller('EditImgController', ['$scope', '$routeParams', '$http'
                 CommonService.postRequestWithFile('api/editar_img', data, imgFile).then(function (result) {
                     if (result.data.success) {
                         $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Imagen actualizada!'});
-                        $modalInstance.close(0);
-                        
-                        imageUrl.set(result.data.data.newImgUrl);
-                        //$rootScope.user.imagenUrl = result.data.data.newImgUrl;
+                        $modalInstance.close(result.data.data.newImgUrl);
                     }
                     else
                         $rootScope.$broadcast('alert-event', {type: 'danger', msg: result.data.msg});

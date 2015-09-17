@@ -62,9 +62,8 @@ function editImg() {
     if (validateFileToUpload()) {
         $filenameAndExt = explode(".", $_FILES['file']['name']);
         $destination = '../uploaded/' . getNewFileUrl($filenameAndExt[0], $filenameAndExt[1], $userName);
-        unlink($destination);
         if (move_uploaded_file($_FILES['file']['tmp_name'], $destination)) {
-            $newImgUrl = getNewFileUrl($filenameAndExt[0], $filenameAndExt[1], $userName);;
+            $newImgUrl = getNewFileUrl($filenameAndExt[0], $filenameAndExt[1], $userName);
             echo updateUserImg($conn, $newImgUrl);
         } else {
             echo MessageHandler::getErrorResponse("Img error.");
@@ -85,15 +84,13 @@ function updateUserImg($conn, $newImgUrl) {
                 $users = $conn->restantesRegistros();
                 $currentUser = $users[0];
                 $userImgUrl = $currentUser->imagenUrl;
-                $deleteDestination = '../uploaded/' . $userImgUrl;
+                if ($userImgUrl !== '') {
+                    unlink("../uploaded/" . $userImgUrl);
+                }
                 $conn->closeCursor();
 
                 $sqlUpdateImg = "UPDATE users SET imagenUrl = '" . $newImgUrl . "'"
                         . " WHERE username = '" . $_SESSION['usuario'] . "'";
-
-                if ($userImgUrl !== '') {
-                    unlink($deleteDestination);
-                }
 
                 if ($conn->consulta($sqlUpdateImg)) {
                     $conn->commitTransaction();
@@ -138,14 +135,12 @@ function registerUser() {
         }
     } else {
         echo MessageHandler::getErrorResponse("Error uploading image.");
-        //TODO: Return and show message : Img failed to upload
-        /*$user['imagenUrl'] = '';
-        echo insertNewUser($conn, $user);*/
     }
 }
 
 function getNewFileUrl($fileName, $fileExt, $username) {
-    $name = $fileName . $username;
+    $date = new DateTime();
+    $name = $date->getTimestamp() . $username;
     return md5($name) . "." . $fileExt;
 }
 

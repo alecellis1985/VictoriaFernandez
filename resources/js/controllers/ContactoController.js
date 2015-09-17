@@ -19,6 +19,7 @@ Professionals.controller('ContactoController', ['$scope', '$routeParams', '$http
         } 
         CommonService.postJsonRequest('api/sendMail', $scope.user).then(function (result) {
             $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Se ha enviado el mail, en breve nos pondremos en contacto.'});
+            $location.path('/index.html');
         });
     };
 }]);

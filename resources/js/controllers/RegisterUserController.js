@@ -373,7 +373,13 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
 
             CommonService.postRequestWithFile('api/agregar_usuario', data, imgFile).then(function (result) {
                 if (result.data.success) {
-                    $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Felicitaciones, ya sos parte de profesionales.uy'});
+                    $scope.premiumPlans = [2,5,6,8,11,12];
+                    if($scope.premiumPlans.indexOf(parseInt($scope.IdPlan))!== -1){
+                        $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Felicitaciones, ya sos parte de profesionales.uy, en breve nos pondremos en contacto contigo para darte el alta!'});
+                    }
+                    else{
+                        $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Felicitaciones, ya sos parte de profesionales.uy'});
+                    }
                     $location.path('/index.html');
                 }
                 else

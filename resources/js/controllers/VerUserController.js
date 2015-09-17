@@ -1,9 +1,9 @@
 'use strict';
 
-Professionals.controller('VerUserController', ['$scope', '$location', 'departamentosList', 'categoriasList', 'barriosList', '$modal',
-    'planes', 'Helper', 'userData', 'imageUrl',
-    function ($scope, $location, departamentosList, categoriasList, barriosList, $modal, planes, Helper, userData, imageUrl) {
-
+Professionals.controller('VerUserController', ['$scope', '$location','$timeout', 'departamentosList', 'categoriasList', 'barriosList', '$modal',
+    'planes', 'Helper', 'userData',
+    function ($scope, $location,$timeout , departamentosList, categoriasList, barriosList, $modal, planes, Helper, userData) {
+        $scope.showImg = true;
         $scope.planes = planes;
         $scope.newUser = false;
         $scope.isCollapsed = false;
@@ -73,6 +73,8 @@ Professionals.controller('VerUserController', ['$scope', '$location', 'departame
         }
         
         function printArrObjVal(obj){
+            if(obj === null)
+                return "";
             var resultText = "";
             $.each(obj, function (index, element) {
                 if (resultText !== "")
@@ -122,8 +124,8 @@ Professionals.controller('VerUserController', ['$scope', '$location', 'departame
 
             $scope.user.horario = userData.data.diasAtencion.horario;
             $scope.IdPlan = $scope.user.plan;
-            imageUrl.set(userData.data.user.imagenUrl);
-            $scope.imageUrl = imageUrl;
+            $scope.imageUrl = '../uploaded/'+userData.data.user.imagenUrl;
+            
             $scope.markers = $.parseJSON(userData.data.user.markers);
         };
 
@@ -144,10 +146,14 @@ Professionals.controller('VerUserController', ['$scope', '$location', 'departame
                 controller: 'EditImgController',
                 size: 'lg'
             });
-            modalInstance.result.then(function () {
-                //$scope.selected = selectedItem;
+            modalInstance.result.then(function (imgUrl) {
+                $scope.showImg = false;
+                $timeout(function(){
+                    $scope.showImg = true;
+                    $scope.imageUrl = '../uploaded/'+imgUrl;    
+                },100);
             }, function () {
-                //console.log('Modal dismissed at: ' + new Date());
+                
             });
         };
 

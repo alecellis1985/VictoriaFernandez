@@ -1,6 +1,6 @@
 'use strict';
 
-Professionals.controller('ProfessionalsSearchController', ['$scope', '$routeParams', '$http', '$rootScope', '$location','$timeout' ,'CommonService', 'departamentosList', 'categoriasList', 'barriosList','premiumUsers',function ($scope, $routeParams, $http, $rootScope, $location,$timeout, CommonService, departamentosList, categoriasList, barriosList,premiumUsers) {
+Professionals.controller('ProfessionalsSearchController', ['$scope', '$routeParams', '$http', '$rootScope', '$location','$timeout' ,'CommonService', 'departamentosList', 'categoriasList', 'barriosList','premiumUsers','$interval',function ($scope, $routeParams, $http, $rootScope, $location,$timeout, CommonService, departamentosList, categoriasList, barriosList,premiumUsers,$interval) {
         $scope.categorias = categoriasList.data;
         $scope.categorias.unshift({categoriaNombre: "Seleccione Categoria", categoriaId: -1});
         $scope.selectedCategoria = $scope.categorias[0];
@@ -10,7 +10,7 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
         $scope.usersViewList = [];
         $scope.isCollapsed = true;
         $scope.selectedUser = null;
-        $scope.premiumUsers = premiumUsers.data;
+        $scope.premiumUsers = premiumUsers.data[0];
         $scope.premiumUsers.map(function(elem){
             if(elem.direccion !== null || elem.direccion !== undefined){
                 elem.direccion = $.parseJSON(elem.direccion);
@@ -19,6 +19,66 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
                 elem.telefonoEmp = $.parseJSON(elem.telefonoEmp);
             }
         });
+        
+        $scope.premiumUsers.map(function(elem){
+            var categorias = "";
+            var length = premiumUsers.data[1].length;
+            while(length--){
+            if(premiumUsers.data[1][length].idUser === elem.idUser)
+                categorias+= premiumUsers.data[1][length].categoriaNombre + " ";
+            }
+            elem.categorias = categorias;
+        });
+        
+        $scope.randomCategoriaArr = ['Abogados','Escribanos','Contadores','Odontólogos','Médicos Generales','Arquitectos','Veterinarios'];
+        
+        $scope.setMiddleCardsRandomly = function (nombreCategoria) {
+            $scope.selectedCategoria = $scope.categorias.filter(function (elem) {
+                return elem.categoriaNombre === nombreCategoria;
+            })[0];
+            $scope.depSelected = $scope.departamentosList.filter(function (elem) {
+                return elem.nombreDepartamento === "Montevideo";
+            })[0];
+            getUsers();
+        }
+        
+        var stop;
+        $scope.movePremiumItems = function() {
+          // Don't start a new fight if we are already fighting
+          if ( angular.isDefined(stop) ) return;
+          stop = $interval(function() {
+            if ($scope.premiumUsers.length>1) {                
+              //var elem = $scope.premiumUsers.shift();
+              //$scope.premiumUsers.push(elem);
+              var elem = $scope.premiumUsers.pop();
+              $scope.premiumUsers.unshift(elem);
+            } else {
+              $scope.stopPremiumItems();
+            }
+          }, 4000);
+        };
+
+        $scope.stopPremiumItems = function() {
+          if (angular.isDefined(stop)) {
+            $interval.cancel(stop);
+            stop = undefined;
+          }
+        };
+
+        $scope.resetPremiumItems = function() {
+          /*$scope.blood_1 = 100;
+          $scope.blood_2 = 120;*/
+        };
+
+        $scope.$on('$destroy', function() {
+          $scope.stopPremiumItems();
+        });
+        
+        $scope.init = function(){
+            $scope.shuffle($scope.randomCategoriaArr);
+            $scope.setMiddleCardsRandomly($scope.randomCategoriaArr[0]);
+            $scope.movePremiumItems();
+        }
         
         $scope.shuffle = function(array) {
             var tmp, current, top = array.length;
@@ -36,6 +96,7 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
         
         $scope.showUserInfo = function (user)
         {   
+            CommonService.postJsonRequest('api/sumarVisita', {'idUser': user.idUser});
             if (user !== $scope.selectedUser)
             {
                 $scope.isCollapsed = false;
@@ -125,7 +186,6 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
         $scope.addSlide('./resources/img/profesionalesSearch.jpg', "¿Buscas un escribano?", "Encuentra al profesional que estás buscando", "Escribanos");
         $scope.addSlide('./resources/img/contador.jpg', "¿Buscas un contador?", "Encuentra al profesional que estás buscando", "Contadores");
         
-
         $scope.setDropdownsAndExecuteQuery = function (premiumUser) {
             $scope.buscoProf = premiumUser.nombre + ' '+ premiumUser.apellido;
             $scope.selectedCategoria = $scope.categorias[0];          
@@ -134,6 +194,8 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
             $timeout(function(){
                 $('.busquedaprofList .card').trigger('click');
             },1000);
+            $scope.buscoProf = "";
+            CommonService.postJsonRequest('api/sumarVisita', {'idUser': premiumUser.idUser});
         }
         
         $scope.totalItems = 0;
@@ -149,5 +211,7 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
                 getUsers();
             }
         });
+        
+        $scope.init();
 
     }]);

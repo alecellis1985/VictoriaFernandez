@@ -5,7 +5,7 @@
                 <div class="form-group col-xs-12 col-md-4 col-sm-12">
                     <h3>Usuario <i>{{currentUsername}}</i></h3>
                 </div>
-                <div class="form-group col-sm-12 col-md-3 col-md-offset-5 md-margin-top">
+                <div class="form-group col-sm-12 col-md-8 md-margin-top">
                     <!--TODO: cambiar todo los estilos a clases-->
                     <button class="btn btn-primary pull-right xs-margin-left" ng-click="editUserData($event)"><i class="fa fa-pencil"></i> Editar Perfil </button>
                     <button class="btn btn-primary pull-right" ng-click="editUserPwd($event)"><i class="fa fa-pencil"></i> Editar contraseña</button>
@@ -55,8 +55,11 @@
             </div>  
         </div>
         <div class="row">
-                <div class="col-xs-3 col-sm-3 col-md-2" style="margin-bottom: 10px;">                
-                <fancy-img ng-if="imageUrl.get() !== undefined && imageUrl.get() !== ''" background-url="{{imageUrl.get()}}" ></fancy-img>
+                <div class="col-xs-3 col-sm-3 col-md-2" style="margin-bottom: 10px;">     
+                <div ng-if="showImg">
+                    <fancy-img ng-if="imageUrl !== undefined && imageUrl !== ''" background-url="{{imageUrl}}" ></fancy-img>
+                </div>
+                <!--<fancy-img ng-if="imageUrl.get() !== undefined && imageUrl.get() !== ''" background-url="{{imageUrl.get()}}" ></fancy-img>-->
                 <div class="cardColor" ng-style="{'background-color':user.cardcolor}" ng-if="user.plan < 7 && user.cardcolor && (imageUrl.get() === undefined || imageUrl.get() === '')">
                     <h3 class="nice-h6" style='text-transform: uppercase;' ng-fi-text ng-fi-text-html="{{ user.nombre | limitTo:1 }}{{ user.apellido | limitTo:1 }}"></h3>
                     <h3 class="nice-h7" ng-fi-text="Profesional"></h3>
