@@ -6,15 +6,16 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            <table class="table">
+            <table class="table" style="table-layout: fixed;">
                 <thead>
                     <tr>
                         <th>Usuario</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
-                        <th>Email</th>
+                        <th style="width: 8%;">Email</th>
                         <th>Telefono</th>
                         <th>Celular</th>
+                        <th style="width: 5%;">Visitas</th>
                         <th>Plan</th>
                         <th>Registro</th>
                         <th>Estado</th>
@@ -31,9 +32,10 @@
                         <td>{{user.username}}</td>
                         <td>{{user.nombre}}</td>
                         <td>{{user.apellido}}</td>
-                        <td>{{user.email}}</td>
+                        <td style="overflow: hidden;text-overflow: ellipsis;" title="{{user.email}}">{{user.email}}</td>
                         <td>{{user.telefono}}</td>
                         <td>{{user.celular}}</td>
+                        <td>{{user.visitas}}</td>
                         <td>{{user.planDesc}}</td>
                         <td>{{user.fecharegistro}}</td>
                         <td ng-if="user.IsActive != 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Activar</button></td>
@@ -51,15 +53,16 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            <table class="table">
+            <table class="table" style="table-layout: fixed;">
                 <thead>
                     <tr>
                         <th>Usuario</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
-                        <th>Email</th>
+                        <th style="width: 8%;">Email</th>
                         <th>Telefono</th>
                         <th>Celular</th>
+                        <th style="width: 5%;">Visitas</th>
                         <th>Plan</th>
                         <th>Registro</th>
                         <th>Estado</th>
@@ -76,9 +79,10 @@
                         <td>{{user.username}}</td>
                         <td>{{user.nombre}}</td>
                         <td>{{user.apellido}}</td>
-                        <td>{{user.email}}</td>
+                        <td style="overflow: hidden;text-overflow: ellipsis;" title="{{user.email}}">{{user.email}}</td>
                         <td>{{user.telefono}}</td>
                         <td>{{user.celular}}</td>
+                        <td>{{user.visitas}}</td>
                         <td>{{user.planDesc}}</td>
                         <td>{{user.fecharegistro}}</td>
                         <td ng-if="user.IsActive != 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Activar</button></td>
@@ -98,15 +102,16 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            <table class="table">
+            <table class="table" style="table-layout: fixed;">
                 <thead>
                     <tr>
                         <th>Usuario</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
-                        <th>Email</th>
+                        <th style="width: 8%;">Email</th>
                         <th>Telefono</th>
                         <th>Celular</th>
+                        <th style="width: 5%;">Visitas</th>
                         <th>Plan</th>
                         <th>Registro</th>
                         <th>Estado</th>
@@ -123,9 +128,10 @@
                         <td>{{user.username}}</td>
                         <td>{{user.nombre}}</td>
                         <td>{{user.apellido}}</td>
-                        <td>{{user.email}}</td>
+                        <td style="overflow: hidden;text-overflow: ellipsis;" title="{{user.email}}">{{user.email}}</td>
                         <td>{{user.telefono}}</td>
                         <td>{{user.celular}}</td>
+                        <td>{{user.visitas}}</td>
                         <td>{{user.planDesc}}</td>
                         <td>{{user.fecharegistro}}</td>
                         <td ng-if="user.IsActive != 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Activar</button></td>
@@ -144,15 +150,16 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            <table class="table">
+            <table class="table" style="table-layout: fixed;">
                 <thead>
                     <tr>
                         <th>Usuario</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
-                        <th>Email</th>
+                        <th style="width: 8%;">Email</th>
                         <th>Telefono</th>
                         <th>Celular</th>
+                        <th style="width: 5%;">Visitas</th>
                         <th>Plan</th>
                         <th>Registro</th>
                         <th>Estado</th>
@@ -169,9 +176,10 @@
                         <td>{{user.username}}</td>
                         <td>{{user.nombre}}</td>
                         <td>{{user.apellido}}</td>
-                        <td>{{user.email}}</td>
+                        <td style="overflow: hidden;text-overflow: ellipsis;" title="{{user.email}}">{{user.email}}</td>
                         <td>{{user.telefono}}</td>
                         <td>{{user.celular}}</td>
+                        <td>{{user.visitas}}</td>
                         <td>{{user.planDesc}}</td>
                         <td>{{user.fecharegistro}}</td>
                         <td ng-if="user.IsActive != 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Activar</button></td>

@@ -189,7 +189,7 @@ function getAllUsers() {
     if(isset($_SESSION['IsAdmin']) && !empty($_SESSION['IsAdmin']) && $_SESSION['IsAdmin']){
         $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
         if ($conn->conectar()) {
-            $sql = "SELECT u.username,u.idUser,u.nombre,u.apellido,u.email,u.telefono,u.celular,u.plan,u.telefonoEmp,u.IsActive,u.fecharegistro,u.imagenUrl  FROM users u where IsAdmin = 0 ORDER BY nombre";
+            $sql = "SELECT u.username,u.idUser,u.nombre,u.apellido,u.email,u.telefono,u.celular,u.plan,u.telefonoEmp,u.IsActive,u.fecharegistro,u.imagenUrl,u.visitas  FROM users u where IsAdmin = 0 ORDER BY nombre";
             if ($conn->consulta($sql)) {
                 $users = $conn->restantesRegistros();
                 $response = MessageHandler::getSuccessResponse("", $users);

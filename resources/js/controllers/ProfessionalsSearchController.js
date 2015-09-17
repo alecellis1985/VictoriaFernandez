@@ -195,7 +195,6 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
                 $('.busquedaprofList .card').trigger('click');
             },1000);
             $scope.buscoProf = "";
-            CommonService.postJsonRequest('api/sumarVisita', {'idUser': premiumUser.idUser});
         }
         
         $scope.totalItems = 0;
