@@ -307,6 +307,12 @@ Professionals.directive('fancyImg', ['$timeout',function ($timeout) {
         link: function ($scope, elem, attr) {
             $scope.Url = 'url(\'uploaded/'+  $scope.backgroundUrl+'\')';
             elem.css('background-image',$scope.Url);
+            $scope.$watch('backgroundUrl',function(newval,oldval){
+                if(newval !== oldval){
+                    $scope.Url = 'url(\'uploaded/'+  $scope.backgroundUrl+'\')';
+                    elem.css('background-image',$scope.Url);
+                }
+            });
         }
     };
 }]);

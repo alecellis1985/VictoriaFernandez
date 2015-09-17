@@ -1,4 +1,4 @@
-Professionals.directive('userDetails', ['$timeout',function($timeout){
+Professionals.directive('userDetails', ['$timeout','Helper',function($timeout,Helper){
     return {
         restrict: 'E',
         templateUrl: 'resources/tpl/userDetails.html',
@@ -24,8 +24,11 @@ Professionals.directive('userDetails', ['$timeout',function($timeout){
                     return;
                 
                 if(tab.title === 'Mapa'){
+                    //Helper.clearArray($scope.userMarkers);
                     $scope.userMarkers = $scope.selectedUser.markers;
-                    $scope.renderMap = true;
+                    $timeout(function(){
+                        $scope.renderMap = true;
+                    },100);
                 }
             }
             
@@ -44,6 +47,9 @@ Professionals.directive('userDetails', ['$timeout',function($timeout){
                     $scope.renderMap = false;
                 }
              });
+             $scope.$on("$destroy", function () {
+                $scope.renderMap = false;
+            });
         }
     };
 }]);
