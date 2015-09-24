@@ -34,7 +34,7 @@ $app->get('/categorias', 'getCategorias');
 $app->get('/barrios', 'getBarrios');
 $app->post('/login-user', 'loginUser');
 $app->post('/logout-user', 'logoutUser');
-$app->get('/users/:categoria/:departamento(/:nombreProf)', 'getUsers');
+$app->get('/users/:categoria/:departamento/:barrioId(/:nombreProf)', 'getUsers');
 $app->post('/agregar_usuario', 'registerUser');
 $app->post('/editar_usuario', 'editUser');
 $app->post('/check-username', 'checkUsername');

@@ -67,8 +67,13 @@ function deleteUser(){
     }
 }
 
+
+
+
+
 //THIS function is called from the main search page
-function getUsers($categoria, $departamento, $nombreProf = null) {
+function getUsers($categoria, $departamento,$barrioId, $nombreProf = null) {
+    
     $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
     $response = null;
 
@@ -79,27 +84,47 @@ function getUsers($categoria, $departamento, $nombreProf = null) {
 
     if ($conn->conectar()) {
         $localidadId = -1;
-
-        //New query EXCEPT MONTEVIDEO
-        if ((int) $departamento === 1) {
-            $sqlGetLocId = "SELECT barrioId FROM barrios b JOIN departamentos d ON b.departamentoId = d.idDepartamento " .
-                    "WHERE b.departamentoId = :deptoId";
-
-            $paramsLoc = array();
-            $paramsLoc[0] = array("deptoId", (int) $departamento, "int");
-        } else {
-            $sqlGetLocId = "SELECT barrioId FROM barrios b JOIN departamentos d ON b.departamentoId = d.idDepartamento " .
-                    "WHERE b.departamentoId = :deptoId";
-
-            $paramsLoc = array();
-            $paramsLoc[0] = array("deptoId", (int) $departamento, "int");
+        $error = false;
+        if(isset($barrioId) && $barrioId != '' && (int) $departamento === 1){
+            $localidadId = (int)$barrioId;
         }
+                
+        if($localidadId == -1 && (int) $departamento != 1){
+            //New query EXCEPT MONTEVIDEO
+            $sqlGetLocId = "SELECT barrioId FROM barrios b JOIN departamentos d ON b.departamentoId = d.idDepartamento " .
+                    "WHERE b.departamentoId = :deptoId";
 
-        if ($conn->consulta($sqlGetLocId, $paramsLoc)) {
-            $localidades = $conn->restantesRegistros();
-            if (isset($localidades[0]))
-                $localidadId = $localidades[0]->barrioId;
+            $paramsLoc = array();
+            $paramsLoc[0] = array("deptoId", (int) $departamento, "int");
+            
 
+            if ($conn->consulta($sqlGetLocId, $paramsLoc)) {
+                $localidades = $conn->restantesRegistros();
+                if (isset($localidades[0]))
+                    $localidadId = $localidades[0]->barrioId;
+            } 
+            else 
+            {
+                $response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
+                $error = true;
+            }
+        }
+        if(!$error){
+            $localidadQuery = "";
+            $usarLocId = false;
+            if($localidadId == -1 && (int) $departamento == 1){
+                $localidadQuery = "du.idLocalidad < 82";
+            }
+            else if($localidadId != -1 ){
+                $usarLocId = true;
+                $localidadQuery = "du.idLocalidad = :departamento";
+            }
+            else if($localidadId == -1 ){
+                $usarLocId = true;
+                $localidadQuery = ":departamento = -1";
+            }
+            
+            
             $sql = "SELECT u.idUser,u.nombre,u.apellido,u.email,u.telefono,u.celular,u.direccion,u.telefonoEmp," .
                     "u.sitioWeb,u.imagenUrl,u.facebookUrl,u.twitterUrl," .
                     "u.linkedinUrl,u.descService,u.servicioOfrecido1,u.servicioOfrecido2,u.servicioOfrecido3," .
@@ -107,15 +132,21 @@ function getUsers($categoria, $departamento, $nombreProf = null) {
                     "fp.*,da.* FROM " .
                     "users u left join formasdepago fp on u.idUser = fp.idUser " .
                     "left join diasatencion da on u.idUser = da.idUser " .
-                    "join localidad_user du on u.idUser = du.idUser AND (du.idLocalidad = :departamento OR :departamento2 = -1 ) " .
+                    "join localidad_user du on u.idUser = du.idUser AND (". $localidadQuery ." ) " .
                     "join categoria_usuario cu on u.idUser = cu.idUser AND (cu.idCategoria = :categoria OR :categoria2 = -1) " .
                     " WHERE " . $addNombreProfToQuery .
                     " IsAdmin = 0 and IsActive = 1  group by u.idUser ORDER BY nombre";
-            
+
             $params = array();
-            $params[0] = array("departamento", (int) $localidadId, "int");
+            //var_dump($localidadId);
+            //die();
+            if($usarLocId){
+                $params[0] = array("departamento", (int) $localidadId, "int");
+            }
+            
+            
             $params[1] = array("categoria", (int) $categoria, "int");
-            $params[2] = array("departamento2", (int) $localidadId, "int");
+            //$params[2] = array("departamento2", (int) $localidadId, "int");
             $params[3] = array("categoria2", (int) $categoria, "int");
 
             if (isset($nombreProf) && $nombreProf != '') {
@@ -128,8 +159,6 @@ function getUsers($categoria, $departamento, $nombreProf = null) {
             } else {
                 $response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
             }
-        } else {
-            $response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
         }
     }
     //}

@@ -4,9 +4,11 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
         $scope.categorias = categoriasList.data;
         $scope.categorias.unshift({categoriaNombre: "Seleccione Categoria", categoriaId: -1});
         $scope.selectedCategoria = $scope.categorias[0];
+        
         $scope.barrios = $.grep(barriosList.data,function(elem){return elem.barrioId < 82;});;
-        $scope.barrios.unshift({barrioNombre: "Seleccione Barrio", id: -1});
+        $scope.barrios.unshift({barrioNombre: "Seleccione Barrio", barrioId: -1});
         $scope.selectedBarrio = $scope.barrios[0];
+        
         $scope.usersViewList = [];
         $scope.isCollapsed = true;
         $scope.selectedUser = null;
@@ -133,10 +135,19 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
             getUsers();
         };
         
+        $scope.selectBarrio = function (e, barrio)
+        {
+            e.preventDefault();
+            $scope.selectedBarrio = barrio;
+            if($scope.depSelected.idDepartamento === -1 || $scope.selectedCategoria.categoriaId === -1)
+                return;
+            getUsers();
+        };
+        
         function getUsers(){
-            $scope.isCollapsed = true;
+            $scope.isCollapsed = true; 
             var url = 'api/users' + '/' + $scope.selectedCategoria.categoriaId +
-                    '/' + $scope.depSelected.idDepartamento + (($scope.buscoProf !== undefined && $scope.buscoProf !== '') ?('/' + $scope.buscoProf):'');
+                    '/' + $scope.depSelected.idDepartamento + '/' +$scope.selectedBarrio.barrioId + (($scope.buscoProf !== undefined && $scope.buscoProf !== '') ?('/' + $scope.buscoProf):'');
             CommonService.getRequest(url).then(function (data) {
                 if(!data.success){
                     $scope.users = [];
