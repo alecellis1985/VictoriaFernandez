@@ -71,6 +71,11 @@ Professionals.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'resources/tpl/contacto.html',
             controller: 'ContactoController'
         });
+        
+        $routeProvider.when('/resetPassword', {
+            templateUrl: 'resources/tpl/resetPassword.html',
+            controller: 'ResetPasswordController'
+        });
 
         $routeProvider.when('/quienessomos', {
             templateUrl: 'resources/tpl/quienessomos.html'

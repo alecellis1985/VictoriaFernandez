@@ -4,11 +4,11 @@ function recoverUserPassword() {
     $emailPostData = json_decode($request->getBody());
     
     if(empty($emailPostData->usermail) || !isset($emailPostData->usermail)){	
-        echo MessageHandler::getErrorResponse("El mail ingresado esta incompleto.");
+        echo MessageHandler::getErrorResponse("Por favor ingrese email o username para recuperar su contraseña.");
         return;
     }
     
-    $pwd = bin2hex(openssl_random_pseudo_bytes(4));
+    $token = bin2hex(openssl_random_pseudo_bytes(4));
     $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
     
      if ($conn->conectar()) {
@@ -16,21 +16,23 @@ function recoverUserPassword() {
         $params = array();
         $params[0] = array("email", $emailPostData->email, "string");
         //$planes = $conn->restantesRegistros();
-        if ($conn->consulta($sql)) {
-            $userId = $conn->restantesRegistros();
-            $updatePw = "UPDATE users SET passwoerd = :password WHERE idUser = " . $userId;
+        /*$updatePw = "UPDATE users SET passwoerd = :password WHERE idUser = " . $userId;
             $params = array();
             $params[0] = array("password", $pwd, "string");
-            if ($conn->consulta($updatePw)) {
+            if ($conn->consulta($updatePw)) {*/
+        if ($conn->consulta($sql)) {
+            $userId = $conn->restantesRegistros();
+            
+            $resetPasswordQuery = "Insert INTO reset_password values(". $userId .",".$token.")";
+            if ($conn->consulta($resetPasswordQuery)) {
+                
                 $to = $emailPostData->usermail;
                 $headers = 'From: info@profesionales.com.uy';
                 $subject = 'Recuperacion de contraseña';
                 $messageBody = "";
 
-                $messageBody .= '<p>Este mail ha sido enviado debido a su petición de recuperación de contraseña <br>\n';
-                $messageBody .= '<p>Su contraseña nueva es: ' . $pwd . '</p>' . "\n";
-                $messageBody .= '<br>' . "\n";
-                $messageBody .= 'Vuelve a http://profesionales.uy/ y no te pierdas de contratar al profesional buscado.';
+                $messageBody .= '<p>Este mail ha sido enviado debido a su petición de recuperación de contraseña. <br>\n';
+                $messageBody .= 'Entra en la siguiente pagina para resetear tu contraseña: http://profesionales.uy/'.$token. ' .';
                 $messageBody = strip_tags($messageBody);
                 try{
                     if(!mail($to, $subject, $messageBody, $headers)){
@@ -42,6 +44,8 @@ function recoverUserPassword() {
                         $response = MessageHandler::getErrorResponse("Error al enviar el mail, por favor intente mas tarde.");
                 }
             }
+                
+            }
             else{
                  $response = MessageHandler::getErrorResponse("Error al enviar el mail, por favor intente mas tarde.");
             }
@@ -52,5 +56,3 @@ function recoverUserPassword() {
     }
 
 
-echo $response;
-}
