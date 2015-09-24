@@ -284,8 +284,18 @@ Professionals.controller('EditUserController', ['$scope', '$rootScope', '$locati
 
             var mvdeoSelected = false;
             $.each(userData.data.departamentos, function (index, element) {
-                if ($.inArray({id: element.idDepartamento}, $scope.depSelected) === -1)
-                    $scope.selectedDepartamentos.push({id: element.idDepartamento});
+                if ($.inArray({id: element.idDepartamento}, $scope.depSelected) === -1){
+                    if(element.idDepartamento === 1){
+                        var mdeoItems = $scope.selectedDepartamentos.filter(function(e){return e.id === 1;});
+                        if(mdeoItems.length<1){
+                            $scope.selectedDepartamentos.push({id: element.idDepartamento});
+                        }
+                    }
+                    else{
+                        $scope.selectedDepartamentos.push({id: element.idDepartamento});
+                    }
+                }
+                    
 
                 if (element.nombreDepartamento.toLowerCase() === "montevideo")
                     mvdeoSelected = true;

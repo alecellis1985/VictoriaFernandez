@@ -146,7 +146,7 @@ function getPremiumUsers() {
     $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
     $response = null;
     if ($conn->conectar()) {
-            $sql = "SELECT u.idUser,u.nombre,u.apellido,u.email, u.direccion,u.telefonoEmp," .
+            $sql = "SELECT u.idUser,u.nombre,u.apellido,u.email, u.direccion,u.telefonoEmp,u.descService," .
                     "u.sitioWeb,u.imagenUrl," .
                     "u.cardcolor,u.markers,u.plan " .
                     "FROM users u WHERE IsAdmin = 0 and IsActive = 1 and plan in (2,5,6,8,11,12)";

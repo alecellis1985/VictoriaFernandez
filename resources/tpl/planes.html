@@ -130,6 +130,7 @@
                         <span><i class="fa fa-certificate" style="color: #E8D000;font-size: 36px;"></i></span>
                     </h2>
                     <h3 class="orange"><i class="fa fa-usd"></i>{{availablePlans[selectedPlan.tipo].Premium.Mensual | transformNumber}}</h6>
+                    <label>Sin período gratuito</label><br>
                     <label style="height: 20px;"></label>
                     <br />
                     <button class="btn btn-primary" ng-click="selectedPlanFn({e: $event,tipo:selectedPlan.tipo,duracion:'Mensual',categoria:'Premium'})">Registrarse</button>
@@ -152,6 +153,7 @@
                         <span><i class="fa fa-certificate" style="color: #E8D000;font-size: 36px;"></i></span>
                     </h2>
                     <h3 class="orange"><i class="fa fa-usd"></i>{{availablePlans[selectedPlan.tipo].Premium.Semestral | transformNumber}}</h6>
+                    <label>Sin período gratuito</label><br>
                     <label>precio anterior &nbsp;</label><discount-directive dividendo="availablePlans[selectedPlan.tipo].Premium.Mensual" divisor="availablePlans[selectedPlan.tipo].Premium.Semestral" meses="6"></discount-directive>
                     <br />
                     <button class="btn btn-primary" ng-click="selectedPlanFn({e: $event,tipo:selectedPlan.tipo,duracion:'Semestral',categoria:'Premium'})">Registrarse</button>
@@ -175,6 +177,7 @@
                         <span><i class="fa fa-certificate" style="color: #E8D000;font-size: 36px;"></i></span>
                     </h2>
                     <h3 class="orange"><i class="fa fa-usd"></i>{{availablePlans[selectedPlan.tipo].Premium.Anual | transformNumber}}</h6>
+                    <label>Sin período gratuito</label><br>
                     <label>precio anterior &nbsp;</label><discount-directive dividendo="availablePlans[selectedPlan.tipo].Premium.Mensual" divisor="availablePlans[selectedPlan.tipo].Premium.Anual" meses="12"></discount-directive>
                     <br />
                     <button class="btn btn-primary" ng-click="selectedPlanFn({e: $event,tipo:selectedPlan.tipo,duracion:'Anual',categoria:'Premium'})">Registrarse</button>

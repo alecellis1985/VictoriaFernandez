@@ -210,32 +210,49 @@ function insertNewUser($conn, $user) {
                                     $error = true;
                                 }
                             }
-
                             $matches = array();
                             $departamentos = $user['departamento'];
                             preg_match_all('!\d+!', $departamentos, $matches);
-
                             foreach ($matches[0] as $departamento) {
-                                $sqlGetLocId = "SELECT barrioId FROM departamentos d join barrios b on d.idDepartamento = b.departamentoId where d.idDepartamento = :idDepartamento";
+                                if((int)$departamento == 1){
+                                    $matches2 = array();
+                                    $barrios = $user['barrio'];
+                                    preg_match_all('!\d+!', $barrios, $matches2);
+                                    foreach($matches2[0] as $barrio){
+                                        $sqlInsertDpto = "INSERT INTO localidad_user VALUES (:idUser, :idLocalidad)";
+                                        $paramsInsertDpto = array();
+                                        $paramsInsertDpto[0] = array("idLocalidad", (int) $barrio, "int");
+                                        $paramsInsertDpto[1] = array("idUser", (int) $user["id"], "int");
+                                        if (!$conn->consulta($sqlInsertDpto, $paramsInsertDpto)) {
+                                            $error = true;
+                                        }
+                                    }
+                                }
+                                else{
+                                    $sqlGetLocId = "SELECT barrioId FROM departamentos d join barrios b on d.idDepartamento = b.departamentoId "
+                                        . "where d.idDepartamento = :idDepartamento";
+                                    $paramsGetLoc = array();
+                                    $paramsGetLoc[0] = array("idDepartamento", (int) $departamento, "int");
 
-                                $paramsGetLoc = array();
-                                $paramsGetLoc[0] = array("idDepartamento", (int) $departamento, "int");
-
-                                if (!$conn->consulta($sqlGetLocId, $paramsGetLoc)) {
-                                    $error = true;
-                                } else {
-                                    $localidades = $conn->restantesRegistros();
-                                    if (isset($localidades[0]))
-                                        $localidadId = $localidades[0]->barrioId;
-
-                                    $sqlInsertDpto = "INSERT INTO localidad_user VALUES (:idUser, :idLocalidad)";
-
-                                    $paramsInsertDpto = array();
-                                    $paramsInsertDpto[0] = array("idLocalidad", (int) $localidadId, "int");
-                                    $paramsInsertDpto[1] = array("idUser", (int) $user["id"], "int");
-
-                                    if (!$conn->consulta($sqlInsertDpto, $paramsInsertDpto)) {
+                                    if (!$conn->consulta($sqlGetLocId, $paramsGetLoc)) {
                                         $error = true;
+                                    } else {
+                                        $localidades = $conn->restantesRegistros();
+
+
+
+                                        if (isset($localidades[0]))
+                                            $localidadId = $localidades[0]->barrioId;
+
+                                        $sqlInsertDpto = "INSERT INTO localidad_user VALUES (:idUser, :idLocalidad)";
+
+                                        $paramsInsertDpto = array();
+                                        $paramsInsertDpto[0] = array("idLocalidad", (int) $localidadId, "int");
+                                        $paramsInsertDpto[1] = array("idUser", (int) $user["id"], "int");
+
+                                        if (!$conn->consulta($sqlInsertDpto, $paramsInsertDpto)) {
+                                            $error = true;
+                                        }
                                     }
                                 }
                             }
@@ -282,8 +299,8 @@ function editUser() {
     echo updateUser($conn, $user);
 }
 
-function updateUser($conn, $user) {
-    $response = null;
+function updateUser($conn, $user) {                                            
+    $response = null;    
     if ($conn->conectar()) {
         try {
             $conn->beginTransaction();
@@ -339,36 +356,51 @@ function updateUser($conn, $user) {
                                 $sqlDeleteLoc = "DELETE FROM localidad_user WHERE idUser = " . $userId;
                                 if ($conn->consulta($sqlDeleteLoc)) {
                                     $conn->closeCursor();
-
                                     $matches = array();
                                     $departamentos = $user['departamento'];
                                     preg_match_all('!\d+!', $departamentos, $matches);
 
                                     foreach ($matches[0] as $departamento) {
-                                        $sqlGetLocId = "SELECT barrioId FROM departamentos d join barrios b on d.idDepartamento = b.departamentoId where d.idDepartamento = :idDepartamento";
+                                        //var_dump($departamento);
+                                        if((int)$departamento == 1){
+                                            $matches2 = array();
+                                            $barrios = $user['barrio'];
+                                            preg_match_all('!\d+!', $barrios, $matches2);
+                                            foreach($matches2[0] as $barrio){
+                                                $sqlInsertDpto = "INSERT INTO localidad_user VALUES (:idUser, :idLocalidad)";
+                                                $paramsInsertDpto = array();
+                                                $paramsInsertDpto[0] = array("idLocalidad", (int) $barrio, "int");
+                                                $paramsInsertDpto[1] = array("idUser", (int) $userId, "int");
+                                                
+                                                if (!$conn->consulta($sqlInsertDpto, $paramsInsertDpto)) {
+                                                    $error = true;
+                                                }
+                                            }
+                                        }else{
+                                            $sqlGetLocId = "SELECT barrioId FROM departamentos d join barrios b on d.idDepartamento = b.departamentoId where d.idDepartamento = :idDepartamento";
 
-                                        $paramsGetLoc = array();
-                                        $paramsGetLoc[0] = array("idDepartamento", (int) $departamento, "int");
+                                            $paramsGetLoc = array();
+                                            $paramsGetLoc[0] = array("idDepartamento", (int) $departamento, "int");
 
-                                        if (!$conn->consulta($sqlGetLocId, $paramsGetLoc)) {
-                                            $error = true;
-                                        } else {
-                                            $localidades = $conn->restantesRegistros();
-                                            if (isset($localidades[0]))
-                                                $localidadId = $localidades[0]->barrioId;
-
-                                            $sqlInsertDpto = "INSERT INTO localidad_user VALUES (:idUser, :idLocalidad)";
-
-                                            $paramsInsertDpto = array();
-                                            $paramsInsertDpto[0] = array("idLocalidad", (int) $localidadId, "int");
-                                            $paramsInsertDpto[1] = array("idUser", (int) $userId, "int");
-
-                                            if (!$conn->consulta($sqlInsertDpto, $paramsInsertDpto)) {
+                                            if (!$conn->consulta($sqlGetLocId, $paramsGetLoc)) {
                                                 $error = true;
+                                            } else {
+                                                $localidades = $conn->restantesRegistros();
+                                                if (isset($localidades[0]))
+                                                    $localidadId = $localidades[0]->barrioId;
+
+                                                $sqlInsertDpto = "INSERT INTO localidad_user VALUES (:idUser, :idLocalidad)";
+
+                                                $paramsInsertDpto = array();
+                                                $paramsInsertDpto[0] = array("idLocalidad", (int) $localidadId, "int");
+                                                $paramsInsertDpto[1] = array("idUser", (int) $userId, "int");
+
+                                                if (!$conn->consulta($sqlInsertDpto, $paramsInsertDpto)) {
+                                                    $error = true;
+                                                }
                                             }
                                         }
                                     }
-
                                     if (!$error) {
 
                                         $sqlDeleteCat = "DELETE FROM categoria_usuario WHERE idUser = " . $userId;
@@ -417,7 +449,7 @@ function updateUser($conn, $user) {
                 echo MessageHandler::getErrorResponse("Primer consulta error.Edit");
             }
         } catch (Exception $exc) {
-            var_dump($exc);
+            //var_dump($exc);
             $response = null;
             $conn->rollbackTransaction();
         }
