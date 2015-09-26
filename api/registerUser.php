@@ -218,13 +218,24 @@ function insertNewUser($conn, $user) {
                                     $matches2 = array();
                                     $barrios = $user['barrio'];
                                     preg_match_all('!\d+!', $barrios, $matches2);
-                                    foreach($matches2[0] as $barrio){
+                                    if(count($matches2[0]) == 0){
+                                        //Adding -1 to departamento if user didn't pick anything
                                         $sqlInsertDpto = "INSERT INTO localidad_user VALUES (:idUser, :idLocalidad)";
                                         $paramsInsertDpto = array();
-                                        $paramsInsertDpto[0] = array("idLocalidad", (int) $barrio, "int");
+                                        $paramsInsertDpto[0] = array("idLocalidad", -1, "int");
                                         $paramsInsertDpto[1] = array("idUser", (int) $user["id"], "int");
                                         if (!$conn->consulta($sqlInsertDpto, $paramsInsertDpto)) {
                                             $error = true;
+                                        }
+                                    }else{
+                                        foreach($matches2[0] as $barrio){
+                                            $sqlInsertDpto = "INSERT INTO localidad_user VALUES (:idUser, :idLocalidad)";
+                                            $paramsInsertDpto = array();
+                                            $paramsInsertDpto[0] = array("idLocalidad", (int) $barrio, "int");
+                                            $paramsInsertDpto[1] = array("idUser", (int) $user["id"], "int");
+                                            if (!$conn->consulta($sqlInsertDpto, $paramsInsertDpto)) {
+                                                $error = true;
+                                            }
                                         }
                                     }
                                 }
@@ -359,21 +370,33 @@ function updateUser($conn, $user) {
                                     $matches = array();
                                     $departamentos = $user['departamento'];
                                     preg_match_all('!\d+!', $departamentos, $matches);
-
+                                    
                                     foreach ($matches[0] as $departamento) {
-                                        //var_dump($departamento);
+                                        
                                         if((int)$departamento == 1){
                                             $matches2 = array();
                                             $barrios = $user['barrio'];
                                             preg_match_all('!\d+!', $barrios, $matches2);
-                                            foreach($matches2[0] as $barrio){
+                                            if(count($matches2[0]) == 0){
+                                                //Adding -1 to departamento if user didn't pick anything
                                                 $sqlInsertDpto = "INSERT INTO localidad_user VALUES (:idUser, :idLocalidad)";
                                                 $paramsInsertDpto = array();
-                                                $paramsInsertDpto[0] = array("idLocalidad", (int) $barrio, "int");
-                                                $paramsInsertDpto[1] = array("idUser", (int) $userId, "int");
-                                                
+                                                $paramsInsertDpto[0] = array("idLocalidad", -1, "int");
+                                                $paramsInsertDpto[1] = array("idUser", (int)$userId, "int");
                                                 if (!$conn->consulta($sqlInsertDpto, $paramsInsertDpto)) {
                                                     $error = true;
+                                                }
+                                            }
+                                            else{
+                                                foreach($matches2[0] as $barrio){
+                                                    $sqlInsertDpto = "INSERT INTO localidad_user VALUES (:idUser, :idLocalidad)";
+                                                    $paramsInsertDpto = array();
+                                                    $paramsInsertDpto[0] = array("idLocalidad", (int) $barrio, "int");
+                                                    $paramsInsertDpto[1] = array("idUser", (int) $userId, "int");
+
+                                                    if (!$conn->consulta($sqlInsertDpto, $paramsInsertDpto)) {
+                                                        $error = true;
+                                                    }
                                                 }
                                             }
                                         }else{

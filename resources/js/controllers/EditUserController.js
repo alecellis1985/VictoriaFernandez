@@ -304,8 +304,16 @@ Professionals.controller('EditUserController', ['$scope', '$rootScope', '$locati
             if (mvdeoSelected) {
                 $scope.showBarrios = true;
                 $.each(userData.data.departamentos, function (index, element) {
-                    if (element.barrioNombre.toLowerCase() !== "default")
-                        $scope.selectedBarrios.push({id: element.barrioId});
+                    if (element.barrioNombre.toLowerCase() !== "default"){
+                        if(element.barrioId === -1){
+                            delete element.barrioId;
+                            delete element.barrioNombre;
+                        }
+                        else{
+                            $scope.selectedBarrios.push({id: element.barrioId});
+                        }                        
+                    }
+                        
                 });
 
             }
