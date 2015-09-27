@@ -1110,19 +1110,30 @@ label{
     }
 }
 
-@media (min-width:1200px)
-{
-}
 
-@media (min-width:992px)
-{
-    
-}
 
 @media (min-width:768px)
 {
     .registroProf .user-details .centerText{
         padding: 0 2px;
+    }
+
+    .mainSliderbgImgs{
+        height: 200px;
+    }
+}
+
+@media (min-width:992px)
+{
+    .mainSliderbgImgs{
+        height: 250px;
+    }
+}
+
+@media (min-width:1200px)
+{
+    .mainSliderbgImgs{
+        height: 300px;
     }
 }
 
@@ -1162,4 +1173,11 @@ label{
 .animate-repeat.ng-enter.ng-enter-active {
   opacity:1;
   height:265px;
+}
+
+.mainSliderbgImgs{
+    margin:auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
 }

@@ -3,7 +3,8 @@
     <div class="col-xs-12">
         <carousel interval="myInterval">
             <slide ng-repeat="slide in slides" active="slide.active">
-                <img ng-src="{{slide.image}}"  alt="{{slide.text}}" ng-click="setDropdownsAndExecuteQuery(slide.categoria)" style="margin:auto;">
+                <!--<img ng-src="{{slide.image}}"  alt="{{slide.text}}" ng-click="setDropdownsAndExecuteQuery(slide.categoria)" style="margin:auto;">-->
+                <div style="background-image:url('{{slide.image}}');" class="mainSliderbgImgs" ng-click="setDropdownsAndExecuteQuery(slide.categoria)"></div>
                 <div class="carousel-caption">
                     <h3>{{slide.text}}</h3>
                     <p>{{slide.subText}}</p>
