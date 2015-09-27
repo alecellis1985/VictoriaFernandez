@@ -20,7 +20,7 @@
 
     try{
         if(mail($para, $subject, $messageBody, $headers)){
-                $response = MessageHandler::getSuccessResponse("El mail ha sido enviado!");
+                $response = MessageHandler::getSuccessResponse("El mail ha sido enviado!",null);
         }else{
                 $response = MessageHandler::getErrorResponse("Error al enviar el mail, por favor intente mas tarde.");
         }

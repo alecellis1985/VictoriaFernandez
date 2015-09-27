@@ -161,9 +161,10 @@ header >nav{
 .card h2
 {
     margin-top: 4px;
-    font-size: 2em;
+    font-size: 1.5em;
     text-overflow: ellipsis;
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .card:hover,.cardhover
@@ -1054,6 +1055,19 @@ label{
         width: 90%;
     }
 }
+
+@media (max-width: 450px){
+    .container {
+        width: 100%;
+    }
+    .special-cont{
+        width:90%;
+    }
+    .special-cont button{
+        margin: 15px 5px;
+    }
+}
+
 
 .centerText > h3{
     height: 30px;
