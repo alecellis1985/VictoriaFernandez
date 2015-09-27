@@ -12,6 +12,9 @@
                     <label for="pwd">Contraseña:</label>
                     <input type="password" class="form-control" name="password" id="pwd" ng-model="userLogin.password" placeholder="contraseña" required>
                 </div>
+                <div class="form-group">
+                    <a href="#/restaurar-password" stop-event ng-click="closeModal($event)">¿Olvidó su contraseña?</a>
+                </div>
                 <div class="form-group hide">
                     <span id="logInErrors" class="error"></span>
                 </div>

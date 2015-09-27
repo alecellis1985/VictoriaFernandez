@@ -15,6 +15,7 @@ require_once('mailHandler.php');
 require_once('planes.php');
 require_once('userState.php');
 require_once('userData.php');
+require_once('resetPasswordMail.php');
 
 session_cache_limiter(false);
 session_start();
@@ -28,6 +29,8 @@ $app->get('/getPremiumUsers', 'getPremiumUsers');
 $app->get('/users/loggedUser', 'isUserLogged');
 $app->post('/sendMail', 'sendEmail');
 $app->post('/recoverPassword', 'recoverUserPassword');
+$app->post('/resetPasswordToken', 'resetUserPasswordAndValidateToken');
+
 $app->get('/userPlans', 'getPlanes');
 $app->get('/departamentos', 'getDepartamentos');
 $app->get('/categorias', 'getCategorias');

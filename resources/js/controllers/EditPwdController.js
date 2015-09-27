@@ -18,7 +18,6 @@ Professionals.controller('EditPwdController', ['$scope', '$routeParams', '$http'
                 'oldPwd': $scope.userLogin.oldPwd,
                 'newPwd': $scope.userLogin.newPwd
             };
-            debugger;
             CommonService.postJsonRequest('api/edit-user-pwd', data).then(function (result) {
                 if (result.success) {
                     $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Contraseña actualizada correctamente !'});
