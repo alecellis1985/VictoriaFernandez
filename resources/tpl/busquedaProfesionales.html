@@ -83,7 +83,8 @@
                                     <prof-a-custom href-Link="user.facebookUrl" icon="fa fa-facebook-official" icon-Title="Facebook"></prof-a-custom>
                                     <prof-a-custom href-Link="user.twitterUrl" icon="fa fa-twitter-square" icon-Title="Twitter"></prof-a-custom>
                                     <prof-a-custom href-Link="user.linkedinUrl" icon="fa fa-linkedin-square" icon-Title="Linkedin"></prof-a-custom>
-                                    <a href="mailto:{{user.email}}" class="btn btn-primary pull-right" title="Enviar mail">
+                                    
+                                    <a href="/" class="btn btn-primary pull-right" stop-All-Events ng-click="enviarMail($event, user.email)"  title="Enviar mail">
                                         <i class="glyphicon glyphicon-envelope"></i>
                                     </a>
                                 </div>

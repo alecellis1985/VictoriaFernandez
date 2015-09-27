@@ -17,10 +17,6 @@ Professionals.controller('LoginController', ['$scope', '$routeParams', '$http', 
             $modalInstance.dismiss('cancel');
             $location.path('/restaurar-password');
         }
-        
-        $scope.$on("$destroy", function() {
-            $modalInstance.close(0);
-        });
 
         $scope.loginUser = function (e)
         {

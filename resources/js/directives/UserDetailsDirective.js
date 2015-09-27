@@ -1,4 +1,4 @@
-Professionals.directive('userDetails', ['$timeout','Helper',function($timeout,Helper){
+Professionals.directive('userDetails', ['$timeout','Helper','$modal',function($timeout,Helper,$modal){
     return {
         restrict: 'E',
         templateUrl: 'resources/tpl/userDetails.html',
@@ -19,6 +19,21 @@ Professionals.directive('userDetails', ['$timeout','Helper',function($timeout,He
                 { title:'Mapa', content:'resources/tpl/tabMap.html',active:false}
               ];
               
+            $scope.enviarMail = function (evt, userEmail) {
+                evt.preventDefault();
+                evt.stopPropagation();
+                $modal.open({
+                    templateUrl: 'resources/tpl/email.html',
+                    controller: 'EmailController',
+                    size: 'lg',
+                    resolve: {
+                        email: function () {
+                         return userEmail;
+                       }
+                    }
+                });
+            };
+            
             $scope.tabSelected = function(tab){
                 if($scope.selectedUser.markers.length < 1)
                     return;

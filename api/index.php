@@ -28,6 +28,7 @@ $app->get('/users', 'getAllUsers');
 $app->get('/getPremiumUsers', 'getPremiumUsers');
 $app->get('/users/loggedUser', 'isUserLogged');
 $app->post('/sendMail', 'sendEmail');
+$app->post('/sendMailContact', 'sendMailToContact');
 $app->post('/recoverPassword', 'recoverUserPassword');
 $app->post('/resetPasswordToken', 'resetUserPasswordAndValidateToken');
 

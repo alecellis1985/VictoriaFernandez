@@ -29,3 +29,44 @@
     }
     echo $response;
 }
+
+function sendMailToContact() {
+    $request = Slim::getInstance()->request();
+    $emailPostData = json_decode($request->getBody());
+    
+    if(isset($emailPostData->contactemail) && !empty($emailPostData->contactemail) &&
+            isset($emailPostData->email) && !empty($emailPostData->email) &&
+            isset($emailPostData->nombre) && !empty($emailPostData->nombre)&& 
+            isset($emailPostData->nombre) && !empty($emailPostData->nombre)&& 
+            isset($emailPostData->apellido) && !empty($emailPostData->apellido) &&
+            isset($emailPostData->telefono) && !empty($emailPostData->telefono) &&
+            isset($emailPostData->mensaje) && !empty($emailPostData->mensaje) ){
+            
+        $para = $emailPostData->contactemail;
+        $headers = "From: Profesionales.uy <info@profesionales.uy>";
+
+        $subject = "Mensaje de: " . $emailPostData->nombre . " " . $emailPostData->apellido;
+        $messageBody = "";
+        $messageBody .= "<p>Este email ha sido enviado por: " .$emailPostData->nombre." ". $emailPostData->apellido . "</p>" . "\n";
+        $messageBody .= "<p>Su email para la respuesta es: " .$emailPostData->email. "</p>" . "\n";
+        $messageBody .= "<p>Telefono: " . $emailPostData->telefono . "</p>" . "\n";
+        $messageBody .= "<br>" . "\n";
+        $messageBody .= "<p> Mensaje: ". $emailPostData->mensaje . "</p>";
+
+        $messageBody = strip_tags($messageBody);
+
+        try{
+            if(mail($para, $subject, $messageBody, $headers)){
+                    $response = MessageHandler::getSuccessResponse("El email ha sido enviado!",null);
+            }else{
+                    $response = MessageHandler::getErrorResponse("Error al enviar el mail, por favor intente mas tarde.");
+            }
+        }catch(Exception $e){
+                $response = MessageHandler::getErrorResponse("Error al enviar el mail, por favor intente mas tarde.");
+        }
+    }
+    else{
+        $response = MessageHandler::getErrorResponse("Debe completar todos los campos para poder enviar emails.");
+    }
+    echo $response;
+}

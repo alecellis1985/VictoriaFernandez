@@ -1,6 +1,7 @@
 'use strict';
 
-Professionals.controller('ProfessionalsSearchController', ['$scope', '$routeParams', '$http', '$rootScope', '$location','$timeout' ,'CommonService', 'departamentosList', 'categoriasList', 'barriosList','premiumUsers','$interval',function ($scope, $routeParams, $http, $rootScope, $location,$timeout, CommonService, departamentosList, categoriasList, barriosList,premiumUsers,$interval) {
+Professionals.controller('ProfessionalsSearchController', ['$scope','$timeout' ,'CommonService', 'departamentosList', 'categoriasList', 'barriosList','premiumUsers','$interval','$modal',
+    function ($scope, $timeout, CommonService, departamentosList, categoriasList, barriosList,premiumUsers,$interval,$modal) {
         $scope.categorias = categoriasList.data;
         $scope.categorias.unshift({categoriaNombre: "Seleccione Categoria", categoriaId: -1});
         $scope.selectedCategoria = $scope.categorias[0];
@@ -214,6 +215,21 @@ Professionals.controller('ProfessionalsSearchController', ['$scope', '$routePara
         
         $scope.setPage = function (pageNo) {
           $scope.currentPage = pageNo;
+        };
+        
+        $scope.enviarMail = function (evt, userEmail) {
+            evt.preventDefault();
+            evt.stopPropagation();
+            $modal.open({
+                templateUrl: 'resources/tpl/email.html',
+                controller: 'EmailController',
+                size: 'lg',
+                resolve: {
+                    email: function () {
+                     return userEmail;
+                   }
+                }
+            });
         };
         
         $scope.$watch('buscoProf', function (newval, oldval) {
