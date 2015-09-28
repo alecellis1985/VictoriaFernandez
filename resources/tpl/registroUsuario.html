@@ -1,9 +1,9 @@
-<div class="row" ng-hide="registro.mostrarRegistro">
-    <div class="row">
-        <div class="container registroProf">
-            <div class="row specialRow">
-                <div class="col-xs-12 col-md-12 col-sm-12 registerTitle">
-                    <div class="special-white-bg col-sm-9"><h1 style="height: 40px;position:relative;" ng-fi-text="¡Haga crecer su negocio con Profesionales.uy!"></h1>
+<div class="registroProf specialRow" ng-hide="registro.mostrarRegistro">
+        <div class="col-xs-12 col-md-12 col-sm-12 registerTitle">
+            <div style="position: absolute; left: 50%;">
+                <div style="position: relative; left: -50%;">
+                    <div class="special-white-bg col-xs-12">
+                        <h2>¡Haga crecer su negocio con Profesionales.uy!</h2>
                         <h3>¿Qué le ofrecemos?</h3>
                         <p>
                             <i class="fa fa-check-circle-o"></i>Reciba solicitudes de presupuesto.<br />
@@ -11,20 +11,19 @@
                             <i class="fa fa-check-circle-o"></i>Llegue a miles de usuarios interesados en sus servicios profesionales.
                         </p>
                     </div>
-                    <div class="niceBackground col-xs-12 col-sm-8 col-md-6">
+                    <div class="niceBackground col-xs-12">
                         <h1 class="superH1" ng-fi-text="¡Registro Gratis Por 3 Meses!"></h1>
                         <button class="btn btn-primary" ng-click="showPlan(0)"><i class="glyphicon glyphicon-education"></i> Profesional</button>
                         <button class="btn btn-primary" ng-click="showPlan(1)"><i class="glyphicon glyphicon-briefcase"></i> Empresas</button>
                     </div>
-
-
                 </div>
             </div>
+        </div>
+    <!--<div style="margin-top: 20px;float: left;">-->
+        <planes-details selected-plan-fn="showRegistration(e,tipo,duracion,categoria)" selected-plan="selectedPlan" elem-colapsed="isCollapsed" available-plans="profesionalesAvailablePlans"></planes-details>
+    
+</div>  
 
-            <planes-details selected-plan-fn="showRegistration(e,tipo,duracion,categoria)" selected-plan="selectedPlan" elem-colapsed="isCollapsed" available-plans="profesionalesAvailablePlans"></planes-details>
-        </div>  
-    </div>
-</div>
 <form ng-submit="registrarUsuario()" name="registerUser" style="padding-top: 10px" ng-show="registro.mostrarRegistro" 
       method="post" novalidate>
     

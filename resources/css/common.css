@@ -310,8 +310,8 @@ header >nav{
 .propagandaMargins
 {
     margin: 0px 0 8px;
-    width: 110%;
-    left: -5%;
+    width: 116%;
+    left: -8%;
     position: relative;
 }
 
@@ -468,29 +468,6 @@ header >nav{
     background-color:#B60000
 }
 
-/*@media (min-width:768px)
-{
-    .fa-arrow-circle-up
-    {
-         right: 0px;
-    }
-}
-@media (min-width:992px)
-{
-    .fa-arrow-circle-up
-    {
-        right: 0px;
-    }
-}
-@media (min-width:1200px)
-{
-    .fa-arrow-circle-up
-    {
-        right: 173px;
-    }
-}*/
-
-
 .GoogleMap {
     height:420px;
 }
@@ -513,31 +490,6 @@ p
     color: #429127;
     color: #277D91;    
 }
-/*.user-details .fa-user{
-    
-}*/
-
-@media (min-width:768px)
-{
-    .card .fa-user
-    {
-        font-size: 119px;
-    }
-}
-@media (min-width:992px)
-{
-    .card .fa-user
-    {
-        font-size: 109px;
-    }
-}
-@media (min-width:1200px)
-{
-    .card .fa-user
-    {
-        font-size: 119px;
-    }
-}
 
 .recaptcha-checkbox-checkmark{
     cursor:pointer;
@@ -549,8 +501,9 @@ p
 
 .registroProf h2
 {
-    text-align: center;
+    color:#000;
 }
+
 .registroProf .glyphicon
 {
     color:#324C8C;
@@ -562,6 +515,11 @@ p
 
 .registroProf .card{
     padding: 20px 10px;
+}
+
+.planes{
+    float: left;
+    margin-top: 15px;
 }
 
 .planes>.panel-body>.row>div:first-child>span>.fa{
@@ -612,27 +570,6 @@ p
 
 .displaycenterText{
     text-align: center;
-}
-
-@media (min-width: 1366px){
-    .container {
-        width: 1324px;
-    }
-}
-@media (min-width: 1440px){
-    .container {
-        width: 1400px;
-    }
-}
-@media (min-width: 1600px){
-    .container {
-        width: 1550px;
-    }
-}
-@media (min-width: 1920px){
-    .container {
-        width: 1760px;
-    }
 }
 
 mark{
@@ -701,8 +638,7 @@ label{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
-    margin-bottom: 20px;
-    padding-left: 20%;
+    overflow: hidden;
 }
 
 .registerTitle .special-white-bg > h1{
@@ -713,12 +649,7 @@ label{
 .special-white-bg{
     background-color: rgba(255, 255, 255, 0.38);
     padding: 7px;
-    margin-bottom: 10px;
-    margin-top: 10px;
     border-radius: 3px;
-    width: 80%;
-    margin: auto;
-    position:relative;
 }
 
 .registerTitle .special-white-bg > p{
@@ -838,8 +769,7 @@ label{
 }
 
 .specialRow{
-    margin-right: -32px;
-    margin-left: -32px;
+   
 }    
 
 .specialRow button{
@@ -864,8 +794,7 @@ label{
     border-radius: 3px;
     padding:15px;
     text-align: center;
-    width: 70%;
-    margin: auto;
+    top: 15px;
 }
 
 .sm-margin-top{
@@ -897,35 +826,6 @@ label{
     right: 2px;
 }
 
-@media (max-width:490px)
-{
-    .profLogoImg{
-        height: 38px;
-    }
-    .planes>.panel-body>.row>div:first-child>span>.fa{
-        font-size: 28px;
-    }
-    .registerTitle{
-        padding-left: 0;
-        height: 445px;
-    }
-    .specialRow .niceBackground{
-        margin-left: 0;
-    }
-    
-    .specialRow h1{
-        font-size: 27px;
-    }
-    .specialRow h3{
-        font-size: 20px;
-        margin-top: 0px;
-    }
-    .specialRow p,.specialRow .fa {
-        font-size: 13px;
-    }
-        
-}
-
 .tab-pane>div{
     padding:10px;
 }
@@ -946,11 +846,15 @@ label{
     -webkit-box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.1);
     box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 .planTypes h1{
     text-align: center;
     color: #000000;
     font-weight: bold;
+}
+.planTypes>h2{
+    font-size: 23px;
 }
 
 .planTypes button{
@@ -1050,24 +954,6 @@ label{
     top: 55px;
 }
 
-@media (max-width: 768px){
-    .container {
-        width: 90%;
-    }
-}
-
-@media (max-width: 450px){
-    .container {
-        width: 100%;
-    }
-    .special-cont{
-        width:90%;
-    }
-    .special-cont button{
-        margin: 15px 5px;
-    }
-}
-
 
 .centerText > h3{
     height: 30px;
@@ -1075,9 +961,7 @@ label{
     position: relative;
 }
 .ccc h2{
-    height: 40px;
-    width: 100%;
-    position: relative;
+    
 }
 
 .fa-globe{
@@ -1103,12 +987,7 @@ label{
     font-size: 1.1em;
 }
 
-@media (min-width: 1200px) and (max-width: 1368px) { 
-  .premium .min_alto{
-        text-overflow: ellipsis;
-        padding-left: 30px;
-    }
-}
+
 
 .mainSliderbgImgs{
     height: 180px;
@@ -1117,14 +996,96 @@ label{
     background-position: 50% 50%;
 }
 
+@media (min-width: 1200px) and (max-width: 1368px) { 
+  .premium .min_alto{
+        text-overflow: ellipsis;
+        padding-left: 30px;
+    }
+}
+
+@media (max-width:490px)
+{
+    .profLogoImg{
+        height: 38px;
+    }
+    .planes>.panel-body>.row>div:first-child>span>.fa{
+        font-size: 28px;
+    }
+    .planTypes>h2{
+        font-size: 20px;
+    }
+}
+
+    
+
+@media (max-width: 810px){
+    .ccc h2{
+        font-size: 20px;
+    }
+    .container {
+        width: 95%;
+    }
+    .special-cont{
+        width:90%;
+    }
+    .special-cont button{
+        margin: 15px 5px;
+    }
+    .registerTitle{
+        padding-left: 0;
+        height: 373px;
+    }
+    
+    .specialRow p,.specialRow .fa {
+        font-size: 9px;
+    }
+    
+    .user-details{
+        font-size: 10px;
+    }
+    .registroProf .user-details .centerText{
+        padding: 0 2px;
+    }
+    
+    .special-white-bg{
+        width: 325px;
+    }
+    .special-white-bg>h2{
+        font-size: 18px;
+    }
+    .special-white-bg>h3{
+        font-size: 17px;
+        margin-top: 0px;
+    }   
+    .registerTitle .special-white-bg > p{
+        font-size: 14px;
+    }
+    .registerTitle .special-white-bg > p > i{
+        font-size: 17px;
+    }
+    .specialRow button{
+        font-size: 14px;
+        padding: 15px 19px;
+    }
+}
+
 @media (min-width:768px)
 {
+    .special-white-bg,.specialRow .niceBackground{
+        width: 717px;
+    }
+    
     .registroProf .user-details .centerText{
         padding: 0 2px;
     }
 
     .mainSliderbgImgs{
         height: 200px;
+    }
+    
+    .card .fa-user
+    {
+        font-size: 119px;
     }
 }
 
@@ -1133,6 +1094,10 @@ label{
     .mainSliderbgImgs{
         height: 250px;
     }
+    .card .fa-user
+    {
+        font-size: 109px;
+    }
 }
 
 @media (min-width:1200px)
@@ -1140,15 +1105,31 @@ label{
     .mainSliderbgImgs{
         height: 300px;
     }
+    .card .fa-user
+    {
+        font-size: 119px;
+    }
+    
 }
 
-@media (max-width:768)
-{
-    .user-details{
-        font-size: 10px;
+@media (min-width: 1366px){
+    .container {
+        width: 1324px;
     }
-    .registroProf .user-details .centerText{
-        padding: 0 2px;
+}
+@media (min-width: 1440px){
+    .container {
+        width: 1400px;
+    }
+}
+@media (min-width: 1600px){
+    .container {
+        width: 1550px;
+    }
+}
+@media (min-width: 1920px){
+    .container {
+        width: 1760px;
     }
 }
 
@@ -1179,4 +1160,3 @@ label{
   opacity:1;
   height:265px;
 }
-

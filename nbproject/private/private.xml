@@ -13,30 +13,18 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/AppServ/www/angular-crud-master/api/mailHandler.php</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/ProfessionalsSearchController.js</file>
             <file>file:/C:/AppServ/www/angular-crud-master/index.html</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/api/resetPasswordMail.php</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/busquedaProfesionales.html</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/api/getUsers.php</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/api/resetPasswordMail.php</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/resources/css/common.css</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/ResetPasswordController.js</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/EditPwdController.js</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/planes.html</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/registroUsuario.html</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/directives/commonDirectives.js</file>
             <file>file:/C:/AppServ/www/angular-crud-master/api/Slim/includes/MessageHandler.php</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/api/Slim/includes/class.Conexion.BD.php</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/editUser.html</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/verUsuario.html</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/api/registerUser.php</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/app.js</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/css/common.css</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/editPwd.html</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/resetPassword.html</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/SendResetPasswordController.js</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/restaurarContrasena.html</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/LoginController.js</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/ContactoController.js</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/api/Slim/includes/class.Conexion.BD.php</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/RegisterUserController.js</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/login.html</file>
         </group>
     </open-files>
 </project-private>

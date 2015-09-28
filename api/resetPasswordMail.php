@@ -19,24 +19,24 @@ function recoverUserPassword() {
         $params[0] = array("email", $email, "string");
         if ($conn->consulta($sql,$params)) {
             $userId = $conn->restantesRegistros();
+            if(count($userId)==0){
+                echo MessageHandler::getErrorResponse("El email no se encuentra registrado en nuestro sitio.");
+                return;
+            }
             $date = new DateTime();
             $timeSpan = $date->getTimestamp();
             $token = bin2hex(openssl_random_pseudo_bytes(8));
             $resetToken = $token . "--". (string)$timeSpan;
-            
             $resetPasswordQuery = "Insert INTO reset_password values(". $userId[0]->idUser .",'". $resetToken ."')";
             if ($conn->consulta($resetPasswordQuery)) {
                 $to = $email;
                 // Always set content-type when sending HTML email
                 $headers = "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-
                 // More headers
-                $headers .= 'From: <info@profesionales.com.uy>' . "\r\n";
-                
-                $subject = 'Nueva password para profesionales.uy';
+                $headers .= 'From: Profesionales.uy <info@profesionales.com.uy>' . "\r\n";
+                $subject = '=?UTF-8?B?'.base64_encode("Nueva contraseña para profesionales.uy").'?=';
                 $messageBody = "";
-
                 $messageBody .= '<p>Este mail ha sido enviado debido a su petición'. "\r\n". 'de recuperación de contraseña. <br>'. "\r\n"; 
                 $messageBody .= 'Entra en la siguiente pagina para resetear tu contraseña:'. "\r\n". 'http://profesionales.uy/#/resetPassword/' .$resetToken. ' .';
                 $messageBody = strip_tags($messageBody);
