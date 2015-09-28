@@ -1110,7 +1110,12 @@ label{
     }
 }
 
-
+.mainSliderbgImgs{
+    height: 180px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
 
 @media (min-width:768px)
 {
@@ -1175,9 +1180,3 @@ label{
   height:265px;
 }
 
-.mainSliderbgImgs{
-    margin:auto;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-}

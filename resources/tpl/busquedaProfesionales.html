@@ -1,17 +1,15 @@
-<!--<div class="row propagandaMargins" ng-controller="TopPropagandaController" ng-include="template.topPropaganda"></div>-->
 <div class="row propagandaMargins">
     <div class="col-xs-12">
-        <carousel interval="myInterval">
+        <carousel interval="myInterval" no-wrap="false">
             <slide ng-repeat="slide in slides" active="slide.active">
-                <!--<img ng-src="{{slide.image}}"  alt="{{slide.text}}" ng-click="setDropdownsAndExecuteQuery(slide.categoria)" style="margin:auto;">-->
-                <div style="background-image:url('{{slide.image}}');" class="mainSliderbgImgs" ng-click="setDropdownsAndExecuteQuery(slide.categoria)"></div>
+                <div style="background-image:url('{{slide.image}}');" class="mainSliderbgImgs"></div>
                 <div class="carousel-caption">
                     <h3>{{slide.text}}</h3>
                     <p>{{slide.subText}}</p>
                 </div>
             </slide>
         </carousel>
-    </div> 
+    </div>
 </div>
 <div class="row">
     <div class="container" style="min-height: 900px;">
