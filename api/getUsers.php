@@ -122,6 +122,7 @@ function getUsers($categoria, $departamento,$barrioId, $nombreProf = null) {
             else if($localidadId == -1 ){
                 $usarLocId = true;
                 $localidadQuery = ":departamento = -1";
+                //$localidadQuery = "du.idLocalidad < 82";
             }
             
             

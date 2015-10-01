@@ -217,7 +217,7 @@ function insertNewUser($conn, $user) {
                                 if((int)$departamento == 1){
                                     $matches2 = array();
                                     $barrios = $user['barrio'];
-                                    preg_match_all('!\d+!', $barrios, $matches2);
+                                    preg_match_all('/-?[0-9]+/', $barrios, $matches2);
                                     if(count($matches2[0]) == 0){
                                         //Adding -1 to departamento if user didn't pick anything
                                         $sqlInsertDpto = "INSERT INTO localidad_user VALUES (:idUser, :idLocalidad)";
@@ -376,7 +376,7 @@ function updateUser($conn, $user) {
                                         if((int)$departamento == 1){
                                             $matches2 = array();
                                             $barrios = $user['barrio'];
-                                            preg_match_all('!\d+!', $barrios, $matches2);
+                                            preg_match_all('/-?[0-9]+/', $barrios, $matches2);
                                             if(count($matches2[0]) == 0){
                                                 //Adding -1 to departamento if user didn't pick anything
                                                 $sqlInsertDpto = "INSERT INTO localidad_user VALUES (:idUser, :idLocalidad)";
