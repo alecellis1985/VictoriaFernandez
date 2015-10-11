@@ -19,14 +19,18 @@
             <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/busquedaProfesionales.html</file>
             <file>file:/C:/AppServ/www/angular-crud-master/api/resetPasswordMail.php</file>
             <file>file:/C:/AppServ/www/angular-crud-master/api/getUsers.php</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/directives/GoogleMaps.js</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/css/common.css</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/ResetPasswordController.js</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/EditUserController.js</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/planes.html</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/registroUsuario.html</file>
             <file>file:/C:/AppServ/www/angular-crud-master/api/Slim/includes/MessageHandler.php</file>
             <file>file:/C:/AppServ/www/angular-crud-master/api/Slim/includes/class.Conexion.BD.php</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/editUser.html</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/verUsuario.html</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/RegisterUserController.js</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/directives/directives.min.js</file>
         </group>
     </open-files>
 </project-private>

@@ -15,7 +15,6 @@ Professionals.controller('AlertController', ['$scope', '$routeParams', '$http', 
         $scope.addAlert = function (alertElem) {
             if(alertElem.type === 'danger'){
                 $scope.alerts.forEach(function(alert,index){
-                    debugger;
                     if(alert.type === 'danger')
                         $scope.closeAlert(index);
                 });

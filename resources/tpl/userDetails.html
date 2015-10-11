@@ -9,7 +9,7 @@
          <div class="row">
              <div class="col-xs-12 col-sm-6 col-md-3">
                  <div class='row'>
-                     <div class="col-xs-12 col-sm-12 col-md-12" style="height:200px; margin-bottom: 10px;">
+                     <div class="col-xs-12 main-block-card">
                         <fancy-img ng-if="selectedUser.imagenUrl !== undefined && selectedUser.imagenUrl !== ''" background-url="{{selectedUser.imagenUrl}}" ></fancy-img>                        
                         <div class="cardColor" ng-style="{'background-color':selectedUser.cardcolor}" ng-if="selectedUser.plan<7 && selectedUser.cardcolor && (selectedUser.imagenUrl === undefined || selectedUser.imagenUrl === '')">
                             <h3 class="nice-h6" style='text-transform: uppercase;' ng-fi-text ng-fi-text-html="{{ selectedUser.nombre | limitTo:1 }}{{ selectedUser.apellido | limitTo:1 }}"></h3>

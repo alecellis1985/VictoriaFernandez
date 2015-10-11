@@ -315,8 +315,8 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
             //Need to map the marker position to latitude longitude to save in the db
             var markersArr = $scope.markers.map(function (obj) {
                 return {
-                    'latitude': obj.position.H.toString(),
-                    'longitude': obj.position.L.toString()
+                    'latitude': obj.getPosition().lat().toString(),
+                    'longitude': obj.getPosition().lng().toString()
                 };
             });
             var markers = JSON.stringify(markersArr);

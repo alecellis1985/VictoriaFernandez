@@ -125,10 +125,13 @@ Professionals.factory('imageUrl', function () {
     };
 });
 
-Professionals.run(['Helper',
-    function (Helper) {
+Professionals.run(['$rootScope','$location','Helper',
+    function ($rootScope,$location,Helper) {
         $('.alertsTop').removeClass('hideAll');
         Helper.getUser();
+        $rootScope.$on('$routeChangeSuccess', function(){
+            ga('send', 'pageview', $location.path());
+        });
     }]);
 
 function goToTop() {

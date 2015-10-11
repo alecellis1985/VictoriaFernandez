@@ -161,22 +161,25 @@
             
             <div class="row ">
             <div class="form-group col-xs-12 col-md-4" >
-                 <h3>Selecciona una foto</h3>
+                 <h3 class="small-h3">Selecciona una foto</h3>
             </div>  
-            <div class="form-group col-xs-12 col-md-4" >
-                <h3>O un color personalizado para la tarjeta</h3>
+            <div class="form-group col-sm-12 col-sm-12 hidden-xs col-md-4" >
+                <h3 class="small-h3">O un color personalizado para la tarjeta</h3>
             </div>
             </div>
             <div class="row ">
-                <div class="form-group col-xs-6 col-md-4" >
-                    <input id="uploadFile" name="imageUpload" class="form-control" style="display: inline-block; width: 85%" 
+                <div class="form-group col-xs-12 col-md-4" >
+                    <input id="uploadFile" name="imageUpload" class="form-control" style="display: inline-block; width: 82%" 
                            placeholder="Foto o Logo de 130px x 150px" disabled="disabled" ng-model="files[0].name"/>
                     <div class="fileUpload btn btn-primary">
                         <span class="glyphicon glyphicon-folder-open"></span>
                         <input id="uploadBtn" type="file" class="upload" ng-file-select name="file" ng-model="files" image-upload/>
                     </div>
                 </div>
-                <div class="form-group col-xs-6 col-md-4">
+                <div class="form-group col-xs-12 hidden-sm hidden-md hidden-lg col-md-4" >
+                    <h3 class="small-h3">O un color personalizado para la tarjeta</h3>
+                </div>
+                <div class="form-group col-xs-12 col-md-4">
                     <div ng-if="user.imagenUrl === undefined || user.imagenUrl === null">
                         <label style="padding-right: 10px;"><input type="radio" name="cardcolor" ng-model="user.cardcolor" value="#A21E2C" ng-click="myStyle={'background-color':'#A21E2C'}">Bordó</label>
                         <label style="padding-right: 10px;"><input type="radio" name="cardcolor" ng-model="user.cardcolor" value="#28A44C" ng-click="myStyle={'background-color':'#28A44C'}">Verde</label>
@@ -241,7 +244,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="form-group col-xs-12">
-                    <textarea class="form-control " name="descService" rows="2" ng-model="user.descService" placeholder="Breve Descripción: ¿Que es lo que hace su empresa? ¿En que se destaca? ¿Que necesidad satisface?" maxlength="150"></textarea>
+                    <textarea class="form-control"style="min-height:100px;" name="descService" rows="2" ng-model="user.descService" placeholder="Breve Descripción: ¿Que es lo que hace su empresa? ¿En que se destaca? ¿Que necesidad satisface?" maxlength="150"></textarea>
                 </div>
             </div>
             <div class="row">
@@ -285,7 +288,7 @@
                 </div>
                 <div class="form-group col-xs-12 col-md-6">
                     <div class="row">
-                        <div class="col-xs-12 col-md-6">
+                        <div class="col-xs-12 col-md-6 small-margin-btm">
                             <div class="btn-group">
                                 <label class="btn btn-default" ng-model="user.formaDePago.contado" btn-checkbox>Contado</label>
                                 <label class="btn btn-default" ng-model="user.formaDePago.debito" btn-checkbox>Débito</label>

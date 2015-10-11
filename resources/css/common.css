@@ -676,8 +676,7 @@ label{
     background-color: #2B4DA5;
     border-radius: 3px;
     padding-top: 15px;
-    margin-top: 15px;
-    margin:15px 0 35px;
+    margin: 15px -15px 23px 0px;
 }
 
 .inputWdth{
@@ -772,7 +771,7 @@ label{
    
 }    
 
-.specialRow button{
+.specialRow > .registerTitle button{
     font-size: 20px;
     line-height: 20px;
     padding: 18px 23px;
@@ -996,27 +995,17 @@ label{
     background-position: 50% 50%;
 }
 
+.main-block-card{
+    height:200px; 
+    margin-bottom: 10px;
+}
+
 @media (min-width: 1200px) and (max-width: 1368px) { 
   .premium .min_alto{
         text-overflow: ellipsis;
         padding-left: 30px;
     }
 }
-
-@media (max-width:490px)
-{
-    .profLogoImg{
-        height: 38px;
-    }
-    .planes>.panel-body>.row>div:first-child>span>.fa{
-        font-size: 28px;
-    }
-    .planTypes>h2{
-        font-size: 20px;
-    }
-}
-
-    
 
 @media (max-width: 810px){
     .ccc h2{
@@ -1063,9 +1052,55 @@ label{
     .registerTitle .special-white-bg > p > i{
         font-size: 17px;
     }
-    .specialRow button{
+    .specialRow > .registerTitle  button{
         font-size: 14px;
         padding: 15px 19px;
+    }
+    .main-block-card{
+        height: 158px; 
+        margin-bottom: 10px;
+    }  
+    .user-detail-icons .row{
+        margin:0;
+    }
+}
+
+@media (max-width:490px)
+{    
+    .profLogoImg{
+        height: 38px;
+    }
+    .planes>.panel-body>.row>div:first-child>span>.fa{
+        font-size: 28px;
+    }
+    .planTypes>h2{
+        font-size: 20px;
+    }
+    .nav-tabs>li>a{
+        padding: 10px 4px;
+        font-size: 9px;
+    }
+    
+    .ccc h2{
+        font-size: 11px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    
+    .registroProf .user-details .centerText>h4{
+        font-size: 0.9em;
+    }
+    
+    .small-h3{
+        margin: 0;
+        font-size: 16px;
+    }
+    
+    .small-margin-btm{
+        margin-bottom: 10px;
+    }
+    .card h2{
+        font-size: 1.2em;
     }
 }
 
