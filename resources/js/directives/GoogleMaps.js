@@ -121,7 +121,7 @@ Professionals.directive('mapSetMarkers', function () {
                 $scope.markersArr.push(marker);
             };
 
-            $scope.loadMarker = function (info, position) {
+            /*$scope.loadMarker = function (info, position) {
                 var marker = new google.maps.Marker({
                     map: $scope.map,
                     position: new google.maps.LatLng(info.latitude, info.longitude)
@@ -129,7 +129,7 @@ Professionals.directive('mapSetMarkers', function () {
 
                 google.maps.event.addListener(marker, 'click', markerClick);
                 $scope.markersArr[position] = marker;
-            };
+            };*/
 
             function markerClick() {
                 infoWindow.setContent('<button class="btn btn-primary pull-left deleteMarker">Borrar?</button>');
@@ -172,10 +172,20 @@ Professionals.directive('mapSetMarkers', function () {
             if ($scope.markersArr !== undefined)
             {
                 var length = $scope.markersArr.length;
-                for (var i = 0; i < length; i++) {
-                    $scope.loadMarker($scope.markersArr[i], i);
+                var allMarkers = [];
+                while(length--){
+                    allMarkers.push($scope.markersArr.pop());
+                }
+                var allMarkersLength = allMarkers.length;
+                for (var i = 0; i < allMarkersLength; i++) {
+                    var pos = new google.maps.LatLng(allMarkers[i].latitude, allMarkers[i].longitude);
+                    $scope.placeMarker(pos);
                 }
             }
+            
+            $scope.$on('$destroy', function() {
+                $(document).off('click', '.deleteMarker', deleteMarker);
+            });
         }
     };
 });
