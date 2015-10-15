@@ -124,12 +124,24 @@
                 </div>
             </div>
             
-            <div class="row ">
-                <div class="form-group col-xs-6 col-md-4">
-                    <div ng-if="user.imagenUrl === undefined || user.imagenUrl === null">
-                        <label style="padding-right: 10px;"><input type="radio" name="cardcolor" ng-model="user.cardcolor" value="#A21E2C" ng-click="myStyle={'background-color':'#A21E2C'}">Bordó</label>
-                        <label style="padding-right: 10px;"><input type="radio" name="cardcolor" ng-model="user.cardcolor" value="#28A44C" ng-click="myStyle={'background-color':'#28A44C'}">Verde</label>
-                        <label><input type="radio" name="cardcolor" ng-model="user.cardcolor" value="#3F4C54" ng-click="myStyle={'background-color':'#3F4C54'}">Gris</label>
+            <div class="row " ng-if="user.imagenUrl === undefined || user.imagenUrl === null || user.imagenUrl ===''">
+                <div class="form-group col-xs-12 hidden-sm hidden-md hidden-lg col-md-4" >
+                    <h3 class="small-h3">Editar tarjeta personal</h3>
+                </div>
+                <div class="form-group col-xs-12 col-md-4">
+                    <div>
+                        <label style="padding-right: 10px;">
+                            <input type="radio" name="cardcolor" ng-model="user.cardcolor" value="#A21E2C" ng-click="myStyle={'background-color':'#A21E2C'}">
+                            Bordó
+                        </label>
+                        <label style="padding-right: 10px;">
+                            <input type="radio" name="cardcolor" ng-model="user.cardcolor" value="#28A44C" ng-click="myStyle={'background-color':'#28A44C'}">
+                            Verde
+                        </label>
+                        <label>
+                            <input type="radio" name="cardcolor" ng-model="user.cardcolor" value="#3F4C54" ng-click="myStyle={'background-color':'#3F4C54'}">
+                            Gris
+                        </label>
                         <div class="cardColor" ng-style="myStyle" ng-if="registro.empresa && user.cardcolor">
                             <h3 class="nice-h6" ng-fi-text ng-fi-text-html="{{ user.nombre }}"></h3>
                             <h3 class="nice-h7" ng-fi-text="Profesión"></h3>

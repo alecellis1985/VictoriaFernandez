@@ -197,8 +197,6 @@ Professionals.controller('ProfessionalsSearchController', ['$scope','$timeout' ,
         $scope.addSlide('./resources/img/handshake.jpg', "¿Buscas un profesional?", "Encuentra al profesional que estás buscando", "Arquitectos");
         $scope.addSlide('./resources/img/contador.jpg', "¿Buscas un contador?", "Encuentra al profesional que estás buscando", "Contadores");
         $scope.addSlide('./resources/img/profesionalesSearch.jpg', "¿Buscas un escribano?", "Encuentra al profesional que estás buscando", "Escribanos");
-        $scope.addSlide('./resources/img/contador.jpg', "¿Buscas un contador?", "Encuentra al profesional que estás buscando", "Contadores");
-        
         
         $scope.setDropdownsAndExecuteQuery = function (premiumUser) {
             $scope.buscoProf = premiumUser.nombre + ' '+ premiumUser.apellido;

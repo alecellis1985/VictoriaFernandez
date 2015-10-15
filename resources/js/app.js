@@ -2,7 +2,7 @@
 
 var Professionals = angular.module('Professionals', ['ngRoute', 'angularFileUpload', 'ui.bootstrap','angularjs-dropdown-multiselect','ng-fi-text','ngAnimate']);
 
-Professionals.config(['$routeProvider', function ($routeProvider) {
+Professionals.config(['$routeProvider','$locationProvider', function ($routeProvider,$locationProvider) {
 
         $routeProvider.when('/registro-usuario', {
             templateUrl: 'resources/tpl/registroUsuario.html',
@@ -109,6 +109,10 @@ Professionals.config(['$routeProvider', function ($routeProvider) {
                 }
             }
         });
+       /* $locationProvider.html5Mode({
+        enabled: true,
+        requireBase: false
+      });*/
     }]);
 
 Professionals.factory('imageUrl', function () {

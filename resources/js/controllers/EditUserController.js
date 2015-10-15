@@ -317,6 +317,9 @@ Professionals.controller('EditUserController', ['$scope', '$rootScope', '$locati
                 });
 
             }
+            if($scope.user.cardcolor !== undefined && $scope.user.cardcolor !== null && $scope.user.cardcolor !== ''){
+                $scope.myStyle={'background-color':$scope.user.cardcolor};
+            }
             var diasAtencion = {};
             diasAtencion.lunes = parseInt(userData.data.diasAtencion.lunes) === 1;
             diasAtencion.martes = parseInt(userData.data.diasAtencion.martes) === 1;
