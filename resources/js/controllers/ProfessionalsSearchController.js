@@ -145,6 +145,8 @@ Professionals.controller('ProfessionalsSearchController', ['$scope','$timeout' ,
             getUsers();
         };
         
+        $scope.premiumPlans = [2, 5, 6, 8, 11, 12];
+        
         function getUsers(){
             $scope.isCollapsed = true; 
             var url = 'api/users' + '/' + $scope.selectedCategoria.categoriaId +
@@ -156,12 +158,27 @@ Professionals.controller('ProfessionalsSearchController', ['$scope','$timeout' ,
                     $scope.currentPage = 1;
                     return;
                 }
-                $scope.users = [];
+                
                 var users = data.data;
                 var length = users.length;
                 $scope.totalItems = length;
                 $scope.currentPage = 1;
-                $scope.users = users;
+                $scope.shuffle(users);
+                
+                
+                $scope.users = [];
+                var length2  = users.length;
+                while(length2--){
+                        if($scope.premiumPlans.indexOf(users[length2].plan) !== -1){
+                                $scope.users.unshift(users.splice(length2,1)[0]);
+                        }
+                }
+                
+                var newLength  = users.length;
+                while(newLength--){
+                        $scope.users.push(users[newLength]);
+                }
+                
                 $scope.users.map(function(elem){
                     if(elem.markers !== null || elem.markers !== undefined){
                         elem.markers = $.parseJSON(elem.markers);
@@ -177,10 +194,16 @@ Professionals.controller('ProfessionalsSearchController', ['$scope','$timeout' ,
             });
         }
         
-        $scope.pageChanged = function(){
+        $scope.pageChanged = function(clickFromPaging){
             var startIndex = ($scope.currentPage - 1)*6;
             var endIndex = startIndex + 6;
             $scope.usersViewList = $scope.users.slice(startIndex,endIndex);
+            if(clickFromPaging !== undefined && clickFromPaging){
+                $timeout(function(){
+                    var topPos = $(".middleSearch").position().top - 63;//Divs height
+                    $("body").animate({scrollTop: topPos}, "slow");
+                },100);    
+            }
         }
 
         $scope.myInterval = 4000;
