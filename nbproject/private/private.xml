@@ -12,19 +12,18 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/ProfessionalsSearchController.js</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/api/registerUser.php</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/UsersController.js</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/header.html</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/index.html</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/tabServicios.html</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/busquedaProfesionales.html</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/app.js</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/css/common.css</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/EditUserController.js</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/footer.html</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/ProfessionalsSearchController.js</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/directives/Planes.js</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/planes.html</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/registroUsuario.html</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/directives/commonDirectives.js</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/index.html</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/editUser.html</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/EditUserController.js</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/api/Slim/Slim.php</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/RegisterUserController.js</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/api/index.php</file>
         </group>
     </open-files>
 </project-private>

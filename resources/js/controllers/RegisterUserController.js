@@ -312,6 +312,10 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
                 $rootScope.$broadcast('alert-event', {type: 'danger', msg: "Verifique que todos los campos esten correctamente completados!"});
                 return;
             }
+            if($scope.user.cardcolor === undefined && ((typeof $scope.files === 'undefined') || ($scope.files === null))){
+                $rootScope.$broadcast('alert-event', {type: 'danger', msg: "Debe subir un icono personal o seleccionar un color personalizado para la tarjeta!"});
+                return;
+            }
             //Need to map the marker position to latitude longitude to save in the db
             var markersArr = $scope.markers.map(function (obj) {
                 return {
@@ -330,10 +334,10 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
             $scope.removeDireccionesVacias();
             $scope.removeTelefonoEmpVacias();
             
+            var listaTelefonosEmp = $scope.telefonosEmp.slice(0);
+            listaTelefonosEmp.unshift(new TelefonoEmp());
+            listaTelefonosEmp[0].val = $scope.user.telefonoEmp;
             
-            
-            $scope.telefonosEmp.unshift(new TelefonoEmp());
-            $scope.telefonosEmp[0].val = $scope.user.telefonoEmp;
             var data = {
                 'nombre': $scope.user.nombre,
                 'apellido': $scope.user.apellido,
@@ -343,7 +347,7 @@ Professionals.controller('RegisterUserController', ['$scope', '$rootScope', '$lo
                 'telefono': $scope.user.telefono,
                 'celular': $scope.user.celular,
                 'direccion': $scope.direcciones.length>0?JSON.stringify($scope.direcciones):null,
-                'telefonoEmp': JSON.stringify($scope.telefonosEmp),
+                'telefonoEmp': JSON.stringify(listaTelefonosEmp),
                 'departamento': $scope.selectedDepartamentos,
                 'categoria': $scope.selectedCategorias,
                 'barrio': $scope.selectedBarrios,

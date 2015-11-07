@@ -39,7 +39,6 @@ function sendMailToContact() {
             isset($emailPostData->nombre) && !empty($emailPostData->nombre)&& 
             isset($emailPostData->nombre) && !empty($emailPostData->nombre)&& 
             isset($emailPostData->apellido) && !empty($emailPostData->apellido) &&
-            isset($emailPostData->telefono) && !empty($emailPostData->telefono) &&
             isset($emailPostData->mensaje) && !empty($emailPostData->mensaje) ){
             
         $para = $emailPostData->contactemail;
@@ -49,8 +48,11 @@ function sendMailToContact() {
         $messageBody = "";
         $messageBody .= "<p>Este email ha sido enviado por: " .$emailPostData->nombre." ". $emailPostData->apellido . "</p>" . "\n";
         $messageBody .= "<p>Su email para la respuesta es: " .$emailPostData->email. "</p>" . "\n";
-        $messageBody .= "<p>Telefono: " . $emailPostData->telefono . "</p>" . "\n";
-        $messageBody .= "<br>" . "\n";
+        if(isset($emailPostData->telefono) && !empty($emailPostData->telefono)){
+            $messageBody .= "<p>Telefono: " . $emailPostData->telefono . "</p>" . "\n";
+            $messageBody .= "<br>" . "\n";
+        }
+        
         $messageBody .= "<p> Mensaje: ". $emailPostData->mensaje . "</p>";
 
         $messageBody = strip_tags($messageBody);

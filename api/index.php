@@ -19,7 +19,7 @@ require_once('resetPasswordMail.php');
 
 session_cache_limiter(false);
 session_start();
-$app = new Slim();
+$app = new Slim(array('debug' => false));
 
 
 $app->post('/sumarVisita', 'updateVisits');

@@ -20,15 +20,16 @@ header >nav{
     color:#FFFFFF!important;
 }
 
-.navbar-fixed-top .navbar-header > a:hover,.navbar-inverse .navbar-nav>li>a:hover
-{
+.navbar-fixed-top .navbar-header > a:hover, .navbar-inverse .navbar-nav > li > a:hover {
+    -moz-transition: background-color 1900ms;
+    -o-transition: background-color 1900ms;
+    -webkit-transition: background-color 1900ms;
     transition: background-color 1900ms;
     background-color: #324C8C;
 }
 
 .panel-primary
 {
-    /*background: #c00;*/
     border-color:#324C8C;
     
 }
@@ -48,12 +49,13 @@ header >nav{
     max-height: 500px;
     overflow-y:scroll; 
 }
-.overflowDots
-{
-    display:inline-block;
-    width:90%;
+.overflowDots {
+    display: inline-block;
+    width: 90%;
     white-space: nowrap;
-    overflow:hidden !important;
+    overflow: hidden !important;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
     line-height: 15px;
     text-align: left;
@@ -158,10 +160,11 @@ header >nav{
     max-height: 200px;
 }
 
-.card h2
-{
+.card h2 {
     margin-top: 4px;
     font-size: 1.5em;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -177,25 +180,37 @@ header >nav{
       background-color: #324C8C;
 }
 
-.card:hover{
+.card:hover {
+    -moz-transition: background-color 1900ms;
+    -o-transition: background-color 1900ms;
+    -webkit-transition: background-color 1900ms;
     transition: box-shadow 1900ms;
     transition: background-color 1900ms;
     background-color: #324C8C;
 }
 
-.card.premium:hover{
+.card.premium:hover {
+    -moz-transition: box-shadow 1900ms,color 1900ms,background-color 1900ms;
+    -o-transition: box-shadow 1900ms,color 1900ms,background-color 1900ms;
+    -webkit-transition: box-shadow 1900ms,color 1900ms,background-color 1900ms;
     transition: box-shadow 1900ms,color 1900ms,background-color 1900ms;
     background-color: #324C8C;
-    color:white;
+    color: white;
 }
-.card.premium:hover h2{
-    color:white;
+.card.premium:hover h2 {
+    color: white;
+    -moz-transition: color 1900ms;
+    -o-transition: color 1900ms;
+    -webkit-transition: color 1900ms;
     transition: color 1900ms;
 }
 
-.card.premium:hover .btn-primary{
+.card.premium:hover .btn-primary {
     background: #B60000;
     border: 2px solid #A30303;
+    -moz-transition: background 1900ms,border 1900ms;
+    -o-transition: background 1900ms,border 1900ms;
+    -webkit-transition: background 1900ms,border 1900ms;
     transition: background 1900ms,border 1900ms;
 }
 .card.premium .fa-certificate{
@@ -220,10 +235,16 @@ header >nav{
 }
 .textareaCustom.longDesc{
     width: 100%;
-    height: 125px;
+    height: 125px!important;
+    max-height: 125px!important;
+    overflow-y:scroll!important;
 }
 
-
+/*textarea {
+  -moz-user-select: text!important;
+  -webkit-user-select: text!important;
+  -ms-user-select: text!important;
+}*/
 
 .busquedaprofList .card:hover{
     background-color: #FFFFFF;
@@ -412,8 +433,11 @@ header >nav{
     border-color: #324C8C;
 }
 
-.nav>li>a:focus, .nav>li>a:hover {
+.nav > li > a:focus, .nav > li > a:hover {
     text-decoration: none;
+    -moz-transition: background-color 900ms;
+    -o-transition: background-color 900ms;
+    -webkit-transition: background-color 900ms;
     transition: background-color 900ms;
     background-color: #324C8C;
 }
@@ -582,14 +606,14 @@ mark{
     margin-top: 4px;
 }
 
-.logoRow{
+.logoRow {
     background-color: white;
     height: 85px;
     -webkit-box-shadow: 0 3px 3px 0 rgba(0,0,0,0.2);
     -moz-box-shadow: 0 3px 3px 0 rgba(0,0,0,0.2);
     -o-box-shadow: 0 3px 3px 0 rgba(0,0,0,0.2);
     -ms-box-shadow: 0 3px 3px 0 rgba(0,0,0,0.2);
-    /* box-shadow: 0 3px 3px 0 rgba(0,0,0,.2); */
+    box-shadow: 0 3px 3px 0 rgba(0,0,0,0.2);
 }
 .navbar-inverse{
     border-color: white;
