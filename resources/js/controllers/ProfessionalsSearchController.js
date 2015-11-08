@@ -21,16 +21,11 @@ Professionals.controller('ProfessionalsSearchController', ['$scope','$timeout' ,
             if(elem.telefonoEmp !== null || elem.telefonoEmp !== undefined){
                 elem.telefonoEmp = $.parseJSON(elem.telefonoEmp);
             }
-        });
-        
-        $scope.premiumUsers.map(function(elem){
-            var categorias = "";
-            var length = premiumUsers.data[1].length;
-            while(length--){
-            if(premiumUsers.data[1][length].idUser === elem.idUser)
-                categorias+= premiumUsers.data[1][length].categoriaNombre + " ";
-            }
-            elem.categorias = categorias;
+            var categoria = $scope.categorias.filter(function(element){
+                return element.categoriaId === elem.catspecial; 
+            });
+
+            elem.categoria = categoria.length>0?categoria[0].categoriaNombre:"";
         });
         
         $scope.randomCategoriaArr = ['Abogados','Escribanos','Contadores','Odontólogos','Arquitectos','Veterinarios'];
@@ -189,7 +184,13 @@ Professionals.controller('ProfessionalsSearchController', ['$scope','$timeout' ,
                     if(elem.telefonoEmp !== null || elem.telefonoEmp !== undefined){
                         elem.telefonoEmp = $.parseJSON(elem.telefonoEmp);
                     }
+                    var categoria = $scope.categorias.filter(function(element){
+                        return element.categoriaId === elem.catspecial; 
+                    });
+
+                    elem.categoria = categoria.length>0?categoria[0].categoriaNombre:"";
                 });
+                
                 $scope.pageChanged();
             });
         }

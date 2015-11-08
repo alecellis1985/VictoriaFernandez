@@ -1,5 +1,5 @@
 <div class="row propagandaMargins">
-    <div class="col-xs-12" >
+    <div class="col-xs-12" ng-if="slides.length>0">
         <carousel interval="myInterval" no-wrap="false">
             <slide ng-repeat="slide in slides" active="slide.active">
                 <div style="background-image:url('{{slide.image}}'); margin:auto;" class="mainSliderbgImgs"></div>
@@ -35,7 +35,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-8">
                 
-                <user-Details selected-User="selectedUser" categoria='selectedCategoria' elem-Colapsed="isCollapsed"></user-Details>
+                <user-Details selected-User="selectedUser" elem-Colapsed="isCollapsed"></user-Details>
                 
                 <div class="row busquedaprofList">
                     <div class="sorryDiv" ng-if="users.length < 1">
@@ -51,11 +51,11 @@
                                             
                                             <div class="cardColor" ng-style="{'background-color':user.cardcolor}" ng-if="user.plan<7 && user.cardcolor && (user.imagenUrl === undefined || user.imagenUrl === '')">
                                                 <h3 class="nice-h6" style='text-transform: uppercase;' ng-fi-text ng-fi-text-html="{{ user.nombre | limitTo:1 }}{{ user.apellido | limitTo:1 }}"></h3>
-                                                <h3 class="nice-h7" ng-if="selectedCategoria.categoriaId!==-1" ng-fi-text="{{selectedCategoria.categoriaNombre}}"></h3>
+                                                <h3 class="nice-h7" ng-fi-text="{{user.categoria}}"></h3>
                                             </div>
                                             <div class="cardColor" ng-style="{'background-color':user.cardcolor}" ng-if="user.plan > 6 && user.cardcolor && (user.imagenUrl === undefined || user.imagenUrl === '')">
                                                 <h3 class="nice-h6" ng-fi-text ng-fi-text-html="{{ user.nombre }}"></h3>
-                                                <h3 class="nice-h7" ng-if="selectedCategoria.categoriaId!==-1" ng-fi-text="{{selectedCategoria.categoriaNombre}}"></h3>
+                                                <h3 class="nice-h7" ng-fi-text="{{user.categoria}}"></h3>
                                             </div>
                                         </div>   
                                     </div>
@@ -64,9 +64,12 @@
                                     <div class="row">
                                         <h2 ng-bind="user.nombre + ' ' + user.apellido"></h2>
                                     </div>
+                                    <div class="row over_flow">
+                                        <span style="color: #616161;" ng-bind="user.categoria"></span>
+                                    </div>
                                     <div class="row">
                                         <p ng-bind="user.descService"></p>
-                                    </div>
+                                    </div>                                    
                                     <div class="row over_flow" ng-if="user.telefonoEmp && user.telefonoEmp.length>0">
                                         <i class="fa fa-phone-square"></i>
                                         <span ng-repeat="tel in user.telefonoEmp">{{tel.val}}<span ng-if="$index<user.telefonoEmp.length-1">,&nbsp;</span></span>
@@ -120,6 +123,9 @@
                                         <h2 style="max-width: 91%;">{{premiumUser.nombre + ' ' + premiumUser.apellido}}<i class="fa fa-certificate"></i></h2>
                                     </div>
                                     <div class="row">
+                                        <span style="font-size: 16px; color: #616161;" ng-bind="premiumUser.categoria"></span>
+                                    </div>
+                                    <div class="row">
                                         <p ng-bind="premiumUser.descService"></p>
                                     </div>
                                     <div class="row over_flow" ng-if="premiumUser.telefonoEmp && premiumUser.telefonoEmp.length>0">
@@ -129,10 +135,7 @@
                                     <div class="row over_flow" ng-if="premiumUser.direccion && premiumUser.direccion.length>0">
                                         <i class="fa fa-home"></i>
                                         <span ng-repeat="dir in premiumUser.direccion">{{dir.val}}<span ng-if="$index<premiumUser.direccion.length-1">,&nbsp;</span></span>
-                                    </div>
-                                    <div class="row" ng-if="premiumUser.categorias !=='' ">
-                                        <span style="font-size: 16px;" ng-bind="premiumUser.categorias"></span>
-                                    </div>
+                                    </div>                                    
                                 </div>
                             </div>
                             <div class="row">

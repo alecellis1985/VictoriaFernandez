@@ -1219,3 +1219,13 @@ label{
   opacity:1;
   height:265px;
 }
+
+.tablesAdmin tbody td{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.tablesAdmin tbody td select{
+    font-size: 11px;
+}
+
+    

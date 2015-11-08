@@ -4,7 +4,6 @@ Professionals.directive('userDetails', ['$timeout','Helper','$modal',function($t
         templateUrl: 'resources/tpl/userDetails.html',
         scope: {
             selectedUser: '=',
-            categoria:'=',
             elemColapsed:'='
         },
         replace: true,

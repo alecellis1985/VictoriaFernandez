@@ -46,6 +46,7 @@ function sendMailToContact() {
 
         $subject = "Mensaje de: " . $emailPostData->nombre . " " . $emailPostData->apellido;
         $messageBody = "";
+        $messageBody .= "<p><b>Por favor no responda este email.</b></p>" . "\n";
         $messageBody .= "<p>Este email ha sido enviado por: " .$emailPostData->nombre." ". $emailPostData->apellido . "</p>" . "\n";
         $messageBody .= "<p>Su email para la respuesta es: " .$emailPostData->email. "</p>" . "\n";
         if(isset($emailPostData->telefono) && !empty($emailPostData->telefono)){
@@ -59,6 +60,7 @@ function sendMailToContact() {
 
         try{
             if(mail($para, $subject, $messageBody, $headers)){
+                    updateEmailsReceived($para);
                     $response = MessageHandler::getSuccessResponse("El email ha sido enviado!",null);
             }else{
                     $response = MessageHandler::getErrorResponse("Error al enviar el mail, por favor intente mas tarde.");

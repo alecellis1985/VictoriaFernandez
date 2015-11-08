@@ -199,7 +199,7 @@ function insertNewUser($conn, $user) {
                             $categorias = $user['categoria'];
                             preg_match_all('!\d+!', $categorias, $matches);
 
-                            foreach ($matches[0] as $categoria) {
+                            foreach ($matches[0] as $index=>$categoria) {
                                 $sqlInsertCat = "INSERT INTO categoria_usuario VALUES (:idCategoria, :idUser)";
 
                                 $paramsInsertCat = array();
@@ -209,11 +209,20 @@ function insertNewUser($conn, $user) {
                                 if (!$conn->consulta($sqlInsertCat, $paramsInsertCat)) {
                                     $error = true;
                                 }
+                                if($index == 0){
+                                    $sqlInsertCatSpec = "UPDATE users SET catspecial = :idCategoria WHERE idUser = :idUser";
+                                    $paramsInsertCatSpec = array();
+                                    $paramsInsertCatSpec[0] = array("idCategoria", (int) $categoria, "int");
+                                    $paramsInsertCatSpec[1] = array("idUser", (int) $user["id"], "int");
+                                    if (!$conn->consulta($sqlInsertCatSpec, $paramsInsertCatSpec)) {
+                                        $error = true;
+                                    }
+                                }
                             }
-                            $matches = array();
+                            $matches2 = array();
                             $departamentos = $user['departamento'];
-                            preg_match_all('!\d+!', $departamentos, $matches);
-                            foreach ($matches[0] as $departamento) {
+                            preg_match_all('!\d+!', $departamentos, $matches2);
+                            foreach ($matches2[0] as $departamento) {
                                 if((int)$departamento == 1){
                                     $matches2 = array();
                                     $barrios = $user['barrio'];

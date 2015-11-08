@@ -11,15 +11,17 @@ require_once('crudCategorias.php');
 require_once('registerUser.php');
 require_once('loginUser.php');
 require_once('getUsers.php');
+require_once('userData.php');
 require_once('mailHandler.php');
 require_once('planes.php');
 require_once('userState.php');
-require_once('userData.php');
 require_once('resetPasswordMail.php');
+
 
 session_cache_limiter(false);
 session_start();
-$app = new Slim(array('debug' => false));
+//$app = new Slim(array('debug' => false));
+$app = new Slim();
 
 
 $app->post('/sumarVisita', 'updateVisits');

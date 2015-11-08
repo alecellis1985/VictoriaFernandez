@@ -13,11 +13,11 @@
                         <fancy-img ng-if="selectedUser.imagenUrl !== undefined && selectedUser.imagenUrl !== ''" background-url="{{selectedUser.imagenUrl}}" ></fancy-img>                        
                         <div class="cardColor" ng-style="{'background-color':selectedUser.cardcolor}" ng-if="selectedUser.plan<7 && selectedUser.cardcolor && (selectedUser.imagenUrl === undefined || selectedUser.imagenUrl === '')">
                             <h3 class="nice-h6" style='text-transform: uppercase;' ng-fi-text ng-fi-text-html="{{ selectedUser.nombre | limitTo:1 }}{{ selectedUser.apellido | limitTo:1 }}"></h3>
-                            <h3 class="nice-h7" ng-if="categoria.categoriaId!==-1" ng-fi-text="{{categoria.categoriaNombre}}"></h3>
+                            <h3 class="nice-h7" ng-fi-text="{{selectedUser.categoria}}"></h3>
                         </div>
                         <div class="cardColor" ng-style="{'background-color':selectedUser.cardcolor}" ng-if="selectedUser.plan > 6 && selectedUser.cardcolor && (selectedUser.imagenUrl === undefined || selectedUser.imagenUrl === '')">
                             <h3 class="nice-h6" ng-fi-text ng-fi-text-html="{{ selectedUser.nombre }}"></h3>
-                            <h3 class="nice-h7" ng-if="categoria.categoriaId!==-1" ng-fi-text="{{categoria.categoriaNombre}}"></h3>
+                            <h3 class="nice-h7" ng-fi-text="{{selectedUser.categoria}}"></h3>
                         </div>
                      </div> 
                      

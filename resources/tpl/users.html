@@ -1,6 +1,6 @@
 
 <button style="margin-top:10px;" class="btn btn-primary" ng-click="cambiarPremuimState()" ng-bind="mostrarPremiumUsersActivos == 0?'Mostrar Premium Activos':'Mostrar Premium Inactivos'"></button>
-<div class="panel panel-primary" style="margin-top: 20px" ng-if="mostrarPremiumUsersActivos == 0">
+<div class="panel panel-primary tablesAdmin" style="margin-top: 20px" ng-if="mostrarPremiumUsersActivos == 0">
     <div class="panel-heading">
         <h3 class="panel-title">Usuarios Premium InActivos</h3>
     </div>
@@ -14,12 +14,13 @@
                         <th>Apellido</th>
                         <th style="width: 8%;">Email</th>
                         <th>Telefono</th>
-                        <th>Celular</th>
-                        <th style="width: 5%;">Visitas</th>
+                        <th style="width:220px;">Categorias</th>
+                        <th style="width:47px;">Visitas</th>
                         <th>Plan</th>
-                        <th>Registro</th>
-                        <th>Estado</th>
-                        <th>Eliminar</th>
+                        <th style="width:90px;">Registro</th>
+                        <th style="width:52px;">Emails</th>
+                        <th style="width:90px;">Estado</th>
+                        <th style="width: 100px;">Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,10 +35,15 @@
                         <td>{{user.apellido}}</td>
                         <td style="overflow: hidden;text-overflow: ellipsis;" title="{{user.email}}">{{user.email}}</td>
                         <td>{{user.telefono}}</td>
-                        <td>{{user.celular}}</td>
+                        <td>
+                            <select>
+                                <option ng-repeat="categoria in user.categorias" ng-bind="categoria.categoriaNombre"></option>
+                            </select>
+                        </td>
                         <td>{{user.visitas}}</td>
                         <td>{{user.planDesc}}</td>
                         <td>{{user.fecharegistro}}</td>
+                        <td>{{user.emails_received}}</td>
                         <td ng-if="user.IsActive != 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Activar</button></td>
                         <td ng-if="user.IsActive == 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Desactivar</button></td>
                         <td><button class="btn btn-primary" ng-click="deleteUser(user)">Eliminar</button></td>
@@ -47,7 +53,7 @@
         </div>
     </div>
 </div>
-<div class="panel panel-primary" style="margin-top: 20px" ng-if="mostrarPremiumUsersActivos == 1">
+<div class="panel panel-primary tablesAdmin" style="margin-top: 20px" ng-if="mostrarPremiumUsersActivos == 1">
     <div class="panel-heading">
         <h3 class="panel-title">Usuarios Premium Activos</h3>
     </div>
@@ -61,12 +67,13 @@
                         <th>Apellido</th>
                         <th style="width: 8%;">Email</th>
                         <th>Telefono</th>
-                        <th>Celular</th>
-                        <th style="width: 5%;">Visitas</th>
+                        <th style="width:220px;">Categorias</th>
+                        <th style="width:47px;">Visitas</th>
                         <th>Plan</th>
-                        <th>Registro</th>
-                        <th>Estado</th>
-                        <th>Eliminar</th>
+                        <th style="width:90px;">Registro</th>
+                        <th style="width:52px;">Emails</th>
+                        <th style="width:90px;">Estado</th>
+                        <th style="width: 100px;">Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -81,10 +88,15 @@
                         <td>{{user.apellido}}</td>
                         <td style="overflow: hidden;text-overflow: ellipsis;" title="{{user.email}}">{{user.email}}</td>
                         <td>{{user.telefono}}</td>
-                        <td>{{user.celular}}</td>
+                        <td>
+                            <select>
+                                <option ng-repeat="categoria in user.categorias" ng-bind="categoria.categoriaNombre"></option>
+                            </select>
+                        </td>
                         <td>{{user.visitas}}</td>
                         <td>{{user.planDesc}}</td>
                         <td>{{user.fecharegistro}}</td>
+                        <td>{{user.emails_received}}</td>
                         <td ng-if="user.IsActive != 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Activar</button></td>
                         <td ng-if="user.IsActive == 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Desactivar</button></td>
                         <td><button class="btn btn-primary" ng-click="deleteUser(user)">Eliminar</button></td>
@@ -96,7 +108,7 @@
 </div>
 
 <button class="btn btn-primary" ng-click="cambiarNoPremuimState()" ng-bind="mostrarNoPremiumUsersActivos == 0?'Mostrar No Premium Activos':'Mostrar No Premium Inactivos'"></button>
-<div class="panel panel-primary" style="margin-top: 20px" ng-if="mostrarNoPremiumUsersActivos == 0"> 
+<div class="panel panel-primary tablesAdmin" style="margin-top: 20px" ng-if="mostrarNoPremiumUsersActivos == 0"> 
     <div class="panel-heading">
         <h3 class="panel-title">Usuarios No Premium Inactivos</h3>
     </div>
@@ -110,12 +122,13 @@
                         <th>Apellido</th>
                         <th style="width: 8%;">Email</th>
                         <th>Telefono</th>
-                        <th>Celular</th>
-                        <th style="width: 5%;">Visitas</th>
+                        <th style="width:220px;">Categorias</th>
+                        <th style="width:47px;">Visitas</th>
                         <th>Plan</th>
-                        <th>Registro</th>
-                        <th>Estado</th>
-                        <th>Eliminar</th>
+                        <th style="width:90px;">Registro</th>
+                        <th style="width:52px;">Emails</th>
+                        <th style="width:90px;">Estado</th>
+                        <th style="width: 100px;">Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -130,10 +143,15 @@
                         <td>{{user.apellido}}</td>
                         <td style="overflow: hidden;text-overflow: ellipsis;" title="{{user.email}}">{{user.email}}</td>
                         <td>{{user.telefono}}</td>
-                        <td>{{user.celular}}</td>
+                        <td>
+                            <select>
+                                <option ng-repeat="categoria in user.categorias" ng-bind="categoria.categoriaNombre"></option>
+                            </select>
+                        </td>
                         <td>{{user.visitas}}</td>
                         <td>{{user.planDesc}}</td>
                         <td>{{user.fecharegistro}}</td>
+                        <td>{{user.emails_received}}</td>
                         <td ng-if="user.IsActive != 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Activar</button></td>
                         <td ng-if="user.IsActive == 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Desactivar</button></td>
                         <td><button class="btn btn-primary" ng-click="deleteUser(user)">Eliminar</button></td>
@@ -144,7 +162,7 @@
     </div>
 </div>
 
-<div class="panel panel-primary" style="margin-top: 20px" ng-if="mostrarNoPremiumUsersActivos == 1"> 
+<div class="panel panel-primary tablesAdmin" style="margin-top: 20px" ng-if="mostrarNoPremiumUsersActivos == 1"> 
     <div class="panel-heading">
         <h3 class="panel-title">Usuarios No Premium Activos</h3>
     </div>
@@ -158,12 +176,13 @@
                         <th>Apellido</th>
                         <th style="width: 8%;">Email</th>
                         <th>Telefono</th>
-                        <th>Celular</th>
-                        <th style="width: 5%;">Visitas</th>
+                        <th style="width:220px;">Categorias</th>
+                        <th style="width:47px;">Visitas</th>
                         <th>Plan</th>
-                        <th>Registro</th>
-                        <th>Estado</th>
-                        <th>Eliminar</th>
+                        <th style="width:90px;">Registro</th>
+                        <th style="width:52px;">Emails</th>
+                        <th style="width:90px;">Estado</th>
+                        <th style="width: 100px;">Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -178,10 +197,15 @@
                         <td>{{user.apellido}}</td>
                         <td style="overflow: hidden;text-overflow: ellipsis;" title="{{user.email}}">{{user.email}}</td>
                         <td>{{user.telefono}}</td>
-                        <td>{{user.celular}}</td>
+                        <td>
+                            <select>
+                                <option ng-repeat="categoria in user.categorias" ng-bind="categoria.categoriaNombre"></option>
+                            </select>
+                        </td>
                         <td>{{user.visitas}}</td>
                         <td>{{user.planDesc}}</td>
                         <td>{{user.fecharegistro}}</td>
+                        <td>{{user.emails_received}}</td>
                         <td ng-if="user.IsActive != 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Activar</button></td>
                         <td ng-if="user.IsActive == 1"><button class="btn btn-primary" ng-click="changeUserState(user)">Desactivar</button></td>
                         <td><button class="btn btn-primary" ng-click="deleteUser(user)">Eliminar</button></td>

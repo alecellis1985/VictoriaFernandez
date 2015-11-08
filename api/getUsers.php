@@ -129,7 +129,7 @@ function getUsers($categoria, $departamento,$barrioId, $nombreProf = null) {
             $sql = "SELECT u.idUser,u.nombre,u.apellido,u.email,u.telefono,u.celular,u.direccion,u.telefonoEmp," .
                     "u.sitioWeb,u.imagenUrl,u.facebookUrl,u.twitterUrl," .
                     "u.linkedinUrl,u.descService,u.servicioOfrecido1,u.servicioOfrecido2,u.servicioOfrecido3," .
-                    "u.servicioOfrecido4,u.servicioOfrecido5,u.servicioOfrecido6,u.descServiceLong,u.cardcolor,u.markers,u.plan," .
+                    "u.servicioOfrecido4,u.servicioOfrecido5,u.servicioOfrecido6,u.descServiceLong,u.cardcolor,u.markers,u.plan,u.catspecial," .
                     "fp.*,da.* FROM " .
                     "users u left join formasdepago fp on u.idUser = fp.idUser " .
                     "left join diasatencion da on u.idUser = da.idUser " .
@@ -178,13 +178,13 @@ function getPremiumUsers() {
     if ($conn->conectar()) {
             $sql = "SELECT u.idUser,u.nombre,u.apellido,u.email, u.direccion,u.telefonoEmp,u.descService," .
                     "u.sitioWeb,u.imagenUrl," .
-                    "u.cardcolor,u.markers,u.plan " .
+                    "u.cardcolor,u.markers,u.plan,u.catspecial " .
                     "FROM users u WHERE IsAdmin = 0 and IsActive = 1 and plan in (2,5,6,8,11,12)";
             $retArr = array();
             if ($conn->consulta($sql)) {
                 $users = $conn->restantesRegistros();
                 $retArr[0] = $users;
-                if(count($users)>0){
+                /*if(count($users)>0){
                     $usersIds = "";
                     foreach ($users as $user) {
                         $usersIds = $usersIds . "," . $user->idUser;
@@ -196,7 +196,7 @@ function getPremiumUsers() {
                         $usersCategorias = $conn->restantesRegistros();
                         $retArr[1] = $usersCategorias;
                     }
-                }
+                }*/
                 $response = MessageHandler::getSuccessResponse("", $retArr);
             } else {
                 $response = MessageHandler::getErrorResponse("");
@@ -213,15 +213,28 @@ function getPremiumUsers() {
     }
 }
 
-//Function to get users 
+//Function to get users when you are admin
 function getAllUsers() {
     $response = null;
-    if(isset($_SESSION['IsAdmin']) && !empty($_SESSION['IsAdmin']) && $_SESSION['IsAdmin']){
+    if(isset($_SESSION['IsAdmin']) && !empty($_SESSION['IsAdmin'])){
         $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
         if ($conn->conectar()) {
-            $sql = "SELECT u.username,u.idUser,u.nombre,u.apellido,u.email,u.telefono,u.celular,u.plan,u.telefonoEmp,u.IsActive,u.fecharegistro,u.imagenUrl,u.visitas  FROM users u where IsAdmin = 0 ORDER BY nombre";
+            $sql = "SELECT u.username,u.idUser,u.nombre,u.apellido,u.email,u.telefono,u.celular,u.plan,u.telefonoEmp,u.IsActive,u.fecharegistro,u.imagenUrl,u.visitas,emails_received  FROM users u where IsAdmin = 0 ORDER BY nombre";
             if ($conn->consulta($sql)) {
                 $users = $conn->restantesRegistros();
+                
+                foreach ($users as $user) {
+                    $sqlGetCats = "select c.* from categoria_usuario cu " .
+                    " join categorias c on cu.idCategoria = c.categoriaId " .
+                    " where idUser = :userId";
+                    $paramsGetCats = array();
+                    $paramsGetCats[0] = array("userId", $user->idUser, "int", 11);
+                    if ($conn->consulta($sqlGetCats, $paramsGetCats)) {
+                        $categorias = $conn->restantesRegistros();
+                        $user->categorias = $categorias;
+                    }
+                }
+                
                 $response = MessageHandler::getSuccessResponse("", $users);
             } else {
                 $response = MessageHandler::getErrorResponse("Internet connection error, please reload the page.");
