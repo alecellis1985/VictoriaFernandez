@@ -3,8 +3,8 @@
 define("CANTPAG", 8);
 define("DRIVER", "mysql");
 define("SERVIDOR", "localhost");
-//define("BASE", "profesionales");
-define("BASE", "profesionalesStaging");
+define("BASE", "profesionales");
+//define("BASE", "profesionalesStaging");
 //define("USUARIO", "root");
  //define("CLAVE", "turtleman1");
 
