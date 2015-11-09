@@ -32,6 +32,12 @@ Professionals.controller('UsersController', ['$scope', '$routeParams', '$http', 
                 });
             }, 1000);
         };
+        
+        $scope.updateDb = function()
+        {   
+            CommonService.getRequest('api/updateDb');
+        }
+        
         $scope.cambiarPremuimState = function(){
             if($scope.mostrarPremiumUsersActivos === 0){
                 $scope.mostrarPremiumUsersActivos = 1;

@@ -1,5 +1,48 @@
 <?php
 
+function editUserCategoria() {
+    $request = Slim::getInstance()->request();
+    $userPwd = json_decode($request->getBody());
+        $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
+        if(isset($userPwd->catspecial) && !empty($userPwd->catspecial)){
+            if ($conn->conectar()) {
+                try {
+                    $conn->beginTransaction();f
+
+                    $sql = "UPDATE users SET catspecial = :catspecial"
+                            . " WHERE username = '" . $_SESSION['usuario'] . "'";
+                    $params = array();
+                    $params[0] = array("newPassword", $userPwd->catspecial, int);
+                    if ($conn->consulta($sql, $params)) {
+                        $conn->closeCursor();
+                        $error = false;
+                        if (!$error) {
+                            $conn->commitTransaction();
+                            $response = MessageHandler::getSuccessResponse("Contraseña actualizada!", null);
+                        } else {
+                            $response = MessageHandler::getErrorResponse("Mi puto error.");
+                        }
+                    } else {
+                        echo MessageHandler::getErrorResponse("No s");
+                    }
+                } catch (Exception $exc) {
+                    $response = null;
+                    $conn->rollbackTransaction();
+                }
+            }
+        }
+        
+    if ($response == null) {
+        header('HTTP/1.1 400 Bad Request');
+        return MessageHandler::getDBErrorResponse();
+    } else {
+        $conn->desconectar();
+        return $response;
+    }
+}
+
+
+
 function editUserPwd() {
     $request = Slim::getInstance()->request();
     $userPwd = json_decode($request->getBody());

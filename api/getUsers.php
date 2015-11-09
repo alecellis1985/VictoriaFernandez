@@ -184,19 +184,7 @@ function getPremiumUsers() {
             if ($conn->consulta($sql)) {
                 $users = $conn->restantesRegistros();
                 $retArr[0] = $users;
-                /*if(count($users)>0){
-                    $usersIds = "";
-                    foreach ($users as $user) {
-                        $usersIds = $usersIds . "," . $user->idUser;
-                    }
-                    $usersIds = substr($usersIds, 1);
-                    $sqlCategorias = "SELECT u.idUser, ca.categoriaNombre FROM categorias ca, categoria_usuario cu,users u "
-                            . "WHERE ca.categoriaId = cu.idCategoria and cu.idUser = u.idUser and u.idUser in (".$usersIds .")";
-                    if ($conn->consulta($sqlCategorias)) {
-                        $usersCategorias = $conn->restantesRegistros();
-                        $retArr[1] = $usersCategorias;
-                    }
-                }*/
+                
                 $response = MessageHandler::getSuccessResponse("", $retArr);
             } else {
                 $response = MessageHandler::getErrorResponse("");
@@ -364,4 +352,50 @@ function getLoggedUser() {
 function isCurrentUserAdmin() {
     $response = MessageHandler::getSuccessResponse("Success", Array('isAdmin' => $_SESSION['IsAdmin']));
     echo $response;
+}
+
+
+function updateDb(){
+    $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
+    $response = null;
+    $error = false;
+    if ($conn->conectar()) {
+            $sql = "SELECT * FROM categoria_usuario GROUP BY idUser";
+            if ($conn->consulta($sql)) {
+                $users = $conn->restantesRegistros();                
+                $conn->beginTransaction();
+                foreach ($users as $user) {
+                    $updateScript = "UPDATE users SET catspecial = " . $user->idCategoria . " WHERE idUser = ". $user->idUser . "; ";
+                    if (!$conn->consulta($updateScript)) {
+                        $error = true;
+                    }
+                }
+                
+                
+                
+                $response = MessageHandler::getSuccessResponse("aaa",null);
+            } else {
+                $response = MessageHandler::getErrorResponse("");
+            }
+    } else {
+        $response = MessageHandler::getErrorResponse("");
+    }
+    
+    if (!$error) 
+    {
+        $conn->commitTransaction();
+        $response = MessageHandler::getSuccessResponse("Se registro exitosamente!", null);
+    } else {
+        $conn->rollbackTransaction();
+        $response = MessageHandler::getErrorResponse("DB ERROR.");
+    }
+    
+    if ($response == null) {
+        header('HTTP/1.1 400 Bad Request');
+        echo MessageHandler::getDBErrorResponse();
+    } else {
+        $conn->desconectar();
+        echo $response;
+    }
+    
 }

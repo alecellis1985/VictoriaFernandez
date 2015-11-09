@@ -1,8 +1,8 @@
 'use strict';
 
-Professionals.controller('VerUserController', ['$scope', '$location','$timeout', 'departamentosList', 'categoriasList', 'barriosList', '$modal',
+Professionals.controller('VerUserController', ['$scope', '$location','$timeout','$rootScope','CommonService', 'departamentosList', 'categoriasList', 'barriosList', '$modal',
     'planes', 'Helper', 'userData',
-    function ($scope, $location,$timeout , departamentosList, categoriasList, barriosList, $modal, planes, Helper, userData) {
+    function ($scope, $location,$timeout ,$rootScope,CommonService, departamentosList, categoriasList, barriosList, $modal, planes, Helper, userData) {
         $scope.showImg = true;
         $scope.planes = planes;
         $scope.newUser = false;
@@ -92,6 +92,12 @@ Professionals.controller('VerUserController', ['$scope', '$location','$timeout',
             $scope.currentUsername = userData.data.user.username;
             $scope.user.selectedCategoriaText = selectedCategoriasText(userData.data.categorias);
             $scope.user.selectedDepartamentoText = selectedDeptosText(userData.data.departamentos);
+            
+            var categoria = $scope.categorias.filter(function(element){
+                return element.categoriaId === $scope.user.catspecial; 
+            });
+            
+            $scope.user.categoria = categoria.length>0?categoria[0].categoriaNombre:"";
 
             if ($scope.depSelected.nombreDepartamento.toLowerCase() === "montevideo") {
                 var barrioId = userData.data.user.barrio;
@@ -153,6 +159,38 @@ Professionals.controller('VerUserController', ['$scope', '$location','$timeout',
                     $scope.imageUrl = '../uploaded/'+imgUrl;    
                 },100);
             }, function () {
+                
+            });
+        };
+        
+        $scope.editCatPrincipal = function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var modalInstance = $modal.open({
+                templateUrl: 'resources/tpl/editCatPrincipalPopUp.html',
+                controller: 'EditCatPrincipalController',
+                size: 'md',
+                resolve: {
+                    categorias: function () {
+                     return $scope.categorias;
+                   },
+                   currentCategoria:function(){
+                       return $scope.user.catspecial;
+                   }
+                }
+            });
+            modalInstance.result.then(function (categoria) {
+                var data = {
+                    'catspecial': $scope.user.catspecial
+                };
+                CommonService.postJsonRequest('api/edit-user-categoria', data).then(function (result) {
+                    $scope.user.catspecial = categoria.categoriaId;
+                    $scope.user.categoria = categoria.categoriaNombre;
+                    if (result.success) {
+                        $rootScope.$broadcast('alert-event', {type: 'success', msg: 'Categoría actualizada correctamente!'});
+                    } else
+                        $rootScope.$broadcast('alert-event', {type: 'danger', msg: result.msg});
+            });
                 
             });
         };
