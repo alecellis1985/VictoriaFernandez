@@ -999,7 +999,7 @@ label{
 }
 
 .min_alto{
-    min-height: 205px;
+    min-height: 215px;
 }
 
 .card.premium{
@@ -1087,8 +1087,8 @@ label{
     .user-detail-icons .row{
         margin:0;
     }
-}
-
+}   
+    
 @media (max-width:490px)
 {    
     .profLogoImg{
@@ -1125,6 +1125,22 @@ label{
     }
     .card h2{
         font-size: 1.2em;
+    }
+}
+
+@media (max-width:350px)
+{    
+    .backgroundImg{
+        height: 115px;
+        width: 100px;
+    }
+    
+    .card h2{
+        font-size: 1em;
+    }
+    
+    .min_alto > div:not(:first-child){
+        font-size: 10px;
     }
 }
 

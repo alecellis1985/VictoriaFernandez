@@ -3,41 +3,42 @@
 function editUserCategoria() {
     $request = Slim::getInstance()->request();
     $userPwd = json_decode($request->getBody());
-        $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
-        if(isset($userPwd->catspecial) && !empty($userPwd->catspecial)){
-            if ($conn->conectar()) {
-                try {
-                    $conn->beginTransaction();f
-
-                    $sql = "UPDATE users SET catspecial = :catspecial"
-                            . " WHERE username = '" . $_SESSION['usuario'] . "'";
-                    $params = array();
-                    $params[0] = array("newPassword", $userPwd->catspecial, int);
-                    if ($conn->consulta($sql, $params)) {
-                        $conn->closeCursor();
-                        $error = false;
-                        if (!$error) {
-                            $conn->commitTransaction();
-                            $response = MessageHandler::getSuccessResponse("Contraseña actualizada!", null);
-                        } else {
-                            $response = MessageHandler::getErrorResponse("Mi puto error.");
-                        }
+    $conn = new ConexionBD(DRIVER, SERVIDOR, BASE, USUARIO, CLAVE);
+    $response = null;
+    if(isset($userPwd->catspecial) && !empty($userPwd->catspecial)){
+        if ($conn->conectar()) {
+            try {
+                $conn->beginTransaction();
+                $sql = "UPDATE users SET catspecial = :catspecial"
+                        . " WHERE username = '" . $_SESSION['usuario'] . "'";
+                $params = array();
+                $params[0] = array("catspecial", $userPwd->catspecial, "int", 11);
+                if ($conn->consulta($sql, $params)) {
+                    $conn->closeCursor();
+                    $error = false;
+                    if (!$error) {
+                        $conn->commitTransaction();
+                        $response = MessageHandler::getSuccessResponse("Contraseña actualizada!", null);
                     } else {
-                        echo MessageHandler::getErrorResponse("No s");
+                        $response = MessageHandler::getErrorResponse("No se pudo realizar esta acción, intente más tarde.");
                     }
-                } catch (Exception $exc) {
-                    $response = null;
-                    $conn->rollbackTransaction();
+                } else {
+                    $response = MessageHandler::getErrorResponse("No se pudo realizar esta acción, intente más tarde.");
                 }
+            } catch (Exception $exc) {
+                $response = null;
+                $conn->rollbackTransaction();
             }
+            $conn->desconectar();
         }
+    }
         
     if ($response == null) {
         header('HTTP/1.1 400 Bad Request');
-        return MessageHandler::getDBErrorResponse();
+        echo MessageHandler::getDBErrorResponse();
     } else {
-        $conn->desconectar();
-        return $response;
+        
+        echo $response;
     }
 }
 

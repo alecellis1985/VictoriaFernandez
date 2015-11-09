@@ -5,7 +5,7 @@
             <url>api/getUsers.php</url>
             <bookmark id="1">
                 <name/>
-                <line>198</line>
+                <line>185</line>
                 <key/>
             </bookmark>
         </file>
@@ -13,23 +13,20 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/AppServ/www/angular-crud-master/api/registerUser.php</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/UsersController.js</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/ProfessionalsSearchController.js</file>
             <file>file:/C:/AppServ/www/angular-crud-master/index.html</file>
             <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/busquedaProfesionales.html</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/userDetails.html</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/editCatPrincipalPopUp.html</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/api/resetPasswordMail.php</file>
             <file>file:/C:/AppServ/www/angular-crud-master/api/getUsers.php</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/EditUserController.js</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/api/userData.php</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/EditPwdController.js</file>
             <file>file:/C:/AppServ/www/angular-crud-master/api/index.php</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/directives/Planes.js</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/planes.html</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/registroUsuario.html</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/api/crudCategorias.php</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/api/crudDepartamentos.php</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/api/Slim/config/parametros.php</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/editUser.html</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/api/Slim/Slim.php</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/RegisterUserController.js</file>
-            <file>file:/C:/AppServ/www/angular-crud-master/api/crudBarrios.php</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/VerUserController.js</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/resources/tpl/editImg.html</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/controllers/EditCatPrincipalController.js</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/directives/commonDirectives.js</file>
+            <file>file:/C:/AppServ/www/angular-crud-master/resources/js/directives/UserDetailsDirective.js</file>
         </group>
     </open-files>
 </project-private>
