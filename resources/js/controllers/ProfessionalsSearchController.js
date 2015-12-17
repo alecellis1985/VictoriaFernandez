@@ -28,7 +28,7 @@ Professionals.controller('ProfessionalsSearchController', ['$scope','$timeout' ,
             elem.categoria = categoria.length>0?categoria[0].categoriaNombre:"";
         });
         
-        $scope.randomCategoriaArr = ['Abogados','Escribanos','Contadores','Odontólogos','Arquitectos','Veterinarios'];
+        $scope.randomCategoriaArr = ['Abogados','Escribanos','Contadores','Odontólogos','Arquitectos'];
         
         $scope.setMiddleCardsRandomly = function (nombreCategoria) {
             $scope.selectedCategoria = $scope.categorias.filter(function (elem) {

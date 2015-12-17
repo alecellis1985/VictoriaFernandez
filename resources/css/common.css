@@ -1130,7 +1130,7 @@ label{
 
 @media (max-width:350px)
 {    
-    .backgroundImg{
+    .backgroundImg,.cardColor{
         height: 115px;
         width: 100px;
     }
@@ -1142,6 +1142,19 @@ label{
     .min_alto > div:not(:first-child){
         font-size: 10px;
     }
+    
+    .nice-h6{
+        top: 0;
+    }
+    
+    .nice-h6, .nice-h7 {
+        position: absolute;
+        
+        left: 5px;
+        width: 90px;
+        height: 25px;
+    }
+
 }
 
 @media (min-width:768px)
@@ -1244,4 +1257,11 @@ label{
     font-size: 11px;
 }
 
-    
+.primary-icons{
+    font-size: 22px;
+    color: #FFFFFF;
+}
+
+.primary-icons:hover{
+    opacity: 0.8;
+}

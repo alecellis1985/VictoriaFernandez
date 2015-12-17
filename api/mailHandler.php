@@ -42,13 +42,13 @@ function sendMailToContact() {
             isset($emailPostData->mensaje) && !empty($emailPostData->mensaje) ){
             
         $para = $emailPostData->contactemail;
-        $headers = "From: Profesionales.uy <info@profesionales.uy>";
+        $headers = "From: No Responder Profesionales.uy <info@profesionales.com.uy>";
 
         $subject = "Mensaje de: " . $emailPostData->nombre . " " . $emailPostData->apellido;
         $messageBody = "";
         $messageBody .= "<p><b>Por favor no responda este email.</b></p>" . "\n";
         $messageBody .= "<p>Este email ha sido enviado por: " .$emailPostData->nombre." ". $emailPostData->apellido . "</p>" . "\n";
-        $messageBody .= "<p>Su email para la respuesta es: " .$emailPostData->email. "</p>" . "\n";
+        $messageBody .= "<p>Contacta a esta persona al email: " .$emailPostData->email. "</p>" . "\n";
         if(isset($emailPostData->telefono) && !empty($emailPostData->telefono)){
             $messageBody .= "<p>Telefono: " . $emailPostData->telefono . "</p>" . "\n";
             $messageBody .= "<br>" . "\n";
